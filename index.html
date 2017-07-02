@@ -275,7 +275,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/02/DigitalOcean+shadowSocks + Docker 科学上网/" itemprop="url">DigitalOcean+shadowSocks + Docker 科学上网 挖矿</a></h1>
+                <a class="post-title-link" href="/2017/07/02/DigitalOcean+shadowSocks + Docker 科学上网/" itemprop="url">DigitalOcean+shadowSocks + Docker 科学上网+挖矿</a></h1>
         
 
         <div class="post-meta">
@@ -345,36 +345,14 @@
 
       
         
-          
-            <h2 id="ss科学上网"><a href="#ss科学上网" class="headerlink" title="ss科学上网"></a>ss科学上网</h2><p>注册<a href="https://www.digitalocean.com/?refcode=e188e648d051" target="_blank" rel="external">DigitalOcean</a>，从<a href="https://m.do.co/c/e70af193c2c0" target="_blank" rel="external">这个链接</a> <a href="https://m.do.co/c/e70af193c2c0" target="_blank" rel="external">https://m.do.co/c/e70af193c2c0</a> 进去可以有$10的优惠券。</p>
-<p>参考<a href="http://cnodejs.org/topic/56a6d3c67ec020ed4b96b357" target="_blank" rel="external">教程</a>上的步骤创建了一个Droplet,选了洛杉矶的服务器，不过好像有点慢，下载了DOcker,拉取了Docker中shadowSock镜像，端口号为1984,。<a href="http://liujin.me/blog/2015/05/27/Docker-DigitalOcean-Shadowsocks-5-%E5%88%86%E9%92%9F%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" target="_blank" rel="external">另一篇</a></p>
-<h2 id="挖矿"><a href="#挖矿" class="headerlink" title="挖矿"></a>挖矿</h2><h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><p>百度一不小心看到了<a href="http://www.linuxde.net/2013/12/15514.html" target="_blank" rel="external">服务器挖莱特比</a>，心血来潮试了一下挖<a href="http://www.laiteb.com/" target="_blank" rel="external">莱特币</a></p>
-<p>接着在服务器上安cpuminer,最终没装上。先下载一堆<a href="https://baijiahao.baidu.com/po/feed/share?wfr=spider&amp;for=pc&amp;context=%7B%22sourceFrom%22%3A%22bjh%22%2C%22nid%22%3A%22news_4042329101433198772%22%7D" target="_blank" rel="external">依赖包</a>,又在github上<a href="https://github.com/noncepool/cpuminer-yescrypt" target="_blank" rel="external">下载包</a>,参考这篇<a href="https://rumorscity.com/2014/01/04/compile-and-install-cpuminer-on-linux-centos/" target="_blank" rel="external">博客</a>，但<code>`./config</code>报错<br>！<a href="/img/digitalOceam科学上网/编译报错.png">编译报错</a></p>
-<blockquote>
-<p>gcc: error: unrecognized command line option ‘-V’<br>gcc: fatal error: no input files<br>compilation terminated.<br>configure:3447: $? = 1<br>configure:3436: gcc -qversion &gt;&amp;5<br>gcc: error: unrecognized command line option ‘-qversion’<br>gcc: fatal error: no input files<br>compilation terminated.<br>configure:3447: $? = 1<br>configure:3467: checking whether the C compiler works<br>configure:3489: gcc -03   conftest.c  &gt;&amp;5<br>gcc: error: unrecognized command line option ‘-03’<br>configure:3493: $? = 1<br>configure:3531: result: no</p>
-</blockquote>
-<p>按照这<a href="http://bbs.csdn.net/topics/390222850" target="_blank" rel="external">上面</a>添加<code>环境变量</code>并没有解决。</p>
-<p>这篇<a href="http://www.iitshare.com/linux-litecoin-ltc-mining-tutorial.html" target="_blank" rel="external">文章</a>里的方法还没试。</p>
-<h2 id="Xshell"><a href="#Xshell" class="headerlink" title="Xshell"></a>Xshell</h2><h3 id="生成密钥"><a href="#生成密钥" class="headerlink" title="生成密钥"></a>生成密钥</h3><p>过程中想用Xshell连接服务器，发现需要用户密钥.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#ssh-keygen -t rsa</span></div></pre></td></tr></table></figure>
-<p>生成<a href="http://blog.sina.cn/dpool/blog/s/blog_6561ca8c0102vb0d.html" target="_blank" rel="external">密钥对</a>服务器上的密钥在authorized_key文件中</p>
-<h3 id="安装vsftpd"><a href="#安装vsftpd" class="headerlink" title="安装vsftpd"></a>安装vsftpd</h3><p>在服务器上安装了vsftpd</p>
-<blockquote>
-<p><a href="http://man.linuxde.net/which" target="_blank" rel="external">which</a>  vsftpd<br>看有没有安装vsftpd。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">service vsftp start #启动服务</div><div class="line">service vsftp stop # 停止服务</div><div class="line">service vsftp restart #重启服务</div></pre></td></tr></table></figure></p>
-</blockquote>
-<p>用<a href="http://man.linuxde.net/vi" target="_blank" rel="external">vi</a> 修改<a href="http://m.jb51.net/LINUXjishu/66611.html" target="_blank" rel="external">配置文件</a></p>
-<blockquote>
-<p>：q是退出，当不存在任何没有保存的修改时它才会用<br>:q!是退出并不保存。<br>u可以取消刚才的修改，ctrl＋R可以取消你所取消的修改。<br>注意：有：号的命令是先ESC，再：命令回车执行，不带：的，就是ESC后再输入执行。<br>忘 了当前编辑的是什么文件，可以用ctrl＋G来查看。<br>VI中可以执行命令。:!command就可以执行命令。命令完成后，可以按回车返回。<br>甚至可以在VI中使用SHELL，（：！bash）从SHELL中执行几个命令后，exit退回到VI。<br>保存退出，ZZ或:wq。</p>
-</blockquote>
-<h3 id="FTP传输"><a href="#FTP传输" class="headerlink" title="FTP传输"></a>FTP传输</h3><p>ftp 传输有主动模式和被动模式，<br>由客户端选择，一般cmd是主动模式，应在控制面板internet选项高级中把被动ftp关闭<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ftp&gt;passive #可开/关被动模式</div></pre></td></tr></table></figure></p>
-<p>ftp 命令：</p>
-<blockquote>
-<p>open ip 打开连接<br>  put 文件 上传文件<br>  get 文件名 下载文件<br>  close 关闭连接<br>  bye/quit 离开ftp</p>
-</blockquote>
-<p>ftp 默认传输的文件在c盘的用户目录下<br>标签（空格分隔）： 科学上网</p>
-<hr>
-
-          
+          <h2 id="ss科学上网"><a href="#ss科学上网" class="headerlink" title="ss科学上网"></a>ss科学上网</h2><p>注册<a href="https://www.digitalocean.com/?refcode=e188e648d051" target="_blank" rel="external">DigitalOcean</a>，从<a href="https://m.do.co/c/e70af193c2c0" target="_blank" rel="external">这个链接</a> <a href="https://m.do.co/c/e70af193c2c0" target="_blank" rel="external">https://m.do.co/c/e70af193c2c0</a> 进去可以有$10的优惠券。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/02/DigitalOcean+shadowSocks + Docker 科学上网/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
