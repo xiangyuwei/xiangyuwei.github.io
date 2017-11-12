@@ -256,6 +256,240 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2017/11/12/DELVING INTO TRANSFERABLE ADVERSARIAL EX- AMPLES AND BLACK-BOX ATTACKS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/12/DELVING INTO TRANSFERABLE ADVERSARIAL EX- AMPLES AND BLACK-BOX ATTACKS/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-12T20:46:11+08:00">
+                2017-11-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>DELVING INTO TRANSFERABLE ADVERSARIAL EX- AMPLES AND BLACK-BOX ATTACKS</p>
+<h2 id="贡献"><a href="#贡献" class="headerlink" title="贡献"></a>贡献</h2><p>研究目标和非目标攻击，转移性在非目标攻击时更容易发生<br>用已有的方法进行目标攻击时，几乎没有转移性<br>提出基于集成的方法生成对抗样本，这样在进行目标攻击时可提高攻击成功率。</p>
+<p>此前转移性只在小的数据集，如MNIST (LeCun et al. (1998)) and CIFAR-10 (Krizhevsky &amp; Hinton (2009))中进行试验，本论文在在大规模数据集，ImageNet (Russakovsky et al. (2015))进行试验</p>
+<p>不同模型的梯度方向是正交的，决策边界是对齐的</p>
+<p>攻击了Clarifai.com, a commercial com- pany providing state-of-the-art image classification services</p>
+<p>转移性的研究：（1）在同样数据集的不同模型间 （2）相同模型在不相交的数据集上 （3）不同模型在不同数据集上</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2017/11/09/ADVERSARIAL MACHINE LEARNING AT SCALE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/09/ADVERSARIAL MACHINE LEARNING AT SCALE/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-09T16:06:59+08:00">
+                2017-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>ADVERSARIAL MACHINE LEARNING AT SCALE</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><h2 id="贡献"><a href="#贡献" class="headerlink" title="贡献"></a>贡献</h2><p>比较了多种攻击方式构造的对抗样本在更大的数据集（imageNET ）上的实验结果，</p>
+<p>单步攻击方法比多步攻击方法更具转移性</p>
+<p>解决标签泄露问题</p>
+<p>focusing on the question of how well adversarial examples transfer between different types of models, while we focus on defenses and studying howwell different types of adversarial example generation procedures transfer between relatively similar models</p>
+<p>标签泄露是指如果分类器正确分类了由使用正确标签构造的对抗样本但是错分了相应的没有使用标签构造的对抗样本，这就说明有了标签泄露。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2017/11/08/One pixel attack for fooling deep neural networks Jiawei/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1025,7 +1259,8 @@ rm -i /test/file1
 <p>###　２、2015-DeepFool: a simple and accurate method to fool deep neural networks [<a href="http://arxiv.org/abs/1511.04599" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/tensorflow/cleverhans/blob/master/cleverhans/attacks.py" target="_blank" rel="external">code</a>]<br>基于$L_2$距离度量的非目标攻击<br>$min ||D(x)-X||<em>2<br>subject\ to\ argmaxf(D(X) \neq\ y</em>{true})<br>$</p>
 <h3 id="３、2015-The-Limitations-of-Deep-Learning-in-Adversarial-Settings-ArXiv-code"><a href="#３、2015-The-Limitations-of-Deep-Learning-in-Adversarial-Settings-ArXiv-code" class="headerlink" title="３、2015-The Limitations of Deep Learning in Adversarial Settings[ArXiv][code]"></a>３、2015-The Limitations of Deep Learning in Adversarial Settings[<a href="http://arxiv.org/abs/1511.07528" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/tensorflow/cleverhans" target="_blank" rel="external">code</a>]</h3><p>通过计算对抗显著图，寻找对输出影响最大的两个输入，每次迭代修改两个像素点，直到达到目标图像。<br>L0 distance metric</p>
 <h3 id="４、2015-Distributional-Smoothing-with-Virtual-Adversarial-Training-ArXiv-code"><a href="#４、2015-Distributional-Smoothing-with-Virtual-Adversarial-Training-ArXiv-code" class="headerlink" title="４、2015-Distributional Smoothing with Virtual Adversarial Training [ArXiv][code]"></a>４、2015-Distributional Smoothing with Virtual Adversarial Training [<a href="http://arxiv.org/abs/1507.00677" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/tensorflow/cleverhans/blob/master/cleverhans/attacks.py" target="_blank" rel="external">code</a>]</h3><p>KL散度</p>
-<h3 id="５、2016-Exploring-the-space-of-adversarial-images-ArXiv-code-lua"><a href="#５、2016-Exploring-the-space-of-adversarial-images-ArXiv-code-lua" class="headerlink" title="５、2016-Exploring the space of adversarial images[ArXiv][code]-lua"></a>５、2016-Exploring the space of adversarial images[<a href="http://arxiv.org/abs/1510.05328" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/xiangyuwei/adversarial-1" target="_blank" rel="external">code</a>]-lua</h3><h3 id="６、2016-Adversarial-Machine-Learning-at-Scale-ArXiv-code"><a href="#６、2016-Adversarial-Machine-Learning-at-Scale-ArXiv-code" class="headerlink" title="６、2016-Adversarial Machine Learning at Scale[ArXiv][code]"></a>６、2016-Adversarial Machine Learning at Scale[<a href="http://arxiv.org/abs/1611.01236" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/tensorflow/cleverhans/tree/master/examples/nips17_adversarial_competition/sample_defenses/adv_inception_v3" target="_blank" rel="external">code</a>]</h3><h3 id="７、2016-Delving-into-Transferable-Adversarial-Examples-and-Black-box-Attacks-ArXiv-code"><a href="#７、2016-Delving-into-Transferable-Adversarial-Examples-and-Black-box-Attacks-ArXiv-code" class="headerlink" title="７、2016-Delving into Transferable Adversarial Examples and Black-box Attacks [ArXiv][code]"></a>７、2016-Delving into Transferable Adversarial Examples and Black-box Attacks [<a href="http://arxiv.org/abs/1611.02770" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/sunblaze-ucb/transferability-advdnn-pub" target="_blank" rel="external">code</a>]</h3><h3 id="８、2016-Practical-Black-Box-Attacks-against-Machine-Learning-ArXiv-code"><a href="#８、2016-Practical-Black-Box-Attacks-against-Machine-Learning-ArXiv-code" class="headerlink" title="８、2016-Practical Black-Box Attacks against Machine Learning[ArXiv][code]"></a>８、2016-Practical Black-Box Attacks against Machine Learning[<a href="http://arxiv.org/abs/1602.02697" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/tensorflow/cleverhans/blob/master/cleverhans_tutorials/mnist_blackbox.py" target="_blank" rel="external">code</a>]</h3><p>敌手不需要知道目标模型的结构和参数，只能够根据输入得到输出。<br>由于对抗样本的迁移性，可以先构建替代模型训练对抗样本再在目标模型上测试生成的对抗样本。<br>替代模型的结构和目标模型结构要能够处理相同的任务。</p>
+<h3 id="５、2016-Exploring-the-space-of-adversarial-images-ArXiv-code-lua"><a href="#５、2016-Exploring-the-space-of-adversarial-images-ArXiv-code-lua" class="headerlink" title="５、2016-Exploring the space of adversarial images[ArXiv][code]-lua"></a>５、2016-Exploring the space of adversarial images[<a href="http://arxiv.org/abs/1510.05328" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/xiangyuwei/adversarial-1" target="_blank" rel="external">code</a>]-lua</h3><h3 id="６、2016-Adversarial-Machine-Learning-at-Scale-ArXiv-code"><a href="#６、2016-Adversarial-Machine-Learning-at-Scale-ArXiv-code" class="headerlink" title="６、2016-Adversarial Machine Learning at Scale[ArXiv][code]"></a>６、2016-Adversarial Machine Learning at Scale[<a href="http://arxiv.org/abs/1611.01236" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/tensorflow/cleverhans/tree/master/examples/nips17_adversarial_competition/sample_defenses/adv_inception_v3" target="_blank" rel="external">code</a>]</h3><h3 id="７、2016-Delving-into-Transferable-Adversarial-Examples-and-Black-box-Attacks-ArXiv-code"><a href="#７、2016-Delving-into-Transferable-Adversarial-Examples-and-Black-box-Attacks-ArXiv-code" class="headerlink" title="７、2016-Delving into Transferable Adversarial Examples and Black-box Attacks [ArXiv][code]"></a>７、2016-Delving into Transferable Adversarial Examples and Black-box Attacks [<a href="http://arxiv.org/abs/1611.02770" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/sunblaze-ucb/transferability-advdnn-pub" target="_blank" rel="external">code</a>]</h3><p>作者还使用了同样的实验方法测试了定向性对抗性攻击在目标模型的效果。结果表明定向类标记的传递性差了很多，只有小于等于4%的对抗性图像在源、目标机器学习模型中都识别出相同的定向标记。<br>基于此，作者提出了ensemble方法。它是以多个深度神经网络模型为基础构造对抗图片，即将图4中单个已知机器学习模型替换成多个不同的已知机器学习模型，并共同产生一个对抗性图像。<br>在实验设计中，作者对5个不同的深度神经网络模型一一实施了黑盒子攻击。在对每一个模型攻击的时候，作者假设已知其余的4个模型，并用集合的方式作白盒子对抗图形的构造。同样的，作者分别使用基于优化的攻击手段，和基于Fast Gradient的手段构造对抗性图片。构造图片依然使用的是Adam优化器。在算法经过100次的迭代对权重向量的更新，loss function得以汇聚。作者发现有许多攻击者预先设定的标记也得到了传递。详细结果参见表2。格子(i,j)代表用除了模型i之外的4个其他算法生成的对抗图片，用模型j来验证得到的定向标记的准确值。可以看出，当目标模型包含在已知模型集合中，定向类标记的传递性都在60%以上。即使目标模型不在已知模型集合中，定向标记的准确值也在30%以上。</p>
+<h3 id="８、2016-Practical-Black-Box-Attacks-against-Machine-Learning-ArXiv-code"><a href="#８、2016-Practical-Black-Box-Attacks-against-Machine-Learning-ArXiv-code" class="headerlink" title="８、2016-Practical Black-Box Attacks against Machine Learning[ArXiv][code]"></a>８、2016-Practical Black-Box Attacks against Machine Learning[<a href="http://arxiv.org/abs/1602.02697" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/tensorflow/cleverhans/blob/master/cleverhans_tutorials/mnist_blackbox.py" target="_blank" rel="external">code</a>]</h3><p>敌手不需要知道目标模型的结构和参数，只能够根据输入得到输出。<br>由于对抗样本的迁移性，可以先构建替代模型训练对抗样本再在目标模型上测试生成的对抗样本。<br>替代模型的结构和目标模型结构要能够处理相同的任务。</p>
 <h3 id="９、2016-Adversarial-examples-in-the-physical-world-ArXiv-code-code"><a href="#９、2016-Adversarial-examples-in-the-physical-world-ArXiv-code-code" class="headerlink" title="９、2016-Adversarial examples in the physical world [ArXiv][code][code]"></a>９、2016-Adversarial examples in the physical world [<a href="http://arxiv.org/abs/1607.02533" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/tensorflow/cleverhans/tree/master/examples/nips17_adversarial_competition/sample_targeted_attacks/iter_target_class" target="_blank" rel="external">code</a>][<a href="https://github.com/tensorflow/cleverhans/blob/master/cleverhans/attacks.py" target="_blank" rel="external">code</a>]</h3><p>通过对对抗样本拍照片，改变了某些像素来测试对抗样本的有效性<br>拓展FGSM,多次应用，每次一小步,中间结果被$\varepsilon$截断<br>$X<em>0^{adv}=X<br> \X</em>{N+1}^{adv}=Clip<em>{X,\varepsilon}{X</em>{N}^{adv}+\alpha\cdot sign (\bigtriangledown J(X,y_{true}))}<br>$</p>
 <h3 id="10、2016-Simple-Black-Box-Adversarial-Perturbations-for-Deep-Networks-ArXiv"><a href="#10、2016-Simple-Black-Box-Adversarial-Perturbations-for-Deep-Networks-ArXiv" class="headerlink" title="10、2016-Simple Black-Box Adversarial Perturbations for Deep Networks[ArXiv]"></a>10、2016-Simple Black-Box Adversarial Perturbations for Deep Networks[<a href="http://arxiv.org/abs/1612.06299" target="_blank" rel="external">ArXiv</a>]</h3><p>数据集：CIFAR10, MNIST, SVHN, STL10, and ImageNet1000 datasets</p>
 <h3 id="11、2017-Towards-Evaluating-the-Robustness-of-Neural-Networks-ArXiv-code-code"><a href="#11、2017-Towards-Evaluating-the-Robustness-of-Neural-Networks-ArXiv-code-code" class="headerlink" title="11、2017-Towards Evaluating the Robustness of Neural Networks[ArXiv][code][code]"></a>11、2017-Towards Evaluating the Robustness of Neural Networks[<a href="http://arxiv.org/abs/608.04644" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/xiangyuwei/nn_robust_attacks" target="_blank" rel="external">code</a>][<a href="https://github.com/tensorflow/cleverhans/blob/master/cleverhans/attacks.py" target="_blank" rel="external">code</a>]</h3><p>It is noteworthy that the original defensive distillation is broken by Carlini and Wagner’s attack<br>$min ||1/2(tanh(W)+1)-x)||^2_2+c\cdot l(1/2(tanh(W)+1))$</p>
@@ -1550,296 +1785,6 @@ float(x )               将x转换到一个浮点数
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2017/10/24/Ubuntu 系统软件安装/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/24/Ubuntu 系统软件安装/" itemprop="url">Ubuntu 系统软件安装</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-24T20:48:43+08:00">
-                2017-10-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>注意安装要在安装包目录下。</p>
-<p>##安装eclipse+pydev<br><a href="http://www.cnblogs.com/restran/archive/2011/11/11/2245812.html" target="_blank" rel="external">教程</a></p>
-<p>##安装ss</p>
-<p>参考github上<a href="https://github.com/shadowsocks/shadowsocks-qt5/wiki/%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97" target="_blank" rel="external">内容</a>下载shadowsock</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo add-apt-repository ppa:hzwhuang/ss-qt5</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install shadowsocks-qt5</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/24/Ubuntu 系统软件安装/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2017/09/19/深度学习论文集/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/19/深度学习论文集/" itemprop="url">对抗样本论文集</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-19T20:25:14+08:00">
-                2017-09-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/深度学习/" itemprop="url" rel="index">
-                    <span itemprop="name">深度学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##“Explaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”<br><a href="http://www.csdn.net/article/2015-12-28/2826566" target="_blank" rel="external">如何让神经网络把熊猫识别为秃鹫</a><br><a href="http://colah.github.io/posts/2015-08-Backprop/" target="_blank" rel="external">正向传播与反向传播的区别</a>、<br><a href="http://blog.csdn.net/cdpac/article/details/53170940" target="_blank" rel="external">这个博客</a>表达了对此论文的一些看法。</p>
-<p>通过利用比你想象更简单（更线性！）的网络事实来做到这一点。我们会使用一个线性函数来逼近这个网络！</p>
-<p>生成对抗网络的发明人Ian Goodfellow在《Explaining and Harnessing Adversarial Examples》中提出了一种更快速方便的方法来产生对抗样本：</p>
-<p>技术分享</p>
-<p>这种方法的思想非常简单，就是让输入图像朝着让类别置信度降低的方向上移动一个在各个维度上都是技术分享这么大小的一步。因为输入通常是高维的（比如224x224），再加上现在的主流神经网络结构都是ReLU系的激活函数，线性程度其实很高，所以即使是很小的技术分享，每个维度的效果加一块，通常也足以对结果产生很大的影响，比如下面这样：</p>
-<p>正则化<br>激活函数<br>优化问题的解决<br>损失函数<br>梯度</p>
-<p>下面是L1正则化和L2正则化的作用，这些表述可以在很多文章中找到。</p>
-<pre><code>L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩罚』是指对损失函数中的某些参数做一些限制。对于线性回归模型，使用L1正则化的模型建叫做Lasso回归，使用L2正则化的模型叫做Ridge回归（岭回归）。L1正则化是指权值向量w中各个元素的绝对值之和，通常表示为||w||1
-</code></pre><p>L2正则化是指权值向量w中各个元素的平方和然后再求平方根（可以看到Ridge回归的L2正则化项有平方符号），通常表示为||w||2<br>    L1正则化可以产生稀疏权值矩阵，即产生一个稀疏模型，可以用于特征选择<br>    L2正则化可以防止模型过拟合（overfitting）；一定程度上，L1也可以防止过拟合</p>
-<p><a href="https://hackernoon.com/the-implications-of-adversarial-examples-deep-learning-bits-3-4086108287c7" target="_blank" rel="external">Adversarial Examples and their implications - Deep Learning bits #3</a>这篇博客主要引用别人论文介绍了概念。应用和几种对抗样本防御方法。<br>对我比较新颖的一点是介绍了图像误分类的区别：<br>一种是图像本身有歧义或者裁剪失败，再一种图像中包含很多类别。这些都可以造成分类器分类失败，但对抗样本是指它不是正常产生的，而是人为构造的。</p>
-<p>##我们可以利用对抗样本做什么</p>
-<blockquote>
-<p>绕过安全过滤机制加载图片<br>通过穿戴特别眼镜假冒他人编过人脸识别装置<br>改变交通标志误导自动驾驶<br>伪装武器躲避视频检测<br>绕过声音或指纹识别</p>
-</blockquote>
-<p>##怎样防范<br>该博客提出防止模型隐私泄露这种方法是不值得采用的。并列举几种论文中的方法，等详细看了之后在写。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1889,7 +1834,7 @@ float(x )               将x转换到一个浮点数
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
