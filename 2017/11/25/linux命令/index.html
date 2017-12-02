@@ -1,0 +1,1074 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux,命令," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="后台运行在应用Unix/Linux时，我们一般想让某个程序在后台运行，于是我们将常会用 &amp;amp; 在程序结尾来让程序自动运行。比如我们要运行mysql在后台： /usr/local/mysql/bin/mysqld_safe –user=mysql &amp;amp;。可是有很多程序并不想mysqld一样，这样我们就需要nohup命令，怎样使用nohup命令呢？这里讲解nohup命令的一些用法。 RC版">
+<meta name="keywords" content="Linux,命令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux 命令">
+<meta property="og:url" content="http://xiangyuwei.github.io/2017/11/25/linux命令/index.html">
+<meta property="og:site_name" content="就和今天说早安">
+<meta property="og:description" content="后台运行在应用Unix/Linux时，我们一般想让某个程序在后台运行，于是我们将常会用 &amp;amp; 在程序结尾来让程序自动运行。比如我们要运行mysql在后台： /usr/local/mysql/bin/mysqld_safe –user=mysql &amp;amp;。可是有很多程序并不想mysqld一样，这样我们就需要nohup命令，怎样使用nohup命令呢？这里讲解nohup命令的一些用法。 RC版">
+<meta property="og:updated_time" content="2017-11-28T09:30:28.088Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux 命令">
+<meta name="twitter:description" content="后台运行在应用Unix/Linux时，我们一般想让某个程序在后台运行，于是我们将常会用 &amp;amp; 在程序结尾来让程序自动运行。比如我们要运行mysql在后台： /usr/local/mysql/bin/mysqld_safe –user=mysql &amp;amp;。可是有很多程序并不想mysqld一样，这样我们就需要nohup命令，怎样使用nohup命令呢？这里讲解nohup命令的一些用法。 RC版">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xiangyuwei.github.io/2017/11/25/linux命令/"/>
+
+
+
+
+
+  <title>linux 命令 | 就和今天说早安</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">就和今天说早安</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2017/11/25/linux命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">linux 命令</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-25T15:52:03+08:00">
+                2017-11-25
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-11-28T17:30:28+08:00">
+                2017-11-28
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  3,718 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  14 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="后台运行"><a href="#后台运行" class="headerlink" title="后台运行"></a>后台运行</h2><p>在应用Unix/Linux时，我们一般想让某个程序在后台运行，于是我们将常会用 &amp; 在程序结尾来让程序自动运行。比如我们要运行mysql在后台： /usr/local/mysql/bin/mysqld_safe –user=mysql &amp;。可是有很多程序并不想mysqld一样，这样我们就需要nohup命令，怎样使用nohup命令呢？这里讲解nohup命令的一些用法。</p>
+<h2 id="RC版本"><a href="#RC版本" class="headerlink" title="RC版本"></a>RC版本</h2><p><a href="https://baike.baidu.com/item/RC%E7%89%88%E6%9C%AC/188688?fr=aladdin" target="_blank" rel="external">百度百科</a>解释<br>发布候选版，主要在于除错</p>
+<h2 id="查看文件夹中文件或文件夹的个数"><a href="#查看文件夹中文件或文件夹的个数" class="headerlink" title="查看文件夹中文件或文件夹的个数"></a>查看文件夹中文件或文件夹的个数</h2><p><a href="http://blog.sina.com.cn/s/blog_406127500101dgl8.html" target="_blank" rel="external">内容详细介绍</a></p>
+<p>查看目录下有多少个文件及文件夹需在终端输入<br>搜索</p>
+<blockquote>
+<p>ls | wc -w</p>
+</blockquote>
+<p>查看目录下有多少个文件需在终端输入</p>
+<blockquote>
+<p>ls | wc -c</p>
+</blockquote>
+<p>查看文件夹下有多少个文件，多少个子目录需在终端输入</p>
+<blockquote>
+<p>ls -l |wc -l</p>
+</blockquote>
+<p>若只想知道文件的个数，则需在终端输入</p>
+<blockquote>
+<p>/bin/ls -l |grep ^-|wc -l</p>
+</blockquote>
+<h2 id="修改用户环境"><a href="#修改用户环境" class="headerlink" title="修改用户环境"></a>修改用户环境</h2><p>~/.bashrc<br><a href="http://blog.csdn.net/qiao1245/article/details/44650929" target="_blank" rel="external">Linux下 环境变量/etc/profile、/etc/bashrc、~/.bashrc的区别</a>中：</p>
+<h3 id="etc-profile"><a href="#etc-profile" class="headerlink" title="/etc/profile:"></a>/etc/profile:</h3><p>该文件登录操作系统时，为每个用户设置环境信息，当用户第一次登录时,该文件被执行。也就是说这个文件对每个shell都有效，用于获取系统的环境信息。</p>
+<h3 id="etc-bashrc："><a href="#etc-bashrc：" class="headerlink" title="etc/bashrc："></a>etc/bashrc：</h3><p>为每一个运行bash shell的用户执行此文件，当bash shell被打开时,该文件被读取。也就是说，当用户shell执行了bash时，运行这个文件。</p>
+<h3 id="bashrc"><a href="#bashrc" class="headerlink" title="~/.bashrc"></a>~/.bashrc</h3><p>该文件存储的是专属于个人bash shell的信息，当登录时以及每次打开一个新的shell时,执行这个文件。在这个文件里可以自定义用户专属的个人信息。<br>在刚登录Linux时，首先启动 /etc/profile 文件，然后再启动用户目录下的 ~/.bash_profile、 ~/.bash_login或 ~/.profile文件中的其中一个，执行的顺序为：~/.bash_profile、 ~/.bash_login、 ~/.profile。如果 ~/.bash_profile文件存在的话，一般还会执行 ~/.bashrc文件</p>
+<h2 id="linux下文件的复制、移动与删除"><a href="#linux下文件的复制、移动与删除" class="headerlink" title="linux下文件的复制、移动与删除"></a>linux下文件的复制、移动与删除</h2><h3 id="文件复制命令cp"><a href="#文件复制命令cp" class="headerlink" title="文件复制命令cp"></a>文件复制命令cp</h3><pre><code>命令格式：cp [-adfilprsu] 源文件(source) 目标文件(destination)
+          cp [option] source1 source2 source3 ...  directory
+参数说明：
+-a:是指archive的意思，也说是指复制所有的目录
+-d:若源文件为连接文件(link file)，则复制连接文件属性而非文件本身
+-f:强制(force)，若有重复或其它疑问时，不会询问用户，而强制复制
+-i:若目标文件(destination)已存在，在覆盖时会先询问是否真的操作
+-l:建立硬连接(hard link)的连接文件，而非复制文件本身
+-p:与文件的属性一起复制，而非使用默认属性
+-r:递归复制，用于目录的复制操作
+-s:复制成符号连接文件(symbolic link)，即“快捷方式”文件
+-u:若目标文件比源文件旧，更新目标文件
+如将/test1目录下的file1复制到/test3目录，并将文件名改为file2,可输入以下命令：
+cp /test1/file1 /test3/file2
+
+cp {id_rsa.pub*,id_rsa*} /home/wxy/.ssh
+</code></pre><h3 id="文件移动命令mv"><a href="#文件移动命令mv" class="headerlink" title="文件移动命令mv"></a>文件移动命令mv</h3><pre><code>命令格式：mv [-fiv] source destination
+参数说明：
+-f:force，强制直接移动而不询问
+-i:若目标文件(destination)已经存在，就会询问是否覆盖
+-u:若目标文件已经存在，且源文件比较新，才会更新
+如将/test1目录下的file1复制到/test3 目录，并将文件名改为file2,可输入以下命令：
+mv /test1/file1 /test3/file2
+</code></pre><h3 id="文件删除命令rm"><a href="#文件删除命令rm" class="headerlink" title="文件删除命令rm"></a>文件删除命令rm</h3><pre><code>命令格式：rm [fir] 文件或目录
+参数说明：
+-f:强制删除
+-i:交互模式，在删除前询问用户是否操作
+-r:递归删除，常用在目录的删除
+如删除/test目录下的file1文件，可以输入以下命令：
+rm -i /test/file1
+</code></pre><h3 id="删除文件夹"><a href="#删除文件夹" class="headerlink" title="删除文件夹"></a>删除文件夹</h3><p>linux删除目录很简单，很多人还是习惯用rmdir，不过一旦目录非空，就陷入深深的苦恼之中，现在使用rm -rf命令即可。<br>直接rm就可以了，不过要加两个参数-rf 即：rm -rf 目录名字<br>-r 就是向下递归，不管有多少级目录，一并删除<br>-f 就是直接强行删除，不作任何提示的意思</p>
+<h2 id="使用awk命令获取文本的某一行-某一列"><a href="#使用awk命令获取文本的某一行-某一列" class="headerlink" title="使用awk命令获取文本的某一行,某一列"></a>使用awk命令获取文本的某一行,某一列</h2><h2 id="du命令也是查看使用空间的，但是与df命令不同的是Linux-du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的"><a href="#du命令也是查看使用空间的，但是与df命令不同的是Linux-du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的" class="headerlink" title="du命令也是查看使用空间的，但是与df命令不同的是Linux du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的"></a>du命令也是查看使用空间的，但是与df命令不同的是Linux du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的</h2><p>来自: <a href="http://man.linuxde.net/du" target="_blank" rel="external">http://man.linuxde.net/du</a></p>
+<h2 id="创建文件，文件夹"><a href="#创建文件，文件夹" class="headerlink" title="创建文件，文件夹"></a>创建文件，文件夹</h2><p>touch testfile<br>mkdir testname<br>1、vi</p>
+<p>vi 1.txt 会直接创建并打开一个文件1.txt</p>
+<p>2、touch</p>
+<p>touch的作用是更改一个文件或目录的时间。touch 2.txt 如果2.txt不存在，则创建空文件2.txt</p>
+<p>3、echo </p>
+<p>echo “abcd” &gt; 3.txt 可以直接创建文件3.txt并将abcd写入。</p>
+<p>4、less 、more 、cat </p>
+<p>三者都是将文件内容输出到标准输出，其中less和more可以分页显示，cat是显示全部。</p>
+<p>三者可以根据已经存在的文件创建新的文件。假设已经存在文件1.txt。</p>
+<p>cat 1.txt &gt; 2.txt</p>
+<p>less 1.txt &gt; 3.txt</p>
+<p>more 1.txt &gt; 4.txt</p>
+<p>此时创建的文件内容都和1.txt中文件内容相同。</p>
+<h2 id="显卡信息查看"><a href="#显卡信息查看" class="headerlink" title="显卡信息查看"></a>显卡信息查看</h2><p>lspci  | grep -i vga<br>如果想看详细的信息，比如 GeForce GT 240，即 02:00.0</p>
+<p>[root@localhost conf]# lspci -v -s 02:00.0</p>
+<h3 id="如何查看GPU信息"><a href="#如何查看GPU信息" class="headerlink" title="如何查看GPU信息"></a>如何查看GPU信息</h3><p>1、<a href="http://baijiahao.baidu.com/s?id=1579864792318971483&amp;wfr=spider&amp;for=pc" target="_blank" rel="external">显示当前GPU使用情况</a><br>Nvidia自带了一个nvidia-smi的命令行工具，会显示显存使用情况：</p>
+<p>$ nvidia-smi</p>
+<h2 id="scp"><a href="#scp" class="headerlink" title="scp"></a>scp</h2><p><a href="http://www.cnblogs.com/reddusty/p/4747481.html" target="_blank" rel="external">获取远程服务器上的文件</a></p>
+<h3 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h3><p>scp -P 2222 root@www.vpser.net:/root/lnmp0.4.tar.gz /home/lnmp0.4.tar.gz<br>上端口大写P 为参数，2222 表示更改SSH端口后的端口，如果没有更改SSH端口可以不用添加该参数。 root@www.vpser.net 表示使用root用户登录远程服务器www.vpser.net，:/root/lnmp0.4.tar.gz 表示远程服务器上的文件，最后面的/home/lnmp0.4.tar.gz表示保存在本地上的路径和文件名。</p>
+<h3 id="上传目录到服务器"><a href="#上传目录到服务器" class="headerlink" title="上传目录到服务器"></a>上传目录到服务器</h3><p>scp -r local_dir username@servername:remote_dir</p>
+<h2 id="查看磁盘信息。-boot空间不足"><a href="#查看磁盘信息。-boot空间不足" class="headerlink" title="查看磁盘信息。/boot空间不足"></a>查看磁盘信息。/boot空间不足</h2><blockquote>
+<p>df -lh<br> dpkg –get-selections|grep linux-image<br>    uname -a<br>sudo gdebi teamviewer_12.0.85001_i386.deb<br>sudo dpkg -i teamviewer_12.0.85001_i386.deb<br>     df<br>    fdisk<br>    fdisk -l<br>   sudo fdisk -l<br>   sudo ntfsfix /dev/sda5</p>
+</blockquote>
+<h2 id="nohup-no-hang-up"><a href="#nohup-no-hang-up" class="headerlink" title="nohup(no hang up)"></a>nohup(no hang up)</h2><p>nohup python -u test.py &gt; out.log &amp;<br>无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中<br>ohup命令：如果你正在运行一个进程，而且你觉得在退出帐户时该进程还不会结束，那么可以使用nohup命令。该命令可以在你退出帐户/关闭终端之后继续运行相应的进程。nohup就是不挂起的意思( n ohang up)。</p>
+<h2 id="查看守护进程"><a href="#查看守护进程" class="headerlink" title="查看守护进程"></a>查看守护进程</h2><p>ps -ef | grep xxx<br>linux进程查看系统进程信息命令主要分为：静态进程查看命令（ps）、动态进程查看命令（top）和查看进程树命令(pstree)<br><a href="http://blog.csdn.net/longerzone/article/details/8015941" target="_blank" rel="external">http://blog.csdn.net/longerzone/article/details/8015941</a><br>一、静态进程查看 ps</p>
+<p>ps命令格式：     ps -aux     查看系统所有进程</p>
+<pre><code>                     ps -lA        查看所有系统的数据
+
+                     ps axjf       连通部分进程树状态
+
+-A：与-e意思一样，表列出所有进程
+
+-a ：不与terminal有关的进程
+
+-u：有效用户相关的进程
+
+ x：通常与a这个参数一起用，可以列出完整信息
+</code></pre><p>输出格式：  l：较仔细列出该pid信息</p>
+<pre><code> j：工作格式
+
+-f：做一个更为完整的输出
+</code></pre><p>pts是所谓的伪终端或虚拟终端，具体表现就是你打开一个终端，这个终端就叫pts/0，如果你再打开一个终端，这个新的终端就叫pts /1。比如用who命令查询当前登录的用户，可以看到每个用户的TTY设备（简单来说就是用户输入命令还有显示信息的设备，比如终端）<br>有一个tty7是表示图形界面，我当前登录的是GNOME，当然就是图形界面了。还有tty1-tty6表示文字界面，可以用Ctrl+Alt+F1-F6切换，+F7就是切换回图形界面。下面两行说明我当前打开了两个终端窗口，所以就有pts/0和pts/1<br>tmux是指通过一个终端登录远程主机并运行后，在其中可以开启多个控制台的终端复用软件<br>tty是Teletype的缩写<br> 伪终端（Pseudo Terminal）<br>如果你发现某个进程的CMD后面接上<defunct>时，就代表该进程是僵尸进程，例如：</defunct></p>
+<p>1  2598  2598  2598 ?           -1 Ss       0   0:00 /usr/sbin/hcid<defunct></defunct></p>
+<h2 id="后台进程"><a href="#后台进程" class="headerlink" title="后台进程"></a>后台进程</h2><p>后台进程退出是由于登陆shell收到了SIGHUP信号后在退出前将SIGHUP转发给所有的作业(jobs)。jobs由于收到SIGHUP而终止运行。<br><a href="http://doc.okbase.net/leehomjan/archive/107550.html" target="_blank" rel="external">http://doc.okbase.net/leehomjan/archive/107550.html</a><br><a href="http://www.cnblogs.com/xianlai-huang/p/6543751.html" target="_blank" rel="external">http://www.cnblogs.com/xianlai-huang/p/6543751.html</a></p>
+<h2 id="dpkg：处理-smbclient-–configure-时出错："><a href="#dpkg：处理-smbclient-–configure-时出错：" class="headerlink" title="dpkg：处理 smbclient (–configure)时出错："></a>dpkg：处理 smbclient (–configure)时出错：</h2><p> 依赖关系问题 - 仍未被配置因为错误消息指示这是由于上一个问题导致的错误，没有写入 apport 报告。<br>    由于已经达到 MaxReports 限制，没有写入 apport 报告。<br>     在处理时有错误发生：<br> nfs-common<br> samba-common<br> samba<br> smbclient<br>E: Sub-process /usr/bin/dpkg returned an error code (1)</p>
+<p>  虽然出错，但是装的软件还是可以用的，这里好象是由于当时安装samba服务器的时候没有安装好，在网上有一篇文章:</p>
+<p><a href="http://hi.baidu.com/dream__land/blog/item/46dfe6fded06880109244d18.html" target="_blank" rel="external">http://hi.baidu.com/dream__land/blog/item/46dfe6fded06880109244d18.html</a></p>
+<p>1.$ sudo mv /var/lib/dpkg/info /var/lib/dpkg/info_old //现将info文件夹更名<br>2.$ sudo mkdir /var/lib/dpkg/info //再新建一个新的info文件夹<br>3.$ sudo apt-get update, apt-get -f install //不用解释了吧<br>4.$ sudo mv /var/lib/dpkg/info/* /var/lib/dpkg/info_old //执行完上一步操作后会在新的info文件夹下生成一些文件，现将这些文件全部移到info_old文件夹下<br>5.$ sudo rm -rf /var/lib/dpkg/info //把自己新建的info文件夹删掉<br>6.$ sudo mv /var/lib/dpkg/info_old /var/lib/dpkg/info //把以前的info文件夹重新改回名字</p>
+<h2 id="重复执行历史命令"><a href="#重复执行历史命令" class="headerlink" title="重复执行历史命令"></a>重复执行历史命令</h2><p>history 查看历史命令</p>
+<p>例如：！255</p>
+<h2 id="查看文件大小"><a href="#查看文件大小" class="headerlink" title="查看文件大小"></a>查看文件大小</h2><p>file ##.png<br>identify ##.jpg</p>
+<h2 id="密钥环"><a href="#密钥环" class="headerlink" title="密钥环"></a>密钥环</h2><p>密钥环是存放保存密码的地方，以明文的方式，需要装系统时设置的密钥进行解锁<br>忘记登录密钥，在启动界面，进入高级选项，修复模式，ｒｏｏｔ下修改密码，passwd XXX  然后reboot<br><a href="http://people.ubuntu.com/~happyaron/ubuntu-docs/precise-html/user-forgottenpassword.html" target="_blank" rel="external">参考官方文档</a></p>
+<blockquote>
+<p>seahorse 进入密钥环</p>
+</blockquote>
+<h2 id="bash快捷键"><a href="#bash快捷键" class="headerlink" title="bash快捷键"></a>bash快捷键</h2><p>ctrl键组合<br>ctrl+a:光标移到行首。<br>ctrl+b:光标左移一个字母<br>ctrl+c:杀死当前进程。<br>ctrl+d:退出当前 Shell。<br>ctrl+e:光标移到行尾。<br>ctrl+h:删除光标前一个字符，同 backspace 键相同。<br>ctrl+k:清除光标后至行尾的内容。<br>ctrl+l:清屏，相当于clear。<br>ctrl+r:搜索之前打过的命令。会有一个提示，根据你输入的关键字进行搜索bash的history<br>ctrl+u: 清除光标前至行首间的所有内容。<br>ctrl+w: 移除光标前的一个单词<br>ctrl+t: 交换光标位置前的两个字符<br>ctrl+y: 粘贴或者恢复上次的删除<br>ctrl+d: 删除光标所在字母;注意和backspace以及ctrl+h的区别，这2个是删除光标前的字符<br>ctrl+f: 光标右移<br>ctrl+z : 把当前进程转到后台运行，使用’ fg ‘命令恢复。比如top -d1 然后ctrl+z ，到后台，然后fg,重新恢复<br>esc组合<br>esc+d: 删除光标后的一个词<br>esc+f: 往右跳一个词<br>esc+b: 往左跳一个词<br>esc+t: 交换光标位置前的两个单词。</p>
+<h2 id="压缩文件"><a href="#压缩文件" class="headerlink" title="压缩文件"></a><a href="https://m.baidu.com/from=1000953f/bd_page_type=1/ssid=0/uid=0/pu=usm%401%2Csz%40320_1002%2Cta%40iphone_2_5.1_2_12137.1/baiduid=97DBFCD8CBF6C3FA5C0C3620486ADE63/w=0_10_/t=iphone/l=3/tc?ref=www_iphone&amp;lid=15262047774738399179&amp;order=2&amp;fm=alop&amp;tj=www_normal_2_0_10_title&amp;vit=osres&amp;m=8&amp;srd=1&amp;cltj=cloud_title&amp;asres=1&amp;title=Linux%E4%B8%8B%E7%9A%84%E5%8E%8B%E7%BC%A9zip%2C%E8%A7%A3%E5%8E%8B%E7%BC%A9unzip%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%AE%9E%E4%BE%8B..._%E5%8D%9A%E5%AE%A2%E5%9B%AD&amp;dict=32&amp;w_qd=IlPT2AEptyoA_yitJU7sE7EixhKXt9x2oUdM&amp;sec=25761&amp;di=f705b6df8ebb06b7&amp;bdenc=1&amp;nsrc=IlPT2AEptyoA_yixCFOxCGZb8c3JV3T5AAGGQmBX0DiyokaoxP4kHREsRCnrOi4IU-_wdoSOxBt8w83h_mAm8QwTaP1s" target="_blank" rel="external">压缩文件</a></h2><p>压缩服务器上当前目录的内容为xxx.zip文件</p>
+<p>zip -r xxx.zip ./*</p>
+<p>解压zip文件到当前目录</p>
+<p>unzip filename.zip<br>zip -r filename.zip filesdir</p>
+<p>在这个例子里，filename.zip 代表你创建的文件，filesdir 代表你想放置新 zip 文件的目录。-r 选项指定你想递归地（recursively）包括所有包括在 filesdir 目录中的文件。</p>
+<p>tar 命令详解</p>
+<p>　　-c: 建立压缩档案</p>
+<p>　　-x：解压</p>
+<p>　　-t：查看内容</p>
+<p>　　-r：向压缩归档文件末尾追加文件</p>
+<p>　　-u：更新原压缩包中的文件</p>
+<p>　　这五个是独立的命令，压缩解压都要用到其中一个，可以和别的命令连用但只能用其中一个。下面的参数是根据需要在压缩或解压档案时可选的。</p>
+<p>　　-c: 建立压缩档案</p>
+<p>　　-x：解压</p>
+<p>　　-t：查看内容</p>
+<p>　　-r：向压缩归档文件末尾追加文件</p>
+<p>　　-u：更新原压缩包中的文件</p>
+<p>　　下面的参数-f是必须的</p>
+<p>　　-f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。<br>主选项：</p>
+<p>　　c 创建新的档案文件。如果用户想备份一个目录或是一些文件，就要选择这个选项。</p>
+<p>　　r 把要存档的文件追加到档案文件的未尾。例如用户已经作好备份文件，又发现还有一个目录或是一些文件忘记备份了，这时可以使用该选项，将忘记的目录或文件追加到备份文件中。</p>
+<p>　　t 列出档案文件的内容，查看已经备份了哪些文件。</p>
+<p>　　u 更新文件。就是说，用新增的文件取代原备份文件，如果在备份文件中找不到要更新的文件，则把它追加到备份文件的最后。</p>
+<p>　　x 从档案文件中释放文件。</p>
+<p>　　辅助选项：</p>
+<p>　　b 该选项是为磁带机设定的。其后跟一数字，用来说明区块的大小，系统预设值为20(20*512 bytes)。</p>
+<p>　　f 使用档案文件或设备，这个选项通常是必选的。</p>
+<p>　　k 保存已经存在的文件。例如我们把某个文件还原，在还原的过程中，遇到相同的文件，不会进行覆盖。</p>
+<p>　　m 在还原文件时，把所有文件的修改时间设定为现在。</p>
+<p>　　M 创建多卷的档案文件，以便在几个磁盘中存放。</p>
+<p>　　v 详细报告tar处理的文件信息。如无此选项，tar不报告文件信息。</p>
+<p>　　w 每一步都要求确认。</p>
+<p>　　z 用gzip来压缩/解压缩文件，加上该选项后可以将档案文件进行压缩，但还原时也一定要使用该选项进行解压缩。</p>
+<p>　　# tar -cf all.tar *.jpg</p>
+<p>　　这条命令是将所有.jpg的文件打成一个名为all.tar的包。-c是表示产生新的包，-f指定包的文</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/path/to/wechat-reward-image" alt="WeiXiangYu WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/path/to/alipay-reward-image" alt="WeiXiangYu Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/命令/" rel="tag"># 命令</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/22/Ubuntu使用/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/25/对抗样本论文集/" rel="prev" title="对抗样本论文">
+                对抗样本论文 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar.jpg"
+               alt="WeiXiangYu" />
+          <p class="site-author-name" itemprop="name">WeiXiangYu</p>
+           
+              <p class="site-description motion-element" itemprop="description">生命不息  折腾不止</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/xiangyuwei" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="twitter" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="weibo" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/11" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-douban"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/weishao" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-zhihu"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://macshuo.com/" title="MacTalk" target="_blank">MacTalk</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://example.com/" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#后台运行"><span class="nav-number">1.</span> <span class="nav-text">后台运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RC版本"><span class="nav-number">2.</span> <span class="nav-text">RC版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件夹中文件或文件夹的个数"><span class="nav-number">3.</span> <span class="nav-text">查看文件夹中文件或文件夹的个数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改用户环境"><span class="nav-number">4.</span> <span class="nav-text">修改用户环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-profile"><span class="nav-number">4.1.</span> <span class="nav-text">/etc/profile:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-bashrc："><span class="nav-number">4.2.</span> <span class="nav-text">etc/bashrc：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bashrc"><span class="nav-number">4.3.</span> <span class="nav-text">~/.bashrc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux下文件的复制、移动与删除"><span class="nav-number">5.</span> <span class="nav-text">linux下文件的复制、移动与删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件复制命令cp"><span class="nav-number">5.1.</span> <span class="nav-text">文件复制命令cp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件移动命令mv"><span class="nav-number">5.2.</span> <span class="nav-text">文件移动命令mv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件删除命令rm"><span class="nav-number">5.3.</span> <span class="nav-text">文件删除命令rm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除文件夹"><span class="nav-number">5.4.</span> <span class="nav-text">删除文件夹</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用awk命令获取文本的某一行-某一列"><span class="nav-number">6.</span> <span class="nav-text">使用awk命令获取文本的某一行,某一列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#du命令也是查看使用空间的，但是与df命令不同的是Linux-du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的"><span class="nav-number">7.</span> <span class="nav-text">du命令也是查看使用空间的，但是与df命令不同的是Linux du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建文件，文件夹"><span class="nav-number">8.</span> <span class="nav-text">创建文件，文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显卡信息查看"><span class="nav-number">9.</span> <span class="nav-text">显卡信息查看</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何查看GPU信息"><span class="nav-number">9.1.</span> <span class="nav-text">如何查看GPU信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scp"><span class="nav-number">10.</span> <span class="nav-text">scp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上传文件"><span class="nav-number">10.1.</span> <span class="nav-text">上传文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传目录到服务器"><span class="nav-number">10.2.</span> <span class="nav-text">上传目录到服务器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看磁盘信息。-boot空间不足"><span class="nav-number">11.</span> <span class="nav-text">查看磁盘信息。/boot空间不足</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nohup-no-hang-up"><span class="nav-number">12.</span> <span class="nav-text">nohup(no hang up)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看守护进程"><span class="nav-number">13.</span> <span class="nav-text">查看守护进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后台进程"><span class="nav-number">14.</span> <span class="nav-text">后台进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dpkg：处理-smbclient-–configure-时出错："><span class="nav-number">15.</span> <span class="nav-text">dpkg：处理 smbclient (–configure)时出错：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重复执行历史命令"><span class="nav-number">16.</span> <span class="nav-text">重复执行历史命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件大小"><span class="nav-number">17.</span> <span class="nav-text">查看文件大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密钥环"><span class="nav-number">18.</span> <span class="nav-text">密钥环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bash快捷键"><span class="nav-number">19.</span> <span class="nav-text">bash快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#压缩文件"><span class="nav-number">20.</span> <span class="nav-text">压缩文件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">WeiXiangYu</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
