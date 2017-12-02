@@ -206,18 +206,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[anaconda+jupyter notebook安装]]></title>
-    <url>%2F2017%2F08%2F22%2Fjupyter%20notebook%20%E5%AE%89%E8%A3%85%2F</url>
-    <content type="text"><![CDATA[安装anaconda2和anaconda3先在清华镜像站下载2和3可以任意先安装一个版本，然后另一个版本安装在/envs/py2路径下，py2是自己起的文件名。再打开CMD下载jupyter notebook 1pip install jupyter notebook notebook同时有两个版本时，可在kernel文件夹中，例如路径为D:\ProgramData\Anaconda3\share\jupyter\kernels，放两个kernel 可把/envs文件下的python拷贝到此路径中。]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>编程</tag>
-        <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[udacity知识点]]></title>
     <url>%2F2017%2F08%2F22%2Fudacity%20%E7%9F%A5%E8%AF%86%E7%82%B9%2F</url>
     <content type="text"><![CDATA[splitext()作用类似与split(),不过它会根据扩展名分隔符而不是目录分隔符来分解路径 python 在内部使用两个字节来存储一个unicode，使用unicode对象而不是str的好处，就是unicode方便于跨平台。 你可以用如下两种方式定义一个unicode:Pythons1 = u”人生苦短”s2 = unicode(“人生苦短”, “utf-8”)12 s1 = u”人生苦短”s2 = unicode(“人生苦短”, “utf-8”) 在windows上面开始使用路径时，一定带上r，不然路径里面类似\t \n这种会被转义不信，自己找路径试试 Python pickle模块作用是持久化的储存数据。 numpy.random.shuffle打乱顺序函数：在做将caffe模型和预训练的参数转化为tensorflow的模型和预训练的参数，以便微调]]></content>
@@ -239,6 +227,18 @@
       <tags>
         <tag>Hexo</tag>
         <tag>GitHub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[anaconda+jupyter notebook安装]]></title>
+    <url>%2F2017%2F08%2F22%2Fjupyter%20notebook%20%E5%AE%89%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[安装anaconda2和anaconda3先在清华镜像站下载2和3可以任意先安装一个版本，然后另一个版本安装在/envs/py2路径下，py2是自己起的文件名。再打开CMD下载jupyter notebook 1pip install jupyter notebook notebook同时有两个版本时，可在kernel文件夹中，例如路径为D:\ProgramData\Anaconda3\share\jupyter\kernels，放两个kernel 可把/envs文件下的python拷贝到此路径中。]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>编程</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
