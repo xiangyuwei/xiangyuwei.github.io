@@ -652,8 +652,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-11-03T09:28:33+08:00">
-                2017-11-03
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-03T17:54:17+08:00">
+                2017-12-03
               </time>
             
           </span>
@@ -673,6 +673,17 @@ $(function() {
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/深度学习/" itemprop="url" rel="index">
                     <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
                   </a>
                 </span>
 
@@ -748,59 +759,14 @@ $(function() {
 
       
         
-          
-            <h2 id="UnicodeDecodeError-‘ascii’-codec-can’t-decode-byte-0xe9-in-position-0-ordinal-not-in-range-128"><a href="#UnicodeDecodeError-‘ascii’-codec-can’t-decode-byte-0xe9-in-position-0-ordinal-not-in-range-128" class="headerlink" title="UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe9 in position 0: ordinal not in range(128)"></a>UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe9 in position 0: ordinal not in range(128)</h2><p>Python在进行编码方式之间的转换时，会将 unicode 作为“中间编码”，但 unicode 最大只有 128 那么长，所以这里当尝试将 ascii 编码字符串转换成”中间编码” unicode 时由于超出了其范围，就报出了如上错误。<br>我们在/usr/lib/python2.7/site-packages/目录下添加一个sitecustomize.py文件，内容如下：</p>
-<blockquote>
-<p>import sys<br>sys.setdefaultencoding(‘utf-8’)</p>
-</blockquote>
-<p>忘了操作什么什么之后报的错，记起后补上……</p>
-<p>参考<a href="ttp://www.cnblogs.com/CasonChan/p/4669799.html" target="_blank" rel="external">博客</a></p>
-<h2 id="OSError-Errno-2-No-such-file-or-directory"><a href="#OSError-Errno-2-No-such-file-or-directory" class="headerlink" title="OSError: [Errno 2] No such file or directory"></a>OSError: [Errno 2] No such file or directory</h2><p>１．代码上传服务器后，空文件没有上传，导致自己一直以为存在文件夹，不明白为什么错误，以后应仔细检查一遍<br>２．在路径前加“./”</p>
-<h2 id="raise-IOError-‘Not-a-gzipped-file’"><a href="#raise-IOError-‘Not-a-gzipped-file’" class="headerlink" title="raise IOError, ‘Not a gzipped file’"></a>raise IOError, ‘Not a gzipped file’</h2><p>服务器中代码运行报错，不能下载MNIST数据集,</p>
-<p>1.首先在当前项目下新建 MNIST_data<br>2.<a href="https://gitee.com/Gssol/tensorflow_mnist_Data/attach_files" target="_blank" rel="external">https://gitee.com/Gssol/tensorflow_mnist_Data/attach_files</a> 从该目录将4个附件全部下载</p>
-<ol>
-<li>将下载的四个文件(不用解压)直接放到MNIST_data文件夹里面<br>4.就可以调用该数据集了<br>参考<a href="http://www.cnblogs.com/gaoss/p/7736281.html" target="_blank" rel="external">博客</a></li>
-</ol>
-<h2 id="ValueError-Parent-directory-of-trained-variables-ckpt-doesn’t-exist-can’t-save"><a href="#ValueError-Parent-directory-of-trained-variables-ckpt-doesn’t-exist-can’t-save" class="headerlink" title="ValueError: Parent directory of trained_variables.ckpt doesn’t exist, can’t save."></a>ValueError: Parent directory of trained_variables.ckpt doesn’t exist, can’t save.</h2><p>模型存储路径在本地没有加ckpt,可以运行，但在服务器上却必须加，原因不明</p>
-<p>##mport sklearn.model_selection 出错ImportError: No module named model_selection<br>conda list 查看包安装列表<br>conda update scikit-learn 命令更新sklearn的版本</p>
-<blockquote>
-<p>conda install Matlotlib、Scikit-Learn<br>注意再激活tensorflow情况下<br>查看某个指定环境的已安装包<br>conda list -n python27<br>查找package信息<br>conda search numpy<br> 安装package<br>conda install -n python27 numpy<br>更新package<br>conda update -n python27 numpy<br> 删除package<br>conda remove -n python27 numpy</p>
-</blockquote>
-<h2 id="SCP-No-such-file-or-directory"><a href="#SCP-No-such-file-or-directory" class="headerlink" title="SCP: No such file or directory"></a>SCP: No such file or directory</h2><p><a href="http://blog.sina.com.cn/s/blog_53b7ddf00102v6tk.html" target="_blank" rel="external">scp就是secure copy，一个在linux下用来进行远程拷贝文件的命令。</a><br>符号软链接，应该写真正指向的地址，不明白这一点，所以浪费了很多时间</p>
-<p>If you are logged into the local machine, you would use scp like this:</p>
-<p>scp /home/username/some.xml root@remote.machine.ip.address:/path/to/directory/</p>
-<p>If you are logged into the remote machine (as in the OP), use scp like this:</p>
-<p>scp username@local.machine.ip.address:/home/username/some.xml /path/to/directory</p>
-<p>Substitute the IP addresses as directed in the commands.<br>/的问题还没弄明白</p>
-<p>权限问题，<a href="http://bluemood.blog.51cto.com/1142811/1316679" target="_blank" rel="external">上层目录也就是home目录</a>被别人误改了权限，处理xxuser，其他用户都没了权限</p>
-<p>##anaconda search -t conda tensorflow</p>
-<h2 id="服务器上配置tensorflow-环境"><a href="#服务器上配置tensorflow-环境" class="headerlink" title="服务器上配置tensorflow 环境"></a>服务器上配置tensorflow 环境</h2><p>安装anocanda2 后，安装ＧＰＵ版本<br>GPU安装只能用pip,conda只能安装cpu版本<br>tensorflow版本简单</p>
-<blockquote>
-<p>pip install tensorflow-gpu==1.1.0<br>pip3 install tensorflow==1.1.0 python3.6 cpu版本</p>
-</blockquote>
-<p>CUDA是NVIDIA 推出的使用GPU 资源进行计算的SDK ，CUDA 里面集成了显卡驱动,GPU加速首先就是安装CUDA，然而CUDA只支持NVIDIA显卡,因为CUDA软件就是他家出的<br>注意GPU版本的不支持CUDNNV5，必须要V5.1以上<br>GPU版本需要安装CUDA和ｃｕＤＮＮ,注意版本问题<br>安装CUDA,参考一下网址：<a href="http://blog.csdn.net/jasonzzj/article/details/52583891" target="_blank" rel="external">博客</a><br><a href="http://blog.csdn.net/binglel/article/details/70230276" target="_blank" rel="external">http://blog.csdn.net/binglel/article/details/70230276</a><br><a href="http://blog.csdn.net/stronger19890215/article/details/71411981?locationNum=8&amp;fps=1" target="_blank" rel="external">http://blog.csdn.net/stronger19890215/article/details/71411981?locationNum=8&amp;fps=1</a><br><a href="http://blog.csdn.net/jteng/article/details/52975247" target="_blank" rel="external">http://blog.csdn.net/jteng/article/details/52975247</a><br><a href="http://blog.csdn.net/zhaoyu106/article/details/52793183" target="_blank" rel="external">http://blog.csdn.net/zhaoyu106/article/details/52793183</a><br><a href="http://blog.sina.com.cn/s/blog_96b836170102vq22.html" target="_blank" rel="external">mingw</a></p>
-<h3 id="CUDA安装和测试"><a href="#CUDA安装和测试" class="headerlink" title="CUDA安装和测试 "></a><a href="http://blog.csdn.net/u012235003/article/details/54575758" target="_blank" rel="external">CUDA安装和测试 </a></h3><p>检查自己的GPU是否是CUDA-capable<br>在终端中输入：</p>
-<blockquote>
-<p>lspci | grep -i nvidia</p>
-</blockquote>
-<h3 id="安装qt-creater"><a href="#安装qt-creater" class="headerlink" title="安装qt creater"></a>安装qt creater</h3><p><a href="https://www.ics.com/blog/getting-started-qt-and-qt-creator-linux" target="_blank" rel="external">https://www.ics.com/blog/getting-started-qt-and-qt-creator-linux</a><br> sudo apt-get install qtcreator<br> sudo apt-get install build-essential libgl1-mesa-dev<br> cd ~/Downloads<br>$ chmod a+x qt-unified-linux-x64-2.0.3-1-online.run</p>
-<p>apt-get install qt4-designer<br>下载后找不到在哪儿运行</p>
-<h3 id="配置PyCharm"><a href="#配置PyCharm" class="headerlink" title="配置PyCharm"></a><a href="http://blog.csdn.net/Jmilk/article/details/50730095" target="_blank" rel="external">配置PyCharm</a></h3><p>1）打开PyCharm，执行快捷键ctrl+alt+s打开设置界面，输入tool，点开external tools，配置qtdesigner。</p>
-<p>点击左上角的加号，作如下配置：</p>
-<p>在Qt Designer的设置中，Program选择PyQt安装目录中 designer.exe 的路径</p>
-<p>Work directory 使用变量 $FileDir$<br>设置“PyUIC” – 这个主要是用来将 Qt界面 转换成 py代码</p>
-<p>在PyUIC的设置中，其他的都差不多，Program 写入Python的地址，Parameters写入</p>
-<blockquote>
-<p>-m PyQt5.uic.pyuic  $FileName$ -o $FileNameWithoutExtension$.py</p>
-</blockquote>
-<p>把上面的Python路径修改成自己的即可！</p>
-<p>Work directory 使用变量 $FileDir$</p>
-<p><a href="http://www.cnblogs.com/IPYQ/p/6281410.html" target="_blank" rel="external">转化py代码</a></p>
-<p>creater集成了pyqt desiner,<br><a href="sudo apt-get install qttools5-dev-tools">sudo apt-get install qttools5-dev-tools</a><br>这个因为安装了creater,暂时没试</p>
-<h2 id="Python中TypeError-unbound-method-问题"><a href="#Python中TypeError-unbound-method-问题" class="headerlink" title="Python中TypeError: unbound method 问题"></a>Python中TypeError: unbound method 问题</h2><p>在运行时报错：TypeError: unbound method onlyCellValue() must be called with dictionary instance as first argument (got str instance instead)</p>
-<p>后经在网上查看，发现时由于调用其他类时，未在后面添加括号，添加括号后，运行正常。这是由于未添加括号情况下，未被认为是类的实例，故报此错</p>
-
-          
+          <h2 id="UnicodeDecodeError-‘ascii’-codec-can’t-decode-byte-0xe9-in-position-0-ordinal-not-in-range-128"><a href="#UnicodeDecodeError-‘ascii’-codec-can’t-decode-byte-0xe9-in-position-0-ordinal-not-in-range-128" class="headerlink" title="UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe9 in position 0: ordinal not in range(128)"></a>UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe9 in position 0: ordinal not in range(128)</h2><p>Python在进行编码方式之间的转换时，会将 unicode 作为“中间编码”，但 unicode 最大只有 128 那么长，所以这里当尝试将 ascii 编码字符串转换成”中间编码” unicode 时由于超出了其范围，就报出了如上错误。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/03/项目报错/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -889,8 +855,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-10-30T09:49:50+08:00">
-                2017-10-30
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-03T17:55:05+08:00">
+                2017-12-03
               </time>
             
           </span>
@@ -985,10 +951,14 @@ $(function() {
 
       
         
-          
-            <p><a href="http://man.linuxde.net/" target="_blank" rel="external">linux命令大全</a><br><a href="http://wiki.jikexueyuan.com/project/tensorflow-zh/get_started/os_setup.html" target="_blank" rel="external">tensorflow中文官方文档</a><br><a href="https://www.tensorflow.org/install/install_linux" target="_blank" rel="external">tensorflow英文文档</a><br><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.where.html" target="_blank" rel="external">scipy</a></p>
-
-          
+          <p><a href="http://man.linuxde.net/" target="_blank" rel="external">linux命令大全</a><br><a href="http://wiki.jikexueyuan.com/project/tensorflow-zh/get_started/os_setup.html" target="_blank" rel="external">tensorflow中文官方文档</a><br><a href="https://www.tensorflow.org/install/install_linux" target="_blank" rel="external">tensorflow英文文档</a><br><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.where.html" target="_blank" rel="external">scipy</a><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/30/官网文档/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1077,8 +1047,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-10-23T22:23:43+08:00">
-                2017-10-23
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-03T17:55:02+08:00">
+                2017-12-03
               </time>
             
           </span>
@@ -1173,15 +1143,15 @@ $(function() {
 
       
         
-          
-            <hr>
-<p>正则化是为了解决过拟合问题。在Andrew Ng的机器学习视频中有提到（详见<a href="http://www.cnblogs.com/jianxinzhou/p/4083921.html）。" target="_blank" rel="external">http://www.cnblogs.com/jianxinzhou/p/4083921.html）。</a><br> 正则化产生了<a href="http://blog.csdn.net/gshgsh1228/article/details/52199870" target="_blank" rel="external">稀疏性（Sparsity）</a>，减少了特征向量个数，降低了模型的复杂度。<br> 例如一回归问题，假设回归模型为：y=w1<em>x1+w2</em>x2+…+w1000*x1000+b</p>
-<p>通过学习，如果最后学习到的w<em>就只有很少的非零元素，大部分W</em>为0或接近于0，例如只有5个非零的wi，那可以认为y之于这5个（因素）xi有关系，这更有利于人们对问题的认识和分析，抓住影响问题的主要方面（因素）更符合人们的认知习惯。<br>(1)L0范数</p>
-<pre><code>L0范数是指向量中非零元素的个数。L0正则化的值是模型中非零参数的个数，L0正则化可以实现模型参数的的稀疏化
-</code></pre><p>（2）L1范数<br> L1范数是指向量中各个元素绝对值之和，又叫“稀疏规则算子”（Lasso regularization）。</p>
-<p><a href="http://blog.csdn.net/jinping_shi/article/details/52433975" target="_blank" rel="external">L1正则化和L2正则化可以看做是损失函数的惩罚项</a>。所谓『惩罚』是指对损失函数中的某些参数做一些限制。<br><a href="https://www.zhihu.com/question/20924039" target="_blank" rel="external">知乎</a>中陶轻松的答案指出正则项使W向量中项的个数最小化，从而防止过拟合</p>
-
-          
+          <hr>
+<p>正则化是为了解决过拟合问题。在Andrew Ng的机器学习视频中有提到（详见<a href="http://www.cnblogs.com/jianxinzhou/p/4083921.html）。" target="_blank" rel="external">http://www.cnblogs.com/jianxinzhou/p/4083921.html）。</a><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/29/正则化/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1270,8 +1240,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-10-23T22:24:56+08:00">
-                2017-10-23
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-03T17:55:49+08:00">
+                2017-12-03
               </time>
             
           </span>
@@ -1366,16 +1336,15 @@ $(function() {
 
       
         
-          
-            <p>在神经网络中，激活函数的作用是能够给神经网络加入一些非线性因素，使得神经网络可以更好地解决较为复杂的问题。<br>激活函数众所周知有tanh,sigmoid,ReLU等。</p>
-<p>tanh　　　双切正切函数，取值范围[-1,1]</p>
-<p>sigmoid　 采用S形函数，取值范围[0,1]</p>
-<p>ReLU  取的max(0,x)    简单而粗暴，大于0的留下，否则一律为0。</p>
-<p>可微函数是指那些在定义域中所有点都存在导数的函数。</p>
-<p><a href="https://www.zhihu.com/question/22334626" target="_blank" rel="external">知乎</a>忆臻的回答中激活函数是多个线性直线的组合，图像比较直观<br><a href="softmax, softplushttp://blog.csdn.net/qrlhl/article/details/60883604">经网络中的激活函数（activation function）-Sigmoid, ReLu, TanHyperbolic(tanh)</a></p>
-<p><a href="http://www.cnblogs.com/rgvb178/p/6055213.html" target="_blank" rel="external">梯度消失问题</a>,由于激活函数的饱和性。<br><a href="http://blog.csdn.net/u014365862/article/details/52710698" target="_blank" rel="external">几种常见的激活函数</a>从神经网络的构建讲解激活函数。</p>
-
-          
+          <p>在神经网络中，激活函数的作用是能够给神经网络加入一些非线性因素，使得神经网络可以更好地解决较为复杂的问题。<br>激活函数众所周知有tanh,sigmoid,ReLU等。</p>
+<p>tanh　　　双切正切函数，取值范围[-1,1]<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/29/深度学习中激活函数/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1464,8 +1433,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-10-29T21:41:54+08:00">
-                2017-10-29
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-03T17:56:41+08:00">
+                2017-12-03
               </time>
             
           </span>
@@ -1560,76 +1529,15 @@ $(function() {
 
       
         
-          
-            <h2 id="np-where"><a href="#np-where" class="headerlink" title="np.where()"></a>np.where()</h2><p>带一个星号（*）参数的函数传人的参数存储为一个元组（tuple）；</p>
+          <h2 id="np-where"><a href="#np-where" class="headerlink" title="np.where()"></a>np.where()</h2><p>带一个星号（*）参数的函数传人的参数存储为一个元组（tuple）；</p>
 <p>而带两个星号（*）参数的函数传人的参数则存储为一个字典（dict）</p>
-<pre><code>np.where()[0] 表示行的索引，
-np.where()[1] 则表示列的索引
-</code></pre><p>shape函数是numpy.core.fromnumeric中的函数，它的功能是读取矩阵的长度，比如shape[0]就是读取矩阵第一维度的长度</p>
-<h2 id="pycharm-配置"><a href="#pycharm-配置" class="headerlink" title="pycharm 配置"></a>pycharm 配置</h2><p>一、在PyCharm下为你的Python项目配置Python解释器</p>
-<p>　　　　1、Settings–》Editor–》Project：当前项目名–》Project Interpreter–》Add Local</p>
-<p>　　二、在Python下创建Python文件、Python模块</p>
-<p>　　　　1、File–》New–》Python File</p>
-<p>　　　　2、File–》New–》Python Package</p>
-<p>　　三、使用PyCharm安装Python第三方模块</p>
-<p>　　　　1、Settings–》Editor–》Project：当前项目名–》Project Interpreter–》点击右侧绿色加号</p>
-<p>　　四、Python基本设置</p>
-<p>　　　　1、不使用Tab，Tab=4空格：Editor–》Code Style–》Python–》Tabs and Indents页签</p>
-<p>　　　　2、字体、字体颜色：           Editor–》Colors &amp; Fonts–》Font/Language Defaults/Python</p>
-<p>　　　　3、关闭自动更新：              Editor–》Appearance &amp; Behavior–》System Settings–》Updates</p>
-<p>　　　　4、脚本头设置：                 Editor–》Code Style–》File and Code Templates–》Python Script</p>
-<p>　　　　5、显示行号：  　　　　　　 Editor–》General–》Appearance–》Show line numbers</p>
-<p>　　　　6、右侧竖线是PEP8的代码规范：提示一行不要超过120个字符。</p>
-<p>　　　　7、导出、导入你自定义的配置：File–》Export Settings、Import Settings</p>
-<p>　　五、常用快捷键</p>
-<p>　　　　 Editor–》Keymap</p>
-<p>　　　　1、Crtl + D ：复制当前行</p>
-<p>　　　　2、Ctrl + Y  ：删除当前行</p>
-<p>　　　　3、Shift + Enter ：快速换行</p>
-<p>　　　　4、Ctrl + / ：快速注释 （选中多行后可以批量注释）</p>
-<p>　　　　5、Tab ：缩进当前行 （选中多行后可以批量缩进）</p>
-<p>　　　　6、Shift + Tab ：取消缩进 （选中多行后可以批量取消缩进）</p>
-<p>　　　　7、Ctrl + F ：查找</p>
-<p>　　　　8、Ctrl + R ：替换</p>
-<p>　　　　9、Ctrl + ] ：跳到行尾</p>
-<p>　　　　10、Ctrl + [：跳到行首</p>
-<p>　　六、PyCharm安装插件</p>
-<p>　　　　1、 Editor–》Plugins Editor–》Browse repositories –》Install</p>
-<p>　　七、Git配置</p>
-<p>　　　　1、Editor–》Version Control–》Git</p>
-<p>　　八、常用操作指南</p>
-<p>　　　　1、复制文件路径：左侧文件列表右键选中的文件–》Copy Path</p>
-<p>　　　　2、在文件管理器中打开：左侧文件列表右键选中的文件–》Show in Explorer</p>
-<p>　　　　3、快速定位：Ctrl + 某些內建模块之后，点击在原文件中展开</p>
-<p>　　　　　　Scroll from Source / Collapse All</p>
-<p>　　　　4、查看结构：IDE左侧边栏Structure查看当前项目的结构</p>
-<p>　　　　5、Tab批量换Space：Edit–》Convent Indents–》To Spaces/To Tobs</p>
-<p>　　　　6、TODO的使用：#TODO要做的事情</p>
-<p>　　　　7、把当前Tab页移到窗口右边（下边），方便对比：Tab页签右键–》Move to Right（Down）</p>
-<p>　　　　8、查看文件修改前后对比：文件中右键–》Local History</p>
-<p>　　　　9、IDE右下角一些有用的信息：当前光标在第几行的第几个字符/当前回车换行/当前编码类型/当前Git分支</p>
-<p> 　　　10、IDE右侧边栏–》DataBase</p>
-<p>　　九、PEP8代码规范</p>
-<p>　　　　1、单独一行的注释：# + 1空格 + 注释内容</p>
-<p>　　　　2、代码后跟着的注释：2空格 + # + 1空格 + 注释内容</p>
-<p>　　十、SSH Terminal Default encoding</p>
-<p>　　　　1、Editor–》Tools–》SSH Terminal–》Default encoding UTF-8</p>
-<p>　　十一、编码统一</p>
-<p>　　　　Editor–》File Encoding–》IDE Encoding 和 Project Encoding 编码统一 UTF-8</p>
-<h2 id="python中的字符数字之间的转换函数"><a href="#python中的字符数字之间的转换函数" class="headerlink" title="python中的字符数字之间的转换函数"></a>python中的字符数字之间的转换函数</h2><pre><code>int(x [,base ])         将x转换为一个整数    
-long(x [,base ])        将x转换为一个长整数    
-float(x )               将x转换到一个浮点数    
-</code></pre><p>complex(real [,imag ])  创建一个复数<br>str(x )                 将对象 x 转换为字符串<br>repr(x )                将对象 x 转换为表达式字符串<br>eval(str )              用来计算在字符串中的有效Python表达式,并返回一个对象<br>tuple(s )               将序列 s 转换为一个元组<br>list(s )                将序列 s 转换为一个列表<br>chr(x )                 将一个整数转换为一个字符<br>unichr(x )              将一个整数转换为Unicode字符<br>ord(x )                 将一个字符转换为它的整数值<br>hex(x )                 将一个整数转换为一个十六进制字符串<br>oct(x )                 将一个整数转换为一个八进制字符串   </p>
-<p>chr(65)=’A’<br>ord(‘A’)=65</p>
-<p>int(‘2’)=2;<br>str(2)=’2’</p>
-<h2 id="获取绝对路径，相对路径"><a href="#获取绝对路径，相对路径" class="headerlink" title="获取绝对路径，相对路径"></a>获取绝对路径，相对路径</h2><p>　　&gt;os.path.abspath(“文件名”)：</p>
-<p>显示的是一个文件的<a href="http://www.cnblogs.com/zhangqigao/p/5756704.html" target="_blank" rel="external">绝对路径</a></p>
-<blockquote>
-<p>os.path.dirname(“文件名”):</p>
-</blockquote>
-<p>显示的是一个文件的相对路径<br>os.getcwd()——获得当前工作的目录<br><a href="http://www.cnblogs.com/kaituorensheng/archive/2013/03/18/2965766.html" target="_blank" rel="external">os模块常用命令</a></p>
-<h3 id="文件和目录访问"><a href="#文件和目录访问" class="headerlink" title="文件和目录访问"></a><a href="http://blog.csdn.net/pipisorry/article/details/38964135" target="_blank" rel="external">文件和目录访问</a></h3>
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/29/python小知识/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1886,7 +1794,7 @@ float(x )               将x转换到一个浮点数
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/19/深度学习论文集/" itemprop="url">对抗样本论文集</a></h1>
+                <a class="post-title-link" href="/2017/09/19/深度学习论文集/" itemprop="url">对抗样本</a></h1>
         
 
         <div class="post-meta">
@@ -1914,8 +1822,8 @@ float(x )               将x转换到一个浮点数
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-09-19T20:25:14+08:00">
-                2017-09-19
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-03T17:58:25+08:00">
+                2017-12-03
               </time>
             
           </span>
@@ -1950,7 +1858,7 @@ float(x )               将x转换到一个浮点数
 
           
           
-             <span id="/2017/09/19/深度学习论文集/" class="leancloud_visitors" data-flag-title="对抗样本论文集">
+             <span id="/2017/09/19/深度学习论文集/" class="leancloud_visitors" data-flag-title="对抗样本">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -2010,24 +1918,14 @@ float(x )               将x转换到一个浮点数
 
       
         
-          
-            <p>##“Explaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”<br><a href="http://www.csdn.net/article/2015-12-28/2826566" target="_blank" rel="external">如何让神经网络把熊猫识别为秃鹫</a><br><a href="http://colah.github.io/posts/2015-08-Backprop/" target="_blank" rel="external">正向传播与反向传播的区别</a>、<br><a href="http://blog.csdn.net/cdpac/article/details/53170940" target="_blank" rel="external">这个博客</a>表达了对此论文的一些看法。</p>
-<p>通过利用比你想象更简单（更线性！）的网络事实来做到这一点。我们会使用一个线性函数来逼近这个网络！</p>
-<p>生成对抗网络的发明人Ian Goodfellow在《Explaining and Harnessing Adversarial Examples》中提出了一种更快速方便的方法来产生对抗样本：</p>
-<p>技术分享</p>
-<p>这种方法的思想非常简单，就是让输入图像朝着让类别置信度降低的方向上移动一个在各个维度上都是技术分享这么大小的一步。因为输入通常是高维的（比如224x224），再加上现在的主流神经网络结构都是ReLU系的激活函数，线性程度其实很高，所以即使是很小的技术分享，每个维度的效果加一块，通常也足以对结果产生很大的影响，比如下面这样：</p>
-<p>正则化<br>激活函数<br>优化问题的解决<br>损失函数<br>梯度</p>
-<p>下面是L1正则化和L2正则化的作用，这些表述可以在很多文章中找到。</p>
-<pre><code>L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩罚』是指对损失函数中的某些参数做一些限制。对于线性回归模型，使用L1正则化的模型建叫做Lasso回归，使用L2正则化的模型叫做Ridge回归（岭回归）。L1正则化是指权值向量w中各个元素的绝对值之和，通常表示为||w||1
-</code></pre><p>L2正则化是指权值向量w中各个元素的平方和然后再求平方根（可以看到Ridge回归的L2正则化项有平方符号），通常表示为||w||2<br>    L1正则化可以产生稀疏权值矩阵，即产生一个稀疏模型，可以用于特征选择<br>    L2正则化可以防止模型过拟合（overfitting）；一定程度上，L1也可以防止过拟合</p>
-<p><a href="https://hackernoon.com/the-implications-of-adversarial-examples-deep-learning-bits-3-4086108287c7" target="_blank" rel="external">Adversarial Examples and their implications - Deep Learning bits #3</a>这篇博客主要引用别人论文介绍了概念。应用和几种对抗样本防御方法。<br>对我比较新颖的一点是介绍了图像误分类的区别：<br>一种是图像本身有歧义或者裁剪失败，再一种图像中包含很多类别。这些都可以造成分类器分类失败，但对抗样本是指它不是正常产生的，而是人为构造的。</p>
-<p>##我们可以利用对抗样本做什么</p>
-<blockquote>
-<p>绕过安全过滤机制加载图片<br>通过穿戴特别眼镜假冒他人编过人脸识别装置<br>改变交通标志误导自动驾驶<br>伪装武器躲避视频检测<br>绕过声音或指纹识别</p>
-</blockquote>
-<p>##怎样防范<br>该博客提出防止模型隐私泄露这种方法是不值得采用的。并列举几种论文中的方法，等详细看了之后在写。</p>
-
-          
+          <h2 id="“Explaining-and-Harnessing-Adversarial-Examples（对抗样本的解释和利用）”"><a href="#“Explaining-and-Harnessing-Adversarial-Examples（对抗样本的解释和利用）”" class="headerlink" title="“Explaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”"></a>“Explaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”</h2><p><a href="http://www.csdn.net/article/2015-12-28/2826566" target="_blank" rel="external">如何让神经网络把熊猫识别为秃鹫</a><br><a href="http://colah.github.io/posts/2015-08-Backprop/" target="_blank" rel="external">正向传播与反向传播的区别</a>、<br><a href="http://blog.csdn.net/cdpac/article/details/53170940" target="_blank" rel="external">这个博客</a>表达了对此论文的一些看法。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/19/深度学习论文集/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2304,8 +2202,8 @@ float(x )               将x转换到一个浮点数
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-28T01:11:29+08:00">
-                2017-08-28
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-03T17:59:08+08:00">
+                2017-12-03
               </time>
             
           </span>
@@ -2400,30 +2298,15 @@ float(x )               将x转换到一个浮点数
 
       
         
-          
-            <p><a href="http://mp.weixin.qq.com/s?__biz=MjM5NjA0NjgyMA==&amp;mid=2651064730&amp;idx=2&amp;sn=89f448b84ca16a2dc19668b80a9f2f77&amp;chksm=bd1f9b118a6812076d78b3938bf88f3d2a511dc1d1aa40879cd4af18e0ac97eb338d4987ced1&amp;mpshare=1&amp;scene=1&amp;srcid=0825oAnJzsX50DcfdTsx8V3h#rd" target="_blank" rel="external">转载Freebuf</a></p>
+          <p><a href="http://mp.weixin.qq.com/s?__biz=MjM5NjA0NjgyMA==&amp;mid=2651064730&amp;idx=2&amp;sn=89f448b84ca16a2dc19668b80a9f2f77&amp;chksm=bd1f9b118a6812076d78b3938bf88f3d2a511dc1d1aa40879cd4af18e0ac97eb338d4987ced1&amp;mpshare=1&amp;scene=1&amp;srcid=0825oAnJzsX50DcfdTsx8V3h#rd" target="_blank" rel="external">转载Freebuf</a></p>
 <p>toilet<br>简介</p>
-<p>toilet能用字母拼写出更大字母的工具，具体拼出什么字由命令后面的参数决定，不仅如此，它还能打印出各种风格的效果，比如彩色，金属光泽等。<br>安装</p>
-<p>apt-get install toilet</p>
-<p>参数解释</p>
-<p>toilet -f mono12 -F metal FreeBuf</p>
-<p>sl<br>简介</p>
-<p>你可能了解Linux的ls命令，并经常使用它来查看文件夹的内容。但是，有些时候你可能会拼写成sl ,这时我们应该如何获得一些乐趣而不是看见“command not found”呢？<br>某编程牛人也经常犯把ls敲成sl的错误，所以他自己编了一个程序娱乐一下,这个程序的作用很简单，就是当你输入sl的时候终端会出现一个火车呼啸而过～～<br>安装</p>
-<p>apt-get install sl</p>
-<p>cmatrix<br>简介</p>
-<p>《黑客帝国》的代码雨视觉特效。<br>安装</p>
-<p>apt-get install cmatrix</p>
-<p>参数解释</p>
-<p>-B: 字体加粗<br>-C: 颜色 后面跟上参数颜色</p>
-<p>cowsay<br>简介</p>
-<p>Cowsay命令是一个有趣的命令。它会用ASCII字符描绘牛，羊和许多其他动物。但是不是每个Linux发行版都带有这个命令。<br>安装</p>
-<p>apt-get install cowsay</p>
-<p>参数解释</p>
-<p>列出所有支持可用的动物:cowsay -l list</p>
-<p>sciinema<br>简介</p>
-<p>本文其实最初很多特效都用这个终端去录制的，但是由于需要引用外部的js，所以最后这些终端下的特效才换成了gif图。asciineme 可以完美录制完美终端下所敲的命令。<br>官网:<a href="https://asciinema.org/" target="_blank" rel="external">https://asciinema.org/</a></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/27/Linux 有趣命令/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2516,7 +2399,7 @@ float(x )               将x转换到一个浮点数
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

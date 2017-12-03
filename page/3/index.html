@@ -1028,8 +1028,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-22T15:50:55+08:00">
-                2017-08-22
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-03T17:59:50+08:00">
+                2017-12-03
               </time>
             
           </span>
@@ -1124,16 +1124,15 @@ $(function() {
 
       
         
-          
-            <p>splitext()作用类似与split(),不过它会根据扩展名分隔符而不是目录分隔符来分解路径</p>
-<p>python 在内部使用两个字节来存储一个unicode，使用unicode对象而不是str的好处，就是unicode方便于跨平台。</p>
-<p>你可以用如下两种方式定义一个unicode:<br>Python<br>s1 = u”人生苦短”<br>s2 = unicode(“人生苦短”, “utf-8”)<br>1<br>2</p>
-<p>s1 = u”人生苦短”<br>s2 = unicode(“人生苦短”, “utf-8”)</p>
-<p>在windows上面开始使用路径时，一定带上r，不然路径里面类似\t \n这种会被转义<br>不信，自己找路径试试</p>
-<p>Python pickle模块作用是持久化的储存数据。</p>
-<p>numpy.random.shuffle打乱顺序函数：在做将caffe模型和预训练的参数转化为tensorflow的模型和预训练的参数，以便微调</p>
-
-          
+          <p>splitext()作用类似与split(),不过它会根据扩展名分隔符而不是目录分隔符来分解路径</p>
+<p>python 在内部使用两个字节来存储一个unicode，使用unicode对象而不是str的好处，就是unicode方便于跨平台。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/22/udacity 知识点/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1222,8 +1221,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-09T23:09:54+08:00">
-                2017-08-09
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-03T18:00:16+08:00">
+                2017-12-03
               </time>
             
           </span>
@@ -1318,13 +1317,17 @@ $(function() {
 
       
         
-          
-            <h1 id="安装anaconda2和anaconda3"><a href="#安装anaconda2和anaconda3" class="headerlink" title="安装anaconda2和anaconda3"></a>安装anaconda2和anaconda3</h1><p>先在<a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="external">清华镜像站</a>下载2和3<br>可以任意先安装一个版本，然后另一个版本安装在/envs/py2路径下，py2是自己起的文件名。<br>再打开CMD下载jupyter notebook</p>
+          <h1 id="安装anaconda2和anaconda3"><a href="#安装anaconda2和anaconda3" class="headerlink" title="安装anaconda2和anaconda3"></a>安装anaconda2和anaconda3</h1><p>先在<a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="external">清华镜像站</a>下载2和3<br>可以任意先安装一个版本，然后另一个版本安装在/envs/py2路径下，py2是自己起的文件名。<br>再打开CMD下载jupyter notebook</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install jupyter notebook</div></pre></td></tr></table></figure>
 <p>notebook同时有两个版本时，可在kernel文件夹中，例如路径为D:\ProgramData\Anaconda3<code>\share\jupyter\kernels</code>，放两个kernel</p>
-<p>可把/envs文件下的python拷贝到此路径中。</p>
-
-          
+<p>可把/envs文件下的python拷贝到此路径中。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/22/jupyter notebook 安装/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1413,8 +1416,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-07-25T21:46:11+08:00">
-                2017-07-25
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-03T18:01:13+08:00">
+                2017-12-03
               </time>
             
           </span>
@@ -1509,59 +1512,16 @@ $(function() {
 
       
         
-          
-            <p>原文出自：<a href="http://zhujiegao.com/2015/12/06/automatic-backup/" target="_blank" rel="external">http://zhujiegao.com/2015/12/06/automatic-backup/</a></p>
+          <p>原文出自：<a href="http://zhujiegao.com/2015/12/06/automatic-backup/" target="_blank" rel="external">http://zhujiegao.com/2015/12/06/automatic-backup/</a></p>
 <p>先安装git和node</p>
-<p>#原理</p>
-<p>通过通过监听Hexo的其它事件来完成自动执行Git命令完成自动备份。<br>通过查阅Hexo文档，找到了Hexo的主要事件，见下表：</p>
-<table>
-<thead>
-<tr>
-<th>事件名</th>
-<th style="text-align:right">事件发生时间</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>deployBefore</td>
-<td style="text-align:right">在部署完成前发布</td>
-</tr>
-<tr>
-<td>deployAfter</td>
-<td style="text-align:right">在部署成功后发布</td>
-</tr>
-<tr>
-<td>exit</td>
-<td style="text-align:right">在 Hexo 结束前发布</td>
-</tr>
-<tr>
-<td>generateBefore</td>
-<td style="text-align:right">在静态文件生成前发布</td>
-</tr>
-<tr>
-<td>generateAfter</td>
-<td style="text-align:right">在静态文件生成后发布</td>
-</tr>
-<tr>
-<td>new</td>
-<td style="text-align:right">在文章文件建立后发布</td>
-</tr>
-</tbody>
-</table>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><ol>
-<li>在Github下创建新的仓库，取名hexo</li>
-<li>进入本地hexo文件夹，执行以下命令</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">git init</div><div class="line">git remote add origin git@github.com:XXX/XXX.git</div><div class="line">git pull -u origin master</div><div class="line">git add .</div><div class="line">git commit -m &quot;添加hexo源码文件备份&quot;</div><div class="line">git pull -u origin master</div></pre></td></tr></table></figure>
-<p>3.安装shelljs模块<br>要实现这个自动备份功能，需要依赖Node.js的一个shelljs模块,该模块重新包装了child_process,调用系统命令更加的方便。该模块需要安装后使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install --save shelljs</div></pre></td></tr></table></figure>
-<p>4 自动备份脚本</p>
-<p>待到模块安装完成，在Hexo根目录的scripts文件夹下新建一个js文件，文件名随意取。</p>
-<p>ps: 如果没有scripts目录，请新建一个。</p>
-<p>然后在脚本中，写入以下内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">require(&apos;shelljs/global&apos;);</div><div class="line">try &#123;</div><div class="line">	hexo.on(&apos;deployAfter&apos;, function() &#123;//当deploy完成后执行备份</div><div class="line">		run();</div><div class="line">	&#125;);</div><div class="line">&#125; catch (e) &#123;</div><div class="line">	console.log(&quot;产生了一个错误&lt;(￣3￣)&gt; !，错误详情为：&quot; + e.toString());</div><div class="line">&#125;</div><div class="line">function run() &#123;</div><div class="line">	if (!which(&apos;git&apos;)) &#123;</div><div class="line">		echo(&apos;Sorry, this script requires git&apos;);</div><div class="line">		exit(1);</div><div class="line">	&#125; else &#123;</div><div class="line">		echo(&quot;======================Auto Backup Begin===========================&quot;);</div><div class="line">		cd(&apos;D:/hexo&apos;);    //此处修改为Hexo根目录路径</div><div class="line">		if (exec(&apos;git add --all&apos;).code !== 0) &#123;</div><div class="line">			echo(&apos;Error: Git add failed&apos;);</div><div class="line">			exit(1);</div><div class="line">		&#125;</div><div class="line">		if (exec(&apos;git commit -am &quot;Form auto backup script\&apos;s commit&quot;&apos;).code !== 0) &#123;</div><div class="line">			echo(&apos;Error: Git commit failed&apos;);</div><div class="line">			exit(1);</div><div class="line">		&#125;</div><div class="line">		if (exec(&apos;git push origin master&apos;).code !== 0) &#123;</div><div class="line">			echo(&apos;Error: Git push failed&apos;);</div><div class="line">			exit(1);</div><div class="line">		&#125;</div><div class="line">		echo(&quot;==================Auto Backup Complete============================&quot;)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>通过通过监听Hexo的其它事件来完成自动执行Git命令完成自动备份。<br>通过查阅Hexo文档，找到了Hexo的主要事件，见下表：</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/22/自动备份hexo/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2034,8 +1994,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-07-04T23:53:42+08:00">
-                2017-07-04
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-03T18:01:29+08:00">
+                2017-12-03
               </time>
             
           </span>
@@ -2130,15 +2090,15 @@ $(function() {
 
       
         
-          
-            <h1 id="利用Wireshark任意获取QQ好友IP实施精准定位"><a href="#利用Wireshark任意获取QQ好友IP实施精准定位" class="headerlink" title="利用Wireshark任意获取QQ好友IP实施精准定位"></a>利用Wireshark任意获取QQ好友IP实施精准定位</h1><p>在freebuf上看到了<a href="http://mp.weixin.qq.com/s/HrLvE3tAoO1bNFqcVkqIiQ" target="_blank" rel="external">利用Wireshark任意获取QQ好友IP实施精准定位</a>这篇文章，就想试试。<br>wireshark抓取数据包，然后查找。<br> 1,选择搜索 “字符串”;</p>
-<p>2,选择搜索 “分组详情”;</p>
-<p>3,填写搜索数据 “020048”;</p>
-<p> 当发现查找能自动定位到连接数据的时候就可以关闭电话邀请<br>一个IP在线定位的网站<a href="http://www.opengps.cn/" target="_blank" rel="external">openGPS.cn</a> 进入页面后，选择高精度IP定位.<br><a href="http://www.cnblogs.com/Chilam007/p/6973990.html" target="_blank" rel="external">wireshark功能使用的详细介绍</a></p>
-<p><a href="http://blog.csdn.net/u012398362/article/details/52276067" target="_blank" rel="external">wireshark抓包常见提示含义解析</a></p>
-<p><a href="http://mp.weixin.qq.com/s/wty92SW-7MJF7ln9q6nZMQ" target="_blank" rel="external">我是如何轻松拿到Google$1337现金奖励</a>这篇文章主要是讲漏洞挖掘<br><img src="/img/查找漏洞.png" alt="数据空间平台"><br>可适当关注<a href="https://fofa.so/" target="_blank" rel="external">Fofa</a>、<a href="https://www.shodan.io/" target="_blank" rel="external">Shodan</a>、<a href="https://www.zoomeye.org/" target="_blank" rel="external">Zoomeye</a>等网络空间数据平台。</p>
-
-          
+          <h1 id="利用Wireshark任意获取QQ好友IP实施精准定位"><a href="#利用Wireshark任意获取QQ好友IP实施精准定位" class="headerlink" title="利用Wireshark任意获取QQ好友IP实施精准定位"></a>利用Wireshark任意获取QQ好友IP实施精准定位</h1><p>在freebuf上看到了<a href="http://mp.weixin.qq.com/s/HrLvE3tAoO1bNFqcVkqIiQ" target="_blank" rel="external">利用Wireshark任意获取QQ好友IP实施精准定位</a>这篇文章，就想试试。<br>wireshark抓取数据包，然后查找。<br> 1,选择搜索 “字符串”;</p>
+<p>2,选择搜索 “分组详情”;<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/22/利用wireshark进行qq好友定位/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2422,7 +2382,7 @@ $(function() {
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
