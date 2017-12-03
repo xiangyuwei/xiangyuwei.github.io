@@ -629,30 +629,30 @@ rm -i /test/file1
 <h3 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h3><p>scp -P 2222 root@www.vpser.net:/root/lnmp0.4.tar.gz /home/lnmp0.4.tar.gz<br>上端口大写P 为参数，2222 表示更改SSH端口后的端口，如果没有更改SSH端口可以不用添加该参数。 root@www.vpser.net 表示使用root用户登录远程服务器www.vpser.net，:/root/lnmp0.4.tar.gz 表示远程服务器上的文件，最后面的/home/lnmp0.4.tar.gz表示保存在本地上的路径和文件名。</p>
 <h3 id="上传目录到服务器"><a href="#上传目录到服务器" class="headerlink" title="上传目录到服务器"></a>上传目录到服务器</h3><p>scp -r local_dir username@servername:remote_dir</p>
 <h2 id="查看磁盘信息。-boot空间不足"><a href="#查看磁盘信息。-boot空间不足" class="headerlink" title="查看磁盘信息。/boot空间不足"></a>查看磁盘信息。/boot空间不足</h2><blockquote>
-<p>df -lh<br> dpkg —get-selections|grep linux-image<br>    uname -a<br>sudo gdebi teamviewer_12.0.85001_i386.deb<br>sudo dpkg -i teamviewer_12.0.85001_i386.deb<br>     df<br>    fdisk<br>    fdisk -l<br>   sudo fdisk -l<br>   sudo ntfsfix /dev/sda5</p>
+<p>df -lh<br> dpkg –get-selections|grep linux-image<br>    uname -a<br>sudo gdebi teamviewer_12.0.85001_i386.deb<br>sudo dpkg -i teamviewer_12.0.85001_i386.deb<br>     df<br>    fdisk<br>    fdisk -l<br>   sudo fdisk -l<br>   sudo ntfsfix /dev/sda5</p>
 </blockquote>
 <h2 id="nohup-no-hang-up"><a href="#nohup-no-hang-up" class="headerlink" title="nohup(no hang up)"></a>nohup(no hang up)</h2><p>nohup python -u test.py &gt; out.log &amp;<br>无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中<br>ohup命令：如果你正在运行一个进程，而且你觉得在退出帐户时该进程还不会结束，那么可以使用nohup命令。该命令可以在你退出帐户/关闭终端之后继续运行相应的进程。nohup就是不挂起的意思( n ohang up)。</p>
 <h2 id="查看守护进程"><a href="#查看守护进程" class="headerlink" title="查看守护进程"></a>查看守护进程</h2><p>ps -ef | grep xxx<br>linux进程查看系统进程信息命令主要分为：静态进程查看命令（ps）、动态进程查看命令（top）和查看进程树命令(pstree)<br><a href="http://blog.csdn.net/longerzone/article/details/8015941" target="_blank" rel="external">http://blog.csdn.net/longerzone/article/details/8015941</a><br>一、静态进程查看 ps</p>
 <p>ps命令格式：     ps -aux     查看系统所有进程</p>
-<pre><code>                      ps -lA        查看所有系统的数据
+<pre><code>                     ps -lA        查看所有系统的数据
 
-                      ps axjf       连通部分进程树状态
+                     ps axjf       连通部分进程树状态
 
- -A：与-e意思一样，表列出所有进程
+-A：与-e意思一样，表列出所有进程
 
- -a ：不与terminal有关的进程
+-a ：不与terminal有关的进程
 
- -u：有效用户相关的进程
+-u：有效用户相关的进程
 
-  x：通常与a这个参数一起用，可以列出完整信息
+ x：通常与a这个参数一起用，可以列出完整信息
 </code></pre><p>输出格式：  l：较仔细列出该pid信息</p>
-<pre><code>               j：工作格式
+<pre><code> j：工作格式
 
-              -f：做一个更为完整的输出
+-f：做一个更为完整的输出
 </code></pre><p>pts是所谓的伪终端或虚拟终端，具体表现就是你打开一个终端，这个终端就叫pts/0，如果你再打开一个终端，这个新的终端就叫pts /1。比如用who命令查询当前登录的用户，可以看到每个用户的TTY设备（简单来说就是用户输入命令还有显示信息的设备，比如终端）<br>有一个tty7是表示图形界面，我当前登录的是GNOME，当然就是图形界面了。还有tty1-tty6表示文字界面，可以用Ctrl+Alt+F1-F6切换，+F7就是切换回图形界面。下面两行说明我当前打开了两个终端窗口，所以就有pts/0和pts/1<br>tmux是指通过一个终端登录远程主机并运行后，在其中可以开启多个控制台的终端复用软件<br>tty是Teletype的缩写<br> 伪终端（Pseudo Terminal）<br>如果你发现某个进程的CMD后面接上<defunct>时，就代表该进程是僵尸进程，例如：</defunct></p>
 <p>1  2598  2598  2598 ?           -1 Ss       0   0:00 /usr/sbin/hcid<defunct></defunct></p>
 <h2 id="后台进程"><a href="#后台进程" class="headerlink" title="后台进程"></a>后台进程</h2><p>后台进程退出是由于登陆shell收到了SIGHUP信号后在退出前将SIGHUP转发给所有的作业(jobs)。jobs由于收到SIGHUP而终止运行。<br><a href="http://doc.okbase.net/leehomjan/archive/107550.html" target="_blank" rel="external">http://doc.okbase.net/leehomjan/archive/107550.html</a><br><a href="http://www.cnblogs.com/xianlai-huang/p/6543751.html" target="_blank" rel="external">http://www.cnblogs.com/xianlai-huang/p/6543751.html</a></p>
-<h2 id="dpkg：处理-smbclient-—configure-时出错："><a href="#dpkg：处理-smbclient-—configure-时出错：" class="headerlink" title="dpkg：处理 smbclient (—configure)时出错："></a>dpkg：处理 smbclient (—configure)时出错：</h2><p> 依赖关系问题 - 仍未被配置因为错误消息指示这是由于上一个问题导致的错误，没有写入 apport 报告。<br>    由于已经达到 MaxReports 限制，没有写入 apport 报告。<br>     在处理时有错误发生：<br> nfs-common<br> samba-common<br> samba<br> smbclient<br>E: Sub-process /usr/bin/dpkg returned an error code (1)</p>
+<h2 id="dpkg：处理-smbclient-–configure-时出错："><a href="#dpkg：处理-smbclient-–configure-时出错：" class="headerlink" title="dpkg：处理 smbclient (–configure)时出错："></a>dpkg：处理 smbclient (–configure)时出错：</h2><p> 依赖关系问题 - 仍未被配置因为错误消息指示这是由于上一个问题导致的错误，没有写入 apport 报告。<br>    由于已经达到 MaxReports 限制，没有写入 apport 报告。<br>     在处理时有错误发生：<br> nfs-common<br> samba-common<br> samba<br> smbclient<br>E: Sub-process /usr/bin/dpkg returned an error code (1)</p>
 <p>  虽然出错，但是装的软件还是可以用的，这里好象是由于当时安装samba服务器的时候没有安装好，在网上有一篇文章:</p>
 <p><a href="http://hi.baidu.com/dream__land/blog/item/46dfe6fded06880109244d18.html" target="_blank" rel="external">http://hi.baidu.com/dream__land/blog/item/46dfe6fded06880109244d18.html</a></p>
 <p>1.$ sudo mv /var/lib/dpkg/info /var/lib/dpkg/info_old //现将info文件夹更名<br>2.$ sudo mkdir /var/lib/dpkg/info //再新建一个新的info文件夹<br>3.$ sudo apt-get update, apt-get -f install //不用解释了吧<br>4.$ sudo mv /var/lib/dpkg/info/* /var/lib/dpkg/info_old //执行完上一步操作后会在新的info文件夹下生成一些文件，现将这些文件全部移到info_old文件夹下<br>5.$ sudo rm -rf /var/lib/dpkg/info //把自己新建的info文件夹删掉<br>6.$ sudo mv /var/lib/dpkg/info_old /var/lib/dpkg/info //把以前的info文件夹重新改回名字</p>
@@ -893,11 +893,20 @@ rm -i /test/file1
               </span>
             
               <span class="links-of-author-item">
-                <a href="twitter" target="_blank" title="Twitter">
+                <a href="https://twitter.com/aiyuziyou520" target="_blank" title="Twitter">
                   
                     <i class="fa fa-fw fa-twitter"></i>
                   
                   Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://youtube.com/" target="_blank" title="Youtube">
+                  
+                    <i class="fa fa-fw fa-youtube"></i>
+                  
+                  Youtube
                 </a>
               </span>
             
@@ -911,7 +920,7 @@ rm -i /test/file1
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://douban.com/people/11" target="_blank" title="豆瓣">
+                <a href="http://douban.com/people/68759000" target="_blank" title="豆瓣">
                   
                     <i class="fa fa-fw fa-douban"></i>
                   
@@ -920,7 +929,7 @@ rm -i /test/file1
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://www.zhihu.com/people/weishao" target="_blank" title="知乎">
+                <a href="http://www.zhihu.com/people/wei-shao-54" target="_blank" title="知乎">
                   
                     <i class="fa fa-fw fa-zhihu"></i>
                   
@@ -970,7 +979,7 @@ rm -i /test/file1
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#后台运行"><span class="nav-number">1.</span> <span class="nav-text">后台运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RC版本"><span class="nav-number">2.</span> <span class="nav-text">RC版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件夹中文件或文件夹的个数"><span class="nav-number">3.</span> <span class="nav-text">查看文件夹中文件或文件夹的个数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改用户环境"><span class="nav-number">4.</span> <span class="nav-text">修改用户环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-profile"><span class="nav-number">4.1.</span> <span class="nav-text">/etc/profile:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-bashrc："><span class="nav-number">4.2.</span> <span class="nav-text">etc/bashrc：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bashrc"><span class="nav-number">4.3.</span> <span class="nav-text">~/.bashrc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux下文件的复制、移动与删除"><span class="nav-number">5.</span> <span class="nav-text">linux下文件的复制、移动与删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件复制命令cp"><span class="nav-number">5.1.</span> <span class="nav-text">文件复制命令cp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件移动命令mv"><span class="nav-number">5.2.</span> <span class="nav-text">文件移动命令mv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件删除命令rm"><span class="nav-number">5.3.</span> <span class="nav-text">文件删除命令rm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除文件夹"><span class="nav-number">5.4.</span> <span class="nav-text">删除文件夹</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用awk命令获取文本的某一行-某一列"><span class="nav-number">6.</span> <span class="nav-text">使用awk命令获取文本的某一行,某一列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#du命令也是查看使用空间的，但是与df命令不同的是Linux-du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的"><span class="nav-number">7.</span> <span class="nav-text">du命令也是查看使用空间的，但是与df命令不同的是Linux du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建文件，文件夹"><span class="nav-number">8.</span> <span class="nav-text">创建文件，文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显卡信息查看"><span class="nav-number">9.</span> <span class="nav-text">显卡信息查看</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何查看GPU信息"><span class="nav-number">9.1.</span> <span class="nav-text">如何查看GPU信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scp"><span class="nav-number">10.</span> <span class="nav-text">scp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上传文件"><span class="nav-number">10.1.</span> <span class="nav-text">上传文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传目录到服务器"><span class="nav-number">10.2.</span> <span class="nav-text">上传目录到服务器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看磁盘信息。-boot空间不足"><span class="nav-number">11.</span> <span class="nav-text">查看磁盘信息。/boot空间不足</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nohup-no-hang-up"><span class="nav-number">12.</span> <span class="nav-text">nohup(no hang up)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看守护进程"><span class="nav-number">13.</span> <span class="nav-text">查看守护进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后台进程"><span class="nav-number">14.</span> <span class="nav-text">后台进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dpkg：处理-smbclient-—configure-时出错："><span class="nav-number">15.</span> <span class="nav-text">dpkg：处理 smbclient (—configure)时出错：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重复执行历史命令"><span class="nav-number">16.</span> <span class="nav-text">重复执行历史命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件大小"><span class="nav-number">17.</span> <span class="nav-text">查看文件大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密钥环"><span class="nav-number">18.</span> <span class="nav-text">密钥环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bash快捷键"><span class="nav-number">19.</span> <span class="nav-text">bash快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#压缩文件"><span class="nav-number">20.</span> <span class="nav-text">压缩文件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#后台运行"><span class="nav-number">1.</span> <span class="nav-text">后台运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RC版本"><span class="nav-number">2.</span> <span class="nav-text">RC版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件夹中文件或文件夹的个数"><span class="nav-number">3.</span> <span class="nav-text">查看文件夹中文件或文件夹的个数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改用户环境"><span class="nav-number">4.</span> <span class="nav-text">修改用户环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-profile"><span class="nav-number">4.1.</span> <span class="nav-text">/etc/profile:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-bashrc："><span class="nav-number">4.2.</span> <span class="nav-text">etc/bashrc：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bashrc"><span class="nav-number">4.3.</span> <span class="nav-text">~/.bashrc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux下文件的复制、移动与删除"><span class="nav-number">5.</span> <span class="nav-text">linux下文件的复制、移动与删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件复制命令cp"><span class="nav-number">5.1.</span> <span class="nav-text">文件复制命令cp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件移动命令mv"><span class="nav-number">5.2.</span> <span class="nav-text">文件移动命令mv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件删除命令rm"><span class="nav-number">5.3.</span> <span class="nav-text">文件删除命令rm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除文件夹"><span class="nav-number">5.4.</span> <span class="nav-text">删除文件夹</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用awk命令获取文本的某一行-某一列"><span class="nav-number">6.</span> <span class="nav-text">使用awk命令获取文本的某一行,某一列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#du命令也是查看使用空间的，但是与df命令不同的是Linux-du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的"><span class="nav-number">7.</span> <span class="nav-text">du命令也是查看使用空间的，但是与df命令不同的是Linux du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建文件，文件夹"><span class="nav-number">8.</span> <span class="nav-text">创建文件，文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显卡信息查看"><span class="nav-number">9.</span> <span class="nav-text">显卡信息查看</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何查看GPU信息"><span class="nav-number">9.1.</span> <span class="nav-text">如何查看GPU信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scp"><span class="nav-number">10.</span> <span class="nav-text">scp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上传文件"><span class="nav-number">10.1.</span> <span class="nav-text">上传文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传目录到服务器"><span class="nav-number">10.2.</span> <span class="nav-text">上传目录到服务器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看磁盘信息。-boot空间不足"><span class="nav-number">11.</span> <span class="nav-text">查看磁盘信息。/boot空间不足</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nohup-no-hang-up"><span class="nav-number">12.</span> <span class="nav-text">nohup(no hang up)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看守护进程"><span class="nav-number">13.</span> <span class="nav-text">查看守护进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后台进程"><span class="nav-number">14.</span> <span class="nav-text">后台进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dpkg：处理-smbclient-–configure-时出错："><span class="nav-number">15.</span> <span class="nav-text">dpkg：处理 smbclient (–configure)时出错：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重复执行历史命令"><span class="nav-number">16.</span> <span class="nav-text">重复执行历史命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件大小"><span class="nav-number">17.</span> <span class="nav-text">查看文件大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密钥环"><span class="nav-number">18.</span> <span class="nav-text">密钥环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bash快捷键"><span class="nav-number">19.</span> <span class="nav-text">bash快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#压缩文件"><span class="nav-number">20.</span> <span class="nav-text">压缩文件</span></a></li></ol></div>
             
 
           </div>
