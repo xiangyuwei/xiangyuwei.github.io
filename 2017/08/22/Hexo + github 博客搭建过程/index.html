@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="就和今天说早安">
 <meta property="og:description" content="最近想建个博客记录一下平时的一些技术细节，以后可以随时翻翻，发现以前做过的事总是很容易忘记，真是好记性不如烂笔头,顺便整理一下思路。   整理知识，学习笔记 发布日记，杂文，所见所想 撰写发布技术文稿（代码支持） 撰写发布学术论文（LaTeX 公式支持）    搭建环境 Windows10 64位 node@4.4 后变成6.1.0 hexo@3.3.7">
 <meta property="og:image" content="http://xiangyuwei.github.io/img/hexo搭建博客/hexo初始化.png">
-<meta property="og:updated_time" content="2017-12-02T14:49:45.812Z">
+<meta property="og:updated_time" content="2017-12-03T10:21:17.857Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo + github 博客搭建过程">
 <meta name="twitter:description" content="最近想建个博客记录一下平时的一些技术细节，以后可以随时翻翻，发现以前做过的事总是很容易忘记，真是好记性不如烂笔头,顺便整理一下思路。   整理知识，学习笔记 发布日记，杂文，所见所想 撰写发布技术文稿（代码支持） 撰写发布学术论文（LaTeX 公式支持）    搭建环境 Windows10 64位 node@4.4 后变成6.1.0 hexo@3.3.7">
@@ -460,8 +460,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-12-02T22:49:45+08:00">
-                2017-12-02
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-03T18:21:17+08:00">
+                2017-12-03
               </time>
             
           </span>
@@ -521,7 +521,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,176 字
+                  2,380 字
                 </span>
               
 
@@ -537,7 +537,7 @@ $(function() {
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  9 分钟
+                  10 分钟
                 </span>
               
             </div>
@@ -647,7 +647,7 @@ $(function() {
 <p>A解析：只能填IP地址，IP地址如果换了的话就需要换解析记录<br>CNAME解析：解析到另一个域名，即使被指向的域名的ip发生变化，也不需要更改解析记录。CNAME优先级高于A解析（至少在DNSPOD是这样的）</p>
 </blockquote>
 <h2 id="给网站添加favicon"><a href="#给网站添加favicon" class="headerlink" title="给网站添加favicon"></a>给网站添加favicon</h2><p>这个和主题有关，默认可能没有，浏览器打开后根据开发者工具里可以看到当前主题下’favicon’的具体路径和要求文件格式，对应做一个就可以了。有时候是’png’但也有时候强制要求’.ico’，可以去<a href="http://www.bitbug.net/" target="_blank" rel="external">比特虫</a>等网站在线制作。</p>
-<h2 id="博客优化"><a href="#博客优化" class="headerlink" title="博客优化"></a>博客优化</h2><p>根据<a href="http://theme-next.iissnan.com/theme-settings.html" target="_blank" rel="external">官网</a>配置了本地搜索 社交链接 打赏功能 友情链接 百度统计</p>
+<h2 id="博客优化"><a href="#博客优化" class="headerlink" title="博客优化"></a>博客优化</h2><p>（12月2日更新）<br>根据<a href="http://theme-next.iissnan.com/theme-settings.html" target="_blank" rel="external">官网</a>配置了本地搜索 社交链接 打赏功能 友情链接 百度统计</p>
 <p><a href="https://notes.wanghao.work/2015-10-21-%E4%B8%BANexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD.html#%E9%85%8D%E7%BD%AELeanCloud" target="_blank" rel="external">文章阅读量统计</a>配置LeanCloud</p>
 <p><a href="http://www.jianshu.com/p/baea8c95e39b" target="_blank" rel="external">文章【字数统计】、【阅读时长】统计功能</a></p>
 <p>安装wordcount插件</p>
@@ -673,6 +673,35 @@ $(function() {
 <blockquote>
 <p><span id="busuanzi_container_site_uv"><br>  本站访客数<span id="busuanzi_value_site_uv"></span>人次<br></span></p>
 </blockquote>
+<h2 id="hexo数学公式显示"><a href="#hexo数学公式显示" class="headerlink" title="hexo数学公式显示"></a>hexo数学公式显示</h2><p>这个折腾了两天，放弃之后结果莫名其妙可以显示了。</p>
+<p>主要使用的命令</p>
+<blockquote>
+<p>npm install hexo-math –save<br>hexo math install<br>npm uninstall hexo-renderer-marked –save<br>npm install hexo-renderer-kramed –save<br>npm install hexo-renderer-mathjax –save</p>
+</blockquote>
+<p>kramed是在marked上作了修改。<br>hexo-renderer-kramed渲染后公式消失了，最终卸载了。</p>
+<p>最终的方案：</p>
+<p>用编辑器打开marked.js（在./node_modules/marked/lib/中）<br>Step 1:</p>
+<blockquote>
+<p>escape: /^\([\`*{}[]()# +-.!_&gt;])/,</p>
+</blockquote>
+<p>替换成</p>
+<blockquote>
+<p>escape: /^\([`*[]()# +-.!_&gt;])/,</p>
+</blockquote>
+<p>这一步是在原基础上取消了对\\,\{,\}的转义(escape)<br>Step 2:</p>
+<blockquote>
+<p>em: /^\b_((?:[^_]|__)+?)_\b|^*((?:**|[\s\S])+?)*(?!*)/,</p>
+</blockquote>
+<p>替换成</p>
+<blockquote>
+<p>em:/^*((?:**|[\s\S])+?)*(?!*)/,</p>
+</blockquote>
+<p>进入到主题目录，找到_config.yml配置问题，把mathjax默认的false修改为true，具体如下：</p>
+<blockquote>
+<h1 id="MathJax-Support"><a href="#MathJax-Support" class="headerlink" title="MathJax Support"></a>MathJax Support</h1><p>mathjax:<br>  enable: true<br>  per_page: true</p>
+</blockquote>
+<p>参考文献：<br><a href="http://blog.csdn.net/emptyset110/article/details/50123231" target="_blank" rel="external">http://blog.csdn.net/emptyset110/article/details/50123231</a></p>
+<p><a href="http://masikkk.com/article/hexo-13-MathJax/" target="_blank" rel="external">http://masikkk.com/article/hexo-13-MathJax/</a></p>
 
       
     </div>
@@ -953,7 +982,7 @@ $(function() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建环境"><span class="nav-number">1.</span> <span class="nav-text">搭建环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前期"><span class="nav-number">2.</span> <span class="nav-text">前期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo-是什么"><span class="nav-number">3.</span> <span class="nav-text">Hexo 是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建博客"><span class="nav-number">4.</span> <span class="nav-text">搭建博客</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装git"><span class="nav-number">4.1.</span> <span class="nav-text">安装git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Node-js"><span class="nav-number">4.2.</span> <span class="nav-text">安装Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Hexo"><span class="nav-number">4.3.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改主题"><span class="nav-number">4.4.</span> <span class="nav-text">修改主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传"><span class="nav-number">4.5.</span> <span class="nav-text">上传</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建过程中问题"><span class="nav-number">5.</span> <span class="nav-text">搭建过程中问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见hexo命令"><span class="nav-number">6.</span> <span class="nav-text">常见hexo命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#markdown"><span class="nav-number">7.</span> <span class="nav-text">markdown</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#域名解析"><span class="nav-number">8.</span> <span class="nav-text">域名解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#给网站添加favicon"><span class="nav-number">9.</span> <span class="nav-text">给网站添加favicon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博客优化"><span class="nav-number">10.</span> <span class="nav-text">博客优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加网站的浏览次数与访客数量统计功能"><span class="nav-number">11.</span> <span class="nav-text">增加网站的浏览次数与访客数量统计功能</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建环境"><span class="nav-number">1.</span> <span class="nav-text">搭建环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前期"><span class="nav-number">2.</span> <span class="nav-text">前期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo-是什么"><span class="nav-number">3.</span> <span class="nav-text">Hexo 是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建博客"><span class="nav-number">4.</span> <span class="nav-text">搭建博客</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装git"><span class="nav-number">4.1.</span> <span class="nav-text">安装git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Node-js"><span class="nav-number">4.2.</span> <span class="nav-text">安装Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Hexo"><span class="nav-number">4.3.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改主题"><span class="nav-number">4.4.</span> <span class="nav-text">修改主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传"><span class="nav-number">4.5.</span> <span class="nav-text">上传</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建过程中问题"><span class="nav-number">5.</span> <span class="nav-text">搭建过程中问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见hexo命令"><span class="nav-number">6.</span> <span class="nav-text">常见hexo命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#markdown"><span class="nav-number">7.</span> <span class="nav-text">markdown</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#域名解析"><span class="nav-number">8.</span> <span class="nav-text">域名解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#给网站添加favicon"><span class="nav-number">9.</span> <span class="nav-text">给网站添加favicon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博客优化"><span class="nav-number">10.</span> <span class="nav-text">博客优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加网站的浏览次数与访客数量统计功能"><span class="nav-number">11.</span> <span class="nav-text">增加网站的浏览次数与访客数量统计功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo数学公式显示"><span class="nav-number">12.</span> <span class="nav-text">hexo数学公式显示</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MathJax-Support"><span class="nav-number"></span> <span class="nav-text">MathJax Support</span></a></div>
             
 
           </div>
