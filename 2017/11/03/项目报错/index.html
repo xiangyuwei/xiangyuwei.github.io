@@ -341,16 +341,6 @@ $(function() {
         </li>
       
         
-        <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
-            
-            站点地图
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-commonweal">
           <a href="/404.html" rel="section">
             
@@ -576,7 +566,7 @@ $(function() {
 <li>将下载的四个文件(不用解压)直接放到MNIST_data文件夹里面<br>4.就可以调用该数据集了<br>参考<a href="http://www.cnblogs.com/gaoss/p/7736281.html" target="_blank" rel="external">博客</a></li>
 </ol>
 <h2 id="ValueError-Parent-directory-of-trained-variables-ckpt-doesn’t-exist-can’t-save"><a href="#ValueError-Parent-directory-of-trained-variables-ckpt-doesn’t-exist-can’t-save" class="headerlink" title="ValueError: Parent directory of trained_variables.ckpt doesn’t exist, can’t save."></a>ValueError: Parent directory of trained_variables.ckpt doesn’t exist, can’t save.</h2><p>模型存储路径在本地没有加ckpt,可以运行，但在服务器上却必须加，原因不明</p>
-<p>##mport sklearn.model_selection 出错ImportError: No module named model_selection<br>conda list 查看包安装列表<br>conda update scikit-learn 命令更新sklearn的版本</p>
+<h2 id="mport-sklearn-model-selection-出错ImportError-No-module-named-model-selection"><a href="#mport-sklearn-model-selection-出错ImportError-No-module-named-model-selection" class="headerlink" title="mport sklearn.model_selection 出错ImportError: No module named model_selection"></a>mport sklearn.model_selection 出错ImportError: No module named model_selection</h2><p>conda list 查看包安装列表<br>conda update scikit-learn 命令更新sklearn的版本</p>
 <blockquote>
 <p>conda install Matlotlib、Scikit-Learn<br>注意再激活tensorflow情况下<br>查看某个指定环境的已安装包<br>conda list -n python27<br>查找package信息<br>conda search numpy<br> 安装package<br>conda install -n python27 numpy<br>更新package<br>conda update -n python27 numpy<br> 删除package<br>conda remove -n python27 numpy</p>
 </blockquote>
@@ -587,8 +577,7 @@ $(function() {
 <p>scp username@local.machine.ip.address:/home/username/some.xml /path/to/directory</p>
 <p>Substitute the IP addresses as directed in the commands.<br>/的问题还没弄明白</p>
 <p>权限问题，<a href="http://bluemood.blog.51cto.com/1142811/1316679" target="_blank" rel="external">上层目录也就是home目录</a>被别人误改了权限，处理xxuser，其他用户都没了权限</p>
-<p>##anaconda search -t conda tensorflow</p>
-<h2 id="服务器上配置tensorflow-环境"><a href="#服务器上配置tensorflow-环境" class="headerlink" title="服务器上配置tensorflow 环境"></a>服务器上配置tensorflow 环境</h2><p>安装anocanda2 后，安装ＧＰＵ版本<br>GPU安装只能用pip,conda只能安装cpu版本<br>tensorflow版本简单</p>
+<h2 id="anaconda-search-t-conda-tensorflow"><a href="#anaconda-search-t-conda-tensorflow" class="headerlink" title="anaconda search -t conda tensorflow"></a>anaconda search -t conda tensorflow</h2><h2 id="服务器上配置tensorflow-环境"><a href="#服务器上配置tensorflow-环境" class="headerlink" title="服务器上配置tensorflow 环境"></a>服务器上配置tensorflow 环境</h2><p>安装anocanda2 后，安装ＧＰＵ版本<br>GPU安装只能用pip,conda只能安装cpu版本<br>tensorflow版本简单</p>
 <blockquote>
 <p>pip install tensorflow-gpu==1.1.0<br>pip3 install tensorflow==1.1.0 python3.6 cpu版本</p>
 </blockquote>
@@ -602,7 +591,7 @@ $(function() {
 <h3 id="配置PyCharm"><a href="#配置PyCharm" class="headerlink" title="配置PyCharm"></a><a href="http://blog.csdn.net/Jmilk/article/details/50730095" target="_blank" rel="external">配置PyCharm</a></h3><p>1）打开PyCharm，执行快捷键ctrl+alt+s打开设置界面，输入tool，点开external tools，配置qtdesigner。</p>
 <p>点击左上角的加号，作如下配置：</p>
 <p>在Qt Designer的设置中，Program选择PyQt安装目录中 designer.exe 的路径</p>
-<p>Work directory 使用变量 $FileDir$<br>设置“PyUIC” – 这个主要是用来将 Qt界面 转换成 py代码</p>
+<p>Work directory 使用变量 $FileDir$<br>设置“PyUIC” — 这个主要是用来将 Qt界面 转换成 py代码</p>
 <p>在PyUIC的设置中，其他的都差不多，Program 写入Python的地址，Parameters写入</p>
 <blockquote>
 <p>-m PyQt5.uic.pyuic  $FileName$ -o $FileNameWithoutExtension$.py</p>
@@ -762,7 +751,7 @@ $(function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -884,7 +873,7 @@ $(function() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#UnicodeDecodeError-‘ascii’-codec-can’t-decode-byte-0xe9-in-position-0-ordinal-not-in-range-128"><span class="nav-number">1.</span> <span class="nav-text">UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe9 in position 0: ordinal not in range(128)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSError-Errno-2-No-such-file-or-directory"><span class="nav-number">2.</span> <span class="nav-text">OSError: [Errno 2] No such file or directory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#raise-IOError-‘Not-a-gzipped-file’"><span class="nav-number">3.</span> <span class="nav-text">raise IOError, ‘Not a gzipped file’</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ValueError-Parent-directory-of-trained-variables-ckpt-doesn’t-exist-can’t-save"><span class="nav-number">4.</span> <span class="nav-text">ValueError: Parent directory of trained_variables.ckpt doesn’t exist, can’t save.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SCP-No-such-file-or-directory"><span class="nav-number">5.</span> <span class="nav-text">SCP: No such file or directory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器上配置tensorflow-环境"><span class="nav-number">6.</span> <span class="nav-text">服务器上配置tensorflow 环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CUDA安装和测试"><span class="nav-number">6.1.</span> <span class="nav-text">CUDA安装和测试 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装qt-creater"><span class="nav-number">6.2.</span> <span class="nav-text">安装qt creater</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置PyCharm"><span class="nav-number">6.3.</span> <span class="nav-text">配置PyCharm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python中TypeError-unbound-method-问题"><span class="nav-number">7.</span> <span class="nav-text">Python中TypeError: unbound method 问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#UnicodeDecodeError-‘ascii’-codec-can’t-decode-byte-0xe9-in-position-0-ordinal-not-in-range-128"><span class="nav-number">1.</span> <span class="nav-text">UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe9 in position 0: ordinal not in range(128)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSError-Errno-2-No-such-file-or-directory"><span class="nav-number">2.</span> <span class="nav-text">OSError: [Errno 2] No such file or directory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#raise-IOError-‘Not-a-gzipped-file’"><span class="nav-number">3.</span> <span class="nav-text">raise IOError, ‘Not a gzipped file’</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ValueError-Parent-directory-of-trained-variables-ckpt-doesn’t-exist-can’t-save"><span class="nav-number">4.</span> <span class="nav-text">ValueError: Parent directory of trained_variables.ckpt doesn’t exist, can’t save.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mport-sklearn-model-selection-出错ImportError-No-module-named-model-selection"><span class="nav-number">5.</span> <span class="nav-text">mport sklearn.model_selection 出错ImportError: No module named model_selection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SCP-No-such-file-or-directory"><span class="nav-number">6.</span> <span class="nav-text">SCP: No such file or directory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#anaconda-search-t-conda-tensorflow"><span class="nav-number">7.</span> <span class="nav-text">anaconda search -t conda tensorflow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器上配置tensorflow-环境"><span class="nav-number">8.</span> <span class="nav-text">服务器上配置tensorflow 环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CUDA安装和测试"><span class="nav-number">8.1.</span> <span class="nav-text">CUDA安装和测试 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装qt-creater"><span class="nav-number">8.2.</span> <span class="nav-text">安装qt creater</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置PyCharm"><span class="nav-number">8.3.</span> <span class="nav-text">配置PyCharm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python中TypeError-unbound-method-问题"><span class="nav-number">9.</span> <span class="nav-text">Python中TypeError: unbound method 问题</span></a></li></ol></div>
             
 
           </div>
@@ -1494,7 +1483,7 @@ $(function() {
         showTime(Counter);
       }
     });
-  </script>
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
@@ -1503,43 +1492,6 @@ $(function() {
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
   
 
 

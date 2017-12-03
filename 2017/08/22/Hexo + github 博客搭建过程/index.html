@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="就和今天说早安">
 <meta property="og:description" content="最近想建个博客记录一下平时的一些技术细节，以后可以随时翻翻，发现以前做过的事总是很容易忘记，真是好记性不如烂笔头,顺便整理一下思路。   整理知识，学习笔记 发布日记，杂文，所见所想 撰写发布技术文稿（代码支持） 撰写发布学术论文（LaTeX 公式支持）    搭建环境 Windows10 64位 node@4.4 后变成6.1.0 hexo@3.3.7">
 <meta property="og:image" content="http://xiangyuwei.github.io/img/hexo搭建博客/hexo初始化.png">
-<meta property="og:updated_time" content="2017-07-02T06:01:16.839Z">
+<meta property="og:updated_time" content="2017-12-02T14:49:45.812Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo + github 博客搭建过程">
 <meta name="twitter:description" content="最近想建个博客记录一下平时的一些技术细节，以后可以随时翻翻，发现以前做过的事总是很容易忘记，真是好记性不如烂笔头,顺便整理一下思路。   整理知识，学习笔记 发布日记，杂文，所见所想 撰写发布技术文稿（代码支持） 撰写发布学术论文（LaTeX 公式支持）    搭建环境 Windows10 64位 node@4.4 后变成6.1.0 hexo@3.3.7">
@@ -343,16 +343,6 @@ $(function() {
         </li>
       
         
-        <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
-            
-            站点地图
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-commonweal">
           <a href="/404.html" rel="section">
             
@@ -470,8 +460,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-07-02T14:01:16+08:00">
-                2017-07-02
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-02T22:49:45+08:00">
+                2017-12-02
               </time>
             
           </span>
@@ -531,7 +521,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,846 字
+                  2,178 字
                 </span>
               
 
@@ -547,7 +537,7 @@ $(function() {
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  7 分钟
+                  9 分钟
                 </span>
               
             </div>
@@ -634,12 +624,12 @@ $(function() {
 <p>2、 ERROR Plugin load failed: hexo-generator-json-content</p>
 <blockquote>
 <p>升级node.js到最新稳定版<br><code>升级node</code>，参照<a href="http://blog.csdn.net/u013049553/article/details/52424765" target="_blank" rel="external">博客</a>,先安装<a href="https://github.com/Kenshin/gnvm" target="_blank" rel="external">gnvm</a>，点击exe发现在cmd下找不到，弃之，后直接下载<a href="https://nodejs.org/en/download/" target="_blank" rel="external">node</a>安装。</p>
-<p>执行命令  npm i hexo-generator-json-content –save</p>
+<p>执行命令  npm i hexo-generator-json-content —save</p>
 </blockquote>
 <p>3、提交时出现错误ERROR Plugin load failed: hexo-deployer-git</p>
 <p>解决</p>
 <blockquote>
-<p>执行 npm install hexo-deployer-git –save</p>
+<p>执行 npm install hexo-deployer-git —save</p>
 </blockquote>
 <p>4、config 中文乱码<br> 在sublime里打开，保存为GBK-8格式</p>
 <h2 id="常见hexo命令"><a href="#常见hexo命令" class="headerlink" title="常见hexo命令"></a>常见hexo命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">hexo new &quot;postName&quot; #新建文章</div><div class="line">hexo new page &quot;pageName&quot; #新建页面</div><div class="line">hexo generate #生成静态页面至public目录</div><div class="line">hexo server #开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）</div><div class="line">hexo deploy #部署到GitHub</div><div class="line">hexo help  # 查看帮助</div><div class="line">hexo version  #查看Hexo的版本</div></pre></td></tr></table></figure>
@@ -657,6 +647,32 @@ $(function() {
 <p>A解析：只能填IP地址，IP地址如果换了的话就需要换解析记录<br>CNAME解析：解析到另一个域名，即使被指向的域名的ip发生变化，也不需要更改解析记录。CNAME优先级高于A解析（至少在DNSPOD是这样的）</p>
 </blockquote>
 <h2 id="给网站添加favicon"><a href="#给网站添加favicon" class="headerlink" title="给网站添加favicon"></a>给网站添加favicon</h2><p>这个和主题有关，默认可能没有，浏览器打开后根据开发者工具里可以看到当前主题下’favicon’的具体路径和要求文件格式，对应做一个就可以了。有时候是’png’但也有时候强制要求’.ico’，可以去<a href="http://www.bitbug.net/" target="_blank" rel="external">比特虫</a>等网站在线制作。</p>
+<h2 id="博客优化"><a href="#博客优化" class="headerlink" title="博客优化"></a>博客优化</h2><p>根据<a href="http://theme-next.iissnan.com/theme-settings.html" target="_blank" rel="external">官网</a>配置了本地搜索 社交链接 打赏功能 友情链接 百度统计</p>
+<p><a href="https://notes.wanghao.work/2015-10-21-%E4%B8%BANexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD.html#%E9%85%8D%E7%BD%AELeanCloud" target="_blank" rel="external">文章阅读量统计</a>配置LeanCloud</p>
+<p><a href="http://www.jianshu.com/p/baea8c95e39b" target="_blank" rel="external">文章【字数统计】、【阅读时长】统计功能</a></p>
+<p>安装wordcount插件</p>
+<blockquote>
+<p>npm i —save hexo-wordcount<br>npm install hexo-generator-searchdb —save</p>
+</blockquote>
+<p>显示文字</p>
+<p>用 Sublime Text 工具打开 post.swig 文件，路径如下：xxx_blog/themes/next/layout/_macro/post.swig</p>
+<h2 id="增加网站的浏览次数与访客数量统计功能"><a href="#增加网站的浏览次数与访客数量统计功能" class="headerlink" title="增加网站的浏览次数与访客数量统计功能"></a><a href="http://www.jeyzhang.com/hexo-next-add-post-views.html#" target="_blank" rel="external">增加网站的浏览次数与访客数量统计功能</a></h2><p>网站的浏览次数，即pv；网站的访客数为uv。pv的计算方式是，单个用户连续点击n篇文章，记录n次访问量；uv的计算方式是，单个用户连续点击n篇文章，只记录1次访客数。你可以根据需要添加相应的统计功能。<br>安装busuanzi.js脚本</p>
+<p>如果你使用的是NexT主题（其他主题类似），打开/theme/next/layout/_partial/footer.swig文件，拷贝下面的代码至文件的开头。</p>
+<blockquote>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+</blockquote>
+<p>显示统计标签</p>
+<p>同样编辑/theme/next/layout/_partial/footer.swig文件。</p>
+<p>如果你想要显示pv统计量，复制以下代码至你想要放置的位置，</p>
+<blockquote>
+<p><span id="busuanzi_container_site_pv"><br>    本站总访问量<span id="busuanzi_value_site_pv"></span>次<br>&lt;/span&gt;</span></p>
+</blockquote>
+<p>如果你想要显示uv统计量，复制以下代码至你想要放置的位置，</p>
+<blockquote>
+<p><span id="busuanzi_container_site_uv"><br>  本站访客数<span id="busuanzi_value_site_uv"></span>人次<br>&lt;/span&gt;</span></p>
+</blockquote>
 
       
     </div>
@@ -806,7 +822,7 @@ $(function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -928,7 +944,7 @@ $(function() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建环境"><span class="nav-number">1.</span> <span class="nav-text">搭建环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前期"><span class="nav-number">2.</span> <span class="nav-text">前期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo-是什么"><span class="nav-number">3.</span> <span class="nav-text">Hexo 是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建博客"><span class="nav-number">4.</span> <span class="nav-text">搭建博客</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装git"><span class="nav-number">4.1.</span> <span class="nav-text">安装git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Node-js"><span class="nav-number">4.2.</span> <span class="nav-text">安装Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Hexo"><span class="nav-number">4.3.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改主题"><span class="nav-number">4.4.</span> <span class="nav-text">修改主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传"><span class="nav-number">4.5.</span> <span class="nav-text">上传</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建过程中问题"><span class="nav-number">5.</span> <span class="nav-text">搭建过程中问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见hexo命令"><span class="nav-number">6.</span> <span class="nav-text">常见hexo命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#markdown"><span class="nav-number">7.</span> <span class="nav-text">markdown</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#域名解析"><span class="nav-number">8.</span> <span class="nav-text">域名解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#给网站添加favicon"><span class="nav-number">9.</span> <span class="nav-text">给网站添加favicon</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建环境"><span class="nav-number">1.</span> <span class="nav-text">搭建环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前期"><span class="nav-number">2.</span> <span class="nav-text">前期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo-是什么"><span class="nav-number">3.</span> <span class="nav-text">Hexo 是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建博客"><span class="nav-number">4.</span> <span class="nav-text">搭建博客</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装git"><span class="nav-number">4.1.</span> <span class="nav-text">安装git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Node-js"><span class="nav-number">4.2.</span> <span class="nav-text">安装Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Hexo"><span class="nav-number">4.3.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改主题"><span class="nav-number">4.4.</span> <span class="nav-text">修改主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传"><span class="nav-number">4.5.</span> <span class="nav-text">上传</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建过程中问题"><span class="nav-number">5.</span> <span class="nav-text">搭建过程中问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见hexo命令"><span class="nav-number">6.</span> <span class="nav-text">常见hexo命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#markdown"><span class="nav-number">7.</span> <span class="nav-text">markdown</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#域名解析"><span class="nav-number">8.</span> <span class="nav-text">域名解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#给网站添加favicon"><span class="nav-number">9.</span> <span class="nav-text">给网站添加favicon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博客优化"><span class="nav-number">10.</span> <span class="nav-text">博客优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加网站的浏览次数与访客数量统计功能"><span class="nav-number">11.</span> <span class="nav-text">增加网站的浏览次数与访客数量统计功能</span></a></li></ol></div>
             
 
           </div>
@@ -1538,7 +1554,7 @@ $(function() {
         showTime(Counter);
       }
     });
-  </script>
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
@@ -1547,43 +1563,6 @@ $(function() {
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
   
 
 

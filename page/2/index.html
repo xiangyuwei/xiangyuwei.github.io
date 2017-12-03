@@ -341,16 +341,6 @@ $(function() {
         </li>
       
         
-        <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
-            
-            站点地图
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-commonweal">
           <a href="/404.html" rel="section">
             
@@ -413,6 +403,178 @@ $(function() {
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2017/11/08/One pixel attack for fooling deep neural networks Jiawei/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/08/One pixel attack for fooling deep neural networks Jiawei/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-08T19:01:50+08:00">
+                2017-11-08
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-11-08T19:01:51+08:00">
+                2017-11-08
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/11/08/One pixel attack for fooling deep neural networks Jiawei/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  447 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="One-pixel-attack-for-fooling-deep-neural-networks-Jiawei"><a href="#One-pixel-attack-for-fooling-deep-neural-networks-Jiawei" class="headerlink" title="One pixel attack for fooling deep neural networks Jiawei"></a>One pixel attack for fooling deep neural networks Jiawei</h1><p>标签（空格分隔）： 未分类</p>
+<hr>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>在图像识别领域，基于 DNN 的方法突破了传统的图像处理技术，达到了可与人类媲美的结果 [9]。但是，多个研究证明自然图像中的人工扰动可以轻易使 DNN 对图像进行错误分类，研究者提出了生成此类「对抗图像」的高效算法 [1, 2, 3, 4]。生成对抗图像（adversarial images）的主要方式是向准确分类的自然图像中添加精心设计的额外扰动，该扰动不影响人类对图像的识别。这样的修改导致分类器将修改后的图像标注为完全不同的其他物体。但是，大多数之前的攻击并未考虑非常有限的对抗实例，即扰动的量有时候也会影响到人眼的识别能力（示例见图 2）。此外，研究在有限场景中创建的对抗图像更加有趣，因为它们可能更接近原始类别和目标类别（target class）之间的边界，研究此类关键点可以使人类更多地了解 DNN 输入空间的几何特征</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="贡献"><a href="#贡献" class="headerlink" title="贡献"></a>贡献</h3><blockquote>
+<p>非目标攻击，修改1,3,5个像素<br>黑盒攻击<br>可攻击不同模型<br>对特征目标有相同的扰动方向</p>
+</blockquote>
+<h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><p>它不抽象的问题<br>将扰动搜索到任意显式的目标函数进行求解，而直接关注提高目标类别的概率标注值<br>全局对抗扰动可以泄露标签<br> 固定修改像素的个数，增改像素改变的强度<br> Differential evolution (DE) which belongs to the general<br>class of genetic algorithm (GA</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -580,7 +742,7 @@ $(function() {
 <li>将下载的四个文件(不用解压)直接放到MNIST_data文件夹里面<br>4.就可以调用该数据集了<br>参考<a href="http://www.cnblogs.com/gaoss/p/7736281.html" target="_blank" rel="external">博客</a></li>
 </ol>
 <h2 id="ValueError-Parent-directory-of-trained-variables-ckpt-doesn’t-exist-can’t-save"><a href="#ValueError-Parent-directory-of-trained-variables-ckpt-doesn’t-exist-can’t-save" class="headerlink" title="ValueError: Parent directory of trained_variables.ckpt doesn’t exist, can’t save."></a>ValueError: Parent directory of trained_variables.ckpt doesn’t exist, can’t save.</h2><p>模型存储路径在本地没有加ckpt,可以运行，但在服务器上却必须加，原因不明</p>
-<p>##mport sklearn.model_selection 出错ImportError: No module named model_selection<br>conda list 查看包安装列表<br>conda update scikit-learn 命令更新sklearn的版本</p>
+<h2 id="mport-sklearn-model-selection-出错ImportError-No-module-named-model-selection"><a href="#mport-sklearn-model-selection-出错ImportError-No-module-named-model-selection" class="headerlink" title="mport sklearn.model_selection 出错ImportError: No module named model_selection"></a>mport sklearn.model_selection 出错ImportError: No module named model_selection</h2><p>conda list 查看包安装列表<br>conda update scikit-learn 命令更新sklearn的版本</p>
 <blockquote>
 <p>conda install Matlotlib、Scikit-Learn<br>注意再激活tensorflow情况下<br>查看某个指定环境的已安装包<br>conda list -n python27<br>查找package信息<br>conda search numpy<br> 安装package<br>conda install -n python27 numpy<br>更新package<br>conda update -n python27 numpy<br> 删除package<br>conda remove -n python27 numpy</p>
 </blockquote>
@@ -591,8 +753,7 @@ $(function() {
 <p>scp username@local.machine.ip.address:/home/username/some.xml /path/to/directory</p>
 <p>Substitute the IP addresses as directed in the commands.<br>/的问题还没弄明白</p>
 <p>权限问题，<a href="http://bluemood.blog.51cto.com/1142811/1316679" target="_blank" rel="external">上层目录也就是home目录</a>被别人误改了权限，处理xxuser，其他用户都没了权限</p>
-<p>##anaconda search -t conda tensorflow</p>
-<h2 id="服务器上配置tensorflow-环境"><a href="#服务器上配置tensorflow-环境" class="headerlink" title="服务器上配置tensorflow 环境"></a>服务器上配置tensorflow 环境</h2><p>安装anocanda2 后，安装ＧＰＵ版本<br>GPU安装只能用pip,conda只能安装cpu版本<br>tensorflow版本简单</p>
+<h2 id="anaconda-search-t-conda-tensorflow"><a href="#anaconda-search-t-conda-tensorflow" class="headerlink" title="anaconda search -t conda tensorflow"></a>anaconda search -t conda tensorflow</h2><h2 id="服务器上配置tensorflow-环境"><a href="#服务器上配置tensorflow-环境" class="headerlink" title="服务器上配置tensorflow 环境"></a>服务器上配置tensorflow 环境</h2><p>安装anocanda2 后，安装ＧＰＵ版本<br>GPU安装只能用pip,conda只能安装cpu版本<br>tensorflow版本简单</p>
 <blockquote>
 <p>pip install tensorflow-gpu==1.1.0<br>pip3 install tensorflow==1.1.0 python3.6 cpu版本</p>
 </blockquote>
@@ -606,7 +767,7 @@ $(function() {
 <h3 id="配置PyCharm"><a href="#配置PyCharm" class="headerlink" title="配置PyCharm"></a><a href="http://blog.csdn.net/Jmilk/article/details/50730095" target="_blank" rel="external">配置PyCharm</a></h3><p>1）打开PyCharm，执行快捷键ctrl+alt+s打开设置界面，输入tool，点开external tools，配置qtdesigner。</p>
 <p>点击左上角的加号，作如下配置：</p>
 <p>在Qt Designer的设置中，Program选择PyQt安装目录中 designer.exe 的路径</p>
-<p>Work directory 使用变量 $FileDir$<br>设置“PyUIC” – 这个主要是用来将 Qt界面 转换成 py代码</p>
+<p>Work directory 使用变量 $FileDir$<br>设置“PyUIC” — 这个主要是用来将 Qt界面 转换成 py代码</p>
 <p>在PyUIC的设置中，其他的都差不多，Program 写入Python的地址，Parameters写入</p>
 <blockquote>
 <p>-m PyQt5.uic.pyuic  $FileName$ -o $FileNameWithoutExtension$.py</p>
@@ -1385,22 +1546,22 @@ $(function() {
 np.where()[1] 则表示列的索引
 </code></pre><p>shape函数是numpy.core.fromnumeric中的函数，它的功能是读取矩阵的长度，比如shape[0]就是读取矩阵第一维度的长度</p>
 <h2 id="pycharm-配置"><a href="#pycharm-配置" class="headerlink" title="pycharm 配置"></a>pycharm 配置</h2><p>一、在PyCharm下为你的Python项目配置Python解释器</p>
-<p>　　　　1、Settings–》Editor–》Project：当前项目名–》Project Interpreter–》Add Local</p>
+<p>　　　　1、Settings—》Editor—》Project：当前项目名—》Project Interpreter—》Add Local</p>
 <p>　　二、在Python下创建Python文件、Python模块</p>
-<p>　　　　1、File–》New–》Python File</p>
-<p>　　　　2、File–》New–》Python Package</p>
+<p>　　　　1、File—》New—》Python File</p>
+<p>　　　　2、File—》New—》Python Package</p>
 <p>　　三、使用PyCharm安装Python第三方模块</p>
-<p>　　　　1、Settings–》Editor–》Project：当前项目名–》Project Interpreter–》点击右侧绿色加号</p>
+<p>　　　　1、Settings—》Editor—》Project：当前项目名—》Project Interpreter—》点击右侧绿色加号</p>
 <p>　　四、Python基本设置</p>
-<p>　　　　1、不使用Tab，Tab=4空格：Editor–》Code Style–》Python–》Tabs and Indents页签</p>
-<p>　　　　2、字体、字体颜色：           Editor–》Colors &amp; Fonts–》Font/Language Defaults/Python</p>
-<p>　　　　3、关闭自动更新：              Editor–》Appearance &amp; Behavior–》System Settings–》Updates</p>
-<p>　　　　4、脚本头设置：                 Editor–》Code Style–》File and Code Templates–》Python Script</p>
-<p>　　　　5、显示行号：  　　　　　　 Editor–》General–》Appearance–》Show line numbers</p>
+<p>　　　　1、不使用Tab，Tab=4空格：Editor—》Code Style—》Python—》Tabs and Indents页签</p>
+<p>　　　　2、字体、字体颜色：           Editor—》Colors &amp; Fonts—》Font/Language Defaults/Python</p>
+<p>　　　　3、关闭自动更新：              Editor—》Appearance &amp; Behavior—》System Settings—》Updates</p>
+<p>　　　　4、脚本头设置：                 Editor—》Code Style—》File and Code Templates—》Python Script</p>
+<p>　　　　5、显示行号：  　　　　　　 Editor—》General—》Appearance—》Show line numbers</p>
 <p>　　　　6、右侧竖线是PEP8的代码规范：提示一行不要超过120个字符。</p>
-<p>　　　　7、导出、导入你自定义的配置：File–》Export Settings、Import Settings</p>
+<p>　　　　7、导出、导入你自定义的配置：File—》Export Settings、Import Settings</p>
 <p>　　五、常用快捷键</p>
-<p>　　　　 Editor–》Keymap</p>
+<p>　　　　 Editor—》Keymap</p>
 <p>　　　　1、Crtl + D ：复制当前行</p>
 <p>　　　　2、Ctrl + Y  ：删除当前行</p>
 <p>　　　　3、Shift + Enter ：快速换行</p>
@@ -1412,28 +1573,28 @@ np.where()[1] 则表示列的索引
 <p>　　　　9、Ctrl + ] ：跳到行尾</p>
 <p>　　　　10、Ctrl + [：跳到行首</p>
 <p>　　六、PyCharm安装插件</p>
-<p>　　　　1、 Editor–》Plugins Editor–》Browse repositories –》Install</p>
+<p>　　　　1、 Editor—》Plugins Editor—》Browse repositories —》Install</p>
 <p>　　七、Git配置</p>
-<p>　　　　1、Editor–》Version Control–》Git</p>
+<p>　　　　1、Editor—》Version Control—》Git</p>
 <p>　　八、常用操作指南</p>
-<p>　　　　1、复制文件路径：左侧文件列表右键选中的文件–》Copy Path</p>
-<p>　　　　2、在文件管理器中打开：左侧文件列表右键选中的文件–》Show in Explorer</p>
+<p>　　　　1、复制文件路径：左侧文件列表右键选中的文件—》Copy Path</p>
+<p>　　　　2、在文件管理器中打开：左侧文件列表右键选中的文件—》Show in Explorer</p>
 <p>　　　　3、快速定位：Ctrl + 某些內建模块之后，点击在原文件中展开</p>
 <p>　　　　　　Scroll from Source / Collapse All</p>
 <p>　　　　4、查看结构：IDE左侧边栏Structure查看当前项目的结构</p>
-<p>　　　　5、Tab批量换Space：Edit–》Convent Indents–》To Spaces/To Tobs</p>
+<p>　　　　5、Tab批量换Space：Edit—》Convent Indents—》To Spaces/To Tobs</p>
 <p>　　　　6、TODO的使用：#TODO要做的事情</p>
-<p>　　　　7、把当前Tab页移到窗口右边（下边），方便对比：Tab页签右键–》Move to Right（Down）</p>
-<p>　　　　8、查看文件修改前后对比：文件中右键–》Local History</p>
+<p>　　　　7、把当前Tab页移到窗口右边（下边），方便对比：Tab页签右键—》Move to Right（Down）</p>
+<p>　　　　8、查看文件修改前后对比：文件中右键—》Local History</p>
 <p>　　　　9、IDE右下角一些有用的信息：当前光标在第几行的第几个字符/当前回车换行/当前编码类型/当前Git分支</p>
-<p> 　　　10、IDE右侧边栏–》DataBase</p>
+<p> 　　　10、IDE右侧边栏—》DataBase</p>
 <p>　　九、PEP8代码规范</p>
 <p>　　　　1、单独一行的注释：# + 1空格 + 注释内容</p>
 <p>　　　　2、代码后跟着的注释：2空格 + # + 1空格 + 注释内容</p>
 <p>　　十、SSH Terminal Default encoding</p>
-<p>　　　　1、Editor–》Tools–》SSH Terminal–》Default encoding UTF-8</p>
+<p>　　　　1、Editor—》Tools—》SSH Terminal—》Default encoding UTF-8</p>
 <p>　　十一、编码统一</p>
-<p>　　　　Editor–》File Encoding–》IDE Encoding 和 Project Encoding 编码统一 UTF-8</p>
+<p>　　　　Editor—》File Encoding—》IDE Encoding 和 Project Encoding 编码统一 UTF-8</p>
 <h2 id="python中的字符数字之间的转换函数"><a href="#python中的字符数字之间的转换函数" class="headerlink" title="python中的字符数字之间的转换函数"></a>python中的字符数字之间的转换函数</h2><pre><code>int(x [,base ])         将x转换为一个整数    
 long(x [,base ])        将x转换为一个长整数    
 float(x )               将x转换到一个浮点数    
@@ -1633,9 +1794,8 @@ float(x )               将x转换到一个浮点数
       
         
           <p>注意安装要在安装包目录下。</p>
-<p>##安装eclipse+pydev<br><a href="http://www.cnblogs.com/restran/archive/2011/11/11/2245812.html" target="_blank" rel="external">教程</a></p>
-<p>##安装ss</p>
-<p>参考github上<a href="https://github.com/shadowsocks/shadowsocks-qt5/wiki/%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97" target="_blank" rel="external">内容</a>下载shadowsock</p>
+<h2 id="安装eclipse-pydev"><a href="#安装eclipse-pydev" class="headerlink" title="安装eclipse+pydev"></a>安装eclipse+pydev</h2><p><a href="http://www.cnblogs.com/restran/archive/2011/11/11/2245812.html" target="_blank" rel="external">教程</a></p>
+<h2 id="安装ss"><a href="#安装ss" class="headerlink" title="安装ss"></a>安装ss</h2><p>参考github上<a href="https://github.com/shadowsocks/shadowsocks-qt5/wiki/%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97" target="_blank" rel="external">内容</a>下载shadowsock</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo add-apt-repository ppa:hzwhuang/ss-qt5</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install shadowsocks-qt5</div></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
@@ -1829,7 +1989,7 @@ float(x )               将x转换到一个浮点数
       
         
           
-            <p>##“Explaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”<br><a href="http://www.csdn.net/article/2015-12-28/2826566" target="_blank" rel="external">如何让神经网络把熊猫识别为秃鹫</a><br><a href="http://colah.github.io/posts/2015-08-Backprop/" target="_blank" rel="external">正向传播与反向传播的区别</a>、<br><a href="http://blog.csdn.net/cdpac/article/details/53170940" target="_blank" rel="external">这个博客</a>表达了对此论文的一些看法。</p>
+            <h2 id="“Explaining-and-Harnessing-Adversarial-Examples（对抗样本的解释和利用）”"><a href="#“Explaining-and-Harnessing-Adversarial-Examples（对抗样本的解释和利用）”" class="headerlink" title="“Explaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”"></a>“Explaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”</h2><p><a href="http://www.csdn.net/article/2015-12-28/2826566" target="_blank" rel="external">如何让神经网络把熊猫识别为秃鹫</a><br><a href="http://colah.github.io/posts/2015-08-Backprop/" target="_blank" rel="external">正向传播与反向传播的区别</a>、<br><a href="http://blog.csdn.net/cdpac/article/details/53170940" target="_blank" rel="external">这个博客</a>表达了对此论文的一些看法。</p>
 <p>通过利用比你想象更简单（更线性！）的网络事实来做到这一点。我们会使用一个线性函数来逼近这个网络！</p>
 <p>生成对抗网络的发明人Ian Goodfellow在《Explaining and Harnessing Adversarial Examples》中提出了一种更快速方便的方法来产生对抗样本：</p>
 <p>技术分享</p>
@@ -1839,11 +1999,10 @@ float(x )               将x转换到一个浮点数
 <pre><code>L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩罚』是指对损失函数中的某些参数做一些限制。对于线性回归模型，使用L1正则化的模型建叫做Lasso回归，使用L2正则化的模型叫做Ridge回归（岭回归）。L1正则化是指权值向量w中各个元素的绝对值之和，通常表示为||w||1
 </code></pre><p>L2正则化是指权值向量w中各个元素的平方和然后再求平方根（可以看到Ridge回归的L2正则化项有平方符号），通常表示为||w||2<br>    L1正则化可以产生稀疏权值矩阵，即产生一个稀疏模型，可以用于特征选择<br>    L2正则化可以防止模型过拟合（overfitting）；一定程度上，L1也可以防止过拟合</p>
 <p><a href="https://hackernoon.com/the-implications-of-adversarial-examples-deep-learning-bits-3-4086108287c7" target="_blank" rel="external">Adversarial Examples and their implications - Deep Learning bits #3</a>这篇博客主要引用别人论文介绍了概念。应用和几种对抗样本防御方法。<br>对我比较新颖的一点是介绍了图像误分类的区别：<br>一种是图像本身有歧义或者裁剪失败，再一种图像中包含很多类别。这些都可以造成分类器分类失败，但对抗样本是指它不是正常产生的，而是人为构造的。</p>
-<p>##我们可以利用对抗样本做什么</p>
-<blockquote>
+<h2 id="我们可以利用对抗样本做什么"><a href="#我们可以利用对抗样本做什么" class="headerlink" title="我们可以利用对抗样本做什么"></a>我们可以利用对抗样本做什么</h2><blockquote>
 <p>绕过安全过滤机制加载图片<br>通过穿戴特别眼镜假冒他人编过人脸识别装置<br>改变交通标志误导自动驾驶<br>伪装武器躲避视频检测<br>绕过声音或指纹识别</p>
 </blockquote>
-<p>##怎样防范<br>该博客提出防止模型隐私泄露这种方法是不值得采用的。并列举几种论文中的方法，等详细看了之后在写。</p>
+<h2 id="怎样防范"><a href="#怎样防范" class="headerlink" title="怎样防范"></a>怎样防范</h2><p>该博客提出防止模型隐私泄露这种方法是不值得采用的。并列举几种论文中的方法，等详细看了之后在写。</p>
 
           
         
@@ -2274,198 +2433,6 @@ float(x )               将x转换到一个浮点数
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2017/08/23/深度学习资料/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/23/深度学习资料/" itemprop="url">深度学习资料</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-23T20:24:13+08:00">
-                2017-08-23
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-23T20:24:13+08:00">
-                2017-08-23
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/科研/" itemprop="url" rel="index">
-                    <span itemprop="name">科研</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/08/23/深度学习资料/" class="leancloud_visitors" data-flag-title="深度学习资料">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  511 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  2 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="深度学习资料"><a href="#深度学习资料" class="headerlink" title="深度学习资料"></a>深度学习资料</h2><p>2015年5月《自然》上刊登的一篇概述性论文<a href="http://www.nature.com/nature/journal/v521/n7553/abs/nature14539.html" target="_blank" rel="external">《深度学习》</a>（Deep learning），由我自己、Yoshua Bengio 、Geoff Hinton共同撰写。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/23/深度学习资料/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2515,7 +2482,7 @@ float(x )               将x转换到一个浮点数
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -3259,24 +3226,7 @@ float(x )               将x转换到一个浮点数
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script type="text/javascript" src=""></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
