@@ -1,0 +1,1508 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="深度学习,对抗样本," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="深度学习１、2014-ｅxlaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”[ArXiv][code][code]">
+<meta name="keywords" content="深度学习,对抗样本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习对抗攻击">
+<meta property="og:url" content="http://xiangyuwei.github.io/2017/12/04/对抗样本论文集/index.html">
+<meta property="og:site_name" content="就和今天说早安">
+<meta property="og:description" content="深度学习１、2014-ｅxlaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”[ArXiv][code][code]">
+<meta property="og:updated_time" content="2017-12-04T07:07:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深度学习对抗攻击">
+<meta name="twitter:description" content="深度学习１、2014-ｅxlaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”[ArXiv][code][code]">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xiangyuwei.github.io/2017/12/04/对抗样本论文集/"/>
+
+
+
+
+
+  <title>深度学习对抗攻击 | 就和今天说早安</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4bacbbd8913214b562621e17552a2067";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+
+
+
+
+</head>
+
+     <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("83okXLCNivJlkVOwUJeUnyLO-gzGzoHsz", "2HD2Pm5DF4IGQImRKGIlClwK");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = $(document.getElementById(url)).text() + ': 0';
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = $(document.getElementById(url)).text() + ': ' + object.get('time');
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+	});
+}
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = $(document.getElementById(url)).text() + ': ' + counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = $(document.getElementById(url)).text() + ': ' + newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+});
+</script>
+  
+
+  
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">就和今天说早安</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2017/12/04/对抗样本论文集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深度学习对抗攻击</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-04T22:40:17+08:00">
+                2017-12-04
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-04T15:07:38+08:00">
+                2017-12-04
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/04/对抗样本论文集/" class="leancloud_visitors" data-flag-title="深度学习对抗攻击">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2,023 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  9 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="深度学习"><a href="#深度学习" class="headerlink" title="深度学习"></a>深度学习</h2><h3 id="１、2014-exlaining-and-Harnessing-Adversarial-Examples（对抗样本的解释和利用）”-ArXiv-code-code"><a href="#１、2014-exlaining-and-Harnessing-Adversarial-Examples（对抗样本的解释和利用）”-ArXiv-code-code" class="headerlink" title="１、2014-ｅxlaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”[ArXiv][code][code]"></a>１、2014-ｅxlaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”[<a href="http://arxiv.org/abs/1412.6572" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/rodgzilla/machine_learning_adversarial_examples" target="_blank" rel="external">code</a>][<a href="https://github.com/tensorflow/cleverhans/blob/master/cleverhans/attacks.py" target="_blank" rel="external">code</a>]</h3><a id="more"></a>
+<p>提出对抗样本不是因为非线性，而是因为模型在高维空间中的线性性。<br>FSM 方法是计算关于x的导数，然后ｓｉｇｎ函数取值进行扰动,在$$ L<em>{无穷} $$距离度量下。<br>$$ X^{adv}＝Ｘ＋ \varepsilon \cdot sign (\bigtriangledown \ J(X,y</em>{true})) $$<br>梯度可以通过反向传播算法（backpropagation）计算获得。</p>
+<h3 id="２、2015-DeepFool-a-simple-and-accurate-method-to-fool-deep-neural-networks-ArXiv-code"><a href="#２、2015-DeepFool-a-simple-and-accurate-method-to-fool-deep-neural-networks-ArXiv-code" class="headerlink" title="２、2015-DeepFool: a simple and accurate method to fool deep neural networks [ArXiv][code]"></a>２、2015-DeepFool: a simple and accurate method to fool deep neural networks [<a href="http://arxiv.org/abs/1511.04599" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/tensorflow/cleverhans/blob/master/cleverhans/attacks.py" target="_blank" rel="external">code</a>]</h3><p>基于$L_2$距离度量的非目标攻击<br>$min ||D(x)-X||<em>2<br>subject\ to\ argmaxf(D(X) \neq\ y</em>{true})<br>$</p>
+<h3 id="３、2015-The-Limitations-of-Deep-Learning-in-Adversarial-Settings-ArXiv-code"><a href="#３、2015-The-Limitations-of-Deep-Learning-in-Adversarial-Settings-ArXiv-code" class="headerlink" title="３、2015-The Limitations of Deep Learning in Adversarial Settings[ArXiv][code]"></a>３、2015-The Limitations of Deep Learning in Adversarial Settings[<a href="http://arxiv.org/abs/1511.07528" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/tensorflow/cleverhans" target="_blank" rel="external">code</a>]</h3><p>通过计算对抗显著图，寻找对输出影响最大的两个输入，每次迭代修改两个像素点，直到达到目标图像。<br>L0 distance metric</p>
+<h3 id="４、2015-Distributional-Smoothing-with-Virtual-Adversarial-Training-ArXiv-code"><a href="#４、2015-Distributional-Smoothing-with-Virtual-Adversarial-Training-ArXiv-code" class="headerlink" title="４、2015-Distributional Smoothing with Virtual Adversarial Training [ArXiv][code]"></a>４、2015-Distributional Smoothing with Virtual Adversarial Training [<a href="http://arxiv.org/abs/1507.00677" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/tensorflow/cleverhans/blob/master/cleverhans/attacks.py" target="_blank" rel="external">code</a>]</h3><p>KL散度</p>
+<h3 id="５、2016-Exploring-the-space-of-adversarial-images-ArXiv-code-lua"><a href="#５、2016-Exploring-the-space-of-adversarial-images-ArXiv-code-lua" class="headerlink" title="５、2016-Exploring the space of adversarial images[ArXiv][code]-lua"></a>５、2016-Exploring the space of adversarial images[<a href="http://arxiv.org/abs/1510.05328" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/xiangyuwei/adversarial-1" target="_blank" rel="external">code</a>]-lua</h3><h3 id="６、2016-Adversarial-Machine-Learning-at-Scale-ArXiv-code"><a href="#６、2016-Adversarial-Machine-Learning-at-Scale-ArXiv-code" class="headerlink" title="６、2016-Adversarial Machine Learning at Scale[ArXiv][code]"></a>６、2016-Adversarial Machine Learning at Scale[<a href="http://arxiv.org/abs/1611.01236" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/tensorflow/cleverhans/tree/master/examples/nips17_adversarial_competition/sample_defenses/adv_inception_v3" target="_blank" rel="external">code</a>]</h3><h3 id="９、2016-Adversarial-examples-in-the-physical-world-ArXiv-code-code"><a href="#９、2016-Adversarial-examples-in-the-physical-world-ArXiv-code-code" class="headerlink" title="９、2016-Adversarial examples in the physical world [ArXiv][code][code]"></a>９、2016-Adversarial examples in the physical world [<a href="http://arxiv.org/abs/1607.02533" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/tensorflow/cleverhans/tree/master/examples/nips17_adversarial_competition/sample_targeted_attacks/iter_target_class" target="_blank" rel="external">code</a>][<a href="https://github.com/tensorflow/cleverhans/blob/master/cleverhans/attacks.py" target="_blank" rel="external">code</a>]</h3><p>通过对对抗样本拍照片，改变了某些像素来测试对抗样本的有效性<br>拓展FGSM,多次应用，每次一小步,中间结果被$\varepsilon$截断<br>$X<em>0^{adv}=X<br> \X</em>{N+1}^{adv}=Clip<em>{X,\varepsilon}{X</em>{N}^{adv}+\alpha\cdot sign (\bigtriangledown J(X,y_{true}))}<br>$</p>
+<h3 id="10、2016-Simple-Black-Box-Adversarial-Perturbations-for-Deep-Networks-ArXiv"><a href="#10、2016-Simple-Black-Box-Adversarial-Perturbations-for-Deep-Networks-ArXiv" class="headerlink" title="10、2016-Simple Black-Box Adversarial Perturbations for Deep Networks[ArXiv]"></a>10、2016-Simple Black-Box Adversarial Perturbations for Deep Networks[<a href="http://arxiv.org/abs/1612.06299" target="_blank" rel="external">ArXiv</a>]</h3><p>数据集：CIFAR10, MNIST, SVHN, STL10, and ImageNet1000 datasets</p>
+<h3 id="11、2017-Towards-Evaluating-the-Robustness-of-Neural-Networks-ArXiv-code-code"><a href="#11、2017-Towards-Evaluating-the-Robustness-of-Neural-Networks-ArXiv-code-code" class="headerlink" title="11、2017-Towards Evaluating the Robustness of Neural Networks[ArXiv][code][code]"></a>11、2017-Towards Evaluating the Robustness of Neural Networks[<a href="http://arxiv.org/abs/608.04644" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/xiangyuwei/nn_robust_attacks" target="_blank" rel="external">code</a>][<a href="https://github.com/tensorflow/cleverhans/blob/master/cleverhans/attacks.py" target="_blank" rel="external">code</a>]</h3><p>It is noteworthy that the original defensive distillation is broken by Carlini and Wagner’s attack<br>$min ||1/2(tanh(W)+1)-x)||^2_2+c\cdot l(1/2(tanh(W)+1))$</p>
+<h3 id="12、2017-Fast-Feature-Fool-A-data-independent-approach-to-universal-adversarial-perturbations-ArXiv-code"><a href="#12、2017-Fast-Feature-Fool-A-data-independent-approach-to-universal-adversarial-perturbations-ArXiv-code" class="headerlink" title="12、2017-Fast Feature Fool: A data independent approach to universal adversarial perturbations[ArXiv][code]"></a>12、2017-Fast Feature Fool: A data independent approach to universal adversarial perturbations[<a href="http://arxiv.org/abs/1707.05572" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/xiangyuwei/fast-feature-fool" target="_blank" rel="external">code</a>]</h3><h3 id="13、2017-Towards-Deep-Learning-Models-Resistant-to-Adversarial-Attacks-ArXiv-code"><a href="#13、2017-Towards-Deep-Learning-Models-Resistant-to-Adversarial-Attacks-ArXiv-code" class="headerlink" title="13、2017-Towards Deep Learning Models Resistant to Adversarial Attacks[ArXiv][code]"></a>13、2017-Towards Deep Learning Models Resistant to Adversarial Attacks[<a href="http://arxiv.org/abs/1706.06083" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/tensorflow/cleverhans/blob/master/cleverhans/attacks.py" target="_blank" rel="external">code</a>]</h3><h3 id="14、2017-Ensemble-Adversarial-Training-Attacks-and-Defenses-ArXiv-code"><a href="#14、2017-Ensemble-Adversarial-Training-Attacks-and-Defenses-ArXiv-code" class="headerlink" title="14、2017-Ensemble Adversarial Training: Attacks and Defenses[ArXiv][code]"></a>14、2017-Ensemble Adversarial Training: Attacks and Defenses[<a href="http://arxiv.org/abs/1705.07204" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/tensorflow/cleverhans/tree/master/examples/nips17_adversarial_competition/sample_defenses/ens_adv_inception_resnet_v2" target="_blank" rel="external">code</a>]</h3><h3 id="15、S-Zagoruyko-Are-deep-learning-algorithms-easily-hackable-code"><a href="#15、S-Zagoruyko-Are-deep-learning-algorithms-easily-hackable-code" class="headerlink" title="15、S. Zagoruyko. Are deep learning algorithms easily hackable?[code]"></a>15、S. Zagoruyko. Are deep learning algorithms easily hackable?[<a href="http://coxlab.github.io/ostrichinator" target="_blank" rel="external">code</a>]</h3><h3 id="16、2015-Deep-neural-networks-are-easily-fooled-High-confidence-predictions-for-unrecognizable-images-ArXiv"><a href="#16、2015-Deep-neural-networks-are-easily-fooled-High-confidence-predictions-for-unrecognizable-images-ArXiv" class="headerlink" title="16、2015-Deep neural networks are easily fooled: High confidence predictions for unrecognizable images[ArXiv]"></a>16、2015-Deep neural networks are easily fooled: High confidence predictions for unrecognizable images[<a href="http://arxiv.org/abs/1412.1897" target="_blank" rel="external">ArXiv</a>]</h3><h3 id="16、2016-Transferability-in-Machine-Learning-from-Phenomena-to-Black-Box-Attacks-using-Adversarial-Samples-ArXiv"><a href="#16、2016-Transferability-in-Machine-Learning-from-Phenomena-to-Black-Box-Attacks-using-Adversarial-Samples-ArXiv" class="headerlink" title="16、2016-Transferability in Machine Learning: from Phenomena to Black-Box Attacks using Adversarial Samples[ArXiv]"></a>16、2016-Transferability in Machine Learning: from Phenomena to Black-Box Attacks using Adversarial Samples[<a href="https://arxiv.org/abs/1605.07277" target="_blank" rel="external">ArXiv</a>]</h3><h3 id="17、2013-Intriguing-properties-of-neural-networkss-ArXiv"><a href="#17、2013-Intriguing-properties-of-neural-networkss-ArXiv" class="headerlink" title="17、2013-Intriguing properties of neural networkss[ArXiv]"></a>17、2013-Intriguing properties of neural networkss[<a href="http://arxiv.org/abs/1312.6199" target="_blank" rel="external">ArXiv</a>]</h3><p>通过在$Ｌ_２$距离度量下Ｌ—BFGS解决优化问题来生成对抗样本。<br> 　$min\ c|r|+loss_f(x+r,l)\  s.t\ x+r \subset[0,1]^m$<br> 　L-BFGS attack and DeepFool attacks have been implemented in the Foolbox[<a href="https://github.com/xiangyuwei/foolbox" target="_blank" rel="external">code</a>]</p>
+<h3 id="2017-Robust-Physical-World-Attacks-on-Deep-Learning-Models"><a href="#2017-Robust-Physical-World-Attacks-on-Deep-Learning-Models" class="headerlink" title="2017-Robust Physical-World Attacks on Deep Learning Models"></a>2017-<a href="https://arxiv.org/pdf/1707.08945.pdf" target="_blank" rel="external">Robust Physical-World Attacks on Deep Learning Models</a></h3><p> 　</p>
+<h3 id="Evasion-attacks-against-machine-learning-at-test-time"><a href="#Evasion-attacks-against-machine-learning-at-test-time" class="headerlink" title="Evasion attacks against machine learning at test time"></a>Evasion attacks against machine learning at test time</h3><p> adversary goal（攻击目标）:    分为两种目标，一是能够分类为好的即可（在垃圾邮件检测中，指分类为好的邮件）。如果有一个函数g定义在样本空间中X，g(x)&lt;0表示分类为好，那么敌人的目标就是设计一个样本x<em>，让g(x</em>)&lt;0。这种攻击很容易破解，只要调整分类界限即可（这里指g(x)=0这条边界）。所以，其实攻击者还有一个更好的目标是让g(x)尽可能小</p>
+<h3 id="Universal-adversarial-perturbations-ArXiv-code"><a href="#Universal-adversarial-perturbations-ArXiv-code" class="headerlink" title="Universal adversarial perturbations[ArXiv][code]"></a>Universal adversarial perturbations[<a href="https://arxiv.org/pdf/1610.08401.pdf" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/xiangyuwei/universal/tree/master/python" target="_blank" rel="external">code</a>]</h3><h2 id="黑盒攻击"><a href="#黑盒攻击" class="headerlink" title="黑盒攻击"></a>黑盒攻击</h2><h3 id="2017-10-WHITENING-BLACK-BOX-NEURAL-NETWORKS-ArXiv"><a href="#2017-10-WHITENING-BLACK-BOX-NEURAL-NETWORKS-ArXiv" class="headerlink" title="2017-10-WHITENING BLACK-BOX NEURAL NETWORKS[ArXiv]"></a>2017-10-WHITENING BLACK-BOX NEURAL NETWORKS[<a href="https://arxiv.org/pdf/1711.01768.pdf" target="_blank" rel="external">ArXiv</a>]</h3><p>窃取隐私数据然后进行白盒攻击</p>
+<h3 id="７、2016-Delving-into-Transferable-Adversarial-Examples-and-Black-box-Attacks-ArXiv-code"><a href="#７、2016-Delving-into-Transferable-Adversarial-Examples-and-Black-box-Attacks-ArXiv-code" class="headerlink" title="７、2016-Delving into Transferable Adversarial Examples and Black-box Attacks [ArXiv][code]"></a>７、2016-Delving into Transferable Adversarial Examples and Black-box Attacks [<a href="http://arxiv.org/abs/1611.02770" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/sunblaze-ucb/transferability-advdnn-pub" target="_blank" rel="external">code</a>]</h3><p>作者还使用了同样的实验方法测试了定向性对抗性攻击在目标模型的效果。结果表明定向类标记的传递性差了很多，只有小于等于4%的对抗性图像在源、目标机器学习模型中都识别出相同的定向标记。<br>基于此，作者提出了ensemble方法。它是以多个深度神经网络模型为基础构造对抗图片，即将图4中单个已知机器学习模型替换成多个不同的已知机器学习模型，并共同产生一个对抗性图像。<br>在实验设计中，作者对5个不同的深度神经网络模型一一实施了黑盒子攻击。在对每一个模型攻击的时候，作者假设已知其余的4个模型，并用集合的方式作白盒子对抗图形的构造。同样的，作者分别使用基于优化的攻击手段，和基于Fast Gradient的手段构造对抗性图片。构造图片依然使用的是Adam优化器。在算法经过100次的迭代对权重向量的更新，loss function得以汇聚。作者发现有许多攻击者预先设定的标记也得到了传递。详细结果参见表2。格子(i,j)代表用除了模型i之外的4个其他算法生成的对抗图片，用模型j来验证得到的定向标记的准确值。可以看出，当目标模型包含在已知模型集合中，定向类标记的传递性都在60%以上。即使目标模型不在已知模型集合中，定向标记的准确值也在30%以上。</p>
+<h3 id="８、2016-Practical-Black-Box-Attacks-against-Machine-Learning-ArXiv-code"><a href="#８、2016-Practical-Black-Box-Attacks-against-Machine-Learning-ArXiv-code" class="headerlink" title="８、2016-Practical Black-Box Attacks against Machine Learning[ArXiv][code]"></a>８、2016-Practical Black-Box Attacks against Machine Learning[<a href="http://arxiv.org/abs/1602.02697" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/tensorflow/cleverhans/blob/master/cleverhans_tutorials/mnist_blackbox.py" target="_blank" rel="external">code</a>]</h3><p>敌手不需要知道目标模型的结构和参数，只能够根据输入得到输出。<br>由于对抗样本的迁移性，可以先构建替代模型训练对抗样本再在目标模型上测试生成的对抗样本。<br>替代模型的结构和目标模型结构要能够处理相同的任务。</p>
+<h3 id="Machine-Learning-as-an-Adversarial-Service-Learning-Black-Box-Adversarial-Examples"><a href="#Machine-Learning-as-an-Adversarial-Service-Learning-Black-Box-Adversarial-Examples" class="headerlink" title="Machine Learning as an Adversarial Service:Learning Black-Box Adversarial Examples"></a>Machine Learning as an Adversarial Service:Learning Black-Box Adversarial Examples</h3><p>一种直接攻击目标黑盒神经网络的方法<br>MNIST数据集，CIFAR-10图片数据集<br>应用在物理世界中的目的模型——Amazon Machine Learning Prediction</p>
+<h3 id="Universal-adversarial-perturbations"><a href="#Universal-adversarial-perturbations" class="headerlink" title="Universal adversarial perturbations"></a>Universal adversarial perturbations</h3><h3 id="Generating-Adversarial-Malware-Examples-for-Black-Box-Attacks-Based-on-GAN"><a href="#Generating-Adversarial-Malware-Examples-for-Black-Box-Attacks-Based-on-GAN" class="headerlink" title="Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN"></a>Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN</h3><p>利用生成对抗网络原理生成对抗样本的方法文中称之为MalGAN。其中，GAN 网络中的判别器是一个人为构建的替代探测器网络。生成器则是目的网络，能生成恶意软件对抗样本。</p>
+<h2 id="隐私问题"><a href="#隐私问题" class="headerlink" title="隐私问题"></a>隐私问题</h2><h3 id="1、Hacking-Smart-Machines-with-Smarter-Ones-How-to-Extract-Meaningful-Data-from-Machine-Learning-Classifiers-ArXiv"><a href="#1、Hacking-Smart-Machines-with-Smarter-Ones-How-to-Extract-Meaningful-Data-from-Machine-Learning-Classifiers-ArXiv" class="headerlink" title="1、Hacking Smart Machines with Smarter Ones : How to Extract Meaningful Data from Machine Learning Classifiers[ArXiv]"></a>1、Hacking Smart Machines with Smarter Ones : How to Extract Meaningful Data from Machine Learning Classifiers[<a href="http://arxiv.org/abs/1306.4447v1" target="_blank" rel="external">ArXiv</a>]</h3><h3 id="２、Membership-Inference-Attacks-Against-Machine-Learning-Models-ArXiv"><a href="#２、Membership-Inference-Attacks-Against-Machine-Learning-Models-ArXiv" class="headerlink" title="２、Membership Inference Attacks Against Machine Learning Models[ArXiv]"></a>２、Membership Inference Attacks Against Machine Learning Models[<a href="http://arxiv.org/abs/1610.05820v2" target="_blank" rel="external">ArXiv</a>]</h3><h3 id="3、Stealing-machine-learning-models-via-prediction-apis"><a href="#3、Stealing-machine-learning-models-via-prediction-apis" class="headerlink" title="3、Stealing machine learning models via prediction apis"></a>3、Stealing machine learning models via prediction apis</h3><h3 id="4、An-end-to-end-case-study-of-personal-ized-warfarin-dosing"><a href="#4、An-end-to-end-case-study-of-personal-ized-warfarin-dosing" class="headerlink" title="4、An end-to-end case study of personal- ized warfarin dosing"></a>4、An end-to-end case study of personal- ized warfarin dosing</h3><h3 id="On-the-Protection-of-Private-Information-in-Machine-Learning-Systems-Two-Recent-Approaches"><a href="#On-the-Protection-of-Private-Information-in-Machine-Learning-Systems-Two-Recent-Approaches" class="headerlink" title="On the Protection of Private Information in Machine Learning Systems:Two Recent Approaches"></a>On the Protection of Private Information in Machine Learning Systems:Two Recent Approaches</h3><h2 id="其他机器学习技术"><a href="#其他机器学习技术" class="headerlink" title="其他机器学习技术"></a>其他机器学习技术</h2><h3 id="1、Vulnerability-of-Deep-Reinforcement-Learning-to-Policy-Induction-Attacks-ArXiv"><a href="#1、Vulnerability-of-Deep-Reinforcement-Learning-to-Policy-Induction-Attacks-ArXiv" class="headerlink" title="1、Vulnerability of Deep Reinforcement Learning to Policy Induction Attacks[ArXiv]"></a>1、Vulnerability of Deep Reinforcement Learning to Policy Induction Attacks[<a href="http://arxiv.org/abs/1701.04143" target="_blank" rel="external">ArXiv</a>]</h3><h3 id="2、Tactics-of-Adversarial-Attack-on-Deep-Reinforcement-Learning-Agents-ArXiv"><a href="#2、Tactics-of-Adversarial-Attack-on-Deep-Reinforcement-Learning-Agents-ArXiv" class="headerlink" title="2、Tactics of Adversarial Attack on Deep Reinforcement Learning Agents[ArXiv]"></a>2、Tactics of Adversarial Attack on Deep Reinforcement Learning Agents[<a href="http://arxiv.org/abs/1703.06748" target="_blank" rel="external">ArXiv</a>]</h3><h3 id="3、Adversarial-examples-for-generative-models-ArXiv"><a href="#3、Adversarial-examples-for-generative-models-ArXiv" class="headerlink" title="3、Adversarial examples for generative models[ArXiv]"></a>3、Adversarial examples for generative models[<a href="http://arxiv.org/abs/1702.06832" target="_blank" rel="external">ArXiv</a>]</h3><h3 id="4、Adversarial-Attacks-on-Neural-Network-Policies"><a href="#4、Adversarial-Attacks-on-Neural-Network-Policies" class="headerlink" title="4、Adversarial Attacks on Neural Network Policies"></a>4、Adversarial Attacks on Neural Network Policies</h3><h2 id="防御技术"><a href="#防御技术" class="headerlink" title="防御技术"></a>防御技术</h2><h3 id="1、2016-Distillation-as-a-Defense-to-Adversarial-Perturbations-Against-Deep-Neural-Networks-ArXiv"><a href="#1、2016-Distillation-as-a-Defense-to-Adversarial-Perturbations-Against-Deep-Neural-Networks-ArXiv" class="headerlink" title="1、2016-Distillation as a Defense to Adversarial Perturbations Against Deep Neural Networks[ArXiv]"></a>1、2016-Distillation as a Defense to Adversarial Perturbations Against Deep Neural Networks[<a href="http://arxiv.org/abs/1511.04508" target="_blank" rel="external">ArXiv</a>]</h3><h2 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h2><h3 id="1、2006-Can-machine-learning-be-secure-paper"><a href="#1、2006-Can-machine-learning-be-secure-paper" class="headerlink" title="1、2006-Can machine learning be secure?[paper]"></a>1、2006-Can machine learning be secure?[<a href="http://portal.acm.org/citation.cfm?doid=1128817.1128824" target="_blank" rel="external">paper</a>]</h3><h3 id="2、2011-Adversarial-machine-learning"><a href="#2、2011-Adversarial-machine-learning" class="headerlink" title="2、2011-Adversarial machine learning"></a>2、2011-Adversarial machine learning</h3><h3 id="3、Take-two-software-updates-and-see-me-in-the-morning-The-Case-for-Software-Security-Evaluations-of-Medical-Devices-paper"><a href="#3、Take-two-software-updates-and-see-me-in-the-morning-The-Case-for-Software-Security-Evaluations-of-Medical-Devices-paper" class="headerlink" title="3、Take two software updates and see me in the morning: The Case for Software Security Evaluations of Medical Devices [paper]"></a>3、Take two software updates and see me in the morning: The Case for Software Security Evaluations of Medical Devices [<a href="http://www.contrib.andrew.cmu.edu/~ppoosank/papers/hanna-aed-healthsec11.pdf" target="_blank" rel="external">paper</a>]</h3><h3 id="4、Adversarial-AI"><a href="#4、Adversarial-AI" class="headerlink" title="4、Adversarial AI"></a>4、Adversarial AI</h3><h3 id="5、2017-机器学习安全性问题及其防御技术研究综述"><a href="#5、2017-机器学习安全性问题及其防御技术研究综述" class="headerlink" title="5、2017-机器学习安全性问题及其防御技术研究综述"></a>5、2017-机器学习安全性问题及其防御技术研究综述</h3><h3 id="6、Concrete-Problems-in-AI-Safety-ArXiv"><a href="#6、Concrete-Problems-in-AI-Safety-ArXiv" class="headerlink" title="6、Concrete Problems in AI Safety[ArXiv]"></a>6、Concrete Problems in AI Safety[<a href="http://arxiv.org/abs/1606.06565" target="_blank" rel="external">ArXiv</a>]</h3><h3 id="7、Towards-the-Science-of-Security-and-Privacy-in-Machine-Learning-ArXiv"><a href="#7、Towards-the-Science-of-Security-and-Privacy-in-Machine-Learning-ArXiv" class="headerlink" title="7、Towards the Science of Security and Privacy in Machine Learning[ArXiv]"></a>7、Towards the Science of Security and Privacy in Machine Learning[<a href="http://arxiv.org/abs/1611.03814" target="_blank" rel="external">ArXiv</a>]</h3><h3 id="8、Stealing-Machine-Learning-Models-via-Prediction-APIs-paper-code"><a href="#8、Stealing-Machine-Learning-Models-via-Prediction-APIs-paper-code" class="headerlink" title="8、Stealing Machine Learning Models via Prediction APIs[paper][code]"></a>8、Stealing Machine Learning Models via Prediction APIs[<a href="https://www.usenix.org/conference/usenixsecurity16/technical-sessions/presentation/tramer" target="_blank" rel="external">paper</a>][<a href="https://github.com/ftramer/Steal-ML" target="_blank" rel="external">code</a>]</h3><h2 id="GAN和对抗样本"><a href="#GAN和对抗样本" class="headerlink" title="GAN和对抗样本"></a>GAN和对抗样本</h2><h3 id="1、2017-APE-GAN-Adversarial-Perturbation-Elimination-with-GAN-ArXiv-code"><a href="#1、2017-APE-GAN-Adversarial-Perturbation-Elimination-with-GAN-ArXiv-code" class="headerlink" title="1、2017-APE-GAN : Adversarial Perturbation Elimination with　GAN[ArXiv][code]"></a>1、2017-APE-GAN : Adversarial Perturbation Elimination with　GAN[<a href="http://arxiv.org/abs/1707.05474v3" target="_blank" rel="external">ArXiv</a>][<a href="https://github.com/shenqixiaojiang/APE-GAN" target="_blank" rel="external">code</a>]</h3><p>数据集：including MNIST, CIFAR10 and ImageNet</p>
+<p>生成网络将对抗样本还原为真实图片</p>
+<h3 id="2、2017-Generative-Adversarial-Trainer-Defense-to-Adversarial-Perturbations-with-GAN-ArXiv"><a href="#2、2017-Generative-Adversarial-Trainer-Defense-to-Adversarial-Perturbations-with-GAN-ArXiv" class="headerlink" title="2、2017-Generative Adversarial Trainer : Defense to Adversarial Perturbations with GAN[ArXiv]"></a>2、2017-Generative Adversarial Trainer : Defense to Adversarial Perturbations with GAN[<a href="http://arxiv.org/abs/1705.03387v1" target="_blank" rel="external">ArXiv</a>]</h3><p>增强判别器的识别能力</p>
+<h3 id="３、2017-Generating-Adversarial-Malware-Examples-for-Black-Box-Attacks-Based-on-GAN-ArXiv"><a href="#３、2017-Generating-Adversarial-Malware-Examples-for-Black-Box-Attacks-Based-on-GAN-ArXiv" class="headerlink" title="３、2017-Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN[ArXiv]"></a>３、2017-Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN[<a href="http://arxiv.org/abs/1702.05983" target="_blank" rel="external">ArXiv</a>]</h3><p>GAN也可以产生针对恶意 软件分类器的对抗样本<br>在提取的恶意软件特征上增加噪声使分类器误分类。</p>
+<h3 id="４、2017-Adversarial-examples-for-generative-models-ArXiv"><a href="#４、2017-Adversarial-examples-for-generative-models-ArXiv" class="headerlink" title="４、2017-Adversarial examples for generative models[ArXiv]"></a>４、2017-Adversarial examples for generative models[<a href="http://arxiv.org/abs/1702.06832" target="_blank" rel="external">ArXiv</a>]</h3><h3 id="5、Generative-Poisoning-Attack-Method-Against-Neural-Networks-ArXiv"><a href="#5、Generative-Poisoning-Attack-Method-Against-Neural-Networks-ArXiv" class="headerlink" title="5、Generative Poisoning Attack Method Against Neural Networks[ArXiv]"></a>5、Generative Poisoning Attack Method Against Neural Networks[<a href="http://arxiv.org/abs/1703.01340" target="_blank" rel="external">ArXiv</a>]</h3><p>提出了 一种更有效的产生对抗样本的方法，它采用生成对 抗网络（GAN）中生成模型（Generative Model）和 判别模型（Discriminative model）的思想，即先用生成模型产生候选的对抗样本，再用判别模型进行 筛选最优对抗样本。</p>
+<h2 id="博士论文"><a href="#博士论文" class="headerlink" title="博士论文"></a>博士论文</h2><h3 id="ON-THE-INTEGRITY-OF-DEEP-LEARNING-SYSTEMS-IN-ADVERSARIAL-SETTINGS"><a href="#ON-THE-INTEGRITY-OF-DEEP-LEARNING-SYSTEMS-IN-ADVERSARIAL-SETTINGS" class="headerlink" title="ON THE INTEGRITY OF DEEP LEARNING SYSTEMS IN ADVERSARIAL SETTINGS"></a>ON THE INTEGRITY OF DEEP LEARNING SYSTEMS IN ADVERSARIAL SETTINGS</h3><h2 id="Segmentation-amp-Object-Detection"><a href="#Segmentation-amp-Object-Detection" class="headerlink" title="Segmentation &amp; Object Detection"></a>Segmentation &amp; Object Detection</h2><p>Adversarial Examples for Semantic Segmentation and Object Detection</p>
+<h2 id="Visual-Question-Answering-VQA）"><a href="#Visual-Question-Answering-VQA）" class="headerlink" title="Visual Question Answering (VQA）"></a>Visual Question Answering (VQA）</h2><p>Can you fool AI with adversarial examples on a visual Turing test?</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>１．Accessorize to a crime: Real and stealthy attacks on state-of-the-art face recognition<br>２．Robust Physical-World Attacks on Machine Learning Models</p>
+<h3 id="软件及应用"><a href="#软件及应用" class="headerlink" title="软件及应用"></a>软件及应用</h3><p>1.AdversariaLib (includes implementation of evasion attacks from .<br>2.AdLib. A python library with a scikit-style interface which includes implementations of a number of published evasion attacks and defenses.<br>3.AlfaSVMLib. Adversarial Label Flip Attacks against Support Vector Machines.<br>4.Poisoning Attacks against Support Vector Machines, and Attacks against Clustering Algorithms<br>5.deep-pwning Metasploit for deep learning which currently has attacks on deep neural networks using Tensorflow<br>6.Cleverhans is a great TensorFlow-based library for adversarial attacks and defences: <a href="https://github.com/tensorflow/cleverhans" target="_blank" rel="external">https://github.com/tensorflow/cleverhans</a><br>7.FoolBox – another collection of attacks that you can use with a framework of your preference<br><a href="https://foolbox.readthedocs.io/en/latest/" target="_blank" rel="external">https://foolbox.readthedocs.io/en/latest/</a><br>8.EvadeML - Machine Learning in the Presence of Adversaries<br>9.Adversarial Machine Learning - PRA Lab</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/path/wechat-reward-image" alt="WeiXiangYu WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/path/alipay-reward-image" alt="WeiXiangYu Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/对抗样本/" rel="tag"># 对抗样本</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/04/Ubuntu使用/" rel="next" title="Ubuntu使用">
+                <i class="fa fa-chevron-left"></i> Ubuntu使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/23/李宏毅课程笔记/" rel="prev" title="李宏毅机器学习课程笔记">
+                李宏毅机器学习课程笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar.jpg"
+               alt="WeiXiangYu" />
+          <p class="site-author-name" itemprop="name">WeiXiangYu</p>
+           
+              <p class="site-description motion-element" itemprop="description">胸怀猛虎 细嗅蔷薇</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/xiangyuwei" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/aiyuziyou520" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://youtube.com/" target="_blank" title="Youtube">
+                  
+                    <i class="fa fa-fw fa-youtube"></i>
+                  
+                  Youtube
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/68759000" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-douban"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/wei-shao-54" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-zhihu"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://macshuo.com/" title="MacTalk" target="_blank">MacTalk</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://weibo.com/1402400261/" title="爱可可爱生活" target="_blank">爱可可爱生活</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#深度学习"><span class="nav-number">1.</span> <span class="nav-text">深度学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#１、2014-exlaining-and-Harnessing-Adversarial-Examples（对抗样本的解释和利用）”-ArXiv-code-code"><span class="nav-number">1.1.</span> <span class="nav-text">１、2014-ｅxlaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”[ArXiv][code][code]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#２、2015-DeepFool-a-simple-and-accurate-method-to-fool-deep-neural-networks-ArXiv-code"><span class="nav-number">1.2.</span> <span class="nav-text">２、2015-DeepFool: a simple and accurate method to fool deep neural networks [ArXiv][code]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#３、2015-The-Limitations-of-Deep-Learning-in-Adversarial-Settings-ArXiv-code"><span class="nav-number">1.3.</span> <span class="nav-text">３、2015-The Limitations of Deep Learning in Adversarial Settings[ArXiv][code]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#４、2015-Distributional-Smoothing-with-Virtual-Adversarial-Training-ArXiv-code"><span class="nav-number">1.4.</span> <span class="nav-text">４、2015-Distributional Smoothing with Virtual Adversarial Training [ArXiv][code]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#５、2016-Exploring-the-space-of-adversarial-images-ArXiv-code-lua"><span class="nav-number">1.5.</span> <span class="nav-text">５、2016-Exploring the space of adversarial images[ArXiv][code]-lua</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#６、2016-Adversarial-Machine-Learning-at-Scale-ArXiv-code"><span class="nav-number">1.6.</span> <span class="nav-text">６、2016-Adversarial Machine Learning at Scale[ArXiv][code]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#９、2016-Adversarial-examples-in-the-physical-world-ArXiv-code-code"><span class="nav-number">1.7.</span> <span class="nav-text">９、2016-Adversarial examples in the physical world [ArXiv][code][code]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10、2016-Simple-Black-Box-Adversarial-Perturbations-for-Deep-Networks-ArXiv"><span class="nav-number">1.8.</span> <span class="nav-text">10、2016-Simple Black-Box Adversarial Perturbations for Deep Networks[ArXiv]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11、2017-Towards-Evaluating-the-Robustness-of-Neural-Networks-ArXiv-code-code"><span class="nav-number">1.9.</span> <span class="nav-text">11、2017-Towards Evaluating the Robustness of Neural Networks[ArXiv][code][code]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12、2017-Fast-Feature-Fool-A-data-independent-approach-to-universal-adversarial-perturbations-ArXiv-code"><span class="nav-number">1.10.</span> <span class="nav-text">12、2017-Fast Feature Fool: A data independent approach to universal adversarial perturbations[ArXiv][code]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13、2017-Towards-Deep-Learning-Models-Resistant-to-Adversarial-Attacks-ArXiv-code"><span class="nav-number">1.11.</span> <span class="nav-text">13、2017-Towards Deep Learning Models Resistant to Adversarial Attacks[ArXiv][code]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14、2017-Ensemble-Adversarial-Training-Attacks-and-Defenses-ArXiv-code"><span class="nav-number">1.12.</span> <span class="nav-text">14、2017-Ensemble Adversarial Training: Attacks and Defenses[ArXiv][code]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15、S-Zagoruyko-Are-deep-learning-algorithms-easily-hackable-code"><span class="nav-number">1.13.</span> <span class="nav-text">15、S. Zagoruyko. Are deep learning algorithms easily hackable?[code]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16、2015-Deep-neural-networks-are-easily-fooled-High-confidence-predictions-for-unrecognizable-images-ArXiv"><span class="nav-number">1.14.</span> <span class="nav-text">16、2015-Deep neural networks are easily fooled: High confidence predictions for unrecognizable images[ArXiv]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16、2016-Transferability-in-Machine-Learning-from-Phenomena-to-Black-Box-Attacks-using-Adversarial-Samples-ArXiv"><span class="nav-number">1.15.</span> <span class="nav-text">16、2016-Transferability in Machine Learning: from Phenomena to Black-Box Attacks using Adversarial Samples[ArXiv]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17、2013-Intriguing-properties-of-neural-networkss-ArXiv"><span class="nav-number">1.16.</span> <span class="nav-text">17、2013-Intriguing properties of neural networkss[ArXiv]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2017-Robust-Physical-World-Attacks-on-Deep-Learning-Models"><span class="nav-number">1.17.</span> <span class="nav-text">2017-Robust Physical-World Attacks on Deep Learning Models</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Evasion-attacks-against-machine-learning-at-test-time"><span class="nav-number">1.18.</span> <span class="nav-text">Evasion attacks against machine learning at test time</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Universal-adversarial-perturbations-ArXiv-code"><span class="nav-number">1.19.</span> <span class="nav-text">Universal adversarial perturbations[ArXiv][code]</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#黑盒攻击"><span class="nav-number">2.</span> <span class="nav-text">黑盒攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2017-10-WHITENING-BLACK-BOX-NEURAL-NETWORKS-ArXiv"><span class="nav-number">2.1.</span> <span class="nav-text">2017-10-WHITENING BLACK-BOX NEURAL NETWORKS[ArXiv]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#７、2016-Delving-into-Transferable-Adversarial-Examples-and-Black-box-Attacks-ArXiv-code"><span class="nav-number">2.2.</span> <span class="nav-text">７、2016-Delving into Transferable Adversarial Examples and Black-box Attacks [ArXiv][code]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#８、2016-Practical-Black-Box-Attacks-against-Machine-Learning-ArXiv-code"><span class="nav-number">2.3.</span> <span class="nav-text">８、2016-Practical Black-Box Attacks against Machine Learning[ArXiv][code]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Machine-Learning-as-an-Adversarial-Service-Learning-Black-Box-Adversarial-Examples"><span class="nav-number">2.4.</span> <span class="nav-text">Machine Learning as an Adversarial Service:Learning Black-Box Adversarial Examples</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Universal-adversarial-perturbations"><span class="nav-number">2.5.</span> <span class="nav-text">Universal adversarial perturbations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generating-Adversarial-Malware-Examples-for-Black-Box-Attacks-Based-on-GAN"><span class="nav-number">2.6.</span> <span class="nav-text">Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐私问题"><span class="nav-number">3.</span> <span class="nav-text">隐私问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Hacking-Smart-Machines-with-Smarter-Ones-How-to-Extract-Meaningful-Data-from-Machine-Learning-Classifiers-ArXiv"><span class="nav-number">3.1.</span> <span class="nav-text">1、Hacking Smart Machines with Smarter Ones : How to Extract Meaningful Data from Machine Learning Classifiers[ArXiv]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#２、Membership-Inference-Attacks-Against-Machine-Learning-Models-ArXiv"><span class="nav-number">3.2.</span> <span class="nav-text">２、Membership Inference Attacks Against Machine Learning Models[ArXiv]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、Stealing-machine-learning-models-via-prediction-apis"><span class="nav-number">3.3.</span> <span class="nav-text">3、Stealing machine learning models via prediction apis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、An-end-to-end-case-study-of-personal-ized-warfarin-dosing"><span class="nav-number">3.4.</span> <span class="nav-text">4、An end-to-end case study of personal- ized warfarin dosing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#On-the-Protection-of-Private-Information-in-Machine-Learning-Systems-Two-Recent-Approaches"><span class="nav-number">3.5.</span> <span class="nav-text">On the Protection of Private Information in Machine Learning Systems:Two Recent Approaches</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他机器学习技术"><span class="nav-number">4.</span> <span class="nav-text">其他机器学习技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Vulnerability-of-Deep-Reinforcement-Learning-to-Policy-Induction-Attacks-ArXiv"><span class="nav-number">4.1.</span> <span class="nav-text">1、Vulnerability of Deep Reinforcement Learning to Policy Induction Attacks[ArXiv]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、Tactics-of-Adversarial-Attack-on-Deep-Reinforcement-Learning-Agents-ArXiv"><span class="nav-number">4.2.</span> <span class="nav-text">2、Tactics of Adversarial Attack on Deep Reinforcement Learning Agents[ArXiv]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、Adversarial-examples-for-generative-models-ArXiv"><span class="nav-number">4.3.</span> <span class="nav-text">3、Adversarial examples for generative models[ArXiv]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、Adversarial-Attacks-on-Neural-Network-Policies"><span class="nav-number">4.4.</span> <span class="nav-text">4、Adversarial Attacks on Neural Network Policies</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御技术"><span class="nav-number">5.</span> <span class="nav-text">防御技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、2016-Distillation-as-a-Defense-to-Adversarial-Perturbations-Against-Deep-Neural-Networks-ArXiv"><span class="nav-number">5.1.</span> <span class="nav-text">1、2016-Distillation as a Defense to Adversarial Perturbations Against Deep Neural Networks[ArXiv]</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习"><span class="nav-number">6.</span> <span class="nav-text">机器学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、2006-Can-machine-learning-be-secure-paper"><span class="nav-number">6.1.</span> <span class="nav-text">1、2006-Can machine learning be secure?[paper]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、2011-Adversarial-machine-learning"><span class="nav-number">6.2.</span> <span class="nav-text">2、2011-Adversarial machine learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、Take-two-software-updates-and-see-me-in-the-morning-The-Case-for-Software-Security-Evaluations-of-Medical-Devices-paper"><span class="nav-number">6.3.</span> <span class="nav-text">3、Take two software updates and see me in the morning: The Case for Software Security Evaluations of Medical Devices [paper]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、Adversarial-AI"><span class="nav-number">6.4.</span> <span class="nav-text">4、Adversarial AI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、2017-机器学习安全性问题及其防御技术研究综述"><span class="nav-number">6.5.</span> <span class="nav-text">5、2017-机器学习安全性问题及其防御技术研究综述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、Concrete-Problems-in-AI-Safety-ArXiv"><span class="nav-number">6.6.</span> <span class="nav-text">6、Concrete Problems in AI Safety[ArXiv]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、Towards-the-Science-of-Security-and-Privacy-in-Machine-Learning-ArXiv"><span class="nav-number">6.7.</span> <span class="nav-text">7、Towards the Science of Security and Privacy in Machine Learning[ArXiv]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、Stealing-Machine-Learning-Models-via-Prediction-APIs-paper-code"><span class="nav-number">6.8.</span> <span class="nav-text">8、Stealing Machine Learning Models via Prediction APIs[paper][code]</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GAN和对抗样本"><span class="nav-number">7.</span> <span class="nav-text">GAN和对抗样本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、2017-APE-GAN-Adversarial-Perturbation-Elimination-with-GAN-ArXiv-code"><span class="nav-number">7.1.</span> <span class="nav-text">1、2017-APE-GAN : Adversarial Perturbation Elimination with　GAN[ArXiv][code]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、2017-Generative-Adversarial-Trainer-Defense-to-Adversarial-Perturbations-with-GAN-ArXiv"><span class="nav-number">7.2.</span> <span class="nav-text">2、2017-Generative Adversarial Trainer : Defense to Adversarial Perturbations with GAN[ArXiv]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#３、2017-Generating-Adversarial-Malware-Examples-for-Black-Box-Attacks-Based-on-GAN-ArXiv"><span class="nav-number">7.3.</span> <span class="nav-text">３、2017-Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN[ArXiv]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#４、2017-Adversarial-examples-for-generative-models-ArXiv"><span class="nav-number">7.4.</span> <span class="nav-text">４、2017-Adversarial examples for generative models[ArXiv]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、Generative-Poisoning-Attack-Method-Against-Neural-Networks-ArXiv"><span class="nav-number">7.5.</span> <span class="nav-text">5、Generative Poisoning Attack Method Against Neural Networks[ArXiv]</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博士论文"><span class="nav-number">8.</span> <span class="nav-text">博士论文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ON-THE-INTEGRITY-OF-DEEP-LEARNING-SYSTEMS-IN-ADVERSARIAL-SETTINGS"><span class="nav-number">8.1.</span> <span class="nav-text">ON THE INTEGRITY OF DEEP LEARNING SYSTEMS IN ADVERSARIAL SETTINGS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Segmentation-amp-Object-Detection"><span class="nav-number">9.</span> <span class="nav-text">Segmentation & Object Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Visual-Question-Answering-VQA）"><span class="nav-number">10.</span> <span class="nav-text">Visual Question Answering (VQA）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景"><span class="nav-number">11.</span> <span class="nav-text">应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#软件及应用"><span class="nav-number">11.1.</span> <span class="nav-text">软件及应用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">WeiXiangYu</span>
+  <br/>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("83okXLCNivJlkVOwUJeUnyLO-gzGzoHsz", "2HD2Pm5DF4IGQImRKGIlClwK");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
