@@ -1,0 +1,1585 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="软件安装,python," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="np.where()带一个星号（*）参数的函数传人的参数存储为一个元组（tuple）； 而带两个星号（*）参数的函数传人的参数则存储为一个字典（dict）">
+<meta name="keywords" content="软件安装,python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python小知识">
+<meta property="og:url" content="http://xiangyuwei.github.io/2017/12/04/python小知识/index.html">
+<meta property="og:site_name" content="就和今天说早安">
+<meta property="og:description" content="np.where()带一个星号（*）参数的函数传人的参数存储为一个元组（tuple）； 而带两个星号（*）参数的函数传人的参数则存储为一个字典（dict）">
+<meta property="og:updated_time" content="2018-07-02T09:31:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python小知识">
+<meta name="twitter:description" content="np.where()带一个星号（*）参数的函数传人的参数存储为一个元组（tuple）； 而带两个星号（*）参数的函数传人的参数则存储为一个字典（dict）">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xiangyuwei.github.io/2017/12/04/python小知识/"/>
+
+
+
+
+
+  <title>python小知识 | 就和今天说早安</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4bacbbd8913214b562621e17552a2067";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+
+
+
+
+</head>
+
+     <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("83okXLCNivJlkVOwUJeUnyLO-gzGzoHsz", "2HD2Pm5DF4IGQImRKGIlClwK");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = $(document.getElementById(url)).text() + ': 0';
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = $(document.getElementById(url)).text() + ': ' + object.get('time');
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+	});
+}
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = $(document.getElementById(url)).text() + ': ' + counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = $(document.getElementById(url)).text() + ': ' + newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+});
+</script>
+  
+
+  
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">就和今天说早安</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2017/12/04/python小知识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python小知识</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-04T22:40:17+08:00">
+                2017-12-04
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-07-02T17:31:59+08:00">
+                2018-07-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/04/python小知识/" class="leancloud_visitors" data-flag-title="python小知识">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2,174 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  10 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="np-where"><a href="#np-where" class="headerlink" title="np.where()"></a>np.where()</h2><p>带一个星号（*）参数的函数传人的参数存储为一个元组（tuple）；</p>
+<p>而带两个星号（*）参数的函数传人的参数则存储为一个字典（dict）</p>
+<a id="more"></a>
+<pre><code>np.where()[0] 表示行的索引，
+np.where()[1] 则表示列的索引
+</code></pre><p>shape函数是numpy.core.fromnumeric中的函数，它的功能是读取矩阵的长度，比如shape[0]就是读取矩阵第一维度的长度</p>
+<h2 id="pycharm-配置"><a href="#pycharm-配置" class="headerlink" title="pycharm 配置"></a>pycharm 配置</h2><p>一、在PyCharm下为你的Python项目配置Python解释器</p>
+<p>　　　　1、Settings–》Editor–》Project：当前项目名–》Project Interpreter–》Add Local</p>
+<p>二、在Python下创建Python文件、Python模块</p>
+<p>　　　　1、File–》New–》Python File</p>
+<p>　　　　2、File–》New–》Python Package</p>
+<p>三、使用PyCharm安装Python第三方模块</p>
+<p>　　　　1、Settings–》Editor–》Project：当前项目名–》Project Interpreter–》点击右侧绿色加号</p>
+<p>四、Python基本设置</p>
+<p>　　　　1、不使用Tab，Tab=4空格：Editor–》Code Style–》Python–》Tabs and Indents页签</p>
+<p>　　　　2、字体、字体颜色：           Editor–》Colors &amp; Fonts–》Font/Language Defaults/Python</p>
+<p>　　　　3、关闭自动更新：              Editor–》Appearance &amp; Behavior–》System Settings–》Updates</p>
+<p>　　　　4、脚本头设置：                 Editor–》Code Style–》File and Code Templates–》Python Script</p>
+<p>　　　　5、显示行号：  　　　　　　 Editor–》General–》Appearance–》Show line numbers</p>
+<p>　　　　6、右侧竖线是PEP8的代码规范：提示一行不要超过120个字符。</p>
+<p>　　　　7、导出、导入你自定义的配置：File–》Export Settings、Import Settings</p>
+<p>五、常用快捷键</p>
+<p>　　　　 Editor–》Keymap</p>
+<p>　　　　1、Crtl + D ：复制当前行</p>
+<p>　　　　2、Ctrl + Y  ：删除当前行</p>
+<p>　　　　3、Shift + Enter ：快速换行</p>
+<p>　　　　4、Ctrl + / ：快速注释 （选中多行后可以批量注释）</p>
+<p>　　　　5、Tab ：缩进当前行 （选中多行后可以批量缩进）</p>
+<p>　　　　6、Shift + Tab ：取消缩进 （选中多行后可以批量取消缩进）</p>
+<p>　　　　7、Ctrl + F ：查找</p>
+<p>　　　　8、Ctrl + R ：替换</p>
+<p>　　　　9、Ctrl + ] ：跳到行尾</p>
+<p>　　　　10、Ctrl + [：跳到行首</p>
+<p>　　六、PyCharm安装插件</p>
+<p>　　　　1、 Editor–》Plugins Editor–》Browse repositories –》Install</p>
+<p>　　七、Git配置</p>
+<p>　　　　1、Editor–》Version Control–》Git</p>
+<p>　　八、常用操作指南</p>
+<p>　　　　1、复制文件路径：左侧文件列表右键选中的文件–》Copy Path</p>
+<p>　　　　2、在文件管理器中打开：左侧文件列表右键选中的文件–》Show in Explorer</p>
+<p>　　　　3、快速定位：Ctrl + 某些內建模块之后，点击在原文件中展开</p>
+<p>　　　　　　Scroll from Source / Collapse All</p>
+<p>　　　　4、查看结构：IDE左侧边栏Structure查看当前项目的结构</p>
+<p>　　　　5、Tab批量换Space：Edit–》Convent Indents–》To Spaces/To Tobs</p>
+<p>　　　　6、TODO的使用：#TODO要做的事情</p>
+<p>　　　　7、把当前Tab页移到窗口右边（下边），方便对比：Tab页签右键–》Move to Right（Down）</p>
+<p>　　　　8、查看文件修改前后对比：文件中右键–》Local History</p>
+<p>　　　　9、IDE右下角一些有用的信息：当前光标在第几行的第几个字符/当前回车换行/当前编码类型/当前Git分支</p>
+<p> 　　　10、IDE右侧边栏–》DataBase</p>
+<p>　　九、PEP8代码规范</p>
+<p>　　　　1、单独一行的注释：# + 1空格 + 注释内容</p>
+<p>　　　　2、代码后跟着的注释：2空格 + # + 1空格 + 注释内容</p>
+<p>　　十、SSH Terminal Default encoding</p>
+<p>　　　　1、Editor–》Tools–》SSH Terminal–》Default encoding UTF-8</p>
+<p>　　十一、编码统一</p>
+<p>　　　　Editor–》File Encoding–》IDE Encoding 和 Project Encoding 编码统一 UTF-8</p>
+<h2 id="python中的字符数字之间的转换函数"><a href="#python中的字符数字之间的转换函数" class="headerlink" title="python中的字符数字之间的转换函数"></a>python中的字符数字之间的转换函数</h2><pre><code>int(x [,base ])         将x转换为一个整数    
+long(x [,base ])        将x转换为一个长整数    
+float(x )               将x转换到一个浮点数    
+</code></pre><p>complex(real [,imag ])  创建一个复数<br>str(x )                 将对象 x 转换为字符串<br>repr(x )                将对象 x 转换为表达式字符串<br>eval(str )              用来计算在字符串中的有效Python表达式,并返回一个对象<br>tuple(s )               将序列 s 转换为一个元组<br>list(s )                将序列 s 转换为一个列表<br>chr(x )                 将一个整数转换为一个字符<br>unichr(x )              将一个整数转换为Unicode字符<br>ord(x )                 将一个字符转换为它的整数值<br>hex(x )                 将一个整数转换为一个十六进制字符串<br>oct(x )                 将一个整数转换为一个八进制字符串   </p>
+<p>chr(65)=’A’<br>ord(‘A’)=65</p>
+<p>int(‘2’)=2;<br>str(2)=’2’</p>
+<h2 id="获取绝对路径，相对路径"><a href="#获取绝对路径，相对路径" class="headerlink" title="获取绝对路径，相对路径"></a>获取绝对路径，相对路径</h2><p>　　&gt;os.path.abspath(“文件名”)：</p>
+<p>显示的是一个文件的<a href="http://www.cnblogs.com/zhangqigao/p/5756704.html" target="_blank" rel="external">绝对路径</a></p>
+<blockquote>
+<p>os.path.dirname(“文件名”):</p>
+</blockquote>
+<p>显示的是一个文件的相对路径<br>os.getcwd()——获得当前工作的目录<br><a href="http://www.cnblogs.com/kaituorensheng/archive/2013/03/18/2965766.html" target="_blank" rel="external">os模块常用命令</a></p>
+<h3 id="文件和目录访问"><a href="#文件和目录访问" class="headerlink" title="文件和目录访问"></a><a href="http://blog.csdn.net/pipisorry/article/details/38964135" target="_blank" rel="external">文件和目录访问</a></h3><h2 id="函数中×和××的区别"><a href="#函数中×和××的区别" class="headerlink" title="函数中×和××的区别"></a>函数中×和××的区别</h2><ul>
+<li><p>函数接收参数为元组</p>
+<p>例如 </p>
+</li>
+</ul>
+<p>def myfun(*args): #相当于 def myfun(1,2,3)    ==&gt; args 就相当于（1,2,3）</p>
+<p>　　for a in args:</p>
+<p>　　　　print(a)</p>
+<p>** 表示函数接收参数为一个字典</p>
+<p>def myfun(**args) :#相当于 def myfun({a:1,b:2,c:3}) ==&gt;args 就相当于{a:1,b:2,c:3}</p>
+<p>　　for k,v in args:</p>
+<p>　　　　print(k,”:”,v)</p>
+<h2 id="查看帮助"><a href="#查看帮助" class="headerlink" title="查看帮助"></a><a href="http://blog.csdn.net/american199062/article/details/51444117" target="_blank" rel="external">查看帮助</a></h2><p>python中每个modul，每个class，每个def都是留有写doc的地方的，写没写是另一回事，可以用“对象名称.<strong>doc</strong>”查看。这是一个字符串，所以内容只能是字符串允许的内容。如果字符不足以满足说明需求，可能会加上web链接，或者专门的说明函数。</p>
+<p>你要查看的应该是<br>import scipy<br>print scipy.quiver.<strong>doc</strong></p>
+<p>或者<br>import scipy<br>print help(scipy.quiver)</p>
+<h2 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h2><p>import numpy as np<br>a=[1,2,3]<br>b=[4,5,6,7]<br>c=[8,9,10,11,12]<br>zz=zip(a,b,c)<br>print(zz)</p>
+<p>x,y,z=zip(*zz)<br>print(x)<br>print(y)<br>print(z)</p>
+<p>输出：<br>[(1, 4, 8), (2, 5, 9), (3, 6, 10)]<br>(1, 2, 3)<br>(4, 5, 6)<br>(8, 9, 10)</p>
+<p>unzip后的列表b和c的值都少了。<br><a href="https://blog.csdn.net/csdn15698845876/article/details/73411541" target="_blank" rel="external">https://blog.csdn.net/csdn15698845876/article/details/73411541</a></p>
+<h2 id="pd-cut"><a href="#pd-cut" class="headerlink" title="pd.cut"></a>pd.cut</h2><p><a href="https://blog.csdn.net/cbbing/article/details/50721468" target="_blank" rel="external">https://blog.csdn.net/cbbing/article/details/50721468</a></p>
+<h2 id="Python3pandas库transform"><a href="#Python3pandas库transform" class="headerlink" title="Python3pandas库transform"></a>Python3pandas库transform</h2><blockquote>
+<p>import pandas as pd<br>import numpy as np<br>A=np.array([[1,2,3,4,5],[2,1,1,2,2],[1,2,3,4,5],[2,1,1,2,2],[1,2,3,4,5]])<br>data=pd.DataFrame(A,index=[‘li’,’chen’,’wang’,’zhao’,’qian’],columns=[‘a’,’b’,’c’,’d’,’e’])<br>print(data)</p>
+</blockquote>
+<pre><code>a  b  c  d  e
+</code></pre><p>li    1  2  3  4  5<br>chen  2  1  1  2  2<br>wang  1  2  3  4  5<br>zhao  2  1  1  2  2<br>qian  1  2  3  4  5</p>
+<p>key=[‘ss’,’kk’,’kk’,’ss’,’ss’]  #给定index分组标记<br>print(data.groupby(key).mean())  #mean是按key做分组的列均值</p>
+<pre><code>a         b         c         d    e
+</code></pre><p>kk  1.500000  1.500000  2.000000  3.000000  3.5<br>ss  1.333333  1.666667  2.333333  3.333333  4.0</p>
+<p>data里每个元素位置的取值由transform函数的参数函数计算</p>
+<p>print(data.groupby(key).transform(np.mean))</p>
+<p>#data里每个位置元素取对应分组列的均值</p>
+<pre><code>a         b         c         d    e
+</code></pre><p>li    1.333333  1.666667  2.333333  3.333333  4.0<br>chen  1.500000  1.500000  2.000000  3.000000  3.5<br>wang  1.500000  1.500000  2.000000  3.000000  3.5<br>zhao  1.333333  1.666667  2.333333  3.333333  4.0<br>qian  1.333333  1.666667  2.333333  3.333333  4.0</p>
+<p>生成的tsf里，每个位置元素取值是data里“对应位置元素”按transform的“函数参数”运算（这里是’对应元素’减去’对应分组列的均值’）；x取值是data的每个位置元素，只不过x.mean中的mean方法作用范围由key决定</p>
+<blockquote>
+<p>my_transform = lambda x : x-x.mean()<br>tsf=data.groupby(key).transform(my_transform)<br>print(tsf)</p>
+</blockquote>
+<pre><code>a         b         c         d    e
+</code></pre><p>li   -0.333333  0.333333  0.666667  0.666667  1.0<br>chen  0.500000 -0.500000 -1.000000 -1.000000 -1.5<br>wang -0.500000  0.500000  1.000000  1.000000  1.5<br>zhao  0.666667 -0.666667 -1.333333 -1.333333 -2.0<br>qian -0.333333  0.333333  0.666667  0.666667  1.0<br><a href="https://blog.csdn.net/cymy001/article/details/78300775" target="_blank" rel="external">https://blog.csdn.net/cymy001/article/details/78300775</a></p>
+<h2 id="groupby-agg"><a href="#groupby-agg" class="headerlink" title="groupby+agg"></a>groupby+agg</h2><p>从0.20.1开始，pandas引入了agg函数，它提供基于列的聚合操作。而groupby可以看做是基于行，或者说index的聚合操作。</p>
+<p>从实现上看，groupby返回的是一个DataFrameGroupBy结构，这个结构必须调用聚合函数（如sum）之后，才会得到结构为Series的数据结果。<br>而agg是DataFrame的直接方法，返回的也是一个DataFrame。当然，很多功能用sum、mean等等也可以实现。但是agg更加简洁, 而且传给它的函数可以是字符串，也可以自定义，参数是column对应的子DataFrame<br><a href="https://segmentfault.com/a/1190000012394176" target="_blank" rel="external">https://segmentfault.com/a/1190000012394176</a></p>
+<h2 id="特征选择-feature-selection"><a href="#特征选择-feature-selection" class="headerlink" title="特征选择 (feature_selection)"></a>特征选择 (feature_selection)</h2><pre><code>特征是否发散：如果一个特征不发散，例如方差接近于0，也就是说样本在这个特征上基本上没有差异，这个特征对于样本的区分并没有什么用。
+特征与目标的相关性：这点比较显见，与目标相关性高的特征，应当优选选择。除移除低方差法外，本文介绍的其他方法均从相关性考虑。
+</code></pre><p><a href="https://www.cnblogs.com/stevenlk/p/6543628.html" target="_blank" rel="external">https://www.cnblogs.com/stevenlk/p/6543628.html</a></p>
+<h2 id="Bagging（Bootstrap-aggregating）、随机森林（random-forests）、AdaBoost"><a href="#Bagging（Bootstrap-aggregating）、随机森林（random-forests）、AdaBoost" class="headerlink" title="Bagging（Bootstrap aggregating）、随机森林（random forests）、AdaBoost"></a>Bagging（Bootstrap aggregating）、随机森林（random forests）、AdaBoost</h2><p><a href="https://blog.csdn.net/xlinsist/article/details/51475345" target="_blank" rel="external">https://blog.csdn.net/xlinsist/article/details/51475345</a></p>
+<h2 id="列-——-gt-索引"><a href="#列-——-gt-索引" class="headerlink" title="列 ——&gt; 索引"></a>列 ——&gt; 索引</h2><p>df.set_index(‘date’)<br>df.set_index(‘date’, inplace=True) # column 改为 index</p>
+<h2 id="索引-——-gt-列"><a href="#索引-——-gt-列" class="headerlink" title="索引 ——&gt; 列"></a>索引 ——&gt; 列</h2><p>df[‘index’] = df.index<br>df.reset_index(level=0, inplace=True)<br>df.reset_index(level=[‘tick’, ‘obs’])</p>
+<h2 id="loc——通过行标签索引行数据"><a href="#loc——通过行标签索引行数据" class="headerlink" title="loc——通过行标签索引行数据"></a>loc——通过行标签索引行数据</h2><p>loc扩展——索引某列</p>
+<p>print df.loc[:,[‘c’]]</p>
+<p>iloc——通过行号获取行数据</p>
+<p>df[]直接索引</p>
+<pre><code>直接索引索引的是列，方口号里面的内容一般是列索引名。也可以接受一个列名组成的list来接受多个列名
+索引slice对象，索引的是行，df[0:1]
+</code></pre><p><a href="http://www.cnblogs.com/daozhongshu/archive/2018/04/30/8973439.html" target="_blank" rel="external">http://www.cnblogs.com/daozhongshu/archive/2018/04/30/8973439.html</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/path/wechat-reward-image" alt="WeiXiangYu WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/path/alipay-reward-image" alt="WeiXiangYu Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/软件安装/" rel="tag"># 软件安装</a>
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/04/One pixel attack for fooling deep neural networks Jiawei/" rel="next" title="One pixel attack for fooling deep neural networks Jiawei">
+                <i class="fa fa-chevron-left"></i> One pixel attack for fooling deep neural networks Jiawei
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/04/Ubuntu使用/" rel="prev" title="Ubuntu使用">
+                Ubuntu使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar.jpg"
+               alt="WeiXiangYu" />
+          <p class="site-author-name" itemprop="name">WeiXiangYu</p>
+           
+              <p class="site-description motion-element" itemprop="description">胸怀猛虎 细嗅蔷薇</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/xiangyuwei" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/aiyuziyou520" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://youtube.com/" target="_blank" title="Youtube">
+                  
+                    <i class="fa fa-fw fa-youtube"></i>
+                  
+                  Youtube
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/68759000" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-douban"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/wei-shao-54" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-zhihu"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://macshuo.com/" title="MacTalk" target="_blank">MacTalk</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://weibo.com/1402400261/" title="爱可可爱生活" target="_blank">爱可可爱生活</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#np-where"><span class="nav-number">1.</span> <span class="nav-text">np.where()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pycharm-配置"><span class="nav-number">2.</span> <span class="nav-text">pycharm 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python中的字符数字之间的转换函数"><span class="nav-number">3.</span> <span class="nav-text">python中的字符数字之间的转换函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取绝对路径，相对路径"><span class="nav-number">4.</span> <span class="nav-text">获取绝对路径，相对路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件和目录访问"><span class="nav-number">4.1.</span> <span class="nav-text">文件和目录访问</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数中×和××的区别"><span class="nav-number">5.</span> <span class="nav-text">函数中×和××的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看帮助"><span class="nav-number">6.</span> <span class="nav-text">查看帮助</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zip"><span class="nav-number">7.</span> <span class="nav-text">zip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pd-cut"><span class="nav-number">8.</span> <span class="nav-text">pd.cut</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python3pandas库transform"><span class="nav-number">9.</span> <span class="nav-text">Python3pandas库transform</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groupby-agg"><span class="nav-number">10.</span> <span class="nav-text">groupby+agg</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特征选择-feature-selection"><span class="nav-number">11.</span> <span class="nav-text">特征选择 (feature_selection)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bagging（Bootstrap-aggregating）、随机森林（random-forests）、AdaBoost"><span class="nav-number">12.</span> <span class="nav-text">Bagging（Bootstrap aggregating）、随机森林（random forests）、AdaBoost</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列-——-gt-索引"><span class="nav-number">13.</span> <span class="nav-text">列 ——> 索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引-——-gt-列"><span class="nav-number">14.</span> <span class="nav-text">索引 ——> 列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loc——通过行标签索引行数据"><span class="nav-number">15.</span> <span class="nav-text">loc——通过行标签索引行数据</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">WeiXiangYu</span>
+  <br/>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("83okXLCNivJlkVOwUJeUnyLO-gzGzoHsz", "2HD2Pm5DF4IGQImRKGIlClwK");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
