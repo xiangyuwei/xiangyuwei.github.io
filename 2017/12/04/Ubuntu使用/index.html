@@ -100,7 +100,7 @@
 <meta property="og:url" content="http://xiangyuwei.github.io/2017/12/04/Ubuntu使用/index.html">
 <meta property="og:site_name" content="就和今天说早安">
 <meta property="og:description" content="CTRL+h  显示隐藏文件ctrl+win +D 显示桌面长按ｗｉｎ  显示快捷键 /usr是Unix Software Rrsources的意思，相当于windows的C盘的，C:\Windows\和C:\Program Files的结合体。 ls /usr可以得到：bin include lib share local 等等。 其中share就是安装后的文件，文件夹所在位置 而local是第">
-<meta property="og:updated_time" content="2018-06-08T08:55:46.000Z">
+<meta property="og:updated_time" content="2018-09-04T07:45:45.195Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu使用">
 <meta name="twitter:description" content="CTRL+h  显示隐藏文件ctrl+win +D 显示桌面长按ｗｉｎ  显示快捷键 /usr是Unix Software Rrsources的意思，相当于windows的C盘的，C:\Windows\和C:\Program Files的结合体。 ls /usr可以得到：bin include lib share local 等等。 其中share就是安装后的文件，文件夹所在位置 而local是第">
@@ -458,8 +458,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-06-08T16:55:46+08:00">
-                2018-06-08
+              <time title="更新于" itemprop="dateModified" datetime="2018-09-04T15:45:45+08:00">
+                2018-09-04
               </time>
             
           </span>
@@ -519,7 +519,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  329 字
+                  372 字
                 </span>
               
 
@@ -572,6 +572,8 @@ $(function() {
 <h3 id="不能上网"><a href="#不能上网" class="headerlink" title="不能上网"></a>不能上网</h3><p>sudo gedit /etc/network/interfaces<br>添加如下内容：<br>auto enp2s0（网卡ifconfig　查看）<br>iface enp2s0 inet static<br>address 10.0.0.156<br>netmask 255.255.255.0<br>gateway 10.0.0.1<br>dns-nameserver 202.112.144.236</p>
 <p>sudo gedit /etc/network/interfaces</p>
 <h2 id="DNS-问题导致不能上网"><a href="#DNS-问题导致不能上网" class="headerlink" title="DNS 问题导致不能上网"></a>DNS 问题导致不能上网</h2><p>sudo gedit /etc/resolv.conf<br>插入　nameserver 202.112.144.236</p>
+<h2 id="var-tmp-文件过大，磁盘空间满"><a href="#var-tmp-文件过大，磁盘空间满" class="headerlink" title="var/tmp 文件过大，磁盘空间满"></a>var/tmp 文件过大，磁盘空间满</h2><p>mkinitramfs× 此类文件过多<br>用rm -rf mkinitramfs* 删除</p>
+<p><a href="http://forum.ubuntu.org.cn/viewtopic.php?p=3189497" target="_blank" rel="external">http://forum.ubuntu.org.cn/viewtopic.php?p=3189497</a><br>lsof看看有没有正在使用</p>
 
       
     </div>
@@ -645,8 +647,8 @@ $(function() {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/04/udacity 知识点/" rel="prev" title="udacity知识点">
-                udacity知识点 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/04/Robust Physical-World Attacks on Machine Learning Models/" rel="prev" title="Robust Physical-World Attacks on Machine Learning Models">
+                Robust Physical-World Attacks on Machine Learning Models <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -719,7 +721,7 @@ $(function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">55</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -730,7 +732,7 @@ $(function() {
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -741,7 +743,7 @@ $(function() {
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -850,7 +852,7 @@ $(function() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#中文输入法不能用"><span class="nav-number">1.</span> <span class="nav-text">中文输入法不能用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#wps"><span class="nav-number">1.1.</span> <span class="nav-text">wps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mendenley"><span class="nav-number">1.2.</span> <span class="nav-text">mendenley</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不能上网"><span class="nav-number">1.3.</span> <span class="nav-text">不能上网</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS-问题导致不能上网"><span class="nav-number">2.</span> <span class="nav-text">DNS 问题导致不能上网</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#中文输入法不能用"><span class="nav-number">1.</span> <span class="nav-text">中文输入法不能用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#wps"><span class="nav-number">1.1.</span> <span class="nav-text">wps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mendenley"><span class="nav-number">1.2.</span> <span class="nav-text">mendenley</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不能上网"><span class="nav-number">1.3.</span> <span class="nav-text">不能上网</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS-问题导致不能上网"><span class="nav-number">2.</span> <span class="nav-text">DNS 问题导致不能上网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var-tmp-文件过大，磁盘空间满"><span class="nav-number">3.</span> <span class="nav-text">var/tmp 文件过大，磁盘空间满</span></a></li></ol></div>
             
 
           </div>

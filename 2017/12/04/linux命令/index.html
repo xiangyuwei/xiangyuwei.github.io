@@ -100,7 +100,7 @@
 <meta property="og:url" content="http://xiangyuwei.github.io/2017/12/04/linux命令/index.html">
 <meta property="og:site_name" content="就和今天说早安">
 <meta property="og:description" content="后台运行在应用Unix/Linux时，我们一般想让某个程序在后台运行，于是我们将常会用 &amp;amp; 在程序结尾来让程序自动运行。比如我们要运行mysql在后台： /usr/local/mysql/bin/mysqld_safe –user=mysql &amp;amp;。可是有很多程序并不想mysqld一样，这样我们就需要nohup命令，怎样使用nohup命令呢？这里讲解nohup命令的一些用法。">
-<meta property="og:updated_time" content="2018-07-12T12:45:21.000Z">
+<meta property="og:updated_time" content="2018-09-04T07:05:27.354Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux 命令">
 <meta name="twitter:description" content="后台运行在应用Unix/Linux时，我们一般想让某个程序在后台运行，于是我们将常会用 &amp;amp; 在程序结尾来让程序自动运行。比如我们要运行mysql在后台： /usr/local/mysql/bin/mysqld_safe –user=mysql &amp;amp;。可是有很多程序并不想mysqld一样，这样我们就需要nohup命令，怎样使用nohup命令呢？这里讲解nohup命令的一些用法。">
@@ -458,8 +458,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-07-12T20:45:21+08:00">
-                2018-07-12
+              <time title="更新于" itemprop="dateModified" datetime="2018-09-04T15:05:27+08:00">
+                2018-09-04
               </time>
             
           </span>
@@ -519,7 +519,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  6,275 字
+                  6,597 字
                 </span>
               
 
@@ -535,7 +535,7 @@ $(function() {
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  24 分钟
+                  26 分钟
                 </span>
               
             </div>
@@ -661,7 +661,26 @@ rm -i /test/file1
 <h2 id="重复执行历史命令"><a href="#重复执行历史命令" class="headerlink" title="重复执行历史命令"></a>重复执行历史命令</h2><p>history 查看历史命令</p>
 <p>例如：！255</p>
 <h2 id="查看文件大小"><a href="#查看文件大小" class="headerlink" title="查看文件大小"></a>查看文件大小</h2><p>file ##.png<br>identify ##.jpg</p>
-<h2 id="密钥环"><a href="#密钥环" class="headerlink" title="密钥环"></a>密钥环</h2><p>密钥环是存放保存密码的地方，以明文的方式，需要装系统时设置的密钥进行解锁<br>忘记登录密钥，在启动界面，进入高级选项，修复模式，ｒｏｏｔ下修改密码，passwd XXX  然后reboot<br><a href="http://people.ubuntu.com/~happyaron/ubuntu-docs/precise-html/user-forgottenpassword.html" target="_blank" rel="external">参考官方文档</a></p>
+<h2 id="最大的前10个文件"><a href="#最大的前10个文件" class="headerlink" title="最大的前10个文件"></a>最大的前10个文件</h2><p>find / -type f -exec du -Sh {} + | sort -rh | head -n 10<br><a href="https://linux.cn/article-9495-1.html?pr" target="_blank" rel="external">https://linux.cn/article-9495-1.html?pr</a></p>
+<pre><code>find：在目录结构中搜索文件的命令
+/：在整个系统（从根目录开始）中查找
+-type：指定文件类型
+    f：普通文件
+-print0：输出完整的文件名，其后跟一个空字符（null）
+|：控制操作符，将一条命令的输出传递给下一个命令以供进一步处理
+xargs：将标准输入转换成命令行参数的命令
+-0：以空字符（null）而不是空白字符来分割记录
+du：计算文件占用的磁盘空间的命令
+sort：对文本文件进行按行排序的命令
+-n：根据数字大小进行比较
+tail -10：输出文件结尾部分的命令（最后 10 个文件）
+cut：从每行删除特定部分的命令
+-f2：只选择特定字段值
+-I{}：将初始参数中出现的每个替换字符串都替换为从标准输入读取的名称
+-s：仅显示每个参数的总和
+-h：用可读格式打印输出
+{}：递归地查找目录，统计每个文件占用的磁盘空间
+</code></pre><h2 id="密钥环"><a href="#密钥环" class="headerlink" title="密钥环"></a>密钥环</h2><p>密钥环是存放保存密码的地方，以明文的方式，需要装系统时设置的密钥进行解锁<br>忘记登录密钥，在启动界面，进入高级选项，修复模式，ｒｏｏｔ下修改密码，passwd XXX  然后reboot<br><a href="http://people.ubuntu.com/~happyaron/ubuntu-docs/precise-html/user-forgottenpassword.html" target="_blank" rel="external">参考官方文档</a></p>
 <blockquote>
 <p>seahorse 进入密钥环</p>
 </blockquote>
@@ -807,6 +826,8 @@ ps -aux | grep &quot;test.sh&quot;    #a:显示所有程序  u:以用户为主�
 <h2 id="ps-aux"><a href="#ps-aux" class="headerlink" title="ps aux"></a>ps aux</h2><p>显示其他用户启动的进程（a）<br>查看系统中属于自己的进程（x）<br>启动这个进程的用户和它启动的时间（u）</p>
 <h2 id="pts"><a href="#pts" class="headerlink" title="pts"></a>pts</h2><p>虚拟终端</p>
 <p>##scp XXX.txt XXX@192.168.1.50:/home/XXX/data<br>内网ip而不是路由器ip</p>
+<h2 id="查看文件大小-1"><a href="#查看文件大小-1" class="headerlink" title="查看文件大小"></a>查看文件大小</h2><p>du -h –max-depth=1 /home</p>
+<p><a href="https://www.cnblogs.com/lixuwu/p/5944062.html" target="_blank" rel="external">https://www.cnblogs.com/lixuwu/p/5944062.html</a></p>
 
       
     </div>
@@ -872,8 +893,8 @@ ps -aux | grep &quot;test.sh&quot;    #a:显示所有程序  u:以用户为主�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/04/One pixel attack for fooling deep neural networks Jiawei/" rel="next" title="One pixel attack for fooling deep neural networks Jiawei">
-                <i class="fa fa-chevron-left"></i> One pixel attack for fooling deep neural networks Jiawei
+              <a href="/2017/12/04/jupyter notebook 安装/" rel="next" title="anaconda+jupyter notebook安装">
+                <i class="fa fa-chevron-left"></i> anaconda+jupyter notebook安装
               </a>
             
           </div>
@@ -882,8 +903,8 @@ ps -aux | grep &quot;test.sh&quot;    #a:显示所有程序  u:以用户为主�
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/04/Linux 有趣命令/" rel="prev" title="没想到你是这样的Linux | 终端下有趣的命令合集">
-                没想到你是这样的Linux | 终端下有趣的命令合集 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/04/DELVING INTO TRANSFERABLE ADVERSARIAL EX- AMPLES AND BLACK-BOX ATTACKS/" rel="prev" title="DELVING INTO TRANSFERABLE ADVERSARIAL EX- AMPLES AND BLACK-BOX ATTACKS">
+                DELVING INTO TRANSFERABLE ADVERSARIAL EX- AMPLES AND BLACK-BOX ATTACKS <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -956,7 +977,7 @@ ps -aux | grep &quot;test.sh&quot;    #a:显示所有程序  u:以用户为主�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">55</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -967,7 +988,7 @@ ps -aux | grep &quot;test.sh&quot;    #a:显示所有程序  u:以用户为主�
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -978,7 +999,7 @@ ps -aux | grep &quot;test.sh&quot;    #a:显示所有程序  u:以用户为主�
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1087,7 +1108,7 @@ ps -aux | grep &quot;test.sh&quot;    #a:显示所有程序  u:以用户为主�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#后台运行"><span class="nav-number">1.</span> <span class="nav-text">后台运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RC版本"><span class="nav-number">2.</span> <span class="nav-text">RC版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件夹中文件或文件夹的个数"><span class="nav-number">3.</span> <span class="nav-text">查看文件夹中文件或文件夹的个数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改用户环境"><span class="nav-number">4.</span> <span class="nav-text">修改用户环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-profile"><span class="nav-number">4.1.</span> <span class="nav-text">/etc/profile:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-bashrc："><span class="nav-number">4.2.</span> <span class="nav-text">etc/bashrc：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bashrc"><span class="nav-number">4.3.</span> <span class="nav-text">~/.bashrc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux下文件的复制、移动与删除"><span class="nav-number">5.</span> <span class="nav-text">linux下文件的复制、移动与删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件复制命令cp"><span class="nav-number">5.1.</span> <span class="nav-text">文件复制命令cp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件移动命令mv"><span class="nav-number">5.2.</span> <span class="nav-text">文件移动命令mv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件删除命令rm"><span class="nav-number">5.3.</span> <span class="nav-text">文件删除命令rm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除文件夹"><span class="nav-number">5.4.</span> <span class="nav-text">删除文件夹</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用awk命令获取文本的某一行-某一列"><span class="nav-number">6.</span> <span class="nav-text">使用awk命令获取文本的某一行,某一列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#du命令也是查看使用空间的，但是与df命令不同的是Linux-du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的"><span class="nav-number">7.</span> <span class="nav-text">du命令也是查看使用空间的，但是与df命令不同的是Linux du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建文件，文件夹"><span class="nav-number">8.</span> <span class="nav-text">创建文件，文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显卡信息查看"><span class="nav-number">9.</span> <span class="nav-text">显卡信息查看</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何查看GPU信息"><span class="nav-number">9.1.</span> <span class="nav-text">如何查看GPU信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scp"><span class="nav-number">10.</span> <span class="nav-text">scp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上传文件"><span class="nav-number">10.1.</span> <span class="nav-text">上传文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传目录到服务器"><span class="nav-number">10.2.</span> <span class="nav-text">上传目录到服务器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看磁盘信息。-boot空间不足"><span class="nav-number">11.</span> <span class="nav-text">查看磁盘信息。/boot空间不足</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nohup-no-hang-up"><span class="nav-number">12.</span> <span class="nav-text">nohup(no hang up)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看守护进程"><span class="nav-number">13.</span> <span class="nav-text">查看守护进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后台进程"><span class="nav-number">14.</span> <span class="nav-text">后台进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dpkg：处理-smbclient-–configure-时出错："><span class="nav-number">15.</span> <span class="nav-text">dpkg：处理 smbclient (–configure)时出错：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重复执行历史命令"><span class="nav-number">16.</span> <span class="nav-text">重复执行历史命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件大小"><span class="nav-number">17.</span> <span class="nav-text">查看文件大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密钥环"><span class="nav-number">18.</span> <span class="nav-text">密钥环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bash快捷键"><span class="nav-number">19.</span> <span class="nav-text">bash快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#压缩文件"><span class="nav-number">20.</span> <span class="nav-text">压缩文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地共享"><span class="nav-number">21.</span> <span class="nav-text">本地共享</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tail"><span class="nav-number">22.</span> <span class="nav-text">tail</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#more"><span class="nav-number">23.</span> <span class="nav-text">more</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-终端复用神器Tmux"><span class="nav-number">24.</span> <span class="nav-text">Linux 终端复用神器Tmux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pychram-配置代码到服务器时map中服务器是新建文件夹名字，与connnection中的路径连起来才是完整路径名"><span class="nav-number">25.</span> <span class="nav-text">pychram 配置代码到服务器时ｍａｐ中服务器是新建文件夹名字，与ｃｏｎｎｎｅｃｔｉｏｎ中的路径连起来才是完整路径名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#winscp类似的软件Fillzilla"><span class="nav-number">26.</span> <span class="nav-text">winscp类似的软件Fillzilla</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看图片命令eog"><span class="nav-number">27.</span> <span class="nav-text">查看图片命令eog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关机"><span class="nav-number">28.</span> <span class="nav-text">关机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在当前目录下找出占用空间最大的前10大文件"><span class="nav-number">29.</span> <span class="nav-text">在当前目录下找出占用空间最大的前10大文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux系统下-var空间不足的解决办法"><span class="nav-number">30.</span> <span class="nav-text">linux系统下/var空间不足的解决办法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件末尾星号"><span class="nav-number">31.</span> <span class="nav-text">文件末尾星号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并压缩文件"><span class="nav-number">32.</span> <span class="nav-text">合并压缩文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#md5值校验"><span class="nav-number">33.</span> <span class="nav-text">md5值校验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加用户"><span class="nav-number">34.</span> <span class="nav-text">添加用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#adduser-tommy"><span class="nav-number">34.1.</span> <span class="nav-text">adduser tommy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Allows-people-in-group-wheel-to-run-all-commands"><span class="nav-number">34.2.</span> <span class="nav-text">Allows people in group wheel to run all commands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#usermod-g-root-tommy"><span class="nav-number">34.3.</span> <span class="nav-text">usermod -g root tommy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Allow-root-to-run-any-commands-anywhere"><span class="nav-number">34.4.</span> <span class="nav-text">Allow root to run any commands anywhere</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按时间顺序查看文件"><span class="nav-number">35.</span> <span class="nav-text">按时间顺序查看文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#以上均可使用-r实现逆序排序"><span class="nav-number"></span> <span class="nav-text">以上均可使用-r实现逆序排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#后台命令"><span class="nav-number">1.</span> <span class="nav-text">后台命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存"><span class="nav-number">2.</span> <span class="nav-text">内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ps-aux"><span class="nav-number">3.</span> <span class="nav-text">ps aux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pts"><span class="nav-number">4.</span> <span class="nav-text">pts</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#后台运行"><span class="nav-number">1.</span> <span class="nav-text">后台运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RC版本"><span class="nav-number">2.</span> <span class="nav-text">RC版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件夹中文件或文件夹的个数"><span class="nav-number">3.</span> <span class="nav-text">查看文件夹中文件或文件夹的个数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改用户环境"><span class="nav-number">4.</span> <span class="nav-text">修改用户环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-profile"><span class="nav-number">4.1.</span> <span class="nav-text">/etc/profile:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-bashrc："><span class="nav-number">4.2.</span> <span class="nav-text">etc/bashrc：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bashrc"><span class="nav-number">4.3.</span> <span class="nav-text">~/.bashrc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux下文件的复制、移动与删除"><span class="nav-number">5.</span> <span class="nav-text">linux下文件的复制、移动与删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件复制命令cp"><span class="nav-number">5.1.</span> <span class="nav-text">文件复制命令cp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件移动命令mv"><span class="nav-number">5.2.</span> <span class="nav-text">文件移动命令mv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件删除命令rm"><span class="nav-number">5.3.</span> <span class="nav-text">文件删除命令rm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除文件夹"><span class="nav-number">5.4.</span> <span class="nav-text">删除文件夹</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用awk命令获取文本的某一行-某一列"><span class="nav-number">6.</span> <span class="nav-text">使用awk命令获取文本的某一行,某一列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#du命令也是查看使用空间的，但是与df命令不同的是Linux-du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的"><span class="nav-number">7.</span> <span class="nav-text">du命令也是查看使用空间的，但是与df命令不同的是Linux du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建文件，文件夹"><span class="nav-number">8.</span> <span class="nav-text">创建文件，文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显卡信息查看"><span class="nav-number">9.</span> <span class="nav-text">显卡信息查看</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何查看GPU信息"><span class="nav-number">9.1.</span> <span class="nav-text">如何查看GPU信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scp"><span class="nav-number">10.</span> <span class="nav-text">scp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上传文件"><span class="nav-number">10.1.</span> <span class="nav-text">上传文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传目录到服务器"><span class="nav-number">10.2.</span> <span class="nav-text">上传目录到服务器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看磁盘信息。-boot空间不足"><span class="nav-number">11.</span> <span class="nav-text">查看磁盘信息。/boot空间不足</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nohup-no-hang-up"><span class="nav-number">12.</span> <span class="nav-text">nohup(no hang up)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看守护进程"><span class="nav-number">13.</span> <span class="nav-text">查看守护进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后台进程"><span class="nav-number">14.</span> <span class="nav-text">后台进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dpkg：处理-smbclient-–configure-时出错："><span class="nav-number">15.</span> <span class="nav-text">dpkg：处理 smbclient (–configure)时出错：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重复执行历史命令"><span class="nav-number">16.</span> <span class="nav-text">重复执行历史命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件大小"><span class="nav-number">17.</span> <span class="nav-text">查看文件大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最大的前10个文件"><span class="nav-number">18.</span> <span class="nav-text">最大的前10个文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密钥环"><span class="nav-number">19.</span> <span class="nav-text">密钥环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bash快捷键"><span class="nav-number">20.</span> <span class="nav-text">bash快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#压缩文件"><span class="nav-number">21.</span> <span class="nav-text">压缩文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地共享"><span class="nav-number">22.</span> <span class="nav-text">本地共享</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tail"><span class="nav-number">23.</span> <span class="nav-text">tail</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#more"><span class="nav-number">24.</span> <span class="nav-text">more</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-终端复用神器Tmux"><span class="nav-number">25.</span> <span class="nav-text">Linux 终端复用神器Tmux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pychram-配置代码到服务器时map中服务器是新建文件夹名字，与connnection中的路径连起来才是完整路径名"><span class="nav-number">26.</span> <span class="nav-text">pychram 配置代码到服务器时ｍａｐ中服务器是新建文件夹名字，与ｃｏｎｎｎｅｃｔｉｏｎ中的路径连起来才是完整路径名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#winscp类似的软件Fillzilla"><span class="nav-number">27.</span> <span class="nav-text">winscp类似的软件Fillzilla</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看图片命令eog"><span class="nav-number">28.</span> <span class="nav-text">查看图片命令eog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关机"><span class="nav-number">29.</span> <span class="nav-text">关机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在当前目录下找出占用空间最大的前10大文件"><span class="nav-number">30.</span> <span class="nav-text">在当前目录下找出占用空间最大的前10大文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux系统下-var空间不足的解决办法"><span class="nav-number">31.</span> <span class="nav-text">linux系统下/var空间不足的解决办法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件末尾星号"><span class="nav-number">32.</span> <span class="nav-text">文件末尾星号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并压缩文件"><span class="nav-number">33.</span> <span class="nav-text">合并压缩文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#md5值校验"><span class="nav-number">34.</span> <span class="nav-text">md5值校验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加用户"><span class="nav-number">35.</span> <span class="nav-text">添加用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#adduser-tommy"><span class="nav-number">35.1.</span> <span class="nav-text">adduser tommy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Allows-people-in-group-wheel-to-run-all-commands"><span class="nav-number">35.2.</span> <span class="nav-text">Allows people in group wheel to run all commands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#usermod-g-root-tommy"><span class="nav-number">35.3.</span> <span class="nav-text">usermod -g root tommy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Allow-root-to-run-any-commands-anywhere"><span class="nav-number">35.4.</span> <span class="nav-text">Allow root to run any commands anywhere</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按时间顺序查看文件"><span class="nav-number">36.</span> <span class="nav-text">按时间顺序查看文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#以上均可使用-r实现逆序排序"><span class="nav-number"></span> <span class="nav-text">以上均可使用-r实现逆序排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#后台命令"><span class="nav-number">1.</span> <span class="nav-text">后台命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存"><span class="nav-number">2.</span> <span class="nav-text">内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ps-aux"><span class="nav-number">3.</span> <span class="nav-text">ps aux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pts"><span class="nav-number">4.</span> <span class="nav-text">pts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件大小-1"><span class="nav-number">5.</span> <span class="nav-text">查看文件大小</span></a></li></ol></div>
             
 
           </div>
