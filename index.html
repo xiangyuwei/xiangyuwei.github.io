@@ -413,6 +413,1534 @@ $(function() {
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/10/27/mysql错误/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/27/mysql错误/" itemprop="url">mysql错误集及使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-27T13:02:51+08:00">
+                2018-10-27
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-27T13:02:51+08:00">
+                2018-10-27
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/27/mysql错误/" class="leancloud_visitors" data-flag-title="mysql错误集及使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  388 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1114-–-The-table-‘xxxx’is-full解决方法"><a href="#1114-–-The-table-‘xxxx’is-full解决方法" class="headerlink" title="1114 – The table ‘xxxx’is full解决方法"></a>1114 – The table ‘xxxx’is full解决方法</h2><p>ubuntu中mysql 的配置文件 my.cnf 的路径是/etc/mysql/my.cnf。<br>2、其它非debian系列的linux中mysql的配置文件my.cnf的路径一般是/etc/my.cnf。</p>
+<h2 id="ERROR-Export-data-to-file-‘Lost-connection-to-MySQL-server-during-query’-2013"><a href="#ERROR-Export-data-to-file-‘Lost-connection-to-MySQL-server-during-query’-2013" class="headerlink" title="ERROR: Export data to file: (‘Lost connection to MySQL server during query’, 2013"></a>ERROR: Export data to file: (‘Lost connection to MySQL server during query’, 2013</h2><p>MySQL workbench Q&amp;A找到原因，链接如下  <a href="https://dev.mysql.com/doc/workbench/en/workbench-faq.html#faq-workbench-error-lost-connection" target="_blank" rel="external">https://dev.mysql.com/doc/workbench/en/workbench-faq.html#faq-workbench-error-lost-connection</a></p>
+<p>Yes, go to ‘ edit ,Preferences, SQL Editor’, and adjust the DBMS connection read time out option that defaults to 600 seconds. This sets the maximum amount of time (in seconds) that a query can take before MySQL Workbench disconnects from the MySQL server.</p>
+<p>通过修改红色字体的值，并重启启动workbench 生效（一定要重启哦！）。</p>
+<h2 id="The-MySQL-server-is-running-with-the-–secure-file-priv-option"><a href="#The-MySQL-server-is-running-with-the-–secure-file-priv-option" class="headerlink" title="The MySQL server is running with the –secure-file-priv option"></a>The MySQL server is running with the –secure-file-priv option</h2><p>```<br>mysql -u -p<br>show variables like ‘%secure%’;查看 secure-file-priv 当前的值是什么<br>导出的数据必须是这个值的指定路径才可以导出，默认有可能是NULL就代表禁止导出，所以需要设置一下</p>
+<p>知道mysql安装路径下的my.ini文件，设置一下路径：<br>然后重启数据库即可</p>
+<h2 id="Error-executing-task-‘ascii’-codec-can’t-decode-byte-0xc4-in-position-32-ordinal-not-in-range-128"><a href="#Error-executing-task-‘ascii’-codec-can’t-decode-byte-0xc4-in-position-32-ordinal-not-in-range-128" class="headerlink" title="Error executing task: ‘ascii’ codec can’t decode byte 0xc4 in position 32: ordinal not in range(128)"></a>Error executing task: ‘ascii’ codec can’t decode byte 0xc4 in position 32: ordinal not in range(128)</h2><p>存储路径名不要有中文<br><a href="https://bbs.csdn.net/topics/390347030" target="_blank" rel="external">https://bbs.csdn.net/topics/390347030</a><br><a href="https://blog.csdn.net/ACMAIN_CHM/article/details/4174186" target="_blank" rel="external">https://blog.csdn.net/ACMAIN_CHM/article/details/4174186</a></p>
+<h2 id="mysql-导出csv"><a href="#mysql-导出csv" class="headerlink" title="mysql 导出csv"></a>mysql 导出csv</h2><p>命令行：<br>SELECT * FROM server_warning_repaired</p>
+<p>into outfile ‘/tmp/test.csv’<br><a href="https://my.oschina.net/u/2335552/blog/733185" target="_blank" rel="external">https://my.oschina.net/u/2335552/blog/733185</a></p>
+<p>mysql workbench:<br>表的右键有导出数据选项，但好像只能一张表一张表<br>整个数据库的导出是导出sql</p>
+<h2 id="查看端口"><a href="#查看端口" class="headerlink" title="查看端口"></a>查看端口</h2><p>终端mysql -uroot -ppasswd 进入<br>show global variables like ‘port’;查看端口号</p>
+<p><a href="https://blog.csdn.net/LANGZI7758521/article/details/51391932" target="_blank" rel="external">https://blog.csdn.net/LANGZI7758521/article/details/51391932</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/10/24/pandas 项目报错/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/24/pandas 项目报错/" itemprop="url">pandas使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-24T14:11:39+08:00">
+                2018-10-24
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-24T14:11:39+08:00">
+                2018-10-24
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/24/pandas 项目报错/" class="leancloud_visitors" data-flag-title="pandas使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  894 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  4 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>pandas.read_csv参数详解<br><a href="https://www.cnblogs.com/datablog/p/6127000.html" target="_blank" rel="external">https://www.cnblogs.com/datablog/p/6127000.html</a></p>
+<p>协同过滤<br><a href="https://blog.csdn.net/xiaokang123456kao/article/details/74735992" target="_blank" rel="external">https://blog.csdn.net/xiaokang123456kao/article/details/74735992</a></p>
+<h2 id="CParserError-Error-tokenizing-data"><a href="#CParserError-Error-tokenizing-data" class="headerlink" title="CParserError: Error tokenizing data"></a>CParserError: Error tokenizing data</h2><h2 id="python处理数据的风骚操作-pandas-之-groupby-amp-agg"><a href="#python处理数据的风骚操作-pandas-之-groupby-amp-agg" class="headerlink" title="python处理数据的风骚操作[pandas 之 groupby&amp;agg]"></a>python处理数据的风骚操作[pandas 之 groupby&amp;agg]</h2><p><a href="https://segmentfault.com/a/1190000012394176" target="_blank" rel="external">https://segmentfault.com/a/1190000012394176</a></p>
+<h2 id="特征选择-feature-selection"><a href="#特征选择-feature-selection" class="headerlink" title="特征选择 (feature_selection)"></a>特征选择 (feature_selection)</h2><pre><code>特征是否发散：如果一个特征不发散，例如方差接近于0，也就是说样本在这个特征上基本上没有差异，这个特征对于样本的区分并没有什么用。
+特征与目标的相关性：这点比较显见，与目标相关性高的特征，应当优选选择。除移除低方差法外，本文介绍的其他方法均从相关性考虑。
+</code></pre><p><a href="https://www.cnblogs.com/stevenlk/p/6543628.html" target="_blank" rel="external">https://www.cnblogs.com/stevenlk/p/6543628.html</a></p>
+<h2 id="Bagging（Bootstrap-aggregating）、随机森林（random-forests）、AdaBoost"><a href="#Bagging（Bootstrap-aggregating）、随机森林（random-forests）、AdaBoost" class="headerlink" title="Bagging（Bootstrap aggregating）、随机森林（random forests）、AdaBoost"></a>Bagging（Bootstrap aggregating）、随机森林（random forests）、AdaBoost</h2><p><a href="https://blog.csdn.net/xlinsist/article/details/51475345" target="_blank" rel="external">https://blog.csdn.net/xlinsist/article/details/51475345</a></p>
+<h2 id="特征转换"><a href="#特征转换" class="headerlink" title="特征转换"></a>特征转换</h2><p><a href="https://www.cnblogs.com/jasonfreak/p/5619260.html" target="_blank" rel="external">https://www.cnblogs.com/jasonfreak/p/5619260.html</a></p>
+<h2 id="GBDT原理及利用GBDT构造新的特征-Python实现"><a href="#GBDT原理及利用GBDT构造新的特征-Python实现" class="headerlink" title="GBDT原理及利用GBDT构造新的特征-Python实现"></a>GBDT原理及利用GBDT构造新的特征-Python实现</h2><p><a href="https://blog.csdn.net/shine19930820/article/details/71713680/" target="_blank" rel="external">https://blog.csdn.net/shine19930820/article/details/71713680/</a></p>
+<h2 id="推荐系统"><a href="#推荐系统" class="headerlink" title="推荐系统"></a>推荐系统</h2><p><a href="http://www.infoq.com/cn/articles/user-portrait-collaborative-filtering-for-recommend-systems" target="_blank" rel="external">http://www.infoq.com/cn/articles/user-portrait-collaborative-filtering-for-recommend-systems</a><br>一般来说推荐系统的特征体系由 3 个部分组成：用户特征、内容特征、上下文特征。</p>
+<p>用户特征：包括但不限于用户姓名、性别、年龄、注册时间、收货地址、常用区域等用户特征</p>
+<p>内容特征：包括但不限于以及商品、内容的标题分词、内容的 TF-IDF、内容来源、内容渠道、内容生产者等等</p>
+<p>那么上下文特征， 是代表用户当前时空状态、最近一段时间的行为抽象的特征。比如说用户当前的 GPS 坐标，大家可能觉得奇怪， GPS 坐标怎么用来推荐呢？其实很简单，地球一圈是 4 万公里，GPS 一圈是 360°，一度大概是 100 公开。如果我们把 GPS 坐标保存到小数点后一位，组合起来，这样的特征就是 10*10 公里的格子，这就代表了一个有泛化能力的用户的位置。</p>
+<h3 id="How-Feature-Engineering-can-help-you-do-well-in-a-Kaggle-competition"><a href="#How-Feature-Engineering-can-help-you-do-well-in-a-Kaggle-competition" class="headerlink" title="How Feature Engineering can help you do well in a Kaggle competition"></a>How Feature Engineering can help you do well in a Kaggle competition</h3><p><a href="https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-i-9cc9a883514d" target="_blank" rel="external">https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-i-9cc9a883514d</a><br><a href="https://jiasuhui.com/article/13888(翻译" target="_blank" rel="external">https://jiasuhui.com/article/13888(翻译</a>)</p>
+<h2 id="pandas模块进行数据分析"><a href="#pandas模块进行数据分析" class="headerlink" title="pandas模块进行数据分析"></a>pandas模块进行数据分析</h2><p><a href="https://www.cnblogs.com/nxld/p/6058591.html" target="_blank" rel="external">https://www.cnblogs.com/nxld/p/6058591.html</a><br><a href="https://blog.csdn.net/cbbing/article/details/50721468" target="_blank" rel="external">https://blog.csdn.net/cbbing/article/details/50721468</a></p>
+<h2 id="Model-selection原理"><a href="#Model-selection原理" class="headerlink" title="Model_selection原理"></a>Model_selection原理</h2><p><a href="https://blog.csdn.net/stranger_man/article/details/78886060" target="_blank" rel="external">https://blog.csdn.net/stranger_man/article/details/78886060</a><br><a href="https://blog.csdn.net/stranger_man/article/details/78376837" target="_blank" rel="external">https://blog.csdn.net/stranger_man/article/details/78376837</a><br>from sklearn.model_selection import cross_validate<br>from sklearn.metrics import recall_score</p>
+<p>#组合评估参数字典<br>scoring = [‘precision_macro’, ‘recall_macro’]<br>clf = svm.SVC(kernel=’linear’, C=1, random_state=0)</p>
+<p>###注意最后一个参数的用法，默认情况下是true返回训练的时间，使用时可以设置成False，因为返回的一般用不到。</p>
+<p>###scoring参数，如果多个参数则必须组合成字典结构。一个参数时则是字符串结构。也可以使用默认的f1-score。</p>
+<p>scores = cross_validate(clf, iris.data, iris.target, scoring=scoring,<br>                       cv=5, return_train_score=False)</p>
+<p>###建议以后自己用的时候也这样打印一下，方便自己的使用。</p>
+<p>sorted(scores.keys())<br>    [‘fit_time’, ‘score_time’, ‘test_precision_macro’, ‘test_recall_macro’]<br>scores[‘test_recall_macro’]<br>    array([ 0.96…,  1.  …,  0.96…,  0.96…,  1.        ])</p>
+<h2 id="python-合并（merge-concat-join-combine-first"><a href="#python-合并（merge-concat-join-combine-first" class="headerlink" title="python 合并（merge , concat , join , combine_first)"></a>python 合并（merge , concat , join , combine_first)</h2><p><a href="https://www.jianshu.com/p/baaf8c89c9e2" target="_blank" rel="external">https://www.jianshu.com/p/baaf8c89c9e2</a></p>
+<h2 id="互联网广告综述之点击率特征工程"><a href="#互联网广告综述之点击率特征工程" class="headerlink" title="互联网广告综述之点击率特征工程"></a>互联网广告综述之点击率特征工程</h2><p><a href="https://blog.csdn.net/yas12345678/article/details/52956085" target="_blank" rel="external">https://blog.csdn.net/yas12345678/article/details/52956085</a><br>CTR预估模型<br><a href="https://www.cnblogs.com/qcloud1001/p/7513982.html" target="_blank" rel="external">https://www.cnblogs.com/qcloud1001/p/7513982.html</a></p>
+<h2 id="plot是一种将所有列及其标签进行绘制的简便方法"><a href="#plot是一种将所有列及其标签进行绘制的简便方法" class="headerlink" title="plot是一种将所有列及其标签进行绘制的简便方法"></a>plot是一种将所有列及其标签进行绘制的简便方法</h2><h2 id="value-counts"><a href="#value-counts" class="headerlink" title="value_counts()"></a>value_counts()</h2><p>是一种查看表格某列中有多少个不同值的快捷方法，并计算每个不同值有在该列中有多少重复值。<br>value_counts()是Series拥有的方法，一般在DataFrame中使用时，需要指定对哪一列或行使用<br><a href="https://www.jianshu.com/p/f773b4b82c66" target="_blank" rel="external">https://www.jianshu.com/p/f773b4b82c66</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/10/20/10.20总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/20/10.20总结/" itemprop="url">18.10.20日前总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-20T15:09:16+08:00">
+                2018-10-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-20T15:09:15+08:00">
+                2018-10-20
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/20/10.20总结/" class="leancloud_visitors" data-flag-title="18.10.20日前总结">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  181 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>焦虑蔓延。所有的东西仿佛都蜻蜓点水，浅尝辄止。<br>由上网需要翻墙引起，很久之前爬过Twitter需要翻墙成功连上过，现在却死活连不上，以前的笔记也记得很混乱，导致自己怀疑是否做过笔记。<br>自从不再看深度学习的理论后，开始数据挖掘，爬过虫，看过快手的比赛，又看了一些论文，但脑子里任然觉得没留下什么让自己觉得踏实的会让自己毕业的东西。<br>人物刻画这个目标要怎么做到仍然是个未知数。<br>哎，我连自己都搞不懂，怎么能搞清楚一堆人呢。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/10/20/感兴趣研究点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/20/感兴趣研究点/" itemprop="url">感兴趣研究点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-20T15:09:12+08:00">
+                2018-10-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-20T15:09:12+08:00">
+                2018-10-20
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/20/感兴趣研究点/" class="leancloud_visitors" data-flag-title="感兴趣研究点">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  10 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>识别行人吵架预警视频</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/10/20/奇思妙想/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/20/奇思妙想/" itemprop="url">奇思妙想</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-20T15:05:46+08:00">
+                2018-10-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-20T15:05:46+08:00">
+                2018-10-20
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/20/奇思妙想/" class="leancloud_visitors" data-flag-title="奇思妙想">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  102 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.消息记录的发送时间，间隔所反映的心理活动<br>2.Attention在语义蕴涵 (Entailment) 中的应用</p>
+<p>给定一个用英文描述的前提和假设作为输入，输出假设与前提是否矛盾、是否相关或者是否成立</p>
+<p>前提：在一个婚礼派对上拍照</p>
+<p>假设：有人结婚了</p>
+<p>该例子中的假设是成立的</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/10/18/Ubuntu 系统软件安装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/18/Ubuntu 系统软件安装/" itemprop="url">Ubuntu 系统软件安装</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-18T21:30:51+08:00">
+                2018-10-18
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-18T21:30:51+08:00">
+                2018-10-18
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/18/Ubuntu 系统软件安装/" class="leancloud_visitors" data-flag-title="Ubuntu 系统软件安装">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  4,003 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  18 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>注意安装要在安装包目录下。</p>
+<h2 id="安装eclipse-pydev"><a href="#安装eclipse-pydev" class="headerlink" title="安装eclipse+pydev"></a>安装eclipse+pydev</h2><p><a href="http://www.cnblogs.com/restran/archive/2011/11/11/2245812.html" target="_blank" rel="external">教程</a></p>
+<h2 id="安装ss"><a href="#安装ss" class="headerlink" title="安装ss"></a>安装ss</h2><p>参考github上<a href="https://github.com/shadowsocks/shadowsocks-qt5/wiki/%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97" target="_blank" rel="external">内容</a>下载shadowsock</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo add-apt-repository ppa:hzwhuang/ss-qt5</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install shadowsocks-qt5</div></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/18/Ubuntu 系统软件安装/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/10/18/linux命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/18/linux命令/" itemprop="url">linux 命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-18T21:08:49+08:00">
+                2018-10-18
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-18T21:08:49+08:00">
+                2018-10-18
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/18/linux命令/" class="leancloud_visitors" data-flag-title="linux 命令">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  6,597 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  26 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="后台运行"><a href="#后台运行" class="headerlink" title="后台运行"></a>后台运行</h2><p>在应用Unix/Linux时，我们一般想让某个程序在后台运行，于是我们将常会用 &amp; 在程序结尾来让程序自动运行。比如我们要运行mysql在后台： /usr/local/mysql/bin/mysqld_safe –user=mysql &amp;。可是有很多程序并不想mysqld一样，这样我们就需要nohup命令，怎样使用nohup命令呢？这里讲解nohup命令的一些用法。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/18/linux命令/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/10/09/tmux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/09/tmux/" itemprop="url">tmux</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-09T15:41:32+08:00">
+                2018-10-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-09T15:41:32+08:00">
+                2018-10-09
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/09/tmux/" class="leancloud_visitors" data-flag-title="tmux">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2,134 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  9 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="tmux"><a href="#tmux" class="headerlink" title="tmux"></a>tmux</h2><p>tmux 中直接通过默认前缀 ctrl + b 之后输入对应命令来操作<br>    session 会话：session是一个特定的终端组合。输入tmux就可以打开一个新的session<br>        ‘tmux new -s session_name’ 创建一个叫做 session_name 的 tmux session<br>        ‘tmux attach -t session_name’ 重新开启叫做 session_name 的 tmux session<br>        tmux switch -t session_name 转换到叫做 session_name 的 tmux session<br>        tmux list-sessions / tmux ls 列出现有的所有 session<br>        ‘tmux detach’ 离开当前开启的 session<br>        tmux kill-server 关闭所有 session<br>    window 窗口：session 中可以有不同的 window（但是同时只能看到一个 window）<br>        tmux new-window 创建一个新的 window<br>        tmux list-windows<br>        tmux select-window -t :0-9 根据索引转到该 window<br>        tmux rename-window 重命名当前 window<br>    pane 面板：window 中可以有不同的 pane（可以把 window 分成不同的部分）<br>        tmux split-window 将 window 垂直划分为两个 pane<br>        tmux split-window -h 将 window 水平划分为两个 pane<br>        tmux swap-pane -[UDLR] 在指定的方向交换 pane<br>        tmux select-pane -[UDLR] 在指定的方向选择下一个 pane</p>
+<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><pre><code>? 列出所有快捷键；按q返回
+d 脱离当前会话,可暂时返回Shell界面
+s 选择并切换会话；在同时开启了多个会话时使用
+&apos;D 选择要脱离的会话；在同时开启了多个会话时使用&apos;
+: 进入命令行模式；此时可输入支持的命令，例如 kill-server 关闭所有tmux会话
+[ 复制模式，光标移动到复制内容位置，空格键开始，方向键选择复制，回车确认，q/Esc退出
+] 进入粘贴模式，粘贴之前复制的内容，按q/Esc退出
+~ 列出提示信息缓存；其中包含了之前tmux返回的各种提示信息
+t 显示当前的时间
+ctrl + z 挂起当前会话
+&apos;$ 重命名session&apos;
+</code></pre><h3 id="session"><a href="#session" class="headerlink" title="session"></a>session</h3><ol>
+<li>open session</li>
+</ol>
+<p>$ tmux new-session -s basic<br>或者<br>$ tmux new -s basic</p>
+<p>-s参数表示session名称，如果不加-s参数，那么Tmux默认会新建一个以数字(下标从0开始)命名的session，并默认打开一个window。打开一个session后，后续的所有控制Tmux本身的快捷键都需要加前缀，默认是 Ctrl+b ，以下把前缀按键称为Prefix。</p>
+<ol>
+<li>detach session<br>想要暂时离开Tmux，回到终端环境时，可以通过快捷键 Prefix+d (d for detach)。要注意的时，即使是detach的状态，Tmux中在运行的程序还会继续运行。想要回到Tmux session时，只需执行：</li>
+</ol>
+<p>$ tmux attach -t basic</p>
+<p>-t参数可以指定要attach的session。</p>
+<ol>
+<li><p>list session<br>终端中执行 tmux ls (ls for list session)可以列出当前有多少个session。如果已经在session中，执行 Prefix+s (s for session)可以列出当前有多少个session，并且可通过上、下键选择要进入的session。</p>
+</li>
+<li><p>kill session<br>要真正关闭一个session，可以在终端下执行命令 ‘tmux kill-session -t basic’ ，其中-t参数表示session名称。</p>
+</li>
+</ol>
+<p>###　窗口操作<br>c ‘创建新窗口’<br>&amp; ‘关闭当前窗口’<br>, ‘重命名当前窗口，便于识别’<br>. 修改当前窗口编号，相当于重新排序<br>f 在所有窗口中查找关键词，便于窗口多了切换<br>[0-9] 数字键切换到指定窗口<br>p 切换至上一窗口<br>n 切换至下一窗口<br>l 前后窗口间互相切换<br>w 通过窗口列表切换窗口</p>
+<h3 id="面板操作"><a href="#面板操作" class="headerlink" title="面板操作"></a>面板操作</h3><p>“ ‘将当前面板上下分屏’（我自己改成了 |）<br>% ‘将当前面板左右分屏’（我自己改成了 -）<br>x ‘关闭当前分屏’<br>Ctrl-方向键 ‘调整分隔窗口大小’<br>    ! 将当前面板置于新窗口,即新建一个窗口,其中仅包含当前面板<br>    ctrl+方向键 以1个单元格为单位移动边缘以调整当前面板大小<br>    alt+方向键 以5个单元格为单位移动边缘以调整当前面板大小<br>    q 显示面板编号<br>    o 选择当前窗口中下一个面板<br>    方向键 移动光标选择对应面板<br>    { 向前置换当前面板<br>    } 向后置换当前面板<br>    alt+o 逆时针旋转当前窗口的面板<br>    ctrl+o 顺时针旋转当前窗口的面板<br>    z 最大化当前所在面板<br>    page up 向上滚动屏幕，q 退出<br>    page down 向下滚动屏幕，q 退出<br>Prefix+Space (空格键): 对当前窗口下的所有pane重新排列布局，每按一次，换一种样式。<br>Prefix+z : 最大化当前pane。再按一次后恢复。</p>
+<h3 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h3><p>‘’’试想这样一个场景：当你打开多个窗口后，然后想将其中几个窗口合并到当前窗口中，以便对比观察输出。</p>
+<p>实际上，你的要求就是将其它窗口变成面板，然后合并到当前窗口中。对于这种操作，我们可以在当前窗口，按下prefix + :，打开命令行，然后输入如下命令：</p>
+<p>join-pane -s window01 # 合并名称为window01的窗口的默认（第一个）面板到当前窗口中<br>join-pane -s window01.1 # .1显式指定了第一个面板，.2就是第二个面板(我本地将面板编号起始值设置为1，默认是0)</p>
+<p>每次执行join-pane命令都会合并一个面板，并且指定的窗口会减少一个面板，直到面板数量为0，窗口关闭。</p>
+<p>除了在当前会话中操作外，join-pane命令甚至可以从其它指定会话中合并面板，格式为join-pane -s [session_name]:[window].[pane]，如join-pane -s 2:1.1 即合并第二个会话的第一个窗口的第一个面板到当前窗口，当目标会话的窗口和面板数量为0时，会话便会关闭。</p>
+<h3 id="自定义配置"><a href="#自定义配置" class="headerlink" title="自定义配置"></a>自定义配置</h3><p>如果没有配置文件的话先创建: touch ~/.tmux.conf<br>```</p>
+<h1 id="Send-prefix"><a href="#Send-prefix" class="headerlink" title="Send prefix"></a>Send prefix</h1><p>set-option -g prefix C-a<br>unbind-key C-a<br>bind-key C-a send-prefix </p>
+<h1 id="Use-Alt-arrow-keys-to-switch-panes"><a href="#Use-Alt-arrow-keys-to-switch-panes" class="headerlink" title="Use Alt-arrow keys to switch panes"></a>Use Alt-arrow keys to switch panes</h1><p>bind -n M-Left select-pane -L<br>bind -n M-Right select-pane -R<br>bind -n M-Up select-pane -U<br>bind -n M-Down select-pane -D</p>
+<h1 id="Shift-arrow-to-switch-windows"><a href="#Shift-arrow-to-switch-windows" class="headerlink" title="Shift arrow to switch windows"></a>Shift arrow to switch windows</h1><p>bind -n S-Left previous-window<br>bind -n S-Right next-window </p>
+<h1 id="Mouse-mode"><a href="#Mouse-mode" class="headerlink" title="Mouse mode"></a>Mouse mode</h1><p>set -g mouse on </p>
+<h1 id="Set-easier-window-split-keys"><a href="#Set-easier-window-split-keys" class="headerlink" title="Set easier window split keys"></a>Set easier window split keys</h1><p>bind-key v split-window -h<br>bind-key h split-window -v </p>
+<h1 id="Easy-config-reload"><a href="#Easy-config-reload" class="headerlink" title="Easy config reload"></a>Easy config reload</h1><p>bind-key r source-file ~/.tmux.conf \; display-message “tmux.conf reloaded”</p>
+<h1 id="key-bindings-for-horizontal-and-vertical-panes"><a href="#key-bindings-for-horizontal-and-vertical-panes" class="headerlink" title="key bindings for horizontal and vertical panes"></a>key bindings for horizontal and vertical panes</h1><p>unbind %<br>bind | split-window -h # 使用|竖屏，方便分屏<br>unbind ‘“‘<br>bind - split-window -v # 使用-横屏，方便分屏</p>
+<p>#– statusbar –#<br>set -g status-justify centre<br>set -g status-left “#[fg=red]s#S:w#I.p#P#[default]”<br>set -g status-right ‘[#(whoami)#(date +” %m-%d %H:%M “)]’<br>set -g status-left-attr bright<br>set -g status-left-length 120<br>set -g status-right-length 120<br>set -g status-utf8 on<br>set -g status-interval 1<br>set -g visual-activity on<br>setw -g monitor-activity on<br>setw -g automatic-rename off</p>
+<h1 id="default-statusbar-colors"><a href="#default-statusbar-colors" class="headerlink" title="default statusbar colors"></a>default statusbar colors</h1><p>set -g status-bg colour235 #base02<br>set -g status-fg colour136 #yellow<br>set -g status-attr default</p>
+<h1 id="default-window-title-colors"><a href="#default-window-title-colors" class="headerlink" title="default window title colors"></a>default window title colors</h1><p>setw -g window-status-fg colour244<br>setw -g window-status-bg default</p>
+<p>#setw -g window-status-attr dim</p>
+<h1 id="active-window-title-colors"><a href="#active-window-title-colors" class="headerlink" title="active window title colors"></a>active window title colors</h1><p>setw -g window-status-current-fg colour166 #orange<br>setw -g window-status-current-bg default</p>
+<p>#setw -g window-status-current-attr bright</p>
+<h1 id="window-title-string-uses-statusbar-variables"><a href="#window-title-string-uses-statusbar-variables" class="headerlink" title="window title string (uses statusbar variables)"></a>window title string (uses statusbar variables)</h1><p>set -g set-titles-string ‘#T’<br>set -g status-justify “centre”<br>set -g window-status-format ‘#I #W’<br>set -g window-status-current-format ‘ #I #W ‘</p>
+<h1 id="pane-border"><a href="#pane-border" class="headerlink" title="pane border"></a>pane border</h1><p>set -g pane-active-border-fg ‘#55ff55’<br>set -g pane-border-fg ‘#555555’</p>
+<h1 id="message-text"><a href="#message-text" class="headerlink" title="message text"></a>message text</h1><p>set -g message-bg colour235 #base02<br>set -g message-fg colour166 #orange</p>
+<h1 id="pane-number-display"><a href="#pane-number-display" class="headerlink" title="pane number display"></a>pane number display</h1><p>set -g display-panes-active-colour colour33 #blue<br>set -g display-panes-colour colour166 #orange</p>
+<h1 id="clock"><a href="#clock" class="headerlink" title="clock"></a>clock</h1><p>setw -g clock-mode-colour colour64 #green</p>
+<p>Send prefix<br>把prefix的ctrl+b变为了ctrl+a，因为这样按起来方便些。基本上用tmux的都改了这个。</p>
+<p>Use Alt-arrow keys to switch panes<br>不用按prefix，直接用alt+箭头在pane之间switch。实际用过之后才发现真是太方便了！</p>
+<p>Shift arrow to switch windows<br>不用按prefix，直接用shift+箭头在window之间switch。太方便了！</p>
+<p>Mouse mode<br>开启鼠标模式。用鼠标就能切换window，pane，还能调整pane的大小，方便！</p>
+<p>Set easier window split keys<br>这一部分是用来更方便切分pane的。prefix + v 代表竖着切，prefix + h 代表横着切。比起默认的切割方法不仅直观而且方便。</p>
+<p>首先，在更改了.tmux.conf后，在tmux里的快捷键没有变化。查找后发现是tmux只有在新建session的时候，才会去找tmux.conf文件。所以说，之前创建的那些session都没有参考tmux.conf. 就用tmux ls  tmux kill-session -a只保留当前session。再删除当前session ‘tmux kill-session -t XX’。这下删除了所有创建好的session。</p>
+<h2 id="放大字体"><a href="#放大字体" class="headerlink" title="放大字体"></a>放大字体</h2><p>Ctrl+shift+“+”</p>
+<h2 id="黏贴"><a href="#黏贴" class="headerlink" title="黏贴"></a>黏贴</h2><p>要按住shift,再右键</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://blog.csdn.net/u011138533/article/details/53109247" target="_blank" rel="external">https://blog.csdn.net/u011138533/article/details/53109247</a><br><a href="https://www.cnblogs.com/piperck/p/4992159.html" target="_blank" rel="external">https://www.cnblogs.com/piperck/p/4992159.html</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/09/30/隐私研究方向乱弹/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -784,1631 +2312,6 @@ $(function() {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/09/30/情感分析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/30/情感分析/" itemprop="url">情感分析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T18:14:10+08:00">
-                2018-09-30
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-03T10:32:06+08:00">
-                2018-09-03
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/科研/" itemprop="url" rel="index">
-                    <span itemprop="name">科研</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/09/30/情感分析/" class="leancloud_visitors" data-flag-title="情感分析">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  2,447 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  8 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>情感分析（SA）又称为倾向性分析和意见挖掘，它是对带有情感色彩的主观性文本进行分析、处理、归纳和推理的过程，其中情感分析还可以细分为情感极性（倾向）分析，情感程度分析，主客观分析等。</p>
-<p>情感极性分析的目的是对文本进行褒义、贬义、中性的进行判断。</p>
-<p>情感程度分析主要是对同一情感极性中再进行划分或者细分，以描述该极性的强度。例如“喜爱”和“敬爱”都是褒义词，但是“敬爱”相对来说褒义的程度更加强烈一些。</p>
-<p>主客观分析主要目的是识别文本中哪些部分是客观称述而不带情感色彩，哪些是带有情感的主管描述。在对于微博，或者商品评论时，这个分析步骤一般都忽略，因为微博和商品评论本身就一定存在强烈的情感色彩，而且客观描述的情感值理论上是为零，不影响最终的情感分析结果。</p>
-<h2 id="基于词典"><a href="#基于词典" class="headerlink" title="基于词典"></a>基于词典</h2><p>基于词典的方法主要通过制定一系列的情感词典和规则，对文本进行段落拆借、句法分析，计算情感值，最后通过情感值来作为文本的情感倾向依据。<br><a href="https://kexue.fm/archives/3360" target="_blank" rel="external">基于词典的比较直观的博客</a><br><a href="http://bigdata.51cto.com/art/201705/539695.htm" target="_blank" rel="external">Python做文本挖掘的情感极性分析（基于情感词典的方法）</a></p>
-<p>基于词典的情感分析：</p>
-<p>情感分析对象的粒度最小是词汇，但是表达一个情感的最基本的单位则是句子，词汇虽然能描述情感的基本信息，但是单一的词汇缺少对象，缺少关联程度，并且不同的词汇组合在一起所得到的情感程度不同甚至情感倾向都相反。所以以句子为最基本的情感分析粒度是较为合理的。篇章或者段落的情感可以通过句子的情感来计算。<br>词典可从《知网》情感分析用词语集(beta版)<a href="http://www.keenage.com/download/sentiment.rar" target="_blank" rel="external">http://www.keenage.com/download/sentiment.rar</a><br>1.1.2 否定词词典<br>1.1.3 程度副词词典</p>
-<p>基于词典的情感分析大致步骤如下：</p>
-<p>考虑到语句中的褒贬并非稳定分布，以上步骤对于积极和消极的情感词分开执行，最终的到两个分值，分别表示文本的正向情感值和负向情感值。</p>
-<p>进过以上的步骤，每篇文章的每个段落的每个句子都会有相应的情感分值，之后针对需求，可以针对句子的分值作统计计算，也可以针对段落的分值作统计计算，得到最后的文本的正向情感值和负向情感值。</p>
-<p>四、基于词典的情感分析实践：</p>
-<p>(1）基于词典的情感分析首先要构建情感词典及程度副词词典。通常是拉取一些比较成熟的情感词典。常见的如知网，台湾大学简体中文情感极性词典。将几个词典组合后再针对需要添加领域内的一些词就差不多了。情感词典，有多家研究机构进行了分析，并且公布了结果，比如大连理工、汉语情感词极值表、台湾大学情感NTUSD、知网Hownet情感词、中文褒贬义词典v1.0（清华大学李军）等，有些词典分为正向、逆向单词两个部分；有些放在一起，然后有单独的标签，可以cbind合并在一起。本文引用的是谭松波老师的正向、逆向情感词典。</p>
-<p>各个词典对情感词的倾向定义可能矛盾，出现同一个词具有情感正向和负向两种倾向的情况，尽管这种情况更加符合现实，但是违背了基于词典的情感分析的原假设，所以要将这些词去重，我们的方法是一个词如果同时属于正向和负向，仅保留正向分类。</p>
-<p>(2)  准备待分析文本、分词工具：</p>
-<p>待分析文本：可以爬取一些购物网站、团购、电影平台的评论数据作为实验数据。</p>
-<p>分析工具：中文的话推荐使用结巴分析，python、java等都有对应的接口，文档和应用案例也相对较多。同时需要准备一份自定义词典，由于领域内的新词及一些网络流行语等不容易切分出来，自己制作一份词典就OK了。<br>1、一、二级清洗</p>
-<p>文本挖掘中，对文本的清洗工作尤为重要，会出现比如：英文逗号、波浪线、英文单引号、英文双引号、分隔符等。</p>
-<p>(3）利用结巴分词分解出一段文本中的句子、及每个句子中词汇：</p>
-<p>(4）计算部分：首先将一段输入文本调用句子切分函数得到一系列句子，对每个句子进行分析处理，得到每个句子的分词结果。搜索分词结果中的情感词并标注和计数，由于情感词存在一些修饰词(如非常、一般、不等)对情感词的情感程度甚至情感极性影响很大，在此，搜索情感词前的程度词，根据程度大小，赋予不同权值，同时搜索情感词前的否定词，赋予反转权值（-1）。综合得到一个句子的正向情感得分、负向情感得分。</p>
-<p>(5）综合每个句子的结果得到最后的文本情感值。</p>
-<p>语言很复杂。讽刺、歧义、多义性、否定性和俚语都是机器难以理解的因素，对情感分析有巨大的影响。因此，简单的基于字典的方法往往无法分析复杂的情感表达。</p>
-<h2 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h2><p>基于机器学习的方法大多将这个问题转化为一个分类问题来看待，对于情感极性的判断，将目标情感分类2类：正、负；对情感程度的分析则转化为回归问题看待。对训练文本进行人工标标注，然后进行有监督的机器学习过程。</p>
-<p>在还没有获得大量文本的情况下，使用基于词典的方法或者简单的机器学习方法是一个不错的选择。获得大量文本后，可以尝试使用一些复杂的机器学习方法甚至使用深度学习来进一步提升分析效果。<br>机器学习的方法精确度更高，因为词典匹配会由于语义表达的丰富性而出现很大误差，而机器学习方法不会。而且它可使用的场景更多样。无论是主客观分类还是正负面情感分类，机器学习都可以完成任务。而无需像词典匹配那样要深入到词语、句子、语法这些层面。</p>
-<p>而词典方法适用的语料范围更广，无论是手机、电脑这些商品，还是书评、影评这些语料，都可以适用。但机器学习则极度依赖语料，把手机语料训练出来的的分类器拿去给书评分类，那是注定要失败的。</p>
-<p>nltk 进行情感分析<a href="http://bigdata.51cto.com/art/201801/562716.htm" target="_blank" rel="external">使用python+机器学习方法进行情感分析</a><br><a href="https://www.jianshu.com/p/4cfcf1610a73" target="_blank" rel="external">Python做文本情感分析之情感极性分析</a>‘包括词典和情感学习’,这篇文章的<a href="http://www.aidnoob.com/ai/python/qinggan2/" target="_blank" rel="external">代码实现</a><br><a href="https://yq.aliyun.com/articles/65239" target="_blank" rel="external">Twitter是怎么做情感分析的？长文解读！</a></p>
-<h2 id="非监督情感分类"><a href="#非监督情感分类" class="headerlink" title="非监督情感分类"></a>非监督情感分类</h2><p>论文：文本情感分类中生成式情感模型的发展<br>依次介绍了隐性情感模型（lsm）,联合情感主题模型（jts）,主题情感混合模型（TSM）</p>
-<p><a href="https://blog.csdn.net/laozhaokun/article/details/30767353" target="_blank" rel="external">一个简单的情感识别系统的实现</a><br><a href="Ahttps://blog.csdn.net/ABCD2010014357/article/details/48031393?locationNum=9" target="_blank" rel="external">Analysis of sentiments using unsupervised learning techniques 使用非监督学习技术分析情感（IEEE2013</a></p>
-<h3 id="主题模型"><a href="#主题模型" class="headerlink" title="主题模型"></a>主题模型</h3><p>要了解主题模型，先了解贝叶斯分类<br>潜在狄立克雷分配的显著特征——集合中所有文档共享同一主题集合，但每个文档中各个主题所占的比例又都各不相同</p>
-<h4 id="贝叶斯分类"><a href="#贝叶斯分类" class="headerlink" title="贝叶斯分类"></a>贝叶斯分类</h4><p><a href="https://blog.csdn.net/u011508640/article/details/72815981" target="_blank" rel="external">详解最大似然估计（MLE）、最大后验概率估计（MAP），以及贝叶斯公式的理解</a></p>
-<p>主题模型就是利用了词语的同现特性<br><a href="http://v.qiye10000.com/v/XODAyNvImMvIy.html" target="_blank" rel="external">http://v.qiye10000.com/v/XODAyNvImMvIy.html</a>　吴立德<br><a href="https://www.bilibili.com/video/av27193854/?p=3" target="_blank" rel="external">https://www.bilibili.com/video/av27193854/?p=3</a>　七月在线</p>
-<p>主题模型参考文献汇总 <a href="https://blog.csdn.net/aws3217150/article/details/53840029" target="_blank" rel="external">https://blog.csdn.net/aws3217150/article/details/53840029</a></p>
-<p>专知主题模型汇总<a href="https://cloud.tencent.com/developer/article/1090052" target="_blank" rel="external">【专知荟萃16】主题模型Topic Model知识资料全集（基础/进阶/论文/综述/代码/专家，附PDF下载</a></p>
-<h2 id="word2vec"><a href="#word2vec" class="headerlink" title="word2vec"></a>word2vec</h2><p>直观理解输入什么，输出什么<br><a href="https://zhuanlan.zhihu.com/p/26306795?utm_source=wechat_session&amp;utm_medium=social&amp;from=groupmessage" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/26306795?utm_source=wechat_session&amp;utm_medium=social&amp;from=groupmessage</a><br><a href="https://www.jianshu.com/p/def47a349299" target="_blank" rel="external">【译】word2vec&amp;doc2vec做文本情感分析</a><br><a href="https://github.com/AimeeLee77/wiki_zh_word2vec" target="_blank" rel="external">利用Python构建Wiki中文语料词向量模型试验</a></p>
-<h2 id="词典及语料库"><a href="#词典及语料库" class="headerlink" title="词典及语料库"></a>词典及语料库</h2><p><a href="http://www.cnblogs.com/finesite/p/3381803.html" target="_blank" rel="external">http://www.cnblogs.com/finesite/p/3381803.html</a><br>有多家研究机构进行了分析，并且公布了结果，比如大连理工、汉语情感词极值表、台湾大学情感NTUSD、知网Hownet情感词、中文褒贬义词典v1.0（清华大学李军），谭松波老师的正向、逆向情感词典等，有些词典分为正向、逆向单词两个部分；有些放在一起，然后有单独的标签，可以cbind合并在一起。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.cnblogs.com/arkenstone/p/6064196.html" target="_blank" rel="external">Stanford NLP学习笔记：7. 情感分析（Sentiment）</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/09/30/tmux/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/30/tmux/" itemprop="url">tmux</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T18:14:10+08:00">
-                2018-09-30
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-18T21:20:30+08:00">
-                2018-09-18
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/09/30/tmux/" class="leancloud_visitors" data-flag-title="tmux">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  2,119 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  9 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="tmux"><a href="#tmux" class="headerlink" title="tmux"></a>tmux</h2><p>tmux 中直接通过默认前缀 ctrl + b 之后输入对应命令来操作<br>    session 会话：session是一个特定的终端组合。输入tmux就可以打开一个新的session<br>        ‘tmux new -s session_name’ 创建一个叫做 session_name 的 tmux session<br>        ‘tmux attach -t session_name’ 重新开启叫做 session_name 的 tmux session<br>        tmux switch -t session_name 转换到叫做 session_name 的 tmux session<br>        tmux list-sessions / tmux ls 列出现有的所有 session<br>        ‘tmux detach’ 离开当前开启的 session<br>        tmux kill-server 关闭所有 session<br>    window 窗口：session 中可以有不同的 window（但是同时只能看到一个 window）<br>        tmux new-window 创建一个新的 window<br>        tmux list-windows<br>        tmux select-window -t :0-9 根据索引转到该 window<br>        tmux rename-window 重命名当前 window<br>    pane 面板：window 中可以有不同的 pane（可以把 window 分成不同的部分）<br>        tmux split-window 将 window 垂直划分为两个 pane<br>        tmux split-window -h 将 window 水平划分为两个 pane<br>        tmux swap-pane -[UDLR] 在指定的方向交换 pane<br>        tmux select-pane -[UDLR] 在指定的方向选择下一个 pane</p>
-<p>###基本操作<br>    ? 列出所有快捷键；按q返回<br>    d 脱离当前会话,可暂时返回Shell界面<br>    s 选择并切换会话；在同时开启了多个会话时使用<br>    ‘D 选择要脱离的会话；在同时开启了多个会话时使用’<br>    : 进入命令行模式；此时可输入支持的命令，例如 kill-server 关闭所有tmux会话<br>    [ 复制模式，光标移动到复制内容位置，空格键开始，方向键选择复制，回车确认，q/Esc退出<br>    ] 进入粘贴模式，粘贴之前复制的内容，按q/Esc退出<br>    ~ 列出提示信息缓存；其中包含了之前tmux返回的各种提示信息<br>    t 显示当前的时间<br>    ctrl + z 挂起当前会话<br>    ‘$ 重命名session’</p>
-<h3 id="session"><a href="#session" class="headerlink" title="session"></a>session</h3><ol>
-<li>open session</li>
-</ol>
-<p>$ tmux new-session -s basic<br>或者<br>$ tmux new -s basic</p>
-<p>-s参数表示session名称，如果不加-s参数，那么Tmux默认会新建一个以数字(下标从0开始)命名的session，并默认打开一个window。打开一个session后，后续的所有控制Tmux本身的快捷键都需要加前缀，默认是 Ctrl+b ，以下把前缀按键称为Prefix。</p>
-<ol>
-<li>detach session<br>想要暂时离开Tmux，回到终端环境时，可以通过快捷键 Prefix+d (d for detach)。要注意的时，即使是detach的状态，Tmux中在运行的程序还会继续运行。想要回到Tmux session时，只需执行：</li>
-</ol>
-<p>$ tmux attach -t basic</p>
-<p>-t参数可以指定要attach的session。</p>
-<ol>
-<li><p>list session<br>终端中执行 tmux ls (ls for list session)可以列出当前有多少个session。如果已经在session中，执行 Prefix+s (s for session)可以列出当前有多少个session，并且可通过上、下键选择要进入的session。</p>
-</li>
-<li><p>kill session<br>要真正关闭一个session，可以在终端下执行命令 ‘tmux kill-session -t basic’ ，其中-t参数表示session名称。</p>
-</li>
-</ol>
-<p>###　窗口操作<br>c ‘创建新窗口’<br>&amp; ‘关闭当前窗口’<br>, ‘重命名当前窗口，便于识别’<br>. 修改当前窗口编号，相当于重新排序<br>f 在所有窗口中查找关键词，便于窗口多了切换<br>[0-9] 数字键切换到指定窗口<br>p 切换至上一窗口<br>n 切换至下一窗口<br>l 前后窗口间互相切换<br>w 通过窗口列表切换窗口</p>
-<h3 id="面板操作"><a href="#面板操作" class="headerlink" title="面板操作"></a>面板操作</h3><p>“ ‘将当前面板上下分屏’（我自己改成了 |）<br>% ‘将当前面板左右分屏’（我自己改成了 -）<br>x ‘关闭当前分屏’<br>Ctrl-方向键 ‘调整分隔窗口大小’<br>    ! 将当前面板置于新窗口,即新建一个窗口,其中仅包含当前面板<br>    ctrl+方向键 以1个单元格为单位移动边缘以调整当前面板大小<br>    alt+方向键 以5个单元格为单位移动边缘以调整当前面板大小<br>    q 显示面板编号<br>    o 选择当前窗口中下一个面板<br>    方向键 移动光标选择对应面板<br>    { 向前置换当前面板<br>    } 向后置换当前面板<br>    alt+o 逆时针旋转当前窗口的面板<br>    ctrl+o 顺时针旋转当前窗口的面板<br>    z 最大化当前所在面板<br>    page up 向上滚动屏幕，q 退出<br>    page down 向下滚动屏幕，q 退出<br>Prefix+Space (空格键): 对当前窗口下的所有pane重新排列布局，每按一次，换一种样式。<br>Prefix+z : 最大化当前pane。再按一次后恢复。</p>
-<h3 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h3><p>‘’’试想这样一个场景：当你打开多个窗口后，然后想将其中几个窗口合并到当前窗口中，以便对比观察输出。</p>
-<p>实际上，你的要求就是将其它窗口变成面板，然后合并到当前窗口中。对于这种操作，我们可以在当前窗口，按下prefix + :，打开命令行，然后输入如下命令：</p>
-<p>join-pane -s window01 # 合并名称为window01的窗口的默认（第一个）面板到当前窗口中<br>join-pane -s window01.1 # .1显式指定了第一个面板，.2就是第二个面板(我本地将面板编号起始值设置为1，默认是0)</p>
-<p>每次执行join-pane命令都会合并一个面板，并且指定的窗口会减少一个面板，直到面板数量为0，窗口关闭。</p>
-<p>除了在当前会话中操作外，join-pane命令甚至可以从其它指定会话中合并面板，格式为join-pane -s [session_name]:[window].[pane]，如join-pane -s 2:1.1 即合并第二个会话的第一个窗口的第一个面板到当前窗口，当目标会话的窗口和面板数量为0时，会话便会关闭。</p>
-<h3 id="自定义配置"><a href="#自定义配置" class="headerlink" title="自定义配置"></a>自定义配置</h3><p>如果没有配置文件的话先创建: touch ~/.tmux.conf<br>```</p>
-<h1 id="Send-prefix"><a href="#Send-prefix" class="headerlink" title="Send prefix"></a>Send prefix</h1><p>set-option -g prefix C-a<br>unbind-key C-a<br>bind-key C-a send-prefix </p>
-<h1 id="Use-Alt-arrow-keys-to-switch-panes"><a href="#Use-Alt-arrow-keys-to-switch-panes" class="headerlink" title="Use Alt-arrow keys to switch panes"></a>Use Alt-arrow keys to switch panes</h1><p>bind -n M-Left select-pane -L<br>bind -n M-Right select-pane -R<br>bind -n M-Up select-pane -U<br>bind -n M-Down select-pane -D</p>
-<h1 id="Shift-arrow-to-switch-windows"><a href="#Shift-arrow-to-switch-windows" class="headerlink" title="Shift arrow to switch windows"></a>Shift arrow to switch windows</h1><p>bind -n S-Left previous-window<br>bind -n S-Right next-window </p>
-<h1 id="Mouse-mode"><a href="#Mouse-mode" class="headerlink" title="Mouse mode"></a>Mouse mode</h1><p>set -g mouse on </p>
-<h1 id="Set-easier-window-split-keys"><a href="#Set-easier-window-split-keys" class="headerlink" title="Set easier window split keys"></a>Set easier window split keys</h1><p>bind-key v split-window -h<br>bind-key h split-window -v </p>
-<h1 id="Easy-config-reload"><a href="#Easy-config-reload" class="headerlink" title="Easy config reload"></a>Easy config reload</h1><p>bind-key r source-file ~/.tmux.conf \; display-message “tmux.conf reloaded”</p>
-<h1 id="key-bindings-for-horizontal-and-vertical-panes"><a href="#key-bindings-for-horizontal-and-vertical-panes" class="headerlink" title="key bindings for horizontal and vertical panes"></a>key bindings for horizontal and vertical panes</h1><p>unbind %<br>bind | split-window -h # 使用|竖屏，方便分屏<br>unbind ‘“‘<br>bind - split-window -v # 使用-横屏，方便分屏</p>
-<p>#– statusbar –#<br>set -g status-justify centre<br>set -g status-left “#[fg=red]s#S:w#I.p#P#[default]”<br>set -g status-right ‘[#(whoami)#(date +” %m-%d %H:%M “)]’<br>set -g status-left-attr bright<br>set -g status-left-length 120<br>set -g status-right-length 120<br>set -g status-utf8 on<br>set -g status-interval 1<br>set -g visual-activity on<br>setw -g monitor-activity on<br>setw -g automatic-rename off</p>
-<h1 id="default-statusbar-colors"><a href="#default-statusbar-colors" class="headerlink" title="default statusbar colors"></a>default statusbar colors</h1><p>set -g status-bg colour235 #base02<br>set -g status-fg colour136 #yellow<br>set -g status-attr default</p>
-<h1 id="default-window-title-colors"><a href="#default-window-title-colors" class="headerlink" title="default window title colors"></a>default window title colors</h1><p>setw -g window-status-fg colour244<br>setw -g window-status-bg default</p>
-<p>#setw -g window-status-attr dim</p>
-<h1 id="active-window-title-colors"><a href="#active-window-title-colors" class="headerlink" title="active window title colors"></a>active window title colors</h1><p>setw -g window-status-current-fg colour166 #orange<br>setw -g window-status-current-bg default</p>
-<p>#setw -g window-status-current-attr bright</p>
-<h1 id="window-title-string-uses-statusbar-variables"><a href="#window-title-string-uses-statusbar-variables" class="headerlink" title="window title string (uses statusbar variables)"></a>window title string (uses statusbar variables)</h1><p>set -g set-titles-string ‘#T’<br>set -g status-justify “centre”<br>set -g window-status-format ‘#I #W’<br>set -g window-status-current-format ‘ #I #W ‘</p>
-<h1 id="pane-border"><a href="#pane-border" class="headerlink" title="pane border"></a>pane border</h1><p>set -g pane-active-border-fg ‘#55ff55’<br>set -g pane-border-fg ‘#555555’</p>
-<h1 id="message-text"><a href="#message-text" class="headerlink" title="message text"></a>message text</h1><p>set -g message-bg colour235 #base02<br>set -g message-fg colour166 #orange</p>
-<h1 id="pane-number-display"><a href="#pane-number-display" class="headerlink" title="pane number display"></a>pane number display</h1><p>set -g display-panes-active-colour colour33 #blue<br>set -g display-panes-colour colour166 #orange</p>
-<h1 id="clock"><a href="#clock" class="headerlink" title="clock"></a>clock</h1><p>setw -g clock-mode-colour colour64 #green</p>
-<p>Send prefix<br>把prefix的ctrl+b变为了ctrl+a，因为这样按起来方便些。基本上用tmux的都改了这个。</p>
-<p>Use Alt-arrow keys to switch panes<br>不用按prefix，直接用alt+箭头在pane之间switch。实际用过之后才发现真是太方便了！</p>
-<p>Shift arrow to switch windows<br>不用按prefix，直接用shift+箭头在window之间switch。太方便了！</p>
-<p>Mouse mode<br>开启鼠标模式。用鼠标就能切换window，pane，还能调整pane的大小，方便！</p>
-<p>Set easier window split keys<br>这一部分是用来更方便切分pane的。prefix + v 代表竖着切，prefix + h 代表横着切。比起默认的切割方法不仅直观而且方便。</p>
-<p>首先，在更改了.tmux.conf后，在tmux里的快捷键没有变化。查找后发现是tmux只有在新建session的时候，才会去找tmux.conf文件。所以说，之前创建的那些session都没有参考tmux.conf. 就用tmux ls  tmux kill-session -a只保留当前session。再删除当前session ‘tmux kill-session -t XX’。这下删除了所有创建好的session。</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://blog.csdn.net/u011138533/article/details/53109247" target="_blank" rel="external">https://blog.csdn.net/u011138533/article/details/53109247</a><br><a href="https://www.cnblogs.com/piperck/p/4992159.html" target="_blank" rel="external">https://www.cnblogs.com/piperck/p/4992159.html</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/08/14/思维导图/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/14/思维导图/" itemprop="url">8月以前思维导图</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-14T14:40:23+08:00">
-                2018-08-14
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-14T14:46:25+08:00">
-                2018-08-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/思维导图/" itemprop="url" rel="index">
-                    <span itemprop="name">思维导图</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/14/思维导图/" class="leancloud_visitors" data-flag-title="8月以前思维导图">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  22 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="svd"><a href="#svd" class="headerlink" title="svd"></a>svd</h2><p><img src="\img\思维导图\svd.png" alt="svd"></p>
-<h2 id="标签体系"><a href="#标签体系" class="headerlink" title="标签体系"></a>标签体系</h2><p><img src="\img\思维导图\标签体系.png" alt="标签体系"></p>
-<h2 id="距离度量方法"><a href="#距离度量方法" class="headerlink" title="距离度量方法"></a>距离度量方法</h2><p><img src="\img\思维导图\距离度量方法.png" alt="距离度量方法"></p>
-<h2 id="社区发现"><a href="#社区发现" class="headerlink" title="社区发现"></a>社区发现</h2><p><img src="\img\思维导图\社区发现.png" alt="社区发现"></p>
-<h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p><img src="\img\思维导图\数据集 .png" alt="数据集"></p>
-<h2 id="用户手机"><a href="#用户手机" class="headerlink" title="用户手机"></a>用户手机</h2><p><img src="\img\思维导图\用户手机.png" alt="用户手机"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/08/13/远程jupyter/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/13/远程jupyter/" itemprop="url">远程登录jupyter notebook</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-13T21:38:08+08:00">
-                2018-08-13
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-13T22:21:09+08:00">
-                2018-08-13
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/13/远程jupyter/" class="leancloud_visitors" data-flag-title="远程登录jupyter notebook">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  570 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  3 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="服务器上设置"><a href="#服务器上设置" class="headerlink" title="服务器上设置"></a>服务器上设置</h2><h3 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h3><blockquote>
-<p>jupyter notebook –generate-config</p>
-</blockquote>
-<h3 id="生成密码"><a href="#生成密码" class="headerlink" title="生成密码"></a>生成密码</h3><blockquote>
-<p>ipython</p>
-</blockquote>
-<p>In [1]: from notebook.auth import passwd<br>In [2]: passwd()<br>Enter password:<br>Verify password:<br>Out[2]: ‘sha1:ce23d945972f:34769685a7ccd3d08c84a18c63968a41f1140274’<br>把生成的密文‘sha:ce…’复制下来</p>
-<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><blockquote>
-<p>vim ~/.jupyter/jupyter_notebook_config.py</p>
-</blockquote>
-<p>c.NotebookApp.ip=’*’<br>c.NotebookApp.password = u’sha:ce…刚才复制的那个密文’<br>c.NotebookApp.open_browser = False<br>c.NotebookApp.port =8888 #随便指定一个端口</p>
-<h2 id="本地"><a href="#本地" class="headerlink" title="本地"></a>本地</h2><p>本地建立一个ssh通道：</p>
-<p>ssh wxy@服务器ＩＰ -p 端口  -L 127.0.0.1:12345:127.0.0.1:8888<br>浏览器上输入<a href="http://127.0.0.1:12345" target="_blank" rel="external">http://127.0.0.1:12345</a></p>
-<p><a href="http://frankchen.xyz/2017/12/25/Remote-jupyter-notebook/（&#39;开机自启&#39;）" target="_blank" rel="external">http://frankchen.xyz/2017/12/25/Remote-jupyter-notebook/（&#39;开机自启&#39;）</a><br><a href="https://www.cnblogs.com/wushaogui/p/8797841.html(windows" target="_blank" rel="external">https://www.cnblogs.com/wushaogui/p/8797841.html(windows</a>)</p>
-<h2 id="另（不成功）"><a href="#另（不成功）" class="headerlink" title="另（不成功）"></a>另（不成功）</h2><p><a href="https://blog.csdn.net/danlei94/article/details/74049975?utm_source=itdadao&amp;utm_medium=referral" target="_blank" rel="external">https://blog.csdn.net/danlei94/article/details/74049975?utm_source=itdadao&amp;utm_medium=referral</a></p>
-<blockquote>
-<p>jupyter notebook –ip 0.0.0.0<br>接着你会看到有一个带token的url地址，你可以将此地址复制粘贴在你本地的浏览器，并且更换掉ip 0.0.0.0–&gt;你服务器的ip地址</p>
-</blockquote>
-<pre><code>按住 Ctrl+z键，即可将一个正在前台执行的命令放到后台，并且暂停
-</code></pre><blockquote>
-<p>Ctrl +z （按键）</p>
-</blockquote>
-<pre><code>输入jobs查看当前job的情况
-
-&gt;jobs
-
-利用bg命令将一个在后台暂停的命令，变成继续执行
-
-&gt;bg 1
-// “1” 这里就可以替换为你运行的jupyter的job号，上一步可以查到
-</code></pre><p>参考文献　<a href="https://bitmingw.com/2017/07/09/run-jupyter-notebook-server/" target="_blank" rel="external">https://bitmingw.com/2017/07/09/run-jupyter-notebook-server/</a><br><a href="http://bbs.bugcode.cn/t/71596" target="_blank" rel="external">http://bbs.bugcode.cn/t/71596</a> (错误，并没有用上)</p>
-<h2 id="增加内核"><a href="#增加内核" class="headerlink" title="增加内核"></a>增加内核</h2><p>自己是在python3环境中conda install jupyter 下载jupyter,网上是pip3 install ipykernel<br>然后在python3坏境中执行’python -m ipykernel install –name XXXX’<br>使用命令jupyter kernelspec list可以查看当前的kernel<br>jupyter notebook –config = /home…/ipython_notebook_config.py   # .py配置文件的路径,在运行时指定配置文件(只需运行一次即可更新.json配置文件，后面再运行时不用添加路径信息)</p>
-<p><a href="https://blog.csdn.net/Lazybones_3/article/details/78631232" target="_blank" rel="external">https://blog.csdn.net/Lazybones_3/article/details/78631232</a><br><a href="https://blog.csdn.net/qq_24027563/article/details/80589880(密码没有修改的问题解决" target="_blank" rel="external">https://blog.csdn.net/qq_24027563/article/details/80589880(密码没有修改的问题解决</a>)</p>
-<h2 id="在当前环境下安装anaconda包集合"><a href="#在当前环境下安装anaconda包集合" class="headerlink" title="在当前环境下安装anaconda包集合"></a>在当前环境下安装anaconda包集合</h2><p>conda install anaconda<br><a href="http://www.mamicode.com/info-detail-2287955.html" target="_blank" rel="external">http://www.mamicode.com/info-detail-2287955.html</a></p>
-<h2 id="出现错误"><a href="#出现错误" class="headerlink" title="出现错误"></a>出现错误</h2><p>channel 2: open failed: connect failed: Connection refused<br>不知道这个错误是什么原因造成的，最后换了ｃｈｒｏｍｅ浏览器访问成功</p>
-<p><a href="https://www.alibabacloud.com/help/zh/doc-detail/53650.htm（阿里使用jupyter）" target="_blank" rel="external">https://www.alibabacloud.com/help/zh/doc-detail/53650.htm（阿里使用jupyter）</a></p>
-<p><a href="http://www.itkeyword.com/doc/8934890860339928285/how-to-start-ipython-notebook-remotely" target="_blank" rel="external">http://www.itkeyword.com/doc/8934890860339928285/how-to-start-ipython-notebook-remotely</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/08/13/社交网络论文记忆点/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/13/社交网络论文记忆点/" itemprop="url">社交网络论文记忆点</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-13T21:38:08+08:00">
-                2018-08-13
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-04-09T21:51:16+08:00">
-                2018-04-09
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/13/社交网络论文记忆点/" class="leancloud_visitors" data-flag-title="社交网络论文记忆点">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  28 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>基于社交媒体的关联性用户属性推断</p>
-<p>超图，多个属性进行关联预测</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/08/13/爬虫错误/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/13/爬虫错误/" itemprop="url">爬虫错误集锦</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-13T21:38:08+08:00">
-                2018-08-13
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-13T22:06:35+08:00">
-                2018-08-13
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/爬虫/" itemprop="url" rel="index">
-                    <span itemprop="name">爬虫</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/13/爬虫错误/" class="leancloud_visitors" data-flag-title="爬虫错误集锦">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  207 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="twitter-安装redis"><a href="#twitter-安装redis" class="headerlink" title="twitter 安装redis"></a>twitter 安装redis</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>python ‘pip install redis’</p>
-<blockquote>
-<p>sudo apt-get install redis-server<br>sudo service redis-server start</p>
-</blockquote>
-<h3 id="lt-twisted-python-failure-Failure-OpenSSL-SSL-Error-‘SSL-routines’-‘SSL23-GET-SERVER-HELLO’-‘sslv3-alert-handshake-failure’"><a href="#lt-twisted-python-failure-Failure-OpenSSL-SSL-Error-‘SSL-routines’-‘SSL23-GET-SERVER-HELLO’-‘sslv3-alert-handshake-failure’" class="headerlink" title="&lt;twisted.python.failure.Failure OpenSSL.SSL.Error: [(‘SSL routines’, ‘SSL23_GET_SERVER_HELLO’, ‘sslv3 alert handshake failure’)"></a>&lt;twisted.python.failure.Failure OpenSSL.SSL.Error: [(‘SSL routines’, ‘SSL23_GET_SERVER_HELLO’, ‘sslv3 alert handshake failure’)</h3><p>openSSl 版本问题，去掉了RC4-MD5<br>用　scrapy version -v 查询版本号<br>pip install –upgrade ‘cryptography&lt;2’</p>
-<p><a href="https://stackoverflow.com/questions/45924568/scrapy-twisted-connection-lost-in-non-clean-fashion-no-proxy-already-tried-hea" target="_blank" rel="external">https://stackoverflow.com/questions/45924568/scrapy-twisted-connection-lost-in-non-clean-fashion-no-proxy-already-tried-hea</a><br><a href="https://github.com/scrapy/scrapy/issues/2311#issuecomment-325804964" target="_blank" rel="external">https://github.com/scrapy/scrapy/issues/2311#issuecomment-325804964</a></p>
-<h3 id="redis-查看数据"><a href="#redis-查看数据" class="headerlink" title="redis 查看数据"></a>redis 查看数据</h3><blockquote>
-<p>redis-cli key <em>　查询<br>del <em>*</em></em> 删除键</p>
-</blockquote>
-<h2 id="TypeError-Unicode-objects-must-be-encoded-before-hashing-python-3"><a href="#TypeError-Unicode-objects-must-be-encoded-before-hashing-python-3" class="headerlink" title="TypeError: Unicode-objects must be encoded before hashing python 3"></a>TypeError: Unicode-objects must be encoded before hashing python 3</h2><p>shaa1 = hashlib.sha1()<br>‘shaa1.update(string.encode(‘utf-8’))<br>res = shaa1.hexdigest()<br>print(“sha1采用encode转换加密结果:”,res)</p>
-<p><a href="https://www.cnblogs.com/pycode/p/hashlib.html" target="_blank" rel="external">https://www.cnblogs.com/pycode/p/hashlib.html</a></p>
-<p>redis的值有5种类型，不同的类型有不同的命令来获取：</p>
-<p>字符直接 get key</p>
-<p>队列 左端弹出一个元素  LPOP key</p>
-<p>哈希 HGET key field   </p>
-<p>集合 SMEMBERS key 返回集合中的所有元素</p>
-<p>有序集合ZRANGE key start stop</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/08/13/心理学/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/13/心理学/" itemprop="url">心理学</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-13T21:38:08+08:00">
-                2018-08-13
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-13T22:16:03+08:00">
-                2018-08-13
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/心理学/" itemprop="url" rel="index">
-                    <span itemprop="name">心理学</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/13/心理学/" class="leancloud_visitors" data-flag-title="心理学">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1,220 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  4 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##　<a href="http://www.sohu.com/a/153290921_610300" target="_blank" rel="external">深度学习中应用的心理学</a><br>发展心理学中研究儿童如何学习物体和词对应关系的方法，来分析深度神经网络。</p>
-<p>认知心理学研究表明，人类儿童在将物体和词对应起来的过程中，存在三种偏好：</p>
-<p>整体偏好：当你指着一个物体，说出一个词，孩子会假设这个词指的的整个物体，而非部件；</p>
-<p>分类偏好：孩子会假设一个词指的是物体所属的基本类别；</p>
-<p>形状偏好：孩子会假设一个名词的意思是基于物体的形状，而不是它的颜色或质地。</p>
-<p>DeepMind借用的，是研究形状偏好的认知实验，因为认知心理学在这方面的研究最为丰富。</p>
-<h2 id="微信行为学"><a href="#微信行为学" class="headerlink" title="微信行为学"></a>微信行为学</h2><p>哈耶克在早年著作《感觉的秩序》里论证，脑的基本功能就是对各种刺激信号分类。最简单的头脑可能只认识“白色”这一特征，于是它的世界分为两类，白色的和不是白色的。更复杂的头脑可能在白色特征之外又认识黑色特征，于是它的世界分为四类：白色的、黑色的、灰色的（即白与黑的光学混合）和彩色的（即非白非黑的光学效应）。一般而言，人们的认知能力有精粗之别，甲认识N种特征，乙认识M种特征，则甲的世界最多分类是2的N次方而乙的世界最多分类是2的M次方。又因语言表达的差异，被认知的未必可被语言表达，典型如佳肴美味，很少可用语言表达的。有鉴于此，我的幼教学说，特别倡导在可承受限度内尽可能让婴儿品尝各类佳肴美味，尽早开发人类演化最早形成的长期记忆脑区——嗅脑（人脑三层次当中的爬行动物脑层次）。康德对此有感觉，他说过，人类的五种感觉当中，私己性最强的是嗅觉和味觉。不是偶然，人类语言基于听觉和视觉，因为这两种感觉最可交流。</p>
-<p>回到主题，人们的微信行为传递哪些重要信号可让人们在众多微信群之间搬家直到出现某一均衡状态？对这一问题的解答，依赖于特定社会的特定时期的特定的人。例如我自己，对粗鲁言辞的承受力不高，故而言辞的文明程度是我在微信群之间搬家的重要动机。我的注意力的代价，与工作性质有关，很大程度上依赖于信息的学术含量。于是，我进入和离开许多微信群的主要理由是学术或思想的，与那里的言辞是否足够典雅无关。</p>
-<h2 id="社群"><a href="#社群" class="headerlink" title="社群"></a>社群</h2><p>真正高维度、高价值的社群，并不止于满足社交需求，而是提供基于信任的身份认同，以及对场景需求的满足。社群成员在其中获得持续而强大的身份认同感和荣誉感的同时，也强化了圈层化<br>小世界网络是研究社会网络、人际关系的社会理论，是对心理学「六度理论」的迭代，由Duncan Watts和Steven Strogatz于1998年在Nature上提出，理论认为许多生物、技术和社会网络并非是简单的规则或随机网络，而是存在与规则网络类似的高的局部聚类和与随机网络类似的较短平均路径长度属性，并以此提出小世界网络模型。我们身处的各个群体，公司、社群、村落、宗族，这些社群化、部落化的社会网络，不正是小世界网络的鲜活演变吗。</p>
-<p>我们的大脑<br>随着人脉神经影像技术的发展和应用，人类得以进一步认知自己身上最古老的器官：大脑，要知道，即使生活在网络时代，我们的大脑仍跟千万年前老祖宗们的大脑差别不大，尽管我剪了个比我曾曾曾曾祖父帅得多的发型。基于复杂理论的人脑建模发现，组成人脑的不同神经单元，如神经元、皮层柱或脑区，也呈现小世界网络结构。大脑爱模式，最擅长合并同类项，否则太过耗能无法在物种进化进程中生存下来，「物以类聚，人以群分」只是行为的结果，而是大脑在我们选择加入哪个群体前已经做出了决策，我们负责执行而已，因为我们需要安全感和归属感。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/08/13/pycharm　远程配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/13/pycharm　远程配置/" itemprop="url">pycharm　远程配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-13T21:38:08+08:00">
-                2018-08-13
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-13T21:56:42+08:00">
-                2018-08-13
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/pycharm/" itemprop="url" rel="index">
-                    <span itemprop="name">pycharm</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/08/13/pycharm　远程配置/" class="leancloud_visitors" data-flag-title="pycharm　远程配置">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  103 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="文件映射"><a href="#文件映射" class="headerlink" title="文件映射"></a>文件映射</h2><p>选择tools下deployment的ｃｏｎｆｉｇｕｒａｔｉｏｎ</p>
-<p>选择ＳＦＴＰ,填写ip和端口，root/path 为可访问的路径，此路径自动添加到ｍａｐｐｉｎｇ<br>ＭＡＰＰＩＮＧ映射文件时不需要添加root/path,<br>Deployment path on server:<br>/code<br>这个就相当于root/path/code</p>
-<p>自动上传服务器选择deployment 下的automatic upload</p>
-<h2 id="远程编译器"><a href="#远程编译器" class="headerlink" title="远程编译器"></a>远程编译器</h2><p>在file/seting/program/ 选择编译器，点击添加后选择’ssh’ 添加远程编译器</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2458,7 +2361,7 @@ $(function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">55</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
