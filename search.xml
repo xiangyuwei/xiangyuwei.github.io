@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[matplotlib 中文显示及同时多个单词替换]]></title>
+    <url>%2F2018%2F10%2F27%2Fmatplotlib%20%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA%E5%8F%8A%E5%90%8C%E6%97%B6%E5%A4%9A%E4%B8%AA%E5%8D%95%E8%AF%8D%E6%9B%BF%E6%8D%A2%2F</url>
+    <content type="text"><![CDATA[中文显示我们来解决一下 matplotlib 的中文显示问题解决Linux系统中python matplotlib画图的中文显示问题 １、/fc-list (“:lang=zh”可添加此后缀单独查看安装的中文字体）下载SimHei.ttf字体 由于系统没有任何中文字体，需要自己准备中文字体，Ubuntu支持TTF字体，这里笔者下载的是SimHei字体（百度搜索下载，注意要是ttf） ２.upyter输入并运行： import matplotlib matplotlib.matplotlib_fname()进入到文件内容中，使用上下光标建找到 1）font.family : sans-serif ，去掉前面的 # 号 2）font.sans-serif ，去掉前面的 # 号，并在后面内容首位添加一个SimHei ３./home/linuxbrew/.linuxbrew/opt/python/lib/python3.6/site-packages/matplotlib/mpl-data 即可看到fonts文件夹—-&gt;进入ttf文件夹——-&gt;将字体拷贝进入即可1）放到系统文件夹下:/usr/share/fonts2） 放到matplotlib的字体文件夹下：/usr/local/lib/python2.7/dist-packages/matplotlib/mpl-data/fonts/ttf/ ４、删除~/.cache/matplotlib缓存文件夹 一定要删除这个文件夹，一般在系统目录下面，比如ubuntu这个文件夹下面找到fontList.cache文件 sudo find / -name fontList.cache 假设我的在/home/user/.cache/matplotlib/fontList.cache，删除： rm /home/user/.cache/matplotlib/fontList.cache ５．画图代码部分 import matplotlib as mpl font_name = ‘SIMHEI’ mpl.rcParams[‘font.family’] = font_name #用来正常显示中文标签 mpl.rcParams[‘axes.unicode_minus’]=False #用来正常显示负号 “以上方式都没解决”，https://blog.csdn.net/u013617229/article/details/82632751 根据os.path返回的结果，结合其他网友分享的文章得到最终的字体位置： os.path + site-packages/matplotlib/mpl-data/fonts/ttf 将想使用的字体命名为DejaVuSans.ttf替换上述路径下的DejaVuSans.ttf即可。https://www.cnblogs.com/lingLongBaby/p/8079588.html 常见问题 1）当matplotlib/mpl-data/fonts/ttf中没有指定字体是执行时会出现如下错误 font_manager.py:1287: UserWarning: findfont: Font family [u’sans-serif’] not found. Falling back to Bitstream Vera Sans (prop.get_family(), self.defaultFamily[fontext])) 2）有字体但还是显示小方块,一般是没有删除~/.cache/matplotlib 的缓冲目录 pyhon 同时替换多个单词https://blog.csdn.net/huludan/article/details/50925735正则断言http://blog.sina.com.cn/s/blog_a71b93220102wczi.html def multiple_replace(text, idict): rx = re.compile(r’\b%s\b’ % r’\b|\b’.join(map(re.escape, idict))) def one_xlat(match): return idict[match.group(0)] return rx.sub(one_xlat, text)]]></content>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ubuntu 死机原因]]></title>
+    <url>%2F2018%2F10%2F27%2Fubuntu%E6%AD%BB%E6%9C%BA%E5%8F%8A%E5%86%85%E5%AD%98%E6%9F%A5%E7%9C%8B%2F</url>
+    <content type="text"><![CDATA[Linux查看内存大小和插槽Linux 查看内存的插槽数，已经使用多少插槽，每条内存多大，已使用内存多大123dmidecode | grep -P -A5 &quot;Memory\s+Device&quot; | grep Size | grep -v Range Linux 查看内存支持的最大内存容量 dmidecode | grep -P ‘Maximum\s+Capacity’ Linux 查看内存的频率1234567dmidecode | grep -A16 &quot;Memory Device&quot; | grep &quot;Speed&quot; 查看详细的主板信息dmidecode | grep -A16 &quot;System Information$&quot;查看详细的内存信息 dmidecode | grep -A16 “Memory Device$”dmidecode -t memory 死机原因内存查看１．free -g,free 为０，内存基本用完 释放内存： sync echo 3 &gt; /proc/sys/vm/drop_caches２．磁盘使用， df-h３．磁盘I/O使用， iostat-x 1４．cpu用 top 或ａｔｏｐ最右侧的%id表示剩余，若很低，则表示cpu被吃完了，在top界面按shift+p对进程使用cpu排序，能看到哪些进程占用cpu较多。ｔｏｐ 按 Ｍ 查看内存分配５．cat /proc/meminfo 也可以看到一些细化的内存使用信息６．按内存占用排序：ps -eo rss,pmem,pcpu,vsize,args | sort -k 1 -r -n | less７.释放内存空间Linux服务器运行一段时间后，由于其内存管理机制，会将暂时不用的内存转为buff/cache，这样在程序使用到这一部分数据时，能够很快的取出，从而提高系统的运行效率，所以这也正是linux内存管理中非常出色的一点，所以乍一看内存剩余的非常少，但是在程序真正需要内存空间时，linux会将缓存让出给程序使用，这样达到对内存的最充分利用，所以真正剩余的内存是free+buff/cache 但是有些时候大量的缓存占据空间，这时候应用程序回去使用swap交换空间，从而使系统变慢，这时候需要手动去释放内存，释放内存的时候，首先执行命令 sync 将所有正在内存中的缓冲区写到磁盘中，其中包括已经修改的文件inode、已延迟的块I/O以及读写映射文件，从而确保文件系统的完整性0：0是系统默认值，默认情况下表示不释放内存，由操作系统自动管理 1：释放页缓存 2：释放dentries和inodes 3：释放所有缓存｀｀｀echo 1 &gt; /proc/sys/vm/drop_caches 正常过程是 系统先使用内存，内存不足了再使用，tmpfs 的。tmpfs 满了，系统内存再满了，你机器就挂了。你看看系统内存什么情况吧。如果系统内存正常，tmpfs 满了说明你服务有问题Slab dentry 过大导致的问题 参考资料：Linux系统卡顿怎么排查，top命令记一次Linux系统内存占用较高得排查助 Linux 真实内存占用过大, htop 命令无法展示占用的进程Linux 死机原因及解决方法Linux释放内存空间]]></content>
+      <tags>
+        <tag>ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[mysql错误集及使用]]></title>
     <url>%2F2018%2F10%2F27%2Fmysql%E9%94%99%E8%AF%AF%2F</url>
     <content type="text"><![CDATA[1114 – The table ‘xxxx’is full解决方法ubuntu中mysql 的配置文件 my.cnf 的路径是/etc/mysql/my.cnf。2、其它非debian系列的linux中mysql的配置文件my.cnf的路径一般是/etc/my.cnf。 ERROR: Export data to file: (‘Lost connection to MySQL server during query’, 2013MySQL workbench Q&amp;A找到原因，链接如下 https://dev.mysql.com/doc/workbench/en/workbench-faq.html#faq-workbench-error-lost-connection Yes, go to ‘ edit ,Preferences, SQL Editor’, and adjust the DBMS connection read time out option that defaults to 600 seconds. This sets the maximum amount of time (in seconds) that a query can take before MySQL Workbench disconnects from the MySQL server. 通过修改红色字体的值，并重启启动workbench 生效（一定要重启哦！）。 The MySQL server is running with the –secure-file-priv option```mysql -u -pshow variables like ‘%secure%’;查看 secure-file-priv 当前的值是什么导出的数据必须是这个值的指定路径才可以导出，默认有可能是NULL就代表禁止导出，所以需要设置一下 知道mysql安装路径下的my.ini文件，设置一下路径：然后重启数据库即可 Error executing task: ‘ascii’ codec can’t decode byte 0xc4 in position 32: ordinal not in range(128)存储路径名不要有中文https://bbs.csdn.net/topics/390347030https://blog.csdn.net/ACMAIN_CHM/article/details/4174186 mysql 导出csv命令行：SELECT * FROM server_warning_repaired into outfile ‘/tmp/test.csv’https://my.oschina.net/u/2335552/blog/733185 mysql workbench:表的右键有导出数据选项，但好像只能一张表一张表整个数据库的导出是导出sql 查看端口终端mysql -uroot -ppasswd 进入show global variables like ‘port’;查看端口号 https://blog.csdn.net/LANGZI7758521/article/details/51391932]]></content>
@@ -10,6 +26,14 @@
       <tags>
         <tag>编程</tag>
         <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[pyhon3与python2的区别]]></title>
+    <url>%2F2018%2F10%2F27%2Fpyhon3%E4%B8%8Epython2%E7%9A%84%E5%8C%BA%E5%88%AB%2F</url>
+    <content type="text"><![CDATA[basestringpython3 为 str ininstance(s,basestring) 为ininstance(s,str)]]></content>
+      <tags>
+        <tag>pyhton</tag>
       </tags>
   </entry>
   <entry>
@@ -255,18 +279,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[自动备份Hexo博客源文件]]></title>
-    <url>%2F2017%2F12%2F04%2F%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BDhexo%2F</url>
-    <content type="text"><![CDATA[原文出自：http://zhujiegao.com/2015/12/06/automatic-backup/ 先安装git和node 原理通过通过监听Hexo的其它事件来完成自动执行Git命令完成自动备份。通过查阅Hexo文档，找到了Hexo的主要事件，见下表： 事件名 事件发生时间 deployBefore 在部署完成前发布 deployAfter 在部署成功后发布 exit 在 Hexo 结束前发布 generateBefore 在静态文件生成前发布 generateAfter 在静态文件生成后发布 new 在文章文件建立后发布 实现 在Github下创建新的仓库，取名hexo 进入本地hexo文件夹，执行以下命令 123456git initgit remote add origin git@github.com:XXX/XXX.gitgit pull -u origin mastergit add .git commit -m &quot;添加hexo源码文件备份&quot;git pull -u origin master 3.安装shelljs模块要实现这个自动备份功能，需要依赖Node.js的一个shelljs模块,该模块重新包装了child_process,调用系统命令更加的方便。该模块需要安装后使用 1npm install --save shelljs 4 自动备份脚本 待到模块安装完成，在Hexo根目录的scripts文件夹下新建一个js文件，文件名随意取。 ps: 如果没有scripts目录，请新建一个。 然后在脚本中，写入以下内容： 123456789101112131415161718192021222324252627282930require(&apos;shelljs/global&apos;);try &#123; hexo.on(&apos;deployAfter&apos;, function() &#123;//当deploy完成后执行备份 run(); &#125;);&#125; catch (e) &#123; console.log(&quot;产生了一个错误&lt;(￣3￣)&gt; !，错误详情为：&quot; + e.toString());&#125;function run() &#123; if (!which(&apos;git&apos;)) &#123; echo(&apos;Sorry, this script requires git&apos;); exit(1); &#125; else &#123; echo(&quot;======================Auto Backup Begin===========================&quot;); cd(&apos;D:/hexo&apos;); //此处修改为Hexo根目录路径 if (exec(&apos;git add --all&apos;).code !== 0) &#123; echo(&apos;Error: Git add failed&apos;); exit(1); &#125; if (exec(&apos;git commit -am &quot;Form auto backup script\&apos;s commit&quot;&apos;).code !== 0) &#123; echo(&apos;Error: Git commit failed&apos;); exit(1); &#125; if (exec(&apos;git push origin master&apos;).code !== 0) &#123; echo(&apos;Error: Git push failed&apos;); exit(1); &#125; echo(&quot;==================Auto Backup Complete============================&quot;) &#125;&#125;]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>GitHub</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[识别系统前期调研]]></title>
     <url>%2F2017%2F12%2F04%2F%E8%AF%86%E5%88%AB%E7%B3%BB%E7%BB%9F%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94%2F</url>
     <content type="text"><![CDATA[三星S8—虹膜识别 ①首先需要可以捕捉红外光的相机（目前市场已经没有） ② 然后对机主的虹膜进行高分辨捕捉 ③ 偷取他的手机 ④ 再用特殊的打印方式打印出来 iphone X—人脸识别苹果在Face ID的人脸识别中加入了深度信息的技术。 Face ID的实现靠的是iPhone X顶部一小块没被屏幕覆盖的区域。这一小块区域集成了多达八个组件，除了麦克风、扬声器、前置摄像头、环境光传感器、距离感应器等我们熟知的部分，还集成了红外镜头、泛光感应元件（Flood illuminator）、点阵投影器。 深度信息技术在Face ID的认证过程中分为以下两个步骤① 在注册时，点阵投影仪会投射3万多个点在人脸上，从而形成一张3D人脸图，并存储在A11芯片上 ② 使用时，泛光感应元件会打一道看不见的光在人的脸上（这样在黑暗中也可以识别人脸），读取用户的脸部3D几何结构图，并将它与存储在A11芯片隔区内的数据进行对比，如果两者一致，iPhone X就会解锁 越南网络安全公司Bkav绕过了首批由华硕、联想、东芝等笔记本电脑部署的面部识别系统，而使用的不过是一张简单的照片 门禁系统支付宝，ＱＱ安全中心人脸改密打卡机人脸（得力，中控）app以及线下互联网领域存在很多提供人脸识别技术的服务商，比如一登、facevisa 研究人员教导人工智能研究社交网络用户的行为，然后设计并实施自己的网络钓鱼诱饵。在测试中，AI 比人类竞争对手强大得多，制造并分发了比人类更多的网络钓鱼微博人工智能可用于挖掘大量公共领域和社交网络数据，以提取出生日期、性别、位置电话号码、邮箱地址等个人身份信息，可用于黑客入侵个人账户它还可以用于自动监控电子邮件和短信，并为社会工程攻击创建个性化的网络钓鱼邮件网络钓鱼诈骗是非法尝试从不知情的用户获取敏感信息。AI 可以更容易地突变恶意软件、更智能地搜索并挖掘和利用系统中的漏洞 ｆａｃｅ＋＋人脸识别语音：ＡＬＥＸＡ 智能设备语音助手公安部旗下NCIIC的人脸比对优图独创Uface深度人脸模型SeetaFace开源人脸识别引擎车牌识别及普通验证码 目标：Deep-pwning是一个轻量级的机器学习模型的实验框架，其目的是评估其对抗动机的强大对手。 请注意，目前状态下的深层次不在接近到期或完成的地方。 这是为了试验，扩展和扩展你。只有这样我们才能真正成为统计机器学习模型的渗透测试工具包。 Visual Question Answering (VQA）Can you fool AI with adversarial examples on a visual Turing test?]]></content>
@@ -303,20 +315,44 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[书单]]></title>
-    <url>%2F2017%2F12%2F04%2F%E4%B9%A6%E5%8D%95%2F</url>
-    <content type="text"><![CDATA[书单：理性乐观派]]></content>
+    <title><![CDATA[自动备份Hexo博客源文件]]></title>
+    <url>%2F2017%2F12%2F04%2F%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BDhexo%2F</url>
+    <content type="text"><![CDATA[原文出自：http://zhujiegao.com/2015/12/06/automatic-backup/ 先安装git和node 原理通过通过监听Hexo的其它事件来完成自动执行Git命令完成自动备份。通过查阅Hexo文档，找到了Hexo的主要事件，见下表： 事件名 事件发生时间 deployBefore 在部署完成前发布 deployAfter 在部署成功后发布 exit 在 Hexo 结束前发布 generateBefore 在静态文件生成前发布 generateAfter 在静态文件生成后发布 new 在文章文件建立后发布 实现 在Github下创建新的仓库，取名hexo 进入本地hexo文件夹，执行以下命令 123456git initgit remote add origin git@github.com:XXX/XXX.gitgit pull -u origin mastergit add .git commit -m &quot;添加hexo源码文件备份&quot;git pull -u origin master 3.安装shelljs模块要实现这个自动备份功能，需要依赖Node.js的一个shelljs模块,该模块重新包装了child_process,调用系统命令更加的方便。该模块需要安装后使用 1npm install --save shelljs 4 自动备份脚本 待到模块安装完成，在Hexo根目录的scripts文件夹下新建一个js文件，文件名随意取。 ps: 如果没有scripts目录，请新建一个。 然后在脚本中，写入以下内容： 123456789101112131415161718192021222324252627282930require(&apos;shelljs/global&apos;);try &#123; hexo.on(&apos;deployAfter&apos;, function() &#123;//当deploy完成后执行备份 run(); &#125;);&#125; catch (e) &#123; console.log(&quot;产生了一个错误&lt;(￣3￣)&gt; !，错误详情为：&quot; + e.toString());&#125;function run() &#123; if (!which(&apos;git&apos;)) &#123; echo(&apos;Sorry, this script requires git&apos;); exit(1); &#125; else &#123; echo(&quot;======================Auto Backup Begin===========================&quot;); cd(&apos;D:/hexo&apos;); //此处修改为Hexo根目录路径 if (exec(&apos;git add --all&apos;).code !== 0) &#123; echo(&apos;Error: Git add failed&apos;); exit(1); &#125; if (exec(&apos;git commit -am &quot;Form auto backup script\&apos;s commit&quot;&apos;).code !== 0) &#123; echo(&apos;Error: Git commit failed&apos;); exit(1); &#125; if (exec(&apos;git push origin master&apos;).code !== 0) &#123; echo(&apos;Error: Git push failed&apos;); exit(1); &#125; echo(&quot;==================Auto Backup Complete============================&quot;) &#125;&#125;]]></content>
       <categories>
-        <category>读书</category>
+        <category>Web</category>
       </categories>
       <tags>
-        <tag>书籍</tag>
+        <tag>Hexo</tag>
+        <tag>GitHub</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[正则化]]></title>
-    <url>%2F2017%2F12%2F04%2F%E6%AD%A3%E5%88%99%E5%8C%96%2F</url>
-    <content type="text"><![CDATA[正则化是为了解决过拟合问题。在Andrew Ng的机器学习视频中有提到（详见http://www.cnblogs.com/jianxinzhou/p/4083921.html）。 正则化产生了稀疏性（Sparsity），减少了特征向量个数，降低了模型的复杂度。 例如一回归问题，假设回归模型为：y=w1x1+w2x2+…+w1000*x1000+b 通过学习，如果最后学习到的w就只有很少的非零元素，大部分W为0或接近于0，例如只有5个非零的wi，那可以认为y之于这5个（因素）xi有关系，这更有利于人们对问题的认识和分析，抓住影响问题的主要方面（因素）更符合人们的认知习惯。(1)L0范数 L0范数是指向量中非零元素的个数。L0正则化的值是模型中非零参数的个数，L0正则化可以实现模型参数的的稀疏化 （2）L1范数 L1范数是指向量中各个元素绝对值之和，又叫“稀疏规则算子”（Lasso regularization）。 L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩罚』是指对损失函数中的某些参数做一些限制。知乎中陶轻松的答案指出正则项使W向量中项的个数最小化，从而防止过拟合]]></content>
+    <title><![CDATA[当难过时]]></title>
+    <url>%2F2017%2F12%2F04%2F%E5%BD%93%E9%9A%BE%E8%BF%87%E6%97%B6%2F</url>
+    <content type="text"><![CDATA[一屋两人三餐四季]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[深度学习中激活函数]]></title>
+    <url>%2F2017%2F12%2F04%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[在神经网络中，激活函数的作用是能够给神经网络加入一些非线性因素，使得神经网络可以更好地解决较为复杂的问题。激活函数众所周知有tanh,sigmoid,ReLU等。 tanh 双切正切函数，取值范围[-1,1]sigmoid 采用S形函数，取值范围[0,1] ReLU 取的max(0,x) 简单而粗暴，大于0的留下，否则一律为0。 可微函数是指那些在定义域中所有点都存在导数的函数。 知乎忆臻的回答中激活函数是多个线性直线的组合，图像比较直观经网络中的激活函数（activation function）-Sigmoid, ReLu, TanHyperbolic(tanh) 梯度消失问题,由于激活函数的饱和性。几种常见的激活函数从神经网络的构建讲解激活函数。]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>对抗样本</tag>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[深度学习对抗攻击]]></title>
+    <url>%2F2017%2F12%2F04%2F%E5%AF%B9%E6%8A%97%E6%A0%B7%E6%9C%AC%E8%AE%BA%E6%96%87%E9%9B%86%2F</url>
+    <content type="text"><![CDATA[深度学习１、2014-ｅxlaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”[ArXiv][code][code] 提出对抗样本不是因为非线性，而是因为模型在高维空间中的线性性。FSM 方法是计算关于x的导数，然后ｓｉｇｎ函数取值进行扰动,在$$ L{无穷} $$距离度量下。$$ X^{adv}＝Ｘ＋ \varepsilon \cdot sign (\bigtriangledown \ J(X,y{true})) $$梯度可以通过反向传播算法（backpropagation）计算获得。 ２、2015-DeepFool: a simple and accurate method to fool deep neural networks [ArXiv][code]基于$L_2$距离度量的非目标攻击$min ||D(x)-X||2subject\ to\ argmaxf(D(X) \neq\ y{true})$ ３、2015-The Limitations of Deep Learning in Adversarial Settings[ArXiv][code]通过计算对抗显著图，寻找对输出影响最大的两个输入，每次迭代修改两个像素点，直到达到目标图像。L0 distance metric ４、2015-Distributional Smoothing with Virtual Adversarial Training [ArXiv][code]KL散度 ５、2016-Exploring the space of adversarial images[ArXiv][code]-lua６、2016-Adversarial Machine Learning at Scale[ArXiv][code]９、2016-Adversarial examples in the physical world [ArXiv][code][code]通过对对抗样本拍照片，改变了某些像素来测试对抗样本的有效性拓展FGSM,多次应用，每次一小步,中间结果被$\varepsilon$截断$X0^{adv}=X \X{N+1}^{adv}=Clip{X,\varepsilon}{X{N}^{adv}+\alpha\cdot sign (\bigtriangledown J(X,y_{true}))}$ 10、2016-Simple Black-Box Adversarial Perturbations for Deep Networks[ArXiv]数据集：CIFAR10, MNIST, SVHN, STL10, and ImageNet1000 datasets 11、2017-Towards Evaluating the Robustness of Neural Networks[ArXiv][code][code]It is noteworthy that the original defensive distillation is broken by Carlini and Wagner’s attack$min ||1/2(tanh(W)+1)-x)||^2_2+c\cdot l(1/2(tanh(W)+1))$ 12、2017-Fast Feature Fool: A data independent approach to universal adversarial perturbations[ArXiv][code]13、2017-Towards Deep Learning Models Resistant to Adversarial Attacks[ArXiv][code]14、2017-Ensemble Adversarial Training: Attacks and Defenses[ArXiv][code]15、S. Zagoruyko. Are deep learning algorithms easily hackable?[code]16、2015-Deep neural networks are easily fooled: High confidence predictions for unrecognizable images[ArXiv]16、2016-Transferability in Machine Learning: from Phenomena to Black-Box Attacks using Adversarial Samples[ArXiv]17、2013-Intriguing properties of neural networkss[ArXiv]通过在$Ｌ_２$距离度量下Ｌ—BFGS解决优化问题来生成对抗样本。 $min\ c|r|+loss_f(x+r,l)\ s.t\ x+r \subset[0,1]^m$ L-BFGS attack and DeepFool attacks have been implemented in the Foolbox[code] 2017-Robust Physical-World Attacks on Deep Learning Models Evasion attacks against machine learning at test time adversary goal（攻击目标）: 分为两种目标，一是能够分类为好的即可（在垃圾邮件检测中，指分类为好的邮件）。如果有一个函数g定义在样本空间中X，g(x)&lt;0表示分类为好，那么敌人的目标就是设计一个样本x，让g(x)&lt;0。这种攻击很容易破解，只要调整分类界限即可（这里指g(x)=0这条边界）。所以，其实攻击者还有一个更好的目标是让g(x)尽可能小 Universal adversarial perturbations[ArXiv][code]黑盒攻击2017-10-WHITENING BLACK-BOX NEURAL NETWORKS[ArXiv]窃取隐私数据然后进行白盒攻击 ７、2016-Delving into Transferable Adversarial Examples and Black-box Attacks [ArXiv][code]作者还使用了同样的实验方法测试了定向性对抗性攻击在目标模型的效果。结果表明定向类标记的传递性差了很多，只有小于等于4%的对抗性图像在源、目标机器学习模型中都识别出相同的定向标记。基于此，作者提出了ensemble方法。它是以多个深度神经网络模型为基础构造对抗图片，即将图4中单个已知机器学习模型替换成多个不同的已知机器学习模型，并共同产生一个对抗性图像。在实验设计中，作者对5个不同的深度神经网络模型一一实施了黑盒子攻击。在对每一个模型攻击的时候，作者假设已知其余的4个模型，并用集合的方式作白盒子对抗图形的构造。同样的，作者分别使用基于优化的攻击手段，和基于Fast Gradient的手段构造对抗性图片。构造图片依然使用的是Adam优化器。在算法经过100次的迭代对权重向量的更新，loss function得以汇聚。作者发现有许多攻击者预先设定的标记也得到了传递。详细结果参见表2。格子(i,j)代表用除了模型i之外的4个其他算法生成的对抗图片，用模型j来验证得到的定向标记的准确值。可以看出，当目标模型包含在已知模型集合中，定向类标记的传递性都在60%以上。即使目标模型不在已知模型集合中，定向标记的准确值也在30%以上。 ８、2016-Practical Black-Box Attacks against Machine Learning[ArXiv][code]敌手不需要知道目标模型的结构和参数，只能够根据输入得到输出。由于对抗样本的迁移性，可以先构建替代模型训练对抗样本再在目标模型上测试生成的对抗样本。替代模型的结构和目标模型结构要能够处理相同的任务。 Machine Learning as an Adversarial Service:Learning Black-Box Adversarial Examples一种直接攻击目标黑盒神经网络的方法MNIST数据集，CIFAR-10图片数据集应用在物理世界中的目的模型——Amazon Machine Learning Prediction Universal adversarial perturbationsGenerating Adversarial Malware Examples for Black-Box Attacks Based on GAN利用生成对抗网络原理生成对抗样本的方法文中称之为MalGAN。其中，GAN 网络中的判别器是一个人为构建的替代探测器网络。生成器则是目的网络，能生成恶意软件对抗样本。 隐私问题1、Hacking Smart Machines with Smarter Ones : How to Extract Meaningful Data from Machine Learning Classifiers[ArXiv]２、Membership Inference Attacks Against Machine Learning Models[ArXiv]3、Stealing machine learning models via prediction apis4、An end-to-end case study of personal- ized warfarin dosingOn the Protection of Private Information in Machine Learning Systems:Two Recent Approaches其他机器学习技术1、Vulnerability of Deep Reinforcement Learning to Policy Induction Attacks[ArXiv]2、Tactics of Adversarial Attack on Deep Reinforcement Learning Agents[ArXiv]3、Adversarial examples for generative models[ArXiv]4、Adversarial Attacks on Neural Network Policies防御技术1、2016-Distillation as a Defense to Adversarial Perturbations Against Deep Neural Networks[ArXiv]机器学习1、2006-Can machine learning be secure?[paper]2、2011-Adversarial machine learning3、Take two software updates and see me in the morning: The Case for Software Security Evaluations of Medical Devices [paper]4、Adversarial AI5、2017-机器学习安全性问题及其防御技术研究综述6、Concrete Problems in AI Safety[ArXiv]7、Towards the Science of Security and Privacy in Machine Learning[ArXiv]8、Stealing Machine Learning Models via Prediction APIs[paper][code]GAN和对抗样本1、2017-APE-GAN : Adversarial Perturbation Elimination with GAN[ArXiv][code]数据集：including MNIST, CIFAR10 and ImageNet 生成网络将对抗样本还原为真实图片 2、2017-Generative Adversarial Trainer : Defense to Adversarial Perturbations with GAN[ArXiv]增强判别器的识别能力 ３、2017-Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN[ArXiv]GAN也可以产生针对恶意 软件分类器的对抗样本在提取的恶意软件特征上增加噪声使分类器误分类。 ４、2017-Adversarial examples for generative models[ArXiv]5、Generative Poisoning Attack Method Against Neural Networks[ArXiv]提出了 一种更有效的产生对抗样本的方法，它采用生成对 抗网络（GAN）中生成模型（Generative Model）和 判别模型（Discriminative model）的思想，即先用生成模型产生候选的对抗样本，再用判别模型进行 筛选最优对抗样本。 博士论文ON THE INTEGRITY OF DEEP LEARNING SYSTEMS IN ADVERSARIAL SETTINGSSegmentation &amp; Object DetectionAdversarial Examples for Semantic Segmentation and Object Detection Visual Question Answering (VQA）Can you fool AI with adversarial examples on a visual Turing test? 应用场景１．Accessorize to a crime: Real and stealthy attacks on state-of-the-art face recognition２．Robust Physical-World Attacks on Machine Learning Models 软件及应用1.AdversariaLib (includes implementation of evasion attacks from .2.AdLib. A python library with a scikit-style interface which includes implementations of a number of published evasion attacks and defenses.3.AlfaSVMLib. Adversarial Label Flip Attacks against Support Vector Machines.4.Poisoning Attacks against Support Vector Machines, and Attacks against Clustering Algorithms5.deep-pwning Metasploit for deep learning which currently has attacks on deep neural networks using Tensorflow6.Cleverhans is a great TensorFlow-based library for adversarial attacks and defences: https://github.com/tensorflow/cleverhans7.FoolBox – another collection of attacks that you can use with a framework of your preferencehttps://foolbox.readthedocs.io/en/latest/8.EvadeML - Machine Learning in the Presence of Adversaries9.Adversarial Machine Learning - PRA Lab]]></content>
       <categories>
         <category>深度学习</category>
       </categories>
@@ -338,9 +374,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[深度学习对抗攻击]]></title>
-    <url>%2F2017%2F12%2F04%2F%E5%AF%B9%E6%8A%97%E6%A0%B7%E6%9C%AC%E8%AE%BA%E6%96%87%E9%9B%86%2F</url>
-    <content type="text"><![CDATA[深度学习１、2014-ｅxlaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”[ArXiv][code][code] 提出对抗样本不是因为非线性，而是因为模型在高维空间中的线性性。FSM 方法是计算关于x的导数，然后ｓｉｇｎ函数取值进行扰动,在$$ L{无穷} $$距离度量下。$$ X^{adv}＝Ｘ＋ \varepsilon \cdot sign (\bigtriangledown \ J(X,y{true})) $$梯度可以通过反向传播算法（backpropagation）计算获得。 ２、2015-DeepFool: a simple and accurate method to fool deep neural networks [ArXiv][code]基于$L_2$距离度量的非目标攻击$min ||D(x)-X||2subject\ to\ argmaxf(D(X) \neq\ y{true})$ ３、2015-The Limitations of Deep Learning in Adversarial Settings[ArXiv][code]通过计算对抗显著图，寻找对输出影响最大的两个输入，每次迭代修改两个像素点，直到达到目标图像。L0 distance metric ４、2015-Distributional Smoothing with Virtual Adversarial Training [ArXiv][code]KL散度 ５、2016-Exploring the space of adversarial images[ArXiv][code]-lua６、2016-Adversarial Machine Learning at Scale[ArXiv][code]９、2016-Adversarial examples in the physical world [ArXiv][code][code]通过对对抗样本拍照片，改变了某些像素来测试对抗样本的有效性拓展FGSM,多次应用，每次一小步,中间结果被$\varepsilon$截断$X0^{adv}=X \X{N+1}^{adv}=Clip{X,\varepsilon}{X{N}^{adv}+\alpha\cdot sign (\bigtriangledown J(X,y_{true}))}$ 10、2016-Simple Black-Box Adversarial Perturbations for Deep Networks[ArXiv]数据集：CIFAR10, MNIST, SVHN, STL10, and ImageNet1000 datasets 11、2017-Towards Evaluating the Robustness of Neural Networks[ArXiv][code][code]It is noteworthy that the original defensive distillation is broken by Carlini and Wagner’s attack$min ||1/2(tanh(W)+1)-x)||^2_2+c\cdot l(1/2(tanh(W)+1))$ 12、2017-Fast Feature Fool: A data independent approach to universal adversarial perturbations[ArXiv][code]13、2017-Towards Deep Learning Models Resistant to Adversarial Attacks[ArXiv][code]14、2017-Ensemble Adversarial Training: Attacks and Defenses[ArXiv][code]15、S. Zagoruyko. Are deep learning algorithms easily hackable?[code]16、2015-Deep neural networks are easily fooled: High confidence predictions for unrecognizable images[ArXiv]16、2016-Transferability in Machine Learning: from Phenomena to Black-Box Attacks using Adversarial Samples[ArXiv]17、2013-Intriguing properties of neural networkss[ArXiv]通过在$Ｌ_２$距离度量下Ｌ—BFGS解决优化问题来生成对抗样本。 $min\ c|r|+loss_f(x+r,l)\ s.t\ x+r \subset[0,1]^m$ L-BFGS attack and DeepFool attacks have been implemented in the Foolbox[code] 2017-Robust Physical-World Attacks on Deep Learning Models Evasion attacks against machine learning at test time adversary goal（攻击目标）: 分为两种目标，一是能够分类为好的即可（在垃圾邮件检测中，指分类为好的邮件）。如果有一个函数g定义在样本空间中X，g(x)&lt;0表示分类为好，那么敌人的目标就是设计一个样本x，让g(x)&lt;0。这种攻击很容易破解，只要调整分类界限即可（这里指g(x)=0这条边界）。所以，其实攻击者还有一个更好的目标是让g(x)尽可能小 Universal adversarial perturbations[ArXiv][code]黑盒攻击2017-10-WHITENING BLACK-BOX NEURAL NETWORKS[ArXiv]窃取隐私数据然后进行白盒攻击 ７、2016-Delving into Transferable Adversarial Examples and Black-box Attacks [ArXiv][code]作者还使用了同样的实验方法测试了定向性对抗性攻击在目标模型的效果。结果表明定向类标记的传递性差了很多，只有小于等于4%的对抗性图像在源、目标机器学习模型中都识别出相同的定向标记。基于此，作者提出了ensemble方法。它是以多个深度神经网络模型为基础构造对抗图片，即将图4中单个已知机器学习模型替换成多个不同的已知机器学习模型，并共同产生一个对抗性图像。在实验设计中，作者对5个不同的深度神经网络模型一一实施了黑盒子攻击。在对每一个模型攻击的时候，作者假设已知其余的4个模型，并用集合的方式作白盒子对抗图形的构造。同样的，作者分别使用基于优化的攻击手段，和基于Fast Gradient的手段构造对抗性图片。构造图片依然使用的是Adam优化器。在算法经过100次的迭代对权重向量的更新，loss function得以汇聚。作者发现有许多攻击者预先设定的标记也得到了传递。详细结果参见表2。格子(i,j)代表用除了模型i之外的4个其他算法生成的对抗图片，用模型j来验证得到的定向标记的准确值。可以看出，当目标模型包含在已知模型集合中，定向类标记的传递性都在60%以上。即使目标模型不在已知模型集合中，定向标记的准确值也在30%以上。 ８、2016-Practical Black-Box Attacks against Machine Learning[ArXiv][code]敌手不需要知道目标模型的结构和参数，只能够根据输入得到输出。由于对抗样本的迁移性，可以先构建替代模型训练对抗样本再在目标模型上测试生成的对抗样本。替代模型的结构和目标模型结构要能够处理相同的任务。 Machine Learning as an Adversarial Service:Learning Black-Box Adversarial Examples一种直接攻击目标黑盒神经网络的方法MNIST数据集，CIFAR-10图片数据集应用在物理世界中的目的模型——Amazon Machine Learning Prediction Universal adversarial perturbationsGenerating Adversarial Malware Examples for Black-Box Attacks Based on GAN利用生成对抗网络原理生成对抗样本的方法文中称之为MalGAN。其中，GAN 网络中的判别器是一个人为构建的替代探测器网络。生成器则是目的网络，能生成恶意软件对抗样本。 隐私问题1、Hacking Smart Machines with Smarter Ones : How to Extract Meaningful Data from Machine Learning Classifiers[ArXiv]２、Membership Inference Attacks Against Machine Learning Models[ArXiv]3、Stealing machine learning models via prediction apis4、An end-to-end case study of personal- ized warfarin dosingOn the Protection of Private Information in Machine Learning Systems:Two Recent Approaches其他机器学习技术1、Vulnerability of Deep Reinforcement Learning to Policy Induction Attacks[ArXiv]2、Tactics of Adversarial Attack on Deep Reinforcement Learning Agents[ArXiv]3、Adversarial examples for generative models[ArXiv]4、Adversarial Attacks on Neural Network Policies防御技术1、2016-Distillation as a Defense to Adversarial Perturbations Against Deep Neural Networks[ArXiv]机器学习1、2006-Can machine learning be secure?[paper]2、2011-Adversarial machine learning3、Take two software updates and see me in the morning: The Case for Software Security Evaluations of Medical Devices [paper]4、Adversarial AI5、2017-机器学习安全性问题及其防御技术研究综述6、Concrete Problems in AI Safety[ArXiv]7、Towards the Science of Security and Privacy in Machine Learning[ArXiv]8、Stealing Machine Learning Models via Prediction APIs[paper][code]GAN和对抗样本1、2017-APE-GAN : Adversarial Perturbation Elimination with GAN[ArXiv][code]数据集：including MNIST, CIFAR10 and ImageNet 生成网络将对抗样本还原为真实图片 2、2017-Generative Adversarial Trainer : Defense to Adversarial Perturbations with GAN[ArXiv]增强判别器的识别能力 ３、2017-Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN[ArXiv]GAN也可以产生针对恶意 软件分类器的对抗样本在提取的恶意软件特征上增加噪声使分类器误分类。 ４、2017-Adversarial examples for generative models[ArXiv]5、Generative Poisoning Attack Method Against Neural Networks[ArXiv]提出了 一种更有效的产生对抗样本的方法，它采用生成对 抗网络（GAN）中生成模型（Generative Model）和 判别模型（Discriminative model）的思想，即先用生成模型产生候选的对抗样本，再用判别模型进行 筛选最优对抗样本。 博士论文ON THE INTEGRITY OF DEEP LEARNING SYSTEMS IN ADVERSARIAL SETTINGSSegmentation &amp; Object DetectionAdversarial Examples for Semantic Segmentation and Object Detection Visual Question Answering (VQA）Can you fool AI with adversarial examples on a visual Turing test? 应用场景１．Accessorize to a crime: Real and stealthy attacks on state-of-the-art face recognition２．Robust Physical-World Attacks on Machine Learning Models 软件及应用1.AdversariaLib (includes implementation of evasion attacks from .2.AdLib. A python library with a scikit-style interface which includes implementations of a number of published evasion attacks and defenses.3.AlfaSVMLib. Adversarial Label Flip Attacks against Support Vector Machines.4.Poisoning Attacks against Support Vector Machines, and Attacks against Clustering Algorithms5.deep-pwning Metasploit for deep learning which currently has attacks on deep neural networks using Tensorflow6.Cleverhans is a great TensorFlow-based library for adversarial attacks and defences: https://github.com/tensorflow/cleverhans7.FoolBox – another collection of attacks that you can use with a framework of your preferencehttps://foolbox.readthedocs.io/en/latest/8.EvadeML - Machine Learning in the Presence of Adversaries9.Adversarial Machine Learning - PRA Lab]]></content>
+    <title><![CDATA[正则化]]></title>
+    <url>%2F2017%2F12%2F04%2F%E6%AD%A3%E5%88%99%E5%8C%96%2F</url>
+    <content type="text"><![CDATA[正则化是为了解决过拟合问题。在Andrew Ng的机器学习视频中有提到（详见http://www.cnblogs.com/jianxinzhou/p/4083921.html）。 正则化产生了稀疏性（Sparsity），减少了特征向量个数，降低了模型的复杂度。 例如一回归问题，假设回归模型为：y=w1x1+w2x2+…+w1000*x1000+b 通过学习，如果最后学习到的w就只有很少的非零元素，大部分W为0或接近于0，例如只有5个非零的wi，那可以认为y之于这5个（因素）xi有关系，这更有利于人们对问题的认识和分析，抓住影响问题的主要方面（因素）更符合人们的认知习惯。(1)L0范数 L0范数是指向量中非零元素的个数。L0正则化的值是模型中非零参数的个数，L0正则化可以实现模型参数的的稀疏化 （2）L1范数 L1范数是指向量中各个元素绝对值之和，又叫“稀疏规则算子”（Lasso regularization）。 L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩罚』是指对损失函数中的某些参数做一些限制。知乎中陶轻松的答案指出正则项使W向量中项的个数最小化，从而防止过拟合]]></content>
       <categories>
         <category>深度学习</category>
       </categories>
@@ -350,15 +386,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[深度学习中激活函数]]></title>
-    <url>%2F2017%2F12%2F04%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[在神经网络中，激活函数的作用是能够给神经网络加入一些非线性因素，使得神经网络可以更好地解决较为复杂的问题。激活函数众所周知有tanh,sigmoid,ReLU等。 tanh 双切正切函数，取值范围[-1,1]sigmoid 采用S形函数，取值范围[0,1] ReLU 取的max(0,x) 简单而粗暴，大于0的留下，否则一律为0。 可微函数是指那些在定义域中所有点都存在导数的函数。 知乎忆臻的回答中激活函数是多个线性直线的组合，图像比较直观经网络中的激活函数（activation function）-Sigmoid, ReLu, TanHyperbolic(tanh) 梯度消失问题,由于激活函数的饱和性。几种常见的激活函数从神经网络的构建讲解激活函数。]]></content>
+    <title><![CDATA[书单]]></title>
+    <url>%2F2017%2F12%2F04%2F%E4%B9%A6%E5%8D%95%2F</url>
+    <content type="text"><![CDATA[书单：理性乐观派]]></content>
       <categories>
-        <category>深度学习</category>
+        <category>读书</category>
       </categories>
       <tags>
-        <tag>对抗样本</tag>
-        <tag>深度学习</tag>
+        <tag>书籍</tag>
       </tags>
   </entry>
   <entry>
@@ -374,25 +409,19 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[当难过时]]></title>
-    <url>%2F2017%2F12%2F04%2F%E5%BD%93%E9%9A%BE%E8%BF%87%E6%97%B6%2F</url>
-    <content type="text"><![CDATA[一屋两人三餐四季]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>心情</tag>
-      </tags>
+    <title><![CDATA[test]]></title>
+    <url>%2F2017%2F12%2F04%2Ftest%2F</url>
+    <content type="text"><![CDATA[$$ \frac $$ $$\begin{eqnarray}\nabla\cdot\vec{E} &amp;=&amp; \frac{\rho}{\epsilon_0} \\nabla\cdot\vec{B} &amp;=&amp; 0 \\nabla\times\vec{E} &amp;=&amp; -\frac{\partial B}{\partial t} \\nabla\times\vec{B} &amp;=&amp; \mu_0\left(\vec{J}+\epsilon_0\frac{\partial E}{\partial t} \right)\end{eqnarray}$$]]></content>
   </entry>
   <entry>
-    <title><![CDATA[Robust Physical-World Attacks on Machine Learning Models]]></title>
-    <url>%2F2017%2F12%2F04%2FRobust%20Physical-World%20Attacks%20on%20Machine%20Learning%20Models%2F</url>
-    <content type="text"><![CDATA[最近的研究中，许多对抗样本构造方法在真实自然世界效果不好。已有的对抗攻击研究在现实世界中，往往不能使分类模型误分类，或者只在非常有限的情况比如复杂原始图像经修改后打印出来才能达到对抗攻击的目的。 本论文要点如下： 提出Robust Physical Perturbations(RP2)算法，能产生鲁棒且自然有效的对抗扰动。 使用RP2算法用两种方式构造对抗攻击：– subtle perturbations：对整个标志进行微小的、很难探测到的改动。把整个受到攻击后的图片打印后覆盖到原标志上面，尺寸和原图一样。– camouflage perturbations：以涂鸦或艺术画的形式对原图进行可见的改变。攻击者直接将扰动攻击打印出来，然后贴到已经存在的标志上面。 因为目前缺乏衡量自然界对抗攻击效果的标准方法，因此论文提出了一种评估方法。 数据集：LISA数据集，包含47种不同的路标图片，在本实验中重设尺寸为32×32 https://www.zybuluo.com/wuxin1994/note/839621]]></content>
+    <title><![CDATA[Ubuntu使用]]></title>
+    <url>%2F2017%2F12%2F04%2FUbuntu%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[CTRL+h 显示隐藏文件ctrl+win +D 显示桌面长按ｗｉｎ 显示快捷键 /usr是Unix Software Rrsources的意思，相当于windows的C盘的，C:\Windows\和C:\Program Files的结合体。 ls /usr可以得到：bin include lib share local 等等。 其中share就是安装后的文件，文件夹所在位置 而local是第三方库的位置，比如我安装了：boost和libtorrent库，就在这里面参考：1 中文输入法不能用wpssudo gedit /usr/bin/wps 增加 &gt;export XMODIFIERS=”@im=fcitx”export QT_IM_MODULE=”fcitx” 一定要在开头添加或者基于qt的程序下不能使用基于fcitx的中文输入法sudo apt-get install fcitx-frontend-qt4 fcitx-frontend-qt5 fcitx-libs-qt fcitx-libs-qt5 libfcitx-qt0 libfcitx-qt5-1 mendenleyUbuntu 用命令locate libfcitxplatforminputcontextplugin.so找到系统中的libfcitxplatforminputcontextplugin.so。（一般是/usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so）拷贝 重命名为libfcitxplatforminputcontextplugin.so，然后拷贝到mendeley安装位置，debian和ubuntu为： /opt/mendeleydesktop/plugins/qt/plugins/platforminputcontexts/ Arch为： /opt/mendeleydesktop/lib/mendeleydesktop/plugins/platforminputcontexts/ 重新启动mendeley即可发现中文可以输入了。 不能上网sudo gedit /etc/network/interfaces添加如下内容：auto enp2s0（网卡ifconfig 查看）iface enp2s0 inet staticaddress 10.0.0.156netmask 255.255.255.0gateway 10.0.0.1dns-nameserver 202.112.144.236 sudo gedit /etc/network/interfaces DNS 问题导致不能上网sudo gedit /etc/resolv.conf插入 nameserver 202.112.144.236 var/tmp 文件过大，磁盘空间满mkinitramfs× 此类文件过多用rm -rf mkinitramfs* 删除 http://forum.ubuntu.org.cn/viewtopic.php?p=3189497lsof看看有没有正在使用]]></content>
       <categories>
-        <category>论文</category>
+        <category>系统</category>
       </categories>
       <tags>
-        <tag>对抗样本</tag>
+        <tag>Ubuntu</tag>
       </tags>
   </entry>
   <entry>
@@ -408,20 +437,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Ubuntu使用]]></title>
-    <url>%2F2017%2F12%2F04%2FUbuntu%E4%BD%BF%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[CTRL+h 显示隐藏文件ctrl+win +D 显示桌面长按ｗｉｎ 显示快捷键 /usr是Unix Software Rrsources的意思，相当于windows的C盘的，C:\Windows\和C:\Program Files的结合体。 ls /usr可以得到：bin include lib share local 等等。 其中share就是安装后的文件，文件夹所在位置 而local是第三方库的位置，比如我安装了：boost和libtorrent库，就在这里面参考：1 中文输入法不能用wpssudo gedit /usr/bin/wps 增加 &gt;export XMODIFIERS=”@im=fcitx”export QT_IM_MODULE=”fcitx” 一定要在开头添加或者基于qt的程序下不能使用基于fcitx的中文输入法sudo apt-get install fcitx-frontend-qt4 fcitx-frontend-qt5 fcitx-libs-qt fcitx-libs-qt5 libfcitx-qt0 libfcitx-qt5-1 mendenleyUbuntu 用命令locate libfcitxplatforminputcontextplugin.so找到系统中的libfcitxplatforminputcontextplugin.so。（一般是/usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so）拷贝 重命名为libfcitxplatforminputcontextplugin.so，然后拷贝到mendeley安装位置，debian和ubuntu为： /opt/mendeleydesktop/plugins/qt/plugins/platforminputcontexts/ Arch为： /opt/mendeleydesktop/lib/mendeleydesktop/plugins/platforminputcontexts/ 重新启动mendeley即可发现中文可以输入了。 不能上网sudo gedit /etc/network/interfaces添加如下内容：auto enp2s0（网卡ifconfig 查看）iface enp2s0 inet staticaddress 10.0.0.156netmask 255.255.255.0gateway 10.0.0.1dns-nameserver 202.112.144.236 sudo gedit /etc/network/interfaces DNS 问题导致不能上网sudo gedit /etc/resolv.conf插入 nameserver 202.112.144.236 var/tmp 文件过大，磁盘空间满mkinitramfs× 此类文件过多用rm -rf mkinitramfs* 删除 http://forum.ubuntu.org.cn/viewtopic.php?p=3189497lsof看看有没有正在使用]]></content>
+    <title><![CDATA[Robust Physical-World Attacks on Machine Learning Models]]></title>
+    <url>%2F2017%2F12%2F04%2FRobust%20Physical-World%20Attacks%20on%20Machine%20Learning%20Models%2F</url>
+    <content type="text"><![CDATA[最近的研究中，许多对抗样本构造方法在真实自然世界效果不好。已有的对抗攻击研究在现实世界中，往往不能使分类模型误分类，或者只在非常有限的情况比如复杂原始图像经修改后打印出来才能达到对抗攻击的目的。 本论文要点如下： 提出Robust Physical Perturbations(RP2)算法，能产生鲁棒且自然有效的对抗扰动。 使用RP2算法用两种方式构造对抗攻击：– subtle perturbations：对整个标志进行微小的、很难探测到的改动。把整个受到攻击后的图片打印后覆盖到原标志上面，尺寸和原图一样。– camouflage perturbations：以涂鸦或艺术画的形式对原图进行可见的改变。攻击者直接将扰动攻击打印出来，然后贴到已经存在的标志上面。 因为目前缺乏衡量自然界对抗攻击效果的标准方法，因此论文提出了一种评估方法。 数据集：LISA数据集，包含47种不同的路标图片，在本实验中重设尺寸为32×32 https://www.zybuluo.com/wuxin1994/note/839621]]></content>
       <categories>
-        <category>系统</category>
+        <category>论文</category>
       </categories>
       <tags>
-        <tag>Ubuntu</tag>
+        <tag>对抗样本</tag>
       </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[test]]></title>
-    <url>%2F2017%2F12%2F04%2Ftest%2F</url>
-    <content type="text"><![CDATA[$$ \frac $$ $$\begin{eqnarray}\nabla\cdot\vec{E} &amp;=&amp; \frac{\rho}{\epsilon_0} \\nabla\cdot\vec{B} &amp;=&amp; 0 \\nabla\times\vec{E} &amp;=&amp; -\frac{\partial B}{\partial t} \\nabla\times\vec{B} &amp;=&amp; \mu_0\left(\vec{J}+\epsilon_0\frac{\partial E}{\partial t} \right)\end{eqnarray}$$]]></content>
   </entry>
   <entry>
     <title><![CDATA[python小知识]]></title>
@@ -433,18 +457,6 @@
       <tags>
         <tag>软件安装</tag>
         <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[anaconda+jupyter notebook安装]]></title>
-    <url>%2F2017%2F12%2F04%2Fjupyter%20notebook%20%E5%AE%89%E8%A3%85%2F</url>
-    <content type="text"><![CDATA[安装anaconda2和anaconda3先在清华镜像站下载2和3可以任意先安装一个版本，然后另一个版本安装在/envs/py2路径下，py2是自己起的文件名。再打开CMD下载jupyter notebook 1pip install jupyter notebook notebook同时有两个版本时，可在kernel文件夹中，例如路径为D:\ProgramData\Anaconda3\share\jupyter\kernels，放两个kernel 可把/envs文件下的python拷贝到此路径中。 跟新源http://so.kszixue.com/?id=20 channels: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/ https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/ https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/show_channel_urls: true 例 conda config –add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>编程</tag>
-        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -482,6 +494,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[anaconda+jupyter notebook安装]]></title>
+    <url>%2F2017%2F12%2F04%2Fjupyter%20notebook%20%E5%AE%89%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[安装anaconda2和anaconda3先在清华镜像站下载2和3可以任意先安装一个版本，然后另一个版本安装在/envs/py2路径下，py2是自己起的文件名。再打开CMD下载jupyter notebook 1pip install jupyter notebook notebook同时有两个版本时，可在kernel文件夹中，例如路径为D:\ProgramData\Anaconda3\share\jupyter\kernels，放两个kernel 可把/envs文件下的python拷贝到此路径中。 跟新源http://so.kszixue.com/?id=20 channels: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/ https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/ https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/show_channel_urls: true 例 conda config –add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>编程</tag>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[DELVING INTO TRANSFERABLE ADVERSARIAL EX- AMPLES AND BLACK-BOX ATTACKS]]></title>
     <url>%2F2017%2F12%2F04%2FDELVING%20INTO%20TRANSFERABLE%20ADVERSARIAL%20EX-%20AMPLES%20AND%20BLACK-BOX%20ATTACKS%2F</url>
     <content type="text"><![CDATA[贡献研究目标和非目标攻击，转移性在非目标攻击时更容易发生用已有的方法进行目标攻击时，几乎没有转移性提出基于集成的方法生成对抗样本，这样在进行目标攻击时可提高攻击成功率。 此前转移性只在小的数据集，如MNIST (LeCun et al. (1998)) and CIFAR-10 (Krizhevsky &amp; Hinton (2009))中进行试验，本论文在在大规模数据集，ImageNet (Russakovsky et al. (2015))进行试验 不同模型的梯度方向是正交的，决策边界是对齐的 攻击了Clarifai.com, a commercial com- pany providing state-of-the-art image classification services 转移性的研究：（1）在同样数据集的不同模型间 （2）相同模型在不相交的数据集上 （3）不同模型在不同数据集上]]></content>
@@ -516,17 +540,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[深度学习资料]]></title>
-    <url>%2F2017%2F12%2F04%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%2F</url>
-    <content type="text"><![CDATA[深度学习资料2015年5月《自然》上刊登的一篇概述性论文《深度学习》（Deep learning），由我自己、Yoshua Bengio 、Geoff Hinton共同撰写。 系统性的课本方面，由 Goodfellow、Bengio 和 Courville共同撰写的《深度学习》（Deep learning）（这个在网上有HTML版本，本书旨在帮助学生和从业人员入门机器学习，尤其是深度学习领域。HTML版本已经编辑完成，并且永久免费。网址：） 2012 年 IPAM上针对研究生的“深度学习和特征学习夏季课程”（这个夏季课程的授课老师包括 Geoff Hinton 、Yann LeCun、吴恩达、Yoshua Bengio等众多深度学习专家，历时半个多月时间，网上有完整视频录像：） 2015年在加拿大蒙特利尔市举行了“深度学习夏季课程”（该课程的对象为：已经具备的机器学习基本知识的研究生、业界工程师和研究人员，授课量十分丰富。 推荐一些关于特定平台的使用教程，比如Torch、TensorFlow 和 Theano。 百度paddle开发团队介绍的深度学习基本概念：深度学习适用于大数据.其中查了两个概念:word embedding,过拟合 知乎上关于深度学习入门的讨论,列了很多资料，一天搞懂深度学习图解深度学习这个网页动画做的很好。 机器学习中文社区 还有斯坦福大学公开课，讲机器学习,CS231 再看Dawn Song团队的一篇论文时查的VAEGAN（生成对抗网络）的最新应用状况结合代码讲解VAE-GAN比较透彻的一篇文章 应该搜搜深度学习暑期学校或深度学习项目实践 教程Udacity 深度学习知乎231翻译没有博士学位，照样玩转TensorFlow深度学习零基础入门深度学习 对抗样本MNIST的对抗噪声TensorFlow生成对抗样本（微信） https://yq.aliyun.com/articles/149583?utm_content=m_27089]]></content>
-      <categories>
-        <category>科研</category>
-      </categories>
-      <tags>
-        <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[今夜 仰望星空]]></title>
     <url>%2F2017%2F12%2F04%2F%E4%BB%8A%E5%A4%9C%20%E4%BB%B0%E6%9C%9B%E6%98%9F%E7%A9%BA%2F</url>
     <content type="text"><![CDATA[一片朦胧的夕光衬着暗绿的楼影你从雾雨中显现带着浴后的红晕多少语言和往事都在微笑中消溶我们走进了夜海去打捞遗失的繁星]]></content>
@@ -536,6 +549,17 @@
       <tags>
         <tag>寄语</tag>
         <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[深度学习资料]]></title>
+    <url>%2F2017%2F12%2F04%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%2F</url>
+    <content type="text"><![CDATA[深度学习资料2015年5月《自然》上刊登的一篇概述性论文《深度学习》（Deep learning），由我自己、Yoshua Bengio 、Geoff Hinton共同撰写。 系统性的课本方面，由 Goodfellow、Bengio 和 Courville共同撰写的《深度学习》（Deep learning）（这个在网上有HTML版本，本书旨在帮助学生和从业人员入门机器学习，尤其是深度学习领域。HTML版本已经编辑完成，并且永久免费。网址：） 2012 年 IPAM上针对研究生的“深度学习和特征学习夏季课程”（这个夏季课程的授课老师包括 Geoff Hinton 、Yann LeCun、吴恩达、Yoshua Bengio等众多深度学习专家，历时半个多月时间，网上有完整视频录像：） 2015年在加拿大蒙特利尔市举行了“深度学习夏季课程”（该课程的对象为：已经具备的机器学习基本知识的研究生、业界工程师和研究人员，授课量十分丰富。 推荐一些关于特定平台的使用教程，比如Torch、TensorFlow 和 Theano。 百度paddle开发团队介绍的深度学习基本概念：深度学习适用于大数据.其中查了两个概念:word embedding,过拟合 知乎上关于深度学习入门的讨论,列了很多资料，一天搞懂深度学习图解深度学习这个网页动画做的很好。 机器学习中文社区 还有斯坦福大学公开课，讲机器学习,CS231 再看Dawn Song团队的一篇论文时查的VAEGAN（生成对抗网络）的最新应用状况结合代码讲解VAE-GAN比较透彻的一篇文章 应该搜搜深度学习暑期学校或深度学习项目实践 教程Udacity 深度学习知乎231翻译没有博士学位，照样玩转TensorFlow深度学习零基础入门深度学习 对抗样本MNIST的对抗噪声TensorFlow生成对抗样本（微信） https://yq.aliyun.com/articles/149583?utm_content=m_27089]]></content>
+      <categories>
+        <category>科研</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
