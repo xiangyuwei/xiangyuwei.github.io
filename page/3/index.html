@@ -413,6 +413,241 @@ $(function() {
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/08/13/远程jupyter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/13/远程jupyter/" itemprop="url">远程登录jupyter notebook</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-13T21:38:08+08:00">
+                2018-08-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-13T22:21:09+08:00">
+                2018-08-13
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/13/远程jupyter/" class="leancloud_visitors" data-flag-title="远程登录jupyter notebook">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  570 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="服务器上设置"><a href="#服务器上设置" class="headerlink" title="服务器上设置"></a>服务器上设置</h2><h3 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h3><blockquote>
+<p>jupyter notebook –generate-config</p>
+</blockquote>
+<h3 id="生成密码"><a href="#生成密码" class="headerlink" title="生成密码"></a>生成密码</h3><blockquote>
+<p>ipython</p>
+</blockquote>
+<p>In [1]: from notebook.auth import passwd<br>In [2]: passwd()<br>Enter password:<br>Verify password:<br>Out[2]: ‘sha1:ce23d945972f:34769685a7ccd3d08c84a18c63968a41f1140274’<br>把生成的密文‘sha:ce…’复制下来</p>
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><blockquote>
+<p>vim ~/.jupyter/jupyter_notebook_config.py</p>
+</blockquote>
+<p>c.NotebookApp.ip=’*’<br>c.NotebookApp.password = u’sha:ce…刚才复制的那个密文’<br>c.NotebookApp.open_browser = False<br>c.NotebookApp.port =8888 #随便指定一个端口</p>
+<h2 id="本地"><a href="#本地" class="headerlink" title="本地"></a>本地</h2><p>本地建立一个ssh通道：</p>
+<p>ssh wxy@服务器ＩＰ -p 端口  -L 127.0.0.1:12345:127.0.0.1:8888<br>浏览器上输入<a href="http://127.0.0.1:12345" target="_blank" rel="external">http://127.0.0.1:12345</a></p>
+<p><a href="http://frankchen.xyz/2017/12/25/Remote-jupyter-notebook/（&#39;开机自启&#39;）" target="_blank" rel="external">http://frankchen.xyz/2017/12/25/Remote-jupyter-notebook/（&#39;开机自启&#39;）</a><br><a href="https://www.cnblogs.com/wushaogui/p/8797841.html(windows" target="_blank" rel="external">https://www.cnblogs.com/wushaogui/p/8797841.html(windows</a>)</p>
+<h2 id="另（不成功）"><a href="#另（不成功）" class="headerlink" title="另（不成功）"></a>另（不成功）</h2><p><a href="https://blog.csdn.net/danlei94/article/details/74049975?utm_source=itdadao&amp;utm_medium=referral" target="_blank" rel="external">https://blog.csdn.net/danlei94/article/details/74049975?utm_source=itdadao&amp;utm_medium=referral</a></p>
+<blockquote>
+<p>jupyter notebook –ip 0.0.0.0<br>接着你会看到有一个带token的url地址，你可以将此地址复制粘贴在你本地的浏览器，并且更换掉ip 0.0.0.0–&gt;你服务器的ip地址</p>
+</blockquote>
+<pre><code>按住 Ctrl+z键，即可将一个正在前台执行的命令放到后台，并且暂停
+</code></pre><blockquote>
+<p>Ctrl +z （按键）</p>
+</blockquote>
+<pre><code>输入jobs查看当前job的情况
+
+&gt;jobs
+
+利用bg命令将一个在后台暂停的命令，变成继续执行
+
+&gt;bg 1
+// “1” 这里就可以替换为你运行的jupyter的job号，上一步可以查到
+</code></pre><p>参考文献　<a href="https://bitmingw.com/2017/07/09/run-jupyter-notebook-server/" target="_blank" rel="external">https://bitmingw.com/2017/07/09/run-jupyter-notebook-server/</a><br><a href="http://bbs.bugcode.cn/t/71596" target="_blank" rel="external">http://bbs.bugcode.cn/t/71596</a> (错误，并没有用上)</p>
+<h2 id="增加内核"><a href="#增加内核" class="headerlink" title="增加内核"></a>增加内核</h2><p>自己是在python3环境中conda install jupyter 下载jupyter,网上是pip3 install ipykernel<br>然后在python3坏境中执行’python -m ipykernel install –name XXXX’<br>使用命令jupyter kernelspec list可以查看当前的kernel<br>jupyter notebook –config = /home…/ipython_notebook_config.py   # .py配置文件的路径,在运行时指定配置文件(只需运行一次即可更新.json配置文件，后面再运行时不用添加路径信息)</p>
+<p><a href="https://blog.csdn.net/Lazybones_3/article/details/78631232" target="_blank" rel="external">https://blog.csdn.net/Lazybones_3/article/details/78631232</a><br><a href="https://blog.csdn.net/qq_24027563/article/details/80589880(密码没有修改的问题解决" target="_blank" rel="external">https://blog.csdn.net/qq_24027563/article/details/80589880(密码没有修改的问题解决</a>)</p>
+<h2 id="在当前环境下安装anaconda包集合"><a href="#在当前环境下安装anaconda包集合" class="headerlink" title="在当前环境下安装anaconda包集合"></a>在当前环境下安装anaconda包集合</h2><p>conda install anaconda<br><a href="http://www.mamicode.com/info-detail-2287955.html" target="_blank" rel="external">http://www.mamicode.com/info-detail-2287955.html</a></p>
+<h2 id="出现错误"><a href="#出现错误" class="headerlink" title="出现错误"></a>出现错误</h2><p>channel 2: open failed: connect failed: Connection refused<br>不知道这个错误是什么原因造成的，最后换了ｃｈｒｏｍｅ浏览器访问成功</p>
+<p><a href="https://www.alibabacloud.com/help/zh/doc-detail/53650.htm（阿里使用jupyter）" target="_blank" rel="external">https://www.alibabacloud.com/help/zh/doc-detail/53650.htm（阿里使用jupyter）</a></p>
+<p><a href="http://www.itkeyword.com/doc/8934890860339928285/how-to-start-ipython-notebook-remotely" target="_blank" rel="external">http://www.itkeyword.com/doc/8934890860339928285/how-to-start-ipython-notebook-remotely</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/08/13/社交网络论文记忆点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2101,197 +2336,6 @@ $(function() {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/01/23/李宏毅课程笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/23/李宏毅课程笔记/" itemprop="url">李宏毅机器学习课程笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-23T22:45:48+08:00">
-                2018-01-23
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2017-12-09T16:52:24+08:00">
-                2017-12-09
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/教程笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">教程笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/01/23/李宏毅课程笔记/" class="leancloud_visitors" data-flag-title="李宏毅机器学习课程笔记">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  114 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="回归"><a href="#回归" class="headerlink" title="回归"></a>回归</h2><h2 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h2><p>梯度下降法主要理论依据是拉格朗日</p>
-<h2 id="错误来源"><a href="#错误来源" class="headerlink" title="错误来源"></a>错误来源</h2><p>误差来源于变量（varias）和偏差(bias)，变量大分布就大，偏差大离中心点就远，模型越复杂，偏差可能越小，变量越大，分布离散。<br>　　好的模型是要权衡变量与偏差的关系。</p>
-<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p>应用：金融，医疗诊断，人脸识别</p>
-<p>回归会惩罚大的值的点</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2341,7 +2385,7 @@ $(function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">64</span>
+                <span class="site-state-item-count">65</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2352,7 +2396,7 @@ $(function() {
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2363,7 +2407,7 @@ $(function() {
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
