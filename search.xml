@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Ubuntu使用]]></title>
+    <url>%2F2018%2F12%2F29%2FUbuntu%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[CTRL+h 显示隐藏文件ctrl+win +D 显示桌面长按ｗｉｎ 显示快捷键 /usr是Unix Software Rrsources的意思，相当于windows的C盘的，C:\Windows\和C:\Program Files的结合体。 ls /usr可以得到：bin include lib share local 等等。 其中share就是安装后的文件，文件夹所在位置 而local是第三方库的位置，比如我安装了：boost和libtorrent库，就在这里面参考：1 中文输入法不能用wpssudo gedit /usr/bin/wps 增加 &gt;export XMODIFIERS=”@im=fcitx”export QT_IM_MODULE=”fcitx” 一定要在开头添加或者基于qt的程序下不能使用基于fcitx的中文输入法sudo apt-get install fcitx-frontend-qt4 fcitx-frontend-qt5 fcitx-libs-qt fcitx-libs-qt5 libfcitx-qt0 libfcitx-qt5-1 mendenleyUbuntu 用命令locate libfcitxplatforminputcontextplugin.so找到系统中的libfcitxplatforminputcontextplugin.so。（一般是/usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so）拷贝 重命名为libfcitxplatforminputcontextplugin.so，然后拷贝到mendeley安装位置，debian和ubuntu为： /opt/mendeleydesktop/plugins/qt/plugins/platforminputcontexts/ Arch为： /opt/mendeleydesktop/lib/mendeleydesktop/plugins/platforminputcontexts/ 重新启动mendeley即可发现中文可以输入了。 不能上网sudo gedit /etc/network/interfaces添加如下内容：auto enp2s0（网卡ifconfig 查看）iface enp2s0 inet staticaddress 10.0.0.156netmask 255.255.255.0gateway 10.0.0.1dns-nameserver 202.112.144.236 sudo gedit /etc/network/interfaces DNS 问题导致不能上网sudo gedit /etc/resolv.conf插入 nameserver 202.112.144.236 var/tmp 文件过大，磁盘空间满mkinitramfs× 此类文件过多用rm -rf mkinitramfs* 删除 http://forum.ubuntu.org.cn/viewtopic.php?p=3189497lsof看看有没有正在使用 linux 共享windows 文件（ubuntu如何访问windows共享局域网文件夹）打开ubuntu的文件，下方有网络-连接服务器：输入sbm://目标ipv4的地址，eg： smb://202.203.21.211或者ctrl+L在地址栏上输入 每一个文件夹名字都打了一个”$“，带$的文件处于非共享状态表示不可以访问，，不加$的表示可以正常访问。 安装smbclient和cifs-utils12345678910apt-get install smbclientapt-get install cifs-utilssudo gedit /etc/samba/smb.conf add the following in the [global] sectionclient min protocol = SMB2client max protocol = SMB3 同时windows 中在管理－管理用户和组中增加共享用户，设置共享文档最终UI直接链接不上，在界面里输入用户名，密码，域总是显示无法分配内存 在linux下面创建一个需要挂载到的目录用命令行挂载：1mount -t cifs -o username=Bob,password=123456 //192.168.0.102/Share /usr/local/bin/code 参数说明 : username , Window 系统登录用户名 ; password : Window 系统登录密码 ; //192.168.0.102/Share : 设置Window共享目录的路径 ; /usr/local/bin/code : 挂载到 Linux 下的那个目录sudo mount -t cifs -o username=xxx,password=xxx,vers=3.0,uid=1000 //10.0.0.25/source /home/windows_share指定挂载后的owner查看某个用户UID的方法： id -u [username] 如果想要开机就自动将windows共享目录挂载到ubuntu本地目录呢，该怎么做？此种情况，可以直接修改 /etc/fstab. 在fstab文件中，添加对远程共享目录的挂载操作，具体做法是在fstab文件中添加以下代码：//10.0.0.25/source /home/windows_share/ cifs defaults,uid=1000,gid=1000,username=user,password=password参考网址：Ubuntu 16.04安装配置Samba服务smbclient 使用方法NT_STATUS_RESOURCE_NAME_NOT_FOUNDprotocol negotiation failed: NT_STATUS_CONNECTION_RESETLinux使用mount挂载Windows共享文件夹Samba windows 10 share: mount error(112): Host is down在Linux下访问Windows共享文件夹另windows中regedit命令启用注册表cmd中输入net user,列举出来的用户就是可以通过网络连接的用户]]></content>
+      <categories>
+        <category>系统</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[jupyter使用]]></title>
+    <url>%2F2018%2F12%2F29%2Fjupyter%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[如果希望屏蔽输出，可以在最后一条语句之后添加一个分号：”;”。在cell中可以直接按tab键，可以自动补全请按两下 i 按键终止循环，注意右上角的图标变回空心圈 https://www.zhihu.com/question/59392251 官方文档https://ipython.org/ipython-doc/1/interactive/notebook.html#keyboard-shortcutshttp://python.jobbole.com/87527/Jupyter 支持多光标操作，与 Sublime Text 类似。按住 Alt 进行点击和拖拽鼠标即可。查看快捷键的方式是使用命令面板：Cmd + Shift + P(或者Linux和Windows上 Ctrl + Shift + P)http://liuchengxu.org/pelican-blog/jupyter-notebook-tips.html &lt; !– more –&gt;Jupyter Notebook 有两种键盘输入模式。编辑模式，允许你往单元中键入代码或文本；这时的单元框线是绿色的。命令模式，键盘输入运行程序命令；这时的单元框线是灰色。 命令模式 (按键 Esc 开启) Enter : 转入编辑模式Shift-Enter : 运行本单元，选中下个单元Ctrl-Enter : 运行本单元Alt-Enter : 运行本单元，在其下插入新单元Y : 单元转入代码状态M :单元转入markdown状态R : 单元转入raw状态1 : 设定 1 级标题2 : 设定 2 级标题3 : 设定 3 级标题4 : 设定 4 级标题5 : 设定 5 级标题6 : 设定 6 级标题Up : 选中上方单元K : 选中上方单元Down : 选中下方单元J : 选中下方单元Shift-K : 扩大选中上方单元Shift-J : 扩大选中下方单元｀A : 在上方插入新单元｀｀B : 在下方插入新单元｀X : 剪切选中的单元C : 复制选中的单元Shift-V : 粘贴到上方单元V : 粘贴到下方单元Z : 恢复删除的最后一个单元D,D : 删除选中的单元Shift-M : 合并选中的单元Ctrl-S : 文件存盘S : 文件存盘L : 转换行号O : 转换输出Shift-O : 转换输出滚动Esc : 关闭页面Q : 关闭页面H : 显示快捷键帮助I,I : 中断Notebook内核0,0 : 重启Notebook内核Shift : 忽略Shift-Space : 向上滚动Space : 向下滚动编辑模式 ( Enter 键启动) ｀Tab : 代码补全或缩进｀｀Shift-Tab : 提示｀Ctrl-] : 缩进Ctrl-[ : 解除缩进Ctrl-A : 全选Ctrl-Z : 复原Ctrl-Shift-Z : 再做Ctrl-Y : 再做Ctrl-Home : 跳到单元开头Ctrl-Up : 跳到单元开头Ctrl-End : 跳到单元末尾Ctrl-Down : 跳到单元末尾Ctrl-Left : 跳到左边一个字首Ctrl-Right : 跳到右边一个字首Ctrl-Backspace : 删除前面一个字Ctrl-Delete : 删除后面一个字Esc : 进入命令模式Ctrl-M : 进入命令模式Shift-Enter : 运行本单元，选中下一单元Ctrl-Enter : 运行本单元Alt-Enter : 运行本单元，在下面插入一单元Ctrl-Shift– : 分割单元Ctrl-Shift-Subtract : 分割单元Ctrl-S : 文件存盘Shift : 忽略Up : 光标上移或转入上一单元Down :光标下移或转入下一单元 增加kernel首先，在anaconda中切换到myPython2环境下，确认是否安装了ipykernel这个包，如果没有则安装。然后，在这个环境下输入一下命令 ``` #xxx是在jupyter中显示的名字，建议使用环境的名字，但是不一样也没关系 我这里和环境名字一样，使用myPython2这个名字python -m ipykernel install –name XXXX https://blog.csdn.net/wj1066/article/details/72891667?utm_source=copy]]></content>
+      <tags>
+        <tag>jupyter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[sklearn 总结]]></title>
     <url>%2F2018%2F12%2F21%2Fsklearn%E6%80%BB%E7%BB%93%2F</url>
     <content type="text"><![CDATA[卡方检验卡方检验是以χ2分布为基础的一种常用假设检验方法 ‘’根据假设，我们可以先算出一个文本出现”洪秀全”的概率，然后用中国近代史的文本个数乘以这个概率就得到了理论值，很好理解的普通概率问题。（想一想，这一起是不是建立在我们的假设的基础上。如果假设是二者不相关，那么理论值应该怎么算？你会发现根本不知道怎么算）’’第一篇参考文献中的例子解释为什么假设相关。因为假设不相关，概率无法计算。文本分类学习 （四） 特征选择之卡方检验结合日常生活的例子，了解什么是卡方检验 特征选择scikit-learn中提供了用于特征选择的模块feature_selection，主要方法包括方差移除法，卡方检验法，基于L1的特征选择和基于树的特征选择。导入数据预处理库from sklearn import preprocessing 卡方检验导入特征选择库中的SelectKBest和chi2用来计算特征与结果间的相关性，并选择相关性最高的特征。导入sklearn库中的SelectKBest和chi2from sklearn.feature_selection import SelectKBest ,chi2选择相关性最高的前5个特征12345678X_chi2 = SelectKBest(chi2, k=5).fit_transform(X, y)X_chi2.shape(27, 5)### 移除方差较低的特征导入特征选择库中的VarianceThreshold用于通过方差选择特征。方差为0的特征会被自动移除。剩下的特征按设定的方差的阈值进行选择。当特征值都是离散型变量的时候这种方法才能用，如果是连续型变量，就需要将连续变量离散化之后才能用 #导入sklearn库中的VarianceThresholdfrom sklearn.feature_selection import VarianceThreshold #设置方差的阈值为0.8sel = VarianceThreshold(threshold=.08) #选择方差大于0.8的特征X_sel=sel.fit_transform(X_scaler)X_sel.shape(27, 5) 使用scikit-learn进行特征选择 Pearson相关系数 Pearson CorrelationPearson相关系数的一个明显缺陷是，作为特征排序机制，他只对线性关系敏感。如果关系是非线性的，即便两个变量具有一一对应的关系，Pearson相关性也可能会接近0。123456789101112import numpy as npfrom scipy.stats import pearsonrnp.random.seed(0)size = 300x = np.random.normal(0, 1, size)print &quot;Lower noise&quot;, pearsonr(x, x + np.random.normal(0, 1, size))print &quot;Higher noise&quot;, pearsonr(x, x + np.random.normal(0, 10, size))### 互信息和最大信息系数当零假设不成立时，MIC的统计就会受到影响。在有的数据集上不存在这个问题，但有的数据集上就存在这个问题。零假设：在统计学中，零假设（虚无假设）是做统计检验时的一类假设。零假设的内容一般是希望证明其错误的假设。比如说，在相关性检验中，一般会取“两者之间没有关联”作为零假设，而在独立性检验中，一般会取“两者之间有关联”作为零假设。 from minepy import MINEm = MINE()x = np.random.uniform(-1, 1, 10000)m.compute_score(x, x**2)print m.mic()单变量特征选择方法独立的衡量每个特征与响应变量之间的关系，另一种主流的特征选择方法是基于机器学习模型的方法。有些机器学习方法本身就具有对特征进行打分的机制，或者很容易将其运用到特征选择任务中，例如回归模型，SVM，决策树，随机森林等等。说句题外话，这种方法好像在一些地方叫做wrapper类型，大概意思是说，特征排序模型和机器学习模型是耦盒在一起的，对应的非wrapper类型的特征选择方法叫做filter类型。 在很多实际的数据当中，往往存在多个互相关联的特征，这时候模型就会变得不稳定，数据中细微的变化就可能导致模型的巨大变化（模型的变化本质上是系数，或者叫参数，可以理解成W），这会让模型的预测变得困难，这种现象也称为多重共线性。例如，假设我们有个数据集，它的真实模型应该是Y=X1+X2，当我们观察的时候，发现Y’=X1+X2+e，e是噪音。如果X1和X2之间存在线性关系，例如X1约等于X2，这个时候由于噪音e的存在，我们学到的模型可能就不是Y=X1+X2了，有可能是Y=2X1，或者Y=-X1+3X2。Lasso能够挑出一些优质特征，同时让其他特征的系数趋于0。当如需要减少特征数的时候它很有用，但是对于数据理解来说不是很好用。（例如在结果表中，X11,X12,X13的得分都是0，好像他们跟输出变量之间没有很强的联系，但实际上不是这样的） MIC对特征一视同仁，这一点上和关联系数有点像，另外，它能够找出X3和响应变量之间的非线性关系。 随机森林基于不纯度的排序结果非常鲜明，在得分最高的几个特征之后的特征，得分急剧的下降。从表中可以看到，得分第三的特征比第一的小4倍。而其他的特征选择算法就没有下降的这么剧烈。 Ridge将回归系数均匀的分摊到各个关联变量上，从表中可以看出，X11,…,X14和X1,…,X4的得分非常接近。 稳定性选择常常是一种既能够有助于理解数据又能够挑出优质特征的这种选择，在结果表中就能很好的看出。像Lasso一样，它能找到那些性能比较好的特征（X1，X2，X4，X5），同时，与这些特征关联度很强的变量也得到了较高的得分。 干货：结合Scikit-learn介绍几种常用的特征选择方法（线性模型和正则化）文章列出的参考文献： http://blog.datadive.net/selecting-good-features-part-i-univariate-selection/ http://blog.datadive.net/selecting-good-features-part-ii-linear-models-and-regularization/ http://scikit-learn.org/stable/modules/feature_selection.html#univariate-feature-selection http://www.quora.com/What-are-some-feature-selection-methods http://www.quora.com/What-are-some-feature-selection-algorithms http://www.quora.com/What-are-some-feature-selection-methods-for-SVMs http://www.quora.com/What-is-the-difference-between-principal-component-analysis-PCA-and-feature-selection-in-machine-learning-Is-PCA-a-means-of-feature-selection 文本特征选择对于一个语料而言，我们可以统计的信息包括文档频率和文档类比例，所有的特征选择方法均依赖于这两个统计量，目前，文本的特征选择方法主要有：DF, MI, IG, CHI，WLLR,WFO六种。 文本挖掘之特征选择(python 实现) 特征抽取通过包sklearn.feature_extraction来实现特征抽取是数据挖掘非常重要的一环，对最终结果的影响要高过数据挖掘算法本身。只有将现实事件用合适的特征表示出来，才能借助数据挖掘的力量找到其他的规律。特征抽取也可以降低事情的复杂程度。一般最常用的特征抽取技术都是高度针对特定领域的。如图像处理领域，提出了很多特征抽取技术，但是这些技术在其他领域的应用却非常有限。DictVectorizer():将dict类型的list数据转换为numpy arrayFeatureHasher():将特征哈希，将数据做哈希映射，同时能达到降维的效果image():图像相关的特征抽取text():文本相关的特征抽取text.CountVectorizer():将文本转换为每个词出现个数的向量text.TfidfVectorizer():将文本转换为逆文本词频向量 text.HashingVectorizer():将文本作哈希向量化sklearn详细讲解 transform方法主要用来对特征进行转换。从可利用信息的角度来说，转换分为无信息转换和有信息转换。无信息转换是指不利用任何其他信息进行转换，比如指数、对数函数转换等。有信息转换从是否利用目标值向量又可分为无监督转换和有监督转换。无监督转换指只利用特征的统计信息的转换，统计信息包括均值、标准差、边界等等，比如标准化、PCA法降维等。有监督转换指既利用了特征信息又利用了目标值信息的转换，比如通过模型选择特征、LDA法降维等。通过总结常用的转换类 使用sklearn优雅地进行数据挖掘这篇文章包含并行处理,流水线处理（pipeline），自动化调参，持久化 sklearn 官网https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html]]></content>
@@ -260,14 +279,6 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[jupyter使用]]></title>
-    <url>%2F2018%2F08%2F13%2Fjupyter%E4%BD%BF%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[如果希望屏蔽输出，可以在最后一条语句之后添加一个分号：”;”。在cell中可以直接按tab键，可以自动补全请按两下 i 按键终止循环，注意右上角的图标变回空心圈 https://www.zhihu.com/question/59392251 官方文档https://ipython.org/ipython-doc/1/interactive/notebook.html#keyboard-shortcutshttp://python.jobbole.com/87527/Jupyter 支持多光标操作，与 Sublime Text 类似。按住 Alt 进行点击和拖拽鼠标即可。查看快捷键的方式是使用命令面板：Cmd + Shift + P(或者Linux和Windows上 Ctrl + Shift + P)http://liuchengxu.org/pelican-blog/jupyter-notebook-tips.html Jupyter Notebook 有两种键盘输入模式。编辑模式，允许你往单元中键入代码或文本；这时的单元框线是绿色的。命令模式，键盘输入运行程序命令；这时的单元框线是灰色。 命令模式 (按键 Esc 开启) Enter : 转入编辑模式Shift-Enter : 运行本单元，选中下个单元Ctrl-Enter : 运行本单元Alt-Enter : 运行本单元，在其下插入新单元Y : 单元转入代码状态M :单元转入markdown状态R : 单元转入raw状态1 : 设定 1 级标题2 : 设定 2 级标题3 : 设定 3 级标题4 : 设定 4 级标题5 : 设定 5 级标题6 : 设定 6 级标题Up : 选中上方单元K : 选中上方单元Down : 选中下方单元J : 选中下方单元Shift-K : 扩大选中上方单元Shift-J : 扩大选中下方单元｀A : 在上方插入新单元｀｀B : 在下方插入新单元｀X : 剪切选中的单元C : 复制选中的单元Shift-V : 粘贴到上方单元V : 粘贴到下方单元Z : 恢复删除的最后一个单元D,D : 删除选中的单元Shift-M : 合并选中的单元Ctrl-S : 文件存盘S : 文件存盘L : 转换行号O : 转换输出Shift-O : 转换输出滚动Esc : 关闭页面Q : 关闭页面H : 显示快捷键帮助I,I : 中断Notebook内核0,0 : 重启Notebook内核Shift : 忽略Shift-Space : 向上滚动Space : 向下滚动编辑模式 ( Enter 键启动) ｀Tab : 代码补全或缩进｀｀Shift-Tab : 提示｀Ctrl-] : 缩进Ctrl-[ : 解除缩进Ctrl-A : 全选Ctrl-Z : 复原Ctrl-Shift-Z : 再做Ctrl-Y : 再做Ctrl-Home : 跳到单元开头Ctrl-Up : 跳到单元开头Ctrl-End : 跳到单元末尾Ctrl-Down : 跳到单元末尾Ctrl-Left : 跳到左边一个字首Ctrl-Right : 跳到右边一个字首Ctrl-Backspace : 删除前面一个字Ctrl-Delete : 删除后面一个字Esc : 进入命令模式Ctrl-M : 进入命令模式Shift-Enter : 运行本单元，选中下一单元Ctrl-Enter : 运行本单元Alt-Enter : 运行本单元，在下面插入一单元Ctrl-Shift– : 分割单元Ctrl-Shift-Subtract : 分割单元Ctrl-S : 文件存盘Shift : 忽略Up : 光标上移或转入上一单元Down :光标下移或转入下一单元 增加kernel首先，在anaconda中切换到myPython2环境下，确认是否安装了ipykernel这个包，如果没有则安装。然后，在这个环境下输入一下命令 ``` #xxx是在jupyter中显示的名字，建议使用环境的名字，但是不一样也没关系 我这里和环境名字一样，使用myPython2这个名字python -m ipykernel install –name XXXX https://blog.csdn.net/wj1066/article/details/72891667?utm_source=copy]]></content>
-      <tags>
-        <tag>jupyter</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[机器学习知识点]]></title>
     <url>%2F2018%2F08%2F13%2FAUC%20-%E5%80%BC%E8%B6%8A%E5%A4%A7%E8%B6%8A%E5%A5%BD%2F</url>
     <content type="text"><![CDATA[AUC :值越大越好https://blog.csdn.net/colapin/article/details/53673749]]></content>
@@ -350,19 +361,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[jsma 报错集]]></title>
-    <url>%2F2017%2F12%2F04%2F%E9%A1%B9%E7%9B%AE%E6%8A%A5%E9%94%99%2F</url>
-    <content type="text"><![CDATA[UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe9 in position 0: ordinal not in range(128)Python在进行编码方式之间的转换时，会将 unicode 作为“中间编码”，但 unicode 最大只有 128 那么长，所以这里当尝试将 ascii 编码字符串转换成”中间编码” unicode 时由于超出了其范围，就报出了如上错误。我们在/usr/lib/python2.7/site-packages/目录下添加一个sitecustomize.py文件，内容如下： import syssys.setdefaultencoding(‘utf-8’) 忘了操作什么什么之后报的错，记起后补上…… 参考博客 OSError: [Errno 2] No such file or directory１．代码上传服务器后，空文件没有上传，导致自己一直以为存在文件夹，不明白为什么错误，以后应仔细检查一遍２．在路径前加“./” raise IOError, ‘Not a gzipped file’服务器中代码运行报错，不能下载MNIST数据集, 1.首先在当前项目下新建 MNIST_data2.https://gitee.com/Gssol/tensorflow_mnist_Data/attach_files 从该目录将4个附件全部下载 将下载的四个文件(不用解压)直接放到MNIST_data文件夹里面4.就可以调用该数据集了参考博客 ValueError: Parent directory of trained_variables.ckpt doesn’t exist, can’t save.模型存储路径在本地没有加ckpt,可以运行，但在服务器上却必须加，原因不明 ##mport sklearn.model_selection 出错ImportError: No module named model_selectionconda list 查看包安装列表conda update scikit-learn 命令更新sklearn的版本 conda install Matlotlib、Scikit-Learn注意再激活tensorflow情况下查看某个指定环境的已安装包conda list -n python27查找package信息conda search numpy 安装packageconda install -n python27 numpy更新packageconda update -n python27 numpy 删除packageconda remove -n python27 numpy SCP: No such file or directoryscp就是secure copy，一个在linux下用来进行远程拷贝文件的命令。符号软链接，应该写真正指向的地址，不明白这一点，所以浪费了很多时间 If you are logged into the local machine, you would use scp like this: scp /home/username/some.xml root@remote.machine.ip.address:/path/to/directory/ If you are logged into the remote machine (as in the OP), use scp like this: scp username@local.machine.ip.address:/home/username/some.xml /path/to/directory Substitute the IP addresses as directed in the commands./的问题还没弄明白 权限问题，上层目录也就是home目录被别人误改了权限，处理xxuser，其他用户都没了权限 ##anaconda search -t conda tensorflow 服务器上配置tensorflow 环境安装anocanda2 后，安装ＧＰＵ版本GPU安装只能用pip,conda只能安装cpu版本tensorflow版本简单 pip install tensorflow-gpu==1.1.0pip3 install tensorflow==1.1.0 python3.6 cpu版本 CUDA是NVIDIA 推出的使用GPU 资源进行计算的SDK ，CUDA 里面集成了显卡驱动,GPU加速首先就是安装CUDA，然而CUDA只支持NVIDIA显卡,因为CUDA软件就是他家出的注意GPU版本的不支持CUDNNV5，必须要V5.1以上GPU版本需要安装CUDA和ｃｕＤＮＮ,注意版本问题安装CUDA,参考一下网址：博客http://blog.csdn.net/binglel/article/details/70230276http://blog.csdn.net/stronger19890215/article/details/71411981?locationNum=8&amp;fps=1http://blog.csdn.net/jteng/article/details/52975247http://blog.csdn.net/zhaoyu106/article/details/52793183mingw CUDA安装和测试 检查自己的GPU是否是CUDA-capable在终端中输入： lspci | grep -i nvidia 安装qt createrhttps://www.ics.com/blog/getting-started-qt-and-qt-creator-linux sudo apt-get install qtcreator sudo apt-get install build-essential libgl1-mesa-dev cd ~/Downloads$ chmod a+x qt-unified-linux-x64-2.0.3-1-online.run apt-get install qt4-designer下载后找不到在哪儿运行 配置PyCharm1）打开PyCharm，执行快捷键ctrl+alt+s打开设置界面，输入tool，点开external tools，配置qtdesigner。 点击左上角的加号，作如下配置： 在Qt Designer的设置中，Program选择PyQt安装目录中 designer.exe 的路径 Work directory 使用变量 $FileDir$设置“PyUIC” – 这个主要是用来将 Qt界面 转换成 py代码 在PyUIC的设置中，其他的都差不多，Program 写入Python的地址，Parameters写入 -m PyQt5.uic.pyuic $FileName$ -o $FileNameWithoutExtension$.py 把上面的Python路径修改成自己的即可！ Work directory 使用变量 $FileDir$ 转化py代码 creater集成了pyqt desiner,sudo apt-get install qttools5-dev-tools这个因为安装了creater,暂时没试 Python中TypeError: unbound method 问题在运行时报错：TypeError: unbound method onlyCellValue() must be called with dictionary instance as first argument (got str instance instead) 后经在网上查看，发现时由于调用其他类时，未在后面添加括号，添加括号后，运行正常。这是由于未添加括号情况下，未被认为是类的实例，故报此错]]></content>
-      <categories>
-        <category>深度学习</category>
-        <category>编程</category>
-      </categories>
-      <tags>
-        <tag>对抗样本</tag>
-        <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[自动备份Hexo博客源文件]]></title>
     <url>%2F2017%2F12%2F04%2F%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BDhexo%2F</url>
     <content type="text"><![CDATA[原文出自：http://zhujiegao.com/2015/12/06/automatic-backup/ 先安装git和node 原理通过通过监听Hexo的其它事件来完成自动执行Git命令完成自动备份。通过查阅Hexo文档，找到了Hexo的主要事件，见下表： 事件名 事件发生时间 deployBefore 在部署完成前发布 deployAfter 在部署成功后发布 exit 在 Hexo 结束前发布 generateBefore 在静态文件生成前发布 generateAfter 在静态文件生成后发布 new 在文章文件建立后发布 实现 在Github下创建新的仓库，取名hexo 进入本地hexo文件夹，执行以下命令 123456git initgit remote add origin git@github.com:XXX/XXX.gitgit pull -u origin mastergit add .git commit -m &quot;添加hexo源码文件备份&quot;git pull -u origin master 3.安装shelljs模块要实现这个自动备份功能，需要依赖Node.js的一个shelljs模块,该模块重新包装了child_process,调用系统命令更加的方便。该模块需要安装后使用 1npm install --save shelljs 4 自动备份脚本 待到模块安装完成，在Hexo根目录的scripts文件夹下新建一个js文件，文件名随意取。 ps: 如果没有scripts目录，请新建一个。 然后在脚本中，写入以下内容： 123456789101112131415161718192021222324252627282930require(&apos;shelljs/global&apos;);try &#123; hexo.on(&apos;deployAfter&apos;, function() &#123;//当deploy完成后执行备份 run(); &#125;);&#125; catch (e) &#123; console.log(&quot;产生了一个错误&lt;(￣3￣)&gt; !，错误详情为：&quot; + e.toString());&#125;function run() &#123; if (!which(&apos;git&apos;)) &#123; echo(&apos;Sorry, this script requires git&apos;); exit(1); &#125; else &#123; echo(&quot;======================Auto Backup Begin===========================&quot;); cd(&apos;D:/hexo&apos;); //此处修改为Hexo根目录路径 if (exec(&apos;git add --all&apos;).code !== 0) &#123; echo(&apos;Error: Git add failed&apos;); exit(1); &#125; if (exec(&apos;git commit -am &quot;Form auto backup script\&apos;s commit&quot;&apos;).code !== 0) &#123; echo(&apos;Error: Git commit failed&apos;); exit(1); &#125; if (exec(&apos;git push origin master&apos;).code !== 0) &#123; echo(&apos;Error: Git push failed&apos;); exit(1); &#125; echo(&quot;==================Auto Backup Complete============================&quot;) &#125;&#125;]]></content>
@@ -398,11 +396,12 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[正则化]]></title>
-    <url>%2F2017%2F12%2F04%2F%E6%AD%A3%E5%88%99%E5%8C%96%2F</url>
-    <content type="text"><![CDATA[正则化是为了解决过拟合问题。在Andrew Ng的机器学习视频中有提到（详见http://www.cnblogs.com/jianxinzhou/p/4083921.html）。 正则化产生了稀疏性（Sparsity），减少了特征向量个数，降低了模型的复杂度。 例如一回归问题，假设回归模型为：y=w1x1+w2x2+…+w1000*x1000+b 通过学习，如果最后学习到的w就只有很少的非零元素，大部分W为0或接近于0，例如只有5个非零的wi，那可以认为y之于这5个（因素）xi有关系，这更有利于人们对问题的认识和分析，抓住影响问题的主要方面（因素）更符合人们的认知习惯。(1)L0范数 L0范数是指向量中非零元素的个数。L0正则化的值是模型中非零参数的个数，L0正则化可以实现模型参数的的稀疏化 （2）L1范数 L1范数是指向量中各个元素绝对值之和，又叫“稀疏规则算子”（Lasso regularization）。 L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩罚』是指对损失函数中的某些参数做一些限制。知乎中陶轻松的答案指出正则项使W向量中项的个数最小化，从而防止过拟合]]></content>
+    <title><![CDATA[jsma 报错集]]></title>
+    <url>%2F2017%2F12%2F04%2F%E9%A1%B9%E7%9B%AE%E6%8A%A5%E9%94%99%2F</url>
+    <content type="text"><![CDATA[UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe9 in position 0: ordinal not in range(128)Python在进行编码方式之间的转换时，会将 unicode 作为“中间编码”，但 unicode 最大只有 128 那么长，所以这里当尝试将 ascii 编码字符串转换成”中间编码” unicode 时由于超出了其范围，就报出了如上错误。我们在/usr/lib/python2.7/site-packages/目录下添加一个sitecustomize.py文件，内容如下： import syssys.setdefaultencoding(‘utf-8’) 忘了操作什么什么之后报的错，记起后补上…… 参考博客 OSError: [Errno 2] No such file or directory１．代码上传服务器后，空文件没有上传，导致自己一直以为存在文件夹，不明白为什么错误，以后应仔细检查一遍２．在路径前加“./” raise IOError, ‘Not a gzipped file’服务器中代码运行报错，不能下载MNIST数据集, 1.首先在当前项目下新建 MNIST_data2.https://gitee.com/Gssol/tensorflow_mnist_Data/attach_files 从该目录将4个附件全部下载 将下载的四个文件(不用解压)直接放到MNIST_data文件夹里面4.就可以调用该数据集了参考博客 ValueError: Parent directory of trained_variables.ckpt doesn’t exist, can’t save.模型存储路径在本地没有加ckpt,可以运行，但在服务器上却必须加，原因不明 ##mport sklearn.model_selection 出错ImportError: No module named model_selectionconda list 查看包安装列表conda update scikit-learn 命令更新sklearn的版本 conda install Matlotlib、Scikit-Learn注意再激活tensorflow情况下查看某个指定环境的已安装包conda list -n python27查找package信息conda search numpy 安装packageconda install -n python27 numpy更新packageconda update -n python27 numpy 删除packageconda remove -n python27 numpy SCP: No such file or directoryscp就是secure copy，一个在linux下用来进行远程拷贝文件的命令。符号软链接，应该写真正指向的地址，不明白这一点，所以浪费了很多时间 If you are logged into the local machine, you would use scp like this: scp /home/username/some.xml root@remote.machine.ip.address:/path/to/directory/ If you are logged into the remote machine (as in the OP), use scp like this: scp username@local.machine.ip.address:/home/username/some.xml /path/to/directory Substitute the IP addresses as directed in the commands./的问题还没弄明白 权限问题，上层目录也就是home目录被别人误改了权限，处理xxuser，其他用户都没了权限 ##anaconda search -t conda tensorflow 服务器上配置tensorflow 环境安装anocanda2 后，安装ＧＰＵ版本GPU安装只能用pip,conda只能安装cpu版本tensorflow版本简单 pip install tensorflow-gpu==1.1.0pip3 install tensorflow==1.1.0 python3.6 cpu版本 CUDA是NVIDIA 推出的使用GPU 资源进行计算的SDK ，CUDA 里面集成了显卡驱动,GPU加速首先就是安装CUDA，然而CUDA只支持NVIDIA显卡,因为CUDA软件就是他家出的注意GPU版本的不支持CUDNNV5，必须要V5.1以上GPU版本需要安装CUDA和ｃｕＤＮＮ,注意版本问题安装CUDA,参考一下网址：博客http://blog.csdn.net/binglel/article/details/70230276http://blog.csdn.net/stronger19890215/article/details/71411981?locationNum=8&amp;fps=1http://blog.csdn.net/jteng/article/details/52975247http://blog.csdn.net/zhaoyu106/article/details/52793183mingw CUDA安装和测试 检查自己的GPU是否是CUDA-capable在终端中输入： lspci | grep -i nvidia 安装qt createrhttps://www.ics.com/blog/getting-started-qt-and-qt-creator-linux sudo apt-get install qtcreator sudo apt-get install build-essential libgl1-mesa-dev cd ~/Downloads$ chmod a+x qt-unified-linux-x64-2.0.3-1-online.run apt-get install qt4-designer下载后找不到在哪儿运行 配置PyCharm1）打开PyCharm，执行快捷键ctrl+alt+s打开设置界面，输入tool，点开external tools，配置qtdesigner。 点击左上角的加号，作如下配置： 在Qt Designer的设置中，Program选择PyQt安装目录中 designer.exe 的路径 Work directory 使用变量 $FileDir$设置“PyUIC” – 这个主要是用来将 Qt界面 转换成 py代码 在PyUIC的设置中，其他的都差不多，Program 写入Python的地址，Parameters写入 -m PyQt5.uic.pyuic $FileName$ -o $FileNameWithoutExtension$.py 把上面的Python路径修改成自己的即可！ Work directory 使用变量 $FileDir$ 转化py代码 creater集成了pyqt desiner,sudo apt-get install qttools5-dev-tools这个因为安装了creater,暂时没试 Python中TypeError: unbound method 问题在运行时报错：TypeError: unbound method onlyCellValue() must be called with dictionary instance as first argument (got str instance instead) 后经在网上查看，发现时由于调用其他类时，未在后面添加括号，添加括号后，运行正常。这是由于未添加括号情况下，未被认为是类的实例，故报此错]]></content>
       <categories>
         <category>深度学习</category>
+        <category>编程</category>
       </categories>
       <tags>
         <tag>对抗样本</tag>
@@ -457,14 +456,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[书单]]></title>
-    <url>%2F2017%2F12%2F04%2F%E4%B9%A6%E5%8D%95%2F</url>
-    <content type="text"><![CDATA[书单：理性乐观派]]></content>
+    <title><![CDATA[正则化]]></title>
+    <url>%2F2017%2F12%2F04%2F%E6%AD%A3%E5%88%99%E5%8C%96%2F</url>
+    <content type="text"><![CDATA[正则化是为了解决过拟合问题。在Andrew Ng的机器学习视频中有提到（详见http://www.cnblogs.com/jianxinzhou/p/4083921.html）。 正则化产生了稀疏性（Sparsity），减少了特征向量个数，降低了模型的复杂度。 例如一回归问题，假设回归模型为：y=w1x1+w2x2+…+w1000*x1000+b 通过学习，如果最后学习到的w就只有很少的非零元素，大部分W为0或接近于0，例如只有5个非零的wi，那可以认为y之于这5个（因素）xi有关系，这更有利于人们对问题的认识和分析，抓住影响问题的主要方面（因素）更符合人们的认知习惯。(1)L0范数 L0范数是指向量中非零元素的个数。L0正则化的值是模型中非零参数的个数，L0正则化可以实现模型参数的的稀疏化 （2）L1范数 L1范数是指向量中各个元素绝对值之和，又叫“稀疏规则算子”（Lasso regularization）。 L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩罚』是指对损失函数中的某些参数做一些限制。知乎中陶轻松的答案指出正则项使W向量中项的个数最小化，从而防止过拟合]]></content>
       <categories>
-        <category>读书</category>
+        <category>深度学习</category>
       </categories>
       <tags>
-        <tag>书籍</tag>
+        <tag>对抗样本</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -480,26 +480,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[udacity知识点]]></title>
-    <url>%2F2017%2F12%2F04%2Fudacity%20%E7%9F%A5%E8%AF%86%E7%82%B9%2F</url>
-    <content type="text"><![CDATA[splitext()作用类似与split(),不过它会根据扩展名分隔符而不是目录分隔符来分解路径 python 在内部使用两个字节来存储一个unicode，使用unicode对象而不是str的好处，就是unicode方便于跨平台。你可以用如下两种方式定义一个unicode:Pythons1 = u”人生苦短”s2 = unicode(“人生苦短”, “utf-8”)12 s1 = u”人生苦短”s2 = unicode(“人生苦短”, “utf-8”) 在windows上面开始使用路径时，一定带上r，不然路径里面类似\t \n这种会被转义不信，自己找路径试试 Python pickle模块作用是持久化的储存数据。 numpy.random.shuffle打乱顺序函数：在做将caffe模型和预训练的参数转化为tensorflow的模型和预训练的参数，以便微调]]></content>
+    <title><![CDATA[书单]]></title>
+    <url>%2F2017%2F12%2F04%2F%E4%B9%A6%E5%8D%95%2F</url>
+    <content type="text"><![CDATA[书单：理性乐观派]]></content>
       <categories>
-        <category>学习</category>
+        <category>读书</category>
       </categories>
       <tags>
-        <tag>深度学习</tag>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Ubuntu使用]]></title>
-    <url>%2F2017%2F12%2F04%2FUbuntu%E4%BD%BF%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[CTRL+h 显示隐藏文件ctrl+win +D 显示桌面长按ｗｉｎ 显示快捷键 /usr是Unix Software Rrsources的意思，相当于windows的C盘的，C:\Windows\和C:\Program Files的结合体。 ls /usr可以得到：bin include lib share local 等等。 其中share就是安装后的文件，文件夹所在位置 而local是第三方库的位置，比如我安装了：boost和libtorrent库，就在这里面参考：1 中文输入法不能用wpssudo gedit /usr/bin/wps 增加 &gt;export XMODIFIERS=”@im=fcitx”export QT_IM_MODULE=”fcitx” 一定要在开头添加或者基于qt的程序下不能使用基于fcitx的中文输入法sudo apt-get install fcitx-frontend-qt4 fcitx-frontend-qt5 fcitx-libs-qt fcitx-libs-qt5 libfcitx-qt0 libfcitx-qt5-1 mendenleyUbuntu 用命令locate libfcitxplatforminputcontextplugin.so找到系统中的libfcitxplatforminputcontextplugin.so。（一般是/usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so）拷贝 重命名为libfcitxplatforminputcontextplugin.so，然后拷贝到mendeley安装位置，debian和ubuntu为： /opt/mendeleydesktop/plugins/qt/plugins/platforminputcontexts/ Arch为： /opt/mendeleydesktop/lib/mendeleydesktop/plugins/platforminputcontexts/ 重新启动mendeley即可发现中文可以输入了。 不能上网sudo gedit /etc/network/interfaces添加如下内容：auto enp2s0（网卡ifconfig 查看）iface enp2s0 inet staticaddress 10.0.0.156netmask 255.255.255.0gateway 10.0.0.1dns-nameserver 202.112.144.236 sudo gedit /etc/network/interfaces DNS 问题导致不能上网sudo gedit /etc/resolv.conf插入 nameserver 202.112.144.236 var/tmp 文件过大，磁盘空间满mkinitramfs× 此类文件过多用rm -rf mkinitramfs* 删除 http://forum.ubuntu.org.cn/viewtopic.php?p=3189497lsof看看有没有正在使用]]></content>
-      <categories>
-        <category>系统</category>
-      </categories>
-      <tags>
-        <tag>Ubuntu</tag>
+        <tag>书籍</tag>
       </tags>
   </entry>
   <entry>
@@ -514,9 +502,32 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[udacity知识点]]></title>
+    <url>%2F2017%2F12%2F04%2Fudacity%20%E7%9F%A5%E8%AF%86%E7%82%B9%2F</url>
+    <content type="text"><![CDATA[splitext()作用类似与split(),不过它会根据扩展名分隔符而不是目录分隔符来分解路径 python 在内部使用两个字节来存储一个unicode，使用unicode对象而不是str的好处，就是unicode方便于跨平台。你可以用如下两种方式定义一个unicode:Pythons1 = u”人生苦短”s2 = unicode(“人生苦短”, “utf-8”)12 s1 = u”人生苦短”s2 = unicode(“人生苦短”, “utf-8”) 在windows上面开始使用路径时，一定带上r，不然路径里面类似\t \n这种会被转义不信，自己找路径试试 Python pickle模块作用是持久化的储存数据。 numpy.random.shuffle打乱顺序函数：在做将caffe模型和预训练的参数转化为tensorflow的模型和预训练的参数，以便微调]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[test]]></title>
     <url>%2F2017%2F12%2F04%2Ftest%2F</url>
     <content type="text"><![CDATA[$$ \frac $$ $$\begin{eqnarray}\nabla\cdot\vec{E} &amp;=&amp; \frac{\rho}{\epsilon_0} \\nabla\cdot\vec{B} &amp;=&amp; 0 \\nabla\times\vec{E} &amp;=&amp; -\frac{\partial B}{\partial t} \\nabla\times\vec{B} &amp;=&amp; \mu_0\left(\vec{J}+\epsilon_0\frac{\partial E}{\partial t} \right)\end{eqnarray}$$]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[ON THE INTEGRITY OF DEEP LEARNING SYSTEMS IN ADVERSARIAL SETTINGS]]></title>
+    <url>%2F2017%2F12%2F04%2FON%20THE%20INTEGRITY%20OF%20DEEP%20LEARNING%20SYSTEMS%20IN%20ADVERSARIAL%20SETTINGS%2F</url>
+    <content type="text"><![CDATA[未来工作这个架构可以用于监督学习也可以用于非监督学习，但目前只能用于前馈神经网络，不能用于循环神经网络探索在更多对抗设置中的攻击 研究现状攻击测试时间 - 探索性攻击[2] - 不会篡改目标模型，而是要么直接行为不端或者只是简单地使用攻击来收集关于模型特征的证据。这是我们在本手稿的前几章中所描述的攻击类型。 Biggio等人[6]在测试时引入了对二进制分类器（例如用于检测）的攻击，并将恶意样本分类为良性的目标考虑为攻击者。假设对手具有（至少部分）目标分类器的知识。他们将对手的攻击策略制定为一个最小化问题，以找到最接近敌对目标的归类为良性的输入（归类为恶意）。为了帮助处理非线性和潜在的非凸性问题，他们使用了一种启发式方法来支持合法点集合（称为模仿）的密集区域中的攻击点。他们使用单个隐藏层对线性分类器，SVM和低维神经网络进行攻击。同样假设目标分类器的知识，Fogla等人详细描述了一个多态混合攻击来规避网络异常检测系统[24,25]。他们的攻击是基于将入侵检测系统建模为常规语法，并发现该语法所接受的突变攻击实例。生成这样的实例是一个NP完全问题，但作者表明，可以找到接近最优的解决方案，使用减少SAT可满足性问题及其相关的求解器]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>对抗样本</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[DELVING INTO TRANSFERABLE ADVERSARIAL EX- AMPLES AND BLACK-BOX ATTACKS]]></title>
@@ -527,18 +538,6 @@
       </categories>
       <tags>
         <tag>对抗样本</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[没想到你是这样的Linux | 终端下有趣的命令合集]]></title>
-    <url>%2F2017%2F12%2F04%2FLinux%20%E6%9C%89%E8%B6%A3%E5%91%BD%E4%BB%A4%2F</url>
-    <content type="text"><![CDATA[转载Freebuf toilet简介 toilet能用字母拼写出更大字母的工具，具体拼出什么字由命令后面的参数决定，不仅如此，它还能打印出各种风格的效果，比如彩色，金属光泽等。安装 apt-get install toilet 参数解释 toilet -f mono12 -F metal FreeBuf sl简介 你可能了解Linux的ls命令，并经常使用它来查看文件夹的内容。但是，有些时候你可能会拼写成sl ,这时我们应该如何获得一些乐趣而不是看见“command not found”呢？某编程牛人也经常犯把ls敲成sl的错误，所以他自己编了一个程序娱乐一下,这个程序的作用很简单，就是当你输入sl的时候终端会出现一个火车呼啸而过～～安装 apt-get install sl cmatrix简介 《黑客帝国》的代码雨视觉特效。安装 apt-get install cmatrix 参数解释 -B: 字体加粗-C: 颜色 后面跟上参数颜色 cowsay简介 Cowsay命令是一个有趣的命令。它会用ASCII字符描绘牛，羊和许多其他动物。但是不是每个Linux发行版都带有这个命令。安装 apt-get install cowsay 参数解释 列出所有支持可用的动物:cowsay -l list sciinema简介 本文其实最初很多特效都用这个终端去录制的，但是由于需要引用外部的js，所以最后这些终端下的特效才换成了gif图。asciineme 可以完美录制完美终端下所敲的命令。官网:https://asciinema.org/]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>有趣命令</tag>
-        <tag>软件安装</tag>
       </tags>
   </entry>
   <entry>
@@ -554,20 +553,21 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[One pixel attack for fooling deep neural networks Jiawei]]></title>
-    <url>%2F2017%2F12%2F04%2FOne%20pixel%20attack%20for%20fooling%20deep%20neural%20networks%20Jiawei%2F</url>
-    <content type="text"><![CDATA[摘要在图像识别领域，基于 DNN 的方法突破了传统的图像处理技术，达到了可与人类媲美的结果 [9]。但是，多个研究证明自然图像中的人工扰动可以轻易使 DNN 对图像进行错误分类，研究者提出了生成此类「对抗图像」的高效算法 [1, 2, 3, 4]。生成对抗图像（adversarial images）的主要方式是向准确分类的自然图像中添加精心设计的额外扰动，该扰动不影响人类对图像的识别。这样的修改导致分类器将修改后的图像标注为完全不同的其他物体。但是，大多数之前的攻击并未考虑非常有限的对抗实例，即扰动的量有时候也会影响到人眼的识别能力（示例见图 2）。此外，研究在有限场景中创建的对抗图像更加有趣，因为它们可能更接近原始类别和目标类别（target class）之间的边界，研究此类关键点可以使人类更多地了解 DNN 输入空间的几何特征 方法贡献 非目标攻击，修改1,3,5个像素黑盒攻击可攻击不同模型对特征目标有相同的扰动方向 方法它不抽象的问题将扰动搜索到任意显式的目标函数进行求解，而直接关注提高目标类别的概率标注值全局对抗扰动可以泄露标签 固定修改像素的个数，增改像素改变的强度 Differential evolution (DE) which belongs to the generalclass of genetic algorithm (GA 实验结论]]></content>
+    <title><![CDATA[没想到你是这样的Linux | 终端下有趣的命令合集]]></title>
+    <url>%2F2017%2F12%2F04%2FLinux%20%E6%9C%89%E8%B6%A3%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[转载Freebuf toilet简介 toilet能用字母拼写出更大字母的工具，具体拼出什么字由命令后面的参数决定，不仅如此，它还能打印出各种风格的效果，比如彩色，金属光泽等。安装 apt-get install toilet 参数解释 toilet -f mono12 -F metal FreeBuf sl简介 你可能了解Linux的ls命令，并经常使用它来查看文件夹的内容。但是，有些时候你可能会拼写成sl ,这时我们应该如何获得一些乐趣而不是看见“command not found”呢？某编程牛人也经常犯把ls敲成sl的错误，所以他自己编了一个程序娱乐一下,这个程序的作用很简单，就是当你输入sl的时候终端会出现一个火车呼啸而过～～安装 apt-get install sl cmatrix简介 《黑客帝国》的代码雨视觉特效。安装 apt-get install cmatrix 参数解释 -B: 字体加粗-C: 颜色 后面跟上参数颜色 cowsay简介 Cowsay命令是一个有趣的命令。它会用ASCII字符描绘牛，羊和许多其他动物。但是不是每个Linux发行版都带有这个命令。安装 apt-get install cowsay 参数解释 列出所有支持可用的动物:cowsay -l list sciinema简介 本文其实最初很多特效都用这个终端去录制的，但是由于需要引用外部的js，所以最后这些终端下的特效才换成了gif图。asciineme 可以完美录制完美终端下所敲的命令。官网:https://asciinema.org/]]></content>
       <categories>
-        <category>论文</category>
+        <category>Linux</category>
       </categories>
       <tags>
-        <tag>对抗样本</tag>
+        <tag>有趣命令</tag>
+        <tag>软件安装</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[ON THE INTEGRITY OF DEEP LEARNING SYSTEMS IN ADVERSARIAL SETTINGS]]></title>
-    <url>%2F2017%2F12%2F04%2FON%20THE%20INTEGRITY%20OF%20DEEP%20LEARNING%20SYSTEMS%20IN%20ADVERSARIAL%20SETTINGS%2F</url>
-    <content type="text"><![CDATA[未来工作这个架构可以用于监督学习也可以用于非监督学习，但目前只能用于前馈神经网络，不能用于循环神经网络探索在更多对抗设置中的攻击 研究现状攻击测试时间 - 探索性攻击[2] - 不会篡改目标模型，而是要么直接行为不端或者只是简单地使用攻击来收集关于模型特征的证据。这是我们在本手稿的前几章中所描述的攻击类型。 Biggio等人[6]在测试时引入了对二进制分类器（例如用于检测）的攻击，并将恶意样本分类为良性的目标考虑为攻击者。假设对手具有（至少部分）目标分类器的知识。他们将对手的攻击策略制定为一个最小化问题，以找到最接近敌对目标的归类为良性的输入（归类为恶意）。为了帮助处理非线性和潜在的非凸性问题，他们使用了一种启发式方法来支持合法点集合（称为模仿）的密集区域中的攻击点。他们使用单个隐藏层对线性分类器，SVM和低维神经网络进行攻击。同样假设目标分类器的知识，Fogla等人详细描述了一个多态混合攻击来规避网络异常检测系统[24,25]。他们的攻击是基于将入侵检测系统建模为常规语法，并发现该语法所接受的突变攻击实例。生成这样的实例是一个NP完全问题，但作者表明，可以找到接近最优的解决方案，使用减少SAT可满足性问题及其相关的求解器]]></content>
+    <title><![CDATA[One pixel attack for fooling deep neural networks Jiawei]]></title>
+    <url>%2F2017%2F12%2F04%2FOne%20pixel%20attack%20for%20fooling%20deep%20neural%20networks%20Jiawei%2F</url>
+    <content type="text"><![CDATA[摘要在图像识别领域，基于 DNN 的方法突破了传统的图像处理技术，达到了可与人类媲美的结果 [9]。但是，多个研究证明自然图像中的人工扰动可以轻易使 DNN 对图像进行错误分类，研究者提出了生成此类「对抗图像」的高效算法 [1, 2, 3, 4]。生成对抗图像（adversarial images）的主要方式是向准确分类的自然图像中添加精心设计的额外扰动，该扰动不影响人类对图像的识别。这样的修改导致分类器将修改后的图像标注为完全不同的其他物体。但是，大多数之前的攻击并未考虑非常有限的对抗实例，即扰动的量有时候也会影响到人眼的识别能力（示例见图 2）。此外，研究在有限场景中创建的对抗图像更加有趣，因为它们可能更接近原始类别和目标类别（target class）之间的边界，研究此类关键点可以使人类更多地了解 DNN 输入空间的几何特征 方法贡献 非目标攻击，修改1,3,5个像素黑盒攻击可攻击不同模型对特征目标有相同的扰动方向 方法它不抽象的问题将扰动搜索到任意显式的目标函数进行求解，而直接关注提高目标类别的概率标注值全局对抗扰动可以泄露标签 固定修改像素的个数，增改像素改变的强度 Differential evolution (DE) which belongs to the generalclass of genetic algorithm (GA 实验结论]]></content>
       <categories>
         <category>论文</category>
       </categories>
@@ -596,6 +596,18 @@
       <tags>
         <tag>对抗样本</tag>
         <tag>论文集</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[今夜 仰望星空]]></title>
+    <url>%2F2017%2F12%2F04%2F%E4%BB%8A%E5%A4%9C%20%E4%BB%B0%E6%9C%9B%E6%98%9F%E7%A9%BA%2F</url>
+    <content type="text"><![CDATA[一片朦胧的夕光衬着暗绿的楼影你从雾雨中显现带着浴后的红晕多少语言和往事都在微笑中消溶我们走进了夜海去打捞遗失的繁星]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>寄语</tag>
+        <tag>心情</tag>
       </tags>
   </entry>
   <entry>
@@ -645,29 +657,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[今夜 仰望星空]]></title>
-    <url>%2F2017%2F12%2F04%2F%E4%BB%8A%E5%A4%9C%20%E4%BB%B0%E6%9C%9B%E6%98%9F%E7%A9%BA%2F</url>
-    <content type="text"><![CDATA[一片朦胧的夕光衬着暗绿的楼影你从雾雨中显现带着浴后的红晕多少语言和往事都在微笑中消溶我们走进了夜海去打捞遗失的繁星]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>寄语</tag>
-        <tag>心情</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[沉默的大多数]]></title>
-    <url>%2F2017%2F12%2F04%2F%E4%B8%80%E5%8F%A5%E8%AF%9D%2F</url>
-    <content type="text"><![CDATA[一句话 区别对待 方向 伙伴 理解 话语权 探索与重复 晚安，好眠。：）]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>一句话</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[DigitalOcean+shadowSocks + Docker 科学上网+挖矿]]></title>
     <url>%2F2017%2F12%2F04%2FDigitalOcean%2BshadowSocks%20%2B%20Docker%20%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%2F</url>
     <content type="text"><![CDATA[ss科学上网注册DigitalOcean，从这个链接 https://m.do.co/c/e70af193c2c0 进去可以有$10的优惠券。 参考教程上的步骤创建了一个Droplet,选了洛杉矶的服务器，不过好像有点慢，下载了DOcker,拉取了Docker中shadowSock镜像，端口号为1984,。另一篇参考。这篇里有详细解释。 这几天发现上不了外网，用docker ps 发现报错，连接不到守护进程，service docker stop 后 docker -d ,service docker start查看docker是否在运行ps aux | grep dockerdocker info查看信息2017/7/4 11:53:55windows查看端口被占用：123netstat -anonet -ano|findstr &quot;***&quot;tasklist|findstr &quot;***&quot; linux查看端口被占用123ps -aux | grep tomcatnetstat -apnps -aux | grep *** 使用shadowsocks，搭建ipv6 VPN，让ipv4上ipv6，下载速度提升到100M 一键脚本配置 前面配置的无法使用，原因不明，又用下图的配置了一遍。 挖矿第一步百度一不小心看到了服务器挖莱特比，心血来潮试了一下挖莱特币 接着在服务器上安cpuminer,最终没装上。先下载一堆依赖包,又在github上下载包,参考这篇博客，但`./config报错 gcc: error: unrecognized command line option ‘-V’gcc: fatal error: no input filescompilation terminated.configure:3447: $? = 1configure:3436: gcc -qversion &gt;&amp;5gcc: error: unrecognized command line option ‘-qversion’gcc: fatal error: no input filescompilation terminated.configure:3447: $? = 1configure:3467: checking whether the C compiler worksconfigure:3489: gcc -03 conftest.c &gt;&amp;5gcc: error: unrecognized command line option ‘-03’configure:3493: $? = 1configure:3531: result: no 按照这上面添加环境变量并没有解决。 这篇文章里的方法还没试。 Xshell生成密钥过程中想用Xshell连接服务器，发现需要用户密钥. 1#ssh-keygen -t rsa 生成密钥对服务器上的密钥在authorized_key文件中 安装vsftpd在服务器上安装了vsftpd which vsftpd看有没有安装vsftpd。123service vsftp start #启动服务service vsftp stop # 停止服务service vsftp restart #重启服务 用vi 修改配置文件 ：q是退出，当不存在任何没有保存的修改时它才会用:q!是退出并不保存。u可以取消刚才的修改，ctrl＋R可以取消你所取消的修改。注意：有：号的命令是先ESC，再：命令回车执行，不带：的，就是ESC后再输入执行。忘 了当前编辑的是什么文件，可以用ctrl＋G来查看。VI中可以执行命令。:!command就可以执行命令。命令完成后，可以按回车返回。甚至可以在VI中使用SHELL，（：！bash）从SHELL中执行几个命令后，exit退回到VI。保存退出，ZZ或:wq。 FTP传输ftp 传输有主动模式和被动模式，由客户端选择，一般cmd是主动模式，应在控制面板internet选项高级中把被动ftp关闭1ftp&gt;passive #可开/关被动模式 ftp 命令： open ip 打开连接 put 文件 上传文件 get 文件名 下载文件 close 关闭连接 bye/quit 离开ftp ftp 默认传输的文件在c盘的用户目录下标签（空格分隔）： 科学上网]]></content>
@@ -690,6 +679,17 @@
       <tags>
         <tag>Hexo</tag>
         <tag>GitHub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[沉默的大多数]]></title>
+    <url>%2F2017%2F12%2F04%2F%E4%B8%80%E5%8F%A5%E8%AF%9D%2F</url>
+    <content type="text"><![CDATA[一句话 区别对待 方向 伙伴 理解 话语权 探索与重复 晚安，好眠。：）]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>一句话</tag>
       </tags>
   </entry>
 </search>

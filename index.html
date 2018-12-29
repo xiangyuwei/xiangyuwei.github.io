@@ -413,6 +413,402 @@ $(function() {
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/12/29/Ubuntu使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/29/Ubuntu使用/" itemprop="url">Ubuntu使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-29T16:46:21+08:00">
+                2018-12-29
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-29T16:46:21+08:00">
+                2018-12-29
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/系统/" itemprop="url" rel="index">
+                    <span itemprop="name">系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/12/29/Ubuntu使用/" class="leancloud_visitors" data-flag-title="Ubuntu使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  873 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  4 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>CTRL+h  显示隐藏文件<br>ctrl+win +D 显示桌面<br>长按ｗｉｎ  显示快捷键</p>
+<p>/usr是Unix Software Rrsources的意思，相当于windows的C盘的，C:\Windows\和C:\Program Files的结合体。</p>
+<p>ls /usr可以得到：bin include lib share local 等等。</p>
+<p>其中share就是安装后的文件，文件夹所在位置</p>
+<p>而local是第三方库的位置，比如我安装了：boost和libtorrent库，就在这里面<br>参考：<br><a href="http://m.blog.csdn.net/wait_for_taht_day5/article/details/50382423" target="_blank" rel="external">1</a></p>
+<h2 id="中文输入法不能用"><a href="#中文输入法不能用" class="headerlink" title="中文输入法不能用"></a>中文输入法不能用</h2><h3 id="wps"><a href="#wps" class="headerlink" title="wps"></a>wps</h3><p>sudo gedit /usr/bin/wps</p>
+<p>增加</p>
+<p>&gt;<br>export XMODIFIERS=”@im=fcitx”<br>export QT_IM_MODULE=”fcitx” </p>
+<p>一定要在开头添加<br>或者<br>基于qt的程序下不能使用基于fcitx的中文输入法<br>sudo apt-get install fcitx-frontend-qt4 fcitx-frontend-qt5 fcitx-libs-qt fcitx-libs-qt5 libfcitx-qt0 libfcitx-qt5-1</p>
+<h3 id="mendenley"><a href="#mendenley" class="headerlink" title="mendenley"></a>mendenley</h3><p>Ubuntu</p>
+<p>用命令locate libfcitxplatforminputcontextplugin.so找到系统中的libfcitxplatforminputcontextplugin.so。（一般是/usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so）<br>拷贝</p>
+<p>重命名为libfcitxplatforminputcontextplugin.so，然后拷贝到mendeley安装位置，debian和ubuntu为：</p>
+<p>/opt/mendeleydesktop/plugins/qt/plugins/platforminputcontexts/</p>
+<p>Arch为：</p>
+<p>/opt/mendeleydesktop/lib/mendeleydesktop/plugins/platforminputcontexts/</p>
+<p>重新启动mendeley即可发现中文可以输入了。</p>
+<h3 id="不能上网"><a href="#不能上网" class="headerlink" title="不能上网"></a>不能上网</h3><p>sudo gedit /etc/network/interfaces<br>添加如下内容：<br>auto enp2s0（网卡ifconfig　查看）<br>iface enp2s0 inet static<br>address 10.0.0.156<br>netmask 255.255.255.0<br>gateway 10.0.0.1<br>dns-nameserver 202.112.144.236</p>
+<p>sudo gedit /etc/network/interfaces</p>
+<h2 id="DNS-问题导致不能上网"><a href="#DNS-问题导致不能上网" class="headerlink" title="DNS 问题导致不能上网"></a>DNS 问题导致不能上网</h2><p>sudo gedit /etc/resolv.conf<br>插入　nameserver 202.112.144.236</p>
+<h2 id="var-tmp-文件过大，磁盘空间满"><a href="#var-tmp-文件过大，磁盘空间满" class="headerlink" title="var/tmp 文件过大，磁盘空间满"></a>var/tmp 文件过大，磁盘空间满</h2><p>mkinitramfs× 此类文件过多<br>用rm -rf mkinitramfs* 删除</p>
+<p><a href="http://forum.ubuntu.org.cn/viewtopic.php?p=3189497" target="_blank" rel="external">http://forum.ubuntu.org.cn/viewtopic.php?p=3189497</a><br>lsof看看有没有正在使用</p>
+<h2 id="linux-共享windows-文件（ubuntu如何访问windows共享局域网文件夹）"><a href="#linux-共享windows-文件（ubuntu如何访问windows共享局域网文件夹）" class="headerlink" title="linux 共享windows 文件（ubuntu如何访问windows共享局域网文件夹）"></a>linux 共享windows 文件（ubuntu如何访问windows共享局域网文件夹）</h2><p>打开ubuntu的文件，下方有网络-连接服务器：输入sbm://目标ipv4的地址，eg： smb://202.203.21.211<br>或者ctrl+L在地址栏上输入</p>
+<p>每一个文件夹名字都打了一个”$“，带$的文件处于非共享状态表示不可以访问，，不加$的表示可以正常访问。</p>
+<p>安装smbclient和cifs-utils<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">apt-get install smbclient</div><div class="line"></div><div class="line">apt-get install cifs-utils</div><div class="line"></div><div class="line">sudo gedit /etc/samba/smb.conf</div><div class="line"></div><div class="line"> add the following in the [global] section</div><div class="line"></div><div class="line">client min protocol = SMB2</div><div class="line">client max protocol = SMB3</div></pre></td></tr></table></figure></p>
+<p>同时windows 中在管理－管理用户和组中增加共享用户，设置共享文档<br><del>最终UI直接链接不上，在界面里输入用户名，密码，域总是显示无法分配内存</del></p>
+<p><em>在linux下面创建一个需要挂载到的目录</em><br>用命令行挂载：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mount -t cifs -o username=Bob,password=123456 //192.168.0.102/Share /usr/local/bin/code</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>参数说明 : username , Window 系统登录用户名 ; password : Window 系统登录密码 ; //192.168.0.102/Share : 设置Window共享目录的路径 ; /usr/local/bin/code : 挂载到 Linux 下的那个目录<br>sudo mount -t cifs -o username=xxx,password=xxx,vers=3.0,uid=1000 //10.0.0.25/source /home/windows_share<br>指定挂载后的owner<br>查看某个用户UID的方法：</p>
+</blockquote>
+<p>id -u [username]</p>
+<p>如果想要开机就自动将windows共享目录挂载到ubuntu本地目录呢，该怎么做？<br>此种情况，可以直接修改 /etc/fstab. 在fstab文件中，添加对远程共享目录的挂载操作，具体做法是在fstab文件中添加以下代码：<br>//10.0.0.25/source  /home/windows_share/ cifs   defaults,uid=1000,gid=1000,username=user,password=password<br>参考网址：<br><a href="https://blog.csdn.net/wbaction/article/details/727586" target="_blank" rel="external">Ubuntu 16.04安装配置Samba服务</a><a href="https://blog.csdn.net/fanlovefan/article/details/1688658" target="_blank" rel="external">smbclient 使用方法</a><br><a href="https://askubuntu.com/questions/942858/smbclient-cannot-connect-to-windows-server-2012-r2" target="_blank" rel="external">NT_STATUS_RESOURCE_NAME_NOT_FOUND</a><br><a href="https://superuser.com/questions/1273456/windows-10-share-not-accessible-from-ubuntu-16-04-lts" target="_blank" rel="external">protocol negotiation failed: NT_STATUS_CONNECTION_RESET</a><br><a href="https://blog.csdn.net/tojohnonly/article/details/71374984" target="_blank" rel="external">Linux使用mount挂载Windows共享文件夹</a><br><a href="https://ask.fedoraproject.org/en/question/87463/samba-windows-10-share-mount-error112-host-is-down/" target="_blank" rel="external">Samba windows 10 share: mount error(112): Host is down</a><br><a href="https://www.cnblogs.com/xia-weiwen/p/7416666.html" target="_blank" rel="external">在Linux下访问Windows共享文件夹</a><br><em>另</em><br>windows中regedit命令启用注册表<br>cmd中输入net user,列举出来的用户就是可以通过网络连接的用户</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/12/29/jupyter使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/29/jupyter使用/" itemprop="url">jupyter使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-29T16:33:48+08:00">
+                2018-12-29
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-29T16:33:48+08:00">
+                2018-12-29
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/12/29/jupyter使用/" class="leancloud_visitors" data-flag-title="jupyter使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  856 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>如果希望屏蔽输出，可以在最后一条语句之后添加一个分号：”;”。<br>在cell中可以直接按tab键，可以自动补全<br>请按两下 i 按键终止循环，注意右上角的图标变回空心圈</p>
+<p><a href="https://www.zhihu.com/question/59392251" target="_blank" rel="external">https://www.zhihu.com/question/59392251</a></p>
+<p>官方文档<a href="https://ipython.org/ipython-doc/1/interactive/notebook.html#keyboard-shortcuts" target="_blank" rel="external">https://ipython.org/ipython-doc/1/interactive/notebook.html#keyboard-shortcuts</a><br><a href="http://python.jobbole.com/87527/" target="_blank" rel="external">http://python.jobbole.com/87527/</a><br>Jupyter 支持多光标操作，与 Sublime Text 类似。按住 Alt 进行点击和拖拽鼠标即可。<br>查看快捷键的方式是使用命令面板：Cmd + Shift + P(或者Linux和Windows上 Ctrl + Shift + P)<br><a href="http://liuchengxu.org/pelican-blog/jupyter-notebook-tips.html" target="_blank" rel="external">http://liuchengxu.org/pelican-blog/jupyter-notebook-tips.html</a></p>
+<p>&lt; !– more –&gt;<br>Jupyter Notebook 有两种键盘输入模式。编辑模式，允许你往单元中键入代码或文本；这时的单元框线是绿色的。命令模式，键盘输入运行程序命令；这时的单元框线是灰色。</p>
+<p>命令模式 (按键 Esc 开启)</p>
+<p>Enter : 转入编辑模式<br>Shift-Enter : 运行本单元，选中下个单元<br>Ctrl-Enter : 运行本单元<br>Alt-Enter : 运行本单元，在其下插入新单元<br>Y : 单元转入代码状态<br>M :单元转入markdown状态<br>R : 单元转入raw状态<br>1 : 设定 1 级标题<br>2 : 设定 2 级标题<br>3 : 设定 3 级标题<br>4 : 设定 4 级标题<br>5 : 设定 5 级标题<br>6 : 设定 6 级标题<br>Up : 选中上方单元<br>K : 选中上方单元<br>Down : 选中下方单元<br>J : 选中下方单元<br>Shift-K : 扩大选中上方单元<br>Shift-J : 扩大选中下方单元<br>｀A : 在上方插入新单元｀<br>｀B : 在下方插入新单元｀<br>X : 剪切选中的单元<br>C : 复制选中的单元<br>Shift-V : 粘贴到上方单元<br>V : 粘贴到下方单元<br>Z : 恢复删除的最后一个单元<br>D,D : 删除选中的单元<br>Shift-M : 合并选中的单元<br>Ctrl-S : 文件存盘<br>S : 文件存盘<br>L : 转换行号<br>O : 转换输出<br>Shift-O : 转换输出滚动<br>Esc : 关闭页面<br>Q : 关闭页面<br>H : 显示快捷键帮助<br>I,I : 中断Notebook内核<br>0,0 : 重启Notebook内核<br>Shift : 忽略<br>Shift-Space : 向上滚动<br>Space : 向下滚动<br>编辑模式 ( Enter 键启动)</p>
+<p>｀Tab : 代码补全或缩进｀<br>｀Shift-Tab : 提示｀<br>Ctrl-] : 缩进<br>Ctrl-[ : 解除缩进<br>Ctrl-A : 全选<br>Ctrl-Z : 复原<br>Ctrl-Shift-Z : 再做<br>Ctrl-Y : 再做<br>Ctrl-Home : 跳到单元开头<br>Ctrl-Up : 跳到单元开头<br>Ctrl-End : 跳到单元末尾<br>Ctrl-Down : 跳到单元末尾<br>Ctrl-Left : 跳到左边一个字首<br>Ctrl-Right : 跳到右边一个字首<br>Ctrl-Backspace : 删除前面一个字<br>Ctrl-Delete : 删除后面一个字<br>Esc : 进入命令模式<br>Ctrl-M : 进入命令模式<br>Shift-Enter : 运行本单元，选中下一单元<br>Ctrl-Enter : 运行本单元<br>Alt-Enter : 运行本单元，在下面插入一单元<br>Ctrl-Shift– : 分割单元<br>Ctrl-Shift-Subtract : 分割单元<br>Ctrl-S : 文件存盘<br>Shift : 忽略<br>Up : 光标上移或转入上一单元<br>Down :光标下移或转入下一单元</p>
+<h2 id="增加kernel"><a href="#增加kernel" class="headerlink" title="增加kernel"></a>增加kernel</h2><p>首先，在anaconda中切换到myPython2环境下，确认是否安装了ipykernel这个包，如果没有则安装。<br>然后，在这个环境下输入一下命令</p>
+<p>```</p>
+<p>#xxx是在jupyter中显示的名字，建议使用环境的名字，但是不一样也没关系</p>
+<h1 id="我这里和环境名字一样，使用myPython2这个名字"><a href="#我这里和环境名字一样，使用myPython2这个名字" class="headerlink" title="我这里和环境名字一样，使用myPython2这个名字"></a>我这里和环境名字一样，使用myPython2这个名字</h1><p>python -m ipykernel install –name XXXX</p>
+<hr>
+<p><a href="https://blog.csdn.net/wj1066/article/details/72891667?utm_source=copy" target="_blank" rel="external">https://blog.csdn.net/wj1066/article/details/72891667?utm_source=copy</a> </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/12/21/sklearn总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1967,379 +2363,6 @@ $(function() {
           
             <p><a href="http://www.cnblogs.com/shihuajie/p/5801408.html" target="_blank" rel="external">Huffman码来对以上符号序列进行二进制编码来说明熵的意义</a></p>
 <p>一文理解机器学习中的各种熵 <a href="https://www.jianshu.com/p/0bc001281bf2" target="_blank" rel="external">https://www.jianshu.com/p/0bc001281bf2</a><br>真实熵与人类行为可预测性 <a href="https://computational-communication.com/python/predicatability/" target="_blank" rel="external">https://computational-communication.com/python/predicatability/</a><br>熵(entropy)的自然直观的理解<br><a href="https://blog.csdn.net/u012491646/article/details/78884423" target="_blank" rel="external">https://blog.csdn.net/u012491646/article/details/78884423</a><br>时间序列的表示与信息提取<br><a href="https://zhuanlan.zhihu.com/p/39105270" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/39105270</a><br>On Predictability of Time Series　<a href="https://arxiv.org/abs/1806.03876" target="_blank" rel="external">https://arxiv.org/abs/1806.03876</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/10/27/matplotlib 中文显示及同时多个单词替换/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/27/matplotlib 中文显示及同时多个单词替换/" itemprop="url">matplotlib 中文显示及同时多个单词替换</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-27T13:29:00+08:00">
-                2018-10-27
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-27T17:58:17+08:00">
-                2018-10-27
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/10/27/matplotlib 中文显示及同时多个单词替换/" class="leancloud_visitors" data-flag-title="matplotlib 中文显示及同时多个单词替换">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  576 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  3 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="中文显示"><a href="#中文显示" class="headerlink" title="中文显示"></a>中文显示</h2><p><a href="https://www.jianshu.com/p/15b5189f85a3" target="_blank" rel="external">我们来解决一下 matplotlib 的中文显示问题</a><br><a href="https://www.cnblogs.com/sunqifs/p/7011677.html?utm_source=itdadao&amp;utm_medium=referral" target="_blank" rel="external">解决Linux系统中python matplotlib画图的中文显示问题</a></p>
-<p>１、/fc-list (“:lang=zh”可添加此后缀单独查看安装的中文字体）<br>下载SimHei.ttf字体</p>
-<p>由于系统没有任何中文字体，需要自己准备中文字体，Ubuntu支持TTF字体，这里笔者下载的是SimHei字体（百度搜索下载，注意要是ttf）</p>
-<p>２.upyter输入并运行：</p>
-<p>  import matplotlib</p>
-<p>  matplotlib.matplotlib_fname()<br>进入到文件内容中，使用上下光标建找到</p>
-<p>1）font.family : sans-serif ，去掉前面的 # 号</p>
-<p>2）font.sans-serif ，去掉前面的  # 号，并在后面内容首位添加一个SimHei</p>
-<p>３./home/linuxbrew/.linuxbrew/opt/python/lib/python3.6/site-packages/matplotlib/mpl-data</p>
-<p>即可看到fonts文件夹—-&gt;进入ttf文件夹——-&gt;将字体拷贝进入即可<br>1）放到系统文件夹下:<br>/usr/share/fonts<br>2） 放到matplotlib的字体文件夹下：<br>/usr/local/lib/python2.7/dist-packages/matplotlib/mpl-data/fonts/ttf/</p>
-<p>４、删除~/.cache/matplotlib缓存文件夹</p>
-<p>一定要删除这个文件夹，一般在系统目录下面，比如ubuntu这个文件夹下面<br>找到fontList.cache文件</p>
-<pre><code>sudo find / -name fontList.cache
-</code></pre><p>假设我的在/home/user/.cache/matplotlib/fontList.cache，删除：</p>
-<pre><code>rm /home/user/.cache/matplotlib/fontList.cache 
-</code></pre><p>５．画图代码部分</p>
-<pre><code>import matplotlib as mpl
-font_name = ‘SIMHEI’
-mpl.rcParams[‘font.family’] = font_name #用来正常显示中文标签
-mpl.rcParams[‘axes.unicode_minus’]=False #用来正常显示负号
-</code></pre><hr>
-<p>“以上方式都没解决”，<br><a href="https://blog.csdn.net/u013617229/article/details/82632751" target="_blank" rel="external">https://blog.csdn.net/u013617229/article/details/82632751</a><br>    根据os.path返回的结果，结合其他网友分享的文章得到最终的字体位置：<br>    os.path + site-packages/matplotlib/mpl-data/fonts/ttf</p>
-<h2 id="将想使用的字体命名为DejaVuSans-ttf替换上述路径下的DejaVuSans-ttf即可。"><a href="#将想使用的字体命名为DejaVuSans-ttf替换上述路径下的DejaVuSans-ttf即可。" class="headerlink" title="将想使用的字体命名为DejaVuSans.ttf替换上述路径下的DejaVuSans.ttf即可。"></a>将想使用的字体命名为DejaVuSans.ttf替换上述路径下的DejaVuSans.ttf即可。</h2><p><a href="https://www.cnblogs.com/lingLongBaby/p/8079588.html" target="_blank" rel="external">https://www.cnblogs.com/lingLongBaby/p/8079588.html</a></p>
-<p>常见问题</p>
-<p>1）当matplotlib/mpl-data/fonts/ttf中没有指定字体是执行时会出现如下错误</p>
-<p>font_manager.py:1287: UserWarning: findfont: Font family [u’sans-serif’] not found. Falling back to Bitstream Vera Sans (prop.get_family(), self.defaultFamily[fontext]))</p>
-<p>2）有字体但还是显示小方块,一般是没有删除~/.cache/matplotlib 的缓冲目录</p>
-<h2 id="pyhon-同时替换多个单词"><a href="#pyhon-同时替换多个单词" class="headerlink" title="pyhon 同时替换多个单词"></a>pyhon 同时替换多个单词</h2><p><a href="https://blog.csdn.net/huludan/article/details/50925735" target="_blank" rel="external">https://blog.csdn.net/huludan/article/details/50925735</a><br>正则断言<a href="http://blog.sina.com.cn/s/blog_a71b93220102wczi.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_a71b93220102wczi.html</a></p>
-<p>def multiple_replace(text, idict):<br>    rx = re.compile(r’\b%s\b’ % r’\b|\b’.join(map(re.escape, idict)))<br>    def one_xlat(match):<br>        return idict[match.group(0)]<br>    return rx.sub(one_xlat, text)</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/10/27/ubuntu死机及内存查看/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/27/ubuntu死机及内存查看/" itemprop="url">Ubuntu 死机原因</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-27T13:02:54+08:00">
-                2018-10-27
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-27T17:59:30+08:00">
-                2018-10-27
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/10/27/ubuntu死机及内存查看/" class="leancloud_visitors" data-flag-title="Ubuntu 死机原因">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  736 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  3 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Linux查看内存大小和插槽"><a href="#Linux查看内存大小和插槽" class="headerlink" title="Linux查看内存大小和插槽"></a>Linux查看内存大小和插槽</h2><p>Linux 查看内存的插槽数，已经使用多少插槽，每条内存多大，已使用内存多大<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dmidecode | grep  -P  -A5  &quot;Memory\s+Device&quot; | grep Size | grep -v Range </div><div class="line"></div><div class="line">Linux 查看内存支持的最大内存容量</div></pre></td></tr></table></figure></p>
-<p>dmidecode | grep -P  ‘Maximum\s+Capacity’</p>
-<p>Linux 查看内存的频率<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">dmidecode | grep -A16 &quot;Memory Device&quot; | grep &quot;Speed&quot; </div><div class="line"></div><div class="line">查看详细的主板信息</div><div class="line"></div><div class="line">dmidecode | grep -A16 &quot;System Information$&quot;</div><div class="line"></div><div class="line">查看详细的内存信息</div></pre></td></tr></table></figure></p>
-<p>dmidecode | grep -A16 “Memory Device$”<br>dmidecode -t memory</p>
-<h2 id="死机原因内存查看"><a href="#死机原因内存查看" class="headerlink" title="死机原因内存查看"></a>死机原因内存查看</h2><p>１．free -g,free 为０，内存基本用完</p>
-<p>释放内存：</p>
-<p>sync</p>
-<p>echo 3 &gt; /proc/sys/vm/drop_caches<br>２．磁盘使用，  df-h<br>３．磁盘I/O使用，  iostat-x 1<br>４．cpu用 top　或ａｔｏｐ<br>最右侧的%id表示剩余，若很低，则表示cpu被吃完了，在top界面按shift+p对进程使用cpu排序，能看到哪些进程占用cpu较多。<br>ｔｏｐ 按　Ｍ　查看内存分配<br>５．cat /proc/meminfo 也可以看到一些细化的内存使用信息<br>６．按内存占用排序：<br>ps -eo rss,pmem,pcpu,vsize,args | sort -k 1 -r -n | less<br>７.释放内存空间<br>Linux服务器运行一段时间后，由于其内存管理机制，会将暂时不用的内存转为buff/cache，这样在程序使用到这一部分数据时，能够很快的取出，从而提高系统的运行效率，所以这也正是linux内存管理中非常出色的一点，所以乍一看内存剩余的非常少，但是在程序真正需要内存空间时，linux会将缓存让出给程序使用，这样达到对内存的最充分利用，所以真正剩余的内存是free+buff/cache</p>
-<p>　　但是有些时候大量的缓存占据空间，这时候应用程序回去使用swap交换空间，从而使系统变慢，这时候需要手动去释放内存，释放内存的时候，首先执行命令 sync 将所有正在内存中的缓冲区写到磁盘中，其中包括已经修改的文件inode、已延迟的块I/O以及读写映射文件，从而确保文件系统的完整性<br>0：0是系统默认值，默认情况下表示不释放内存，由操作系统自动管理</p>
-<p>　　1：释放页缓存</p>
-<p>　　2：释放dentries和inodes</p>
-<p>　　3：释放所有缓存<br>｀｀｀<br>echo 1 &gt; /proc/sys/vm/drop_caches</p>
-<p>正常过程是 系统先使用内存，内存不足了再使用，tmpfs 的。tmpfs 满了，系统内存再满了，你机器就挂了。<br>你看看系统内存什么情况吧。<br>如果系统内存正常，tmpfs 满了说明你服务有问题<br>Slab dentry 过大导致的问题</p>
-<p>参考资料：<br><a href="https://blog.csdn.net/single6/article/details/81176213" target="_blank" rel="external">Linux系统卡顿怎么排查，top命令</a><br><a href="https://m.aliyun.com/yunqi/articles/161186" target="_blank" rel="external">记一次Linux系统内存占用较高得排查</a><br><a href="https://www.v2ex.com/t/432993" target="_blank" rel="external">助 Linux 真实内存占用过大, htop 命令无法展示占用的进程</a><br><a href="https://m.hqew.com/tech/fangan_388077" target="_blank" rel="external">Linux 死机原因及解决方法</a><br><a href="https://www.cnblogs.com/freeweb/p/5713513.html" target="_blank" rel="external">Linux释放内存空间</a></p>
 
           
         
