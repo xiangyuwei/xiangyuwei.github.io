@@ -100,12 +100,10 @@
 <meta property="og:url" content="http://xiangyuwei.github.io/2018/12/21/sklearn总结/index.html">
 <meta property="og:site_name" content="就和今天说早安">
 <meta property="og:description" content="卡方检验卡方检验是以χ2分布为基础的一种常用假设检验方法 ‘’根据假设，我们可以先算出一个文本出现”洪秀全”的概率，然后用中国近代史的文本个数乘以这个概率就得到了理论值，很好理解的普通概率问题。（想一想，这一起是不是建立在我们的假设的基础上。如果假设是二者不相关，那么理论值应该怎么算？你会发现根本不知道怎么算）’’第一篇参考文献中的例子解释为什么假设相关。因为假设不相关，概率无法计算。文本分类学习">
-<meta property="og:image" content="http://xiangyuwei.github.io/img/特征选择图片.png">
-<meta property="og:updated_time" content="2018-12-21T07:32:36.275Z">
+<meta property="og:updated_time" content="2018-12-31T16:29:13.448Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sklearn 总结">
 <meta name="twitter:description" content="卡方检验卡方检验是以χ2分布为基础的一种常用假设检验方法 ‘’根据假设，我们可以先算出一个文本出现”洪秀全”的概率，然后用中国近代史的文本个数乘以这个概率就得到了理论值，很好理解的普通概率问题。（想一想，这一起是不是建立在我们的假设的基础上。如果假设是二者不相关，那么理论值应该怎么算？你会发现根本不知道怎么算）’’第一篇参考文献中的例子解释为什么假设相关。因为假设不相关，概率无法计算。文本分类学习">
-<meta name="twitter:image" content="http://xiangyuwei.github.io/img/特征选择图片.png">
 
 
 
@@ -460,8 +458,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-21T15:32:36+08:00">
-                2018-12-21
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-01T00:29:13+08:00">
+                2019-01-01
               </time>
             
           </span>
@@ -532,7 +530,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,242 字
+                  211 字
                 </span>
               
 
@@ -548,7 +546,7 @@ $(function() {
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  8 分钟
+                  1 分钟
                 </span>
               
             </div>
@@ -568,12 +566,21 @@ $(function() {
       
         <h2 id="卡方检验"><a href="#卡方检验" class="headerlink" title="卡方检验"></a>卡方检验</h2><p>卡方检验是以χ2分布为基础的一种常用假设检验方法</p>
 <p>‘’根据假设，我们可以先算出一个文本出现”洪秀全”的概率，然后用中国近代史的文本个数乘以这个概率就得到了理论值，很好理解的普通概率问题。（想一想，这一起是不是建立在我们的假设的基础上。如果假设是二者不相关，那么理论值应该怎么算？你会发现根本不知道怎么算）’’第一篇参考文献中的例子解释为什么假设相关。<br>因为假设不相关，概率无法计算。<br><a href="http://www.cnblogs.com/dacc123/p/8746247.html" target="_blank" rel="external">文本分类学习 （四） 特征选择之卡方检验</a><br><a href="https://www.jianshu.com/p/807b2c2bfd9b" target="_blank" rel="external">结合日常生活的例子，了解什么是卡方检验</a></p>
-<h2 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h2><p>scikit-learn中提供了用于特征选择的模块feature_selection，主要方法包括方差移除法，卡方检验法，基于L1的特征选择和基于树的特征选择。<br>导入数据预处理库<br>from sklearn import preprocessing</p>
-<h3 id="卡方检验-1"><a href="#卡方检验-1" class="headerlink" title="卡方检验"></a>卡方检验</h3><p>导入特征选择库中的SelectKBest和chi2用来计算特征与结果间的相关性，并选择相关性最高的特征。<br>导入sklearn库中的SelectKBest和chi2<br>from sklearn.feature_selection import SelectKBest ,chi2<br>选择相关性最高的前5个特征<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">X_chi2 = SelectKBest(chi2, k=5).fit_transform(X, y)</div><div class="line">X_chi2.shape</div><div class="line">(27, 5)</div><div class="line"></div><div class="line">### 移除方差较低的特征</div><div class="line"></div><div class="line">导入特征选择库中的VarianceThreshold用于通过方差选择特征。方差为0的特征会被自动移除。剩下的特征按设定的方差的阈值进行选择。</div><div class="line">当特征值都是离散型变量的时候这种方法才能用，如果是连续型变量，就需要将连续变量离散化之后才能用</div></pre></td></tr></table></figure></p>
+<h2 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h2><!--more->
+
+scikit-learn中提供了用于特征选择的模块feature_selection，主要方法包括方差移除法，卡方检验法，基于L1的特征选择和基于树的特征选择。
+导入数据预处理库
+from sklearn import preprocessing
+### 卡方检验
+导入特征选择库中的SelectKBest和chi2用来计算特征与结果间的相关性，并选择相关性最高的特征。
+导入sklearn库中的SelectKBest和chi2
+from sklearn.feature_selection import SelectKBest ,chi2
+选择相关性最高的前5个特征
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">X_chi2 = SelectKBest(chi2, k=5).fit_transform(X, y)</div><div class="line">X_chi2.shape</div><div class="line">(27, 5)</div><div class="line"></div><div class="line">### 移除方差较低的特征</div><div class="line"></div><div class="line">导入特征选择库中的VarianceThreshold用于通过方差选择特征。方差为0的特征会被自动移除。剩下的特征按设定的方差的阈值进行选择。</div><div class="line">当特征值都是离散型变量的时候这种方法才能用，如果是连续型变量，就需要将连续变量离散化之后才能用</div></pre></td></tr></table></figure>
 <p>#导入sklearn库中的VarianceThreshold<br>from sklearn.feature_selection import VarianceThreshold</p>
 <p>#设置方差的阈值为0.8<br>sel = VarianceThreshold(threshold=.08)</p>
 <p>#选择方差大于0.8的特征<br>X_sel=sel.fit_transform(X_scaler)<br>X_sel.shape<br>(27, 5)</p>
-<p><a href="http://bluewhale.cc/2016-11-25/use-scikit-learn-for-feature-selection.html" target="_blank" rel="external">使用scikit-learn进行特征选择</a></p>
+<p><a href="http://bluewhale.cc/2016-11-25/use-scikit-learn-for-feature-selection.html">使用scikit-learn进行特征选择</a></p>
 <h3 id="Pearson相关系数-Pearson-Correlation"><a href="#Pearson相关系数-Pearson-Correlation" class="headerlink" title="Pearson相关系数 Pearson Correlation"></a>Pearson相关系数 Pearson Correlation</h3><p>Pearson相关系数的一个明显缺陷是，作为特征排序机制，他只对线性关系敏感。如果关系是非线性的，即便两个变量具有一一对应的关系，Pearson相关性也可能会接近0。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">import numpy as np</div><div class="line">from scipy.stats import pearsonr</div><div class="line">np.random.seed(0)</div><div class="line">size = 300</div><div class="line">x = np.random.normal(0, 1, size)</div><div class="line">print &quot;Lower noise&quot;, pearsonr(x, x + np.random.normal(0, 1, size))</div><div class="line">print &quot;Higher noise&quot;, pearsonr(x, x + np.random.normal(0, 10, size))</div><div class="line"></div><div class="line">### 互信息和最大信息系数</div><div class="line">当零假设不成立时，MIC的统计就会受到影响。在有的数据集上不存在这个问题，但有的数据集上就存在这个问题。</div><div class="line">零假设：</div><div class="line">在统计学中，零假设（虚无假设）是做统计检验时的一类假设。零假设的内容一般是希望证明其错误的假设。比如说，在相关性检验中，一般会取“两者之间没有关联”作为零假设，而在独立性检验中，一般会取“两者之间有关联”作为零假设。</div></pre></td></tr></table></figure></p>
 <p>from minepy import MINE<br>m = MINE()<br>x = np.random.uniform(-1, 1, 10000)<br>m.compute_score(x, x**2)<br>print m.mic()<br>单变量特征选择方法独立的衡量每个特征与响应变量之间的关系，另一种主流的特征选择方法是基于机器学习模型的方法。有些机器学习方法本身就具有对特征进行打分的机制，或者很容易将其运用到特征选择任务中，例如回归模型，SVM，决策树，随机森林等等。说句题外话，这种方法好像在一些地方叫做wrapper类型，大概意思是说，特征排序模型和机器学习模型是耦盒在一起的，对应的非wrapper类型的特征选择方法叫做filter类型。</p>
 <p>在很多实际的数据当中，往往存在多个互相关联的特征，这时候模型就会变得不稳定，数据中细微的变化就可能导致模型的巨大变化（模型的变化本质上是系数，或者叫参数，可以理解成W），这会让模型的预测变得困难，这种现象也称为多重共线性。例如，假设我们有个数据集，它的真实模型应该是Y=X1+X2，当我们观察的时候，发现Y’=X1+X2+e，e是噪音。如果X1和X2之间存在线性关系，例如X1约等于X2，这个时候由于噪音e的存在，我们学到的模型可能就不是Y=X1+X2了，有可能是Y=2X1，或者Y=-X1+3X2。<br>Lasso能够挑出一些优质特征，同时让其他特征的系数趋于0。当如需要减少特征数的时候它很有用，但是对于数据理解来说不是很好用。（例如在结果表中，X11,X12,X13的得分都是0，好像他们跟输出变量之间没有很强的联系，但实际上不是这样的）</p>
@@ -581,15 +588,15 @@ $(function() {
 <p>随机森林基于不纯度的排序结果非常鲜明，在得分最高的几个特征之后的特征，得分急剧的下降。从表中可以看到，得分第三的特征比第一的小4倍。而其他的特征选择算法就没有下降的这么剧烈。</p>
 <p>Ridge将回归系数均匀的分摊到各个关联变量上，从表中可以看出，X11,…,X14和X1,…,X4的得分非常接近。</p>
 <p>稳定性选择常常是一种既能够有助于理解数据又能够挑出优质特征的这种选择，在结果表中就能很好的看出。像Lasso一样，它能找到那些性能比较好的特征（X1，X2，X4，X5），同时，与这些特征关联度很强的变量也得到了较高的得分。</p>
-<p><a href="https://www.cnblogs.com/harvey888/p/5958586.html" target="_blank" rel="external">干货：结合Scikit-learn介绍几种常用的特征选择方法</a>（线性模型和正则化）<br>文章列出的参考文献：<br>    <a href="http://blog.datadive.net/selecting-good-features-part-i-univariate-selection/" target="_blank" rel="external">http://blog.datadive.net/selecting-good-features-part-i-univariate-selection/</a><br>    <a href="http://blog.datadive.net/selecting-good-features-part-ii-linear-models-and-regularization/" target="_blank" rel="external">http://blog.datadive.net/selecting-good-features-part-ii-linear-models-and-regularization/</a><br>    <a href="http://scikit-learn.org/stable/modules/feature_selection.html#univariate-feature-selection" target="_blank" rel="external">http://scikit-learn.org/stable/modules/feature_selection.html#univariate-feature-selection</a><br>    <a href="http://www.quora.com/What-are-some-feature-selection-methods" target="_blank" rel="external">http://www.quora.com/What-are-some-feature-selection-methods</a><br>    <a href="http://www.quora.com/What-are-some-feature-selection-algorithms" target="_blank" rel="external">http://www.quora.com/What-are-some-feature-selection-algorithms</a><br>    <a href="http://www.quora.com/What-are-some-feature-selection-methods-for-SVMs" target="_blank" rel="external">http://www.quora.com/What-are-some-feature-selection-methods-for-SVMs</a><br>    <a href="http://www.quora.com/What-is-the-difference-between-principal-component-analysis-PCA-and-feature-selection-in-machine-learning-Is-PCA-a-means-of-feature-selection" target="_blank" rel="external">http://www.quora.com/What-is-the-difference-between-principal-component-analysis-PCA-and-feature-selection-in-machine-learning-Is-PCA-a-means-of-feature-selection</a></p>
+<p><a href="https://www.cnblogs.com/harvey888/p/5958586.html">干货：结合Scikit-learn介绍几种常用的特征选择方法</a>（线性模型和正则化）<br>文章列出的参考文献：<br>    <a href="http://blog.datadive.net/selecting-good-features-part-i-univariate-selection/">http://blog.datadive.net/selecting-good-features-part-i-univariate-selection/</a><br>    <a href="http://blog.datadive.net/selecting-good-features-part-ii-linear-models-and-regularization/">http://blog.datadive.net/selecting-good-features-part-ii-linear-models-and-regularization/</a><br>    <a href="http://scikit-learn.org/stable/modules/feature_selection.html#univariate-feature-selection">http://scikit-learn.org/stable/modules/feature_selection.html#univariate-feature-selection</a><br>    <a href="http://www.quora.com/What-are-some-feature-selection-methods">http://www.quora.com/What-are-some-feature-selection-methods</a><br>    <a href="http://www.quora.com/What-are-some-feature-selection-algorithms">http://www.quora.com/What-are-some-feature-selection-algorithms</a><br>    <a href="http://www.quora.com/What-are-some-feature-selection-methods-for-SVMs">http://www.quora.com/What-are-some-feature-selection-methods-for-SVMs</a><br>    <a href="http://www.quora.com/What-is-the-difference-between-principal-component-analysis-PCA-and-feature-selection-in-machine-learning-Is-PCA-a-means-of-feature-selection">http://www.quora.com/What-is-the-difference-between-principal-component-analysis-PCA-and-feature-selection-in-machine-learning-Is-PCA-a-means-of-feature-selection</a></p>
 <h2 id="文本特征选择"><a href="#文本特征选择" class="headerlink" title="文本特征选择"></a>文本特征选择</h2><p>对于一个语料而言，我们可以统计的信息包括文档频率和文档类比例，所有的特征选择方法均依赖于这两个统计量，目前，文本的特征选择方法主要有：DF, MI, IG, CHI，WLLR,WFO六种。 </p>
-<p><a href="https://www.cnblogs.com/wangbogong/p/3251132.html" target="_blank" rel="external">文本挖掘之特征选择(python 实现)</a></p>
+<p><a href="https://www.cnblogs.com/wangbogong/p/3251132.html">文本挖掘之特征选择(python 实现)</a></p>
 <h2 id="特征抽取"><a href="#特征抽取" class="headerlink" title="特征抽取"></a>特征抽取</h2><p>通过包sklearn.feature_extraction来实现<br>特征抽取是数据挖掘非常重要的一环，对最终结果的影响要高过数据挖掘算法本身。只有将现实事件用合适的特征表示出来，才能借助数据挖掘的力量找到其他的规律。特征抽取也可以降低事情的复杂程度。<br>一般最常用的特征抽取技术都是高度针对特定领域的。如图像处理领域，提出了很多特征抽取技术，但是这些技术在其他领域的应用却非常有限。<br>DictVectorizer():将dict类型的list数据转换为numpy array<br>FeatureHasher():将特征哈希，将数据做哈希映射，同时能达到降维的效果<br>image():图像相关的特征抽取<br>text():文本相关的特征抽取<br>text.CountVectorizer():将文本转换为每个词出现个数的向量<br>text.TfidfVectorizer():将文本转换为逆文本词频向量 </p>
-<h2 id="text-HashingVectorizer-将文本作哈希向量化"><a href="#text-HashingVectorizer-将文本作哈希向量化" class="headerlink" title="text.HashingVectorizer():将文本作哈希向量化"></a>text.HashingVectorizer():将文本作哈希向量化</h2><p><a href="https://blog.csdn.net/sunshunli/article/details/80488838" target="_blank" rel="external">sklearn详细讲解</a> </p>
+<h2 id="text-HashingVectorizer-将文本作哈希向量化"><a href="#text-HashingVectorizer-将文本作哈希向量化" class="headerlink" title="text.HashingVectorizer():将文本作哈希向量化"></a>text.HashingVectorizer():将文本作哈希向量化</h2><p><a href="https://blog.csdn.net/sunshunli/article/details/80488838">sklearn详细讲解</a> </p>
 <p>　transform方法主要用来对特征进行转换。从可利用信息的角度来说，转换分为无信息转换和有信息转换。无信息转换是指不利用任何其他信息进行转换，比如指数、对数函数转换等。有信息转换从是否利用目标值向量又可分为无监督转换和有监督转换。无监督转换指只利用特征的统计信息的转换，统计信息包括均值、标准差、边界等等，比如标准化、PCA法降维等。有监督转换指既利用了特征信息又利用了目标值信息的转换，比如通过模型选择特征、LDA法降维等。通过总结常用的转换类<br><img src="/img/特征选择图片.png" alt="特征选择图片"></p>
-<p><a href="https://www.cnblogs.com/jasonfreak/p/5448462.html" target="_blank" rel="external">使用sklearn优雅地进行数据挖掘</a>这篇文章包含并行处理,流水线处理（pipeline），自动化调参，持久化</p>
-<h2 id="sklearn-官网"><a href="#sklearn-官网" class="headerlink" title="sklearn 官网"></a>sklearn 官网</h2><p><a href="https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html" target="_blank" rel="external">https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html</a></p>
-
+<p><a href="https://www.cnblogs.com/jasonfreak/p/5448462.html">使用sklearn优雅地进行数据挖掘</a>这篇文章包含并行处理,流水线处理（pipeline），自动化调参，持久化</p>
+<h2 id="sklearn-官网"><a href="#sklearn-官网" class="headerlink" title="sklearn 官网"></a>sklearn 官网</h2><p><a href="https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html">https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html</a></p>
+-->
       
     </div>
 
@@ -878,7 +885,7 @@ $(function() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#卡方检验"><span class="nav-number">1.</span> <span class="nav-text">卡方检验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特征选择"><span class="nav-number">2.</span> <span class="nav-text">特征选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#卡方检验-1"><span class="nav-number">2.1.</span> <span class="nav-text">卡方检验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pearson相关系数-Pearson-Correlation"><span class="nav-number">2.2.</span> <span class="nav-text">Pearson相关系数 Pearson Correlation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本特征选择"><span class="nav-number">3.</span> <span class="nav-text">文本特征选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特征抽取"><span class="nav-number">4.</span> <span class="nav-text">特征抽取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#text-HashingVectorizer-将文本作哈希向量化"><span class="nav-number">5.</span> <span class="nav-text">text.HashingVectorizer():将文本作哈希向量化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sklearn-官网"><span class="nav-number">6.</span> <span class="nav-text">sklearn 官网</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#卡方检验"><span class="nav-number">1.</span> <span class="nav-text">卡方检验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特征选择"><span class="nav-number">2.</span> <span class="nav-text">特征选择</span></a></li></ol></div>
             
 
           </div>
