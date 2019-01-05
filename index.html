@@ -460,7 +460,7 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-05T10:30:49+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-05T11:47:57+08:00">
                 2019-01-05
               </time>
             
@@ -521,7 +521,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  24 字
+                  155 字
                 </span>
               
 
@@ -556,11 +556,17 @@ $(function() {
 
       
         
-          
-            <h2 id="systeminfo-more"><a href="#systeminfo-more" class="headerlink" title="systeminfo | more"></a>systeminfo | more</h2><p>查看系统参数</p>
+          <h2 id="systeminfo-more"><a href="#systeminfo-more" class="headerlink" title="systeminfo | more"></a>systeminfo | more</h2><p>查看系统参数</p>
 <h2 id="相同命令运行"><a href="#相同命令运行" class="headerlink" title="相同命令运行"></a>相同命令运行</h2><p>讲命令行写入bat文件中</p>
-
-          
+<h2 id="后台运行-start-mim"><a href="#后台运行-start-mim" class="headerlink" title="后台运行 start /mim"></a>后台运行 start /mim</h2><p>在Linux下要使程序后台运行，可通过  java -jar Client.jar &amp;  来实现</p>
+<p>在Windows下，则通过  start /b java -jar Client.jar  来实现<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/05/windows使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1207,8 +1213,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-01T00:14:04+08:00">
-                2019-01-01
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-05T17:14:18+08:00">
+                2019-01-05
               </time>
             
           </span>
@@ -1268,7 +1274,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  204 字
+                  359 字
                 </span>
               
 
@@ -1284,7 +1290,7 @@ $(function() {
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -1316,6 +1322,15 @@ $(function() {
 </code></pre></blockquote>
 <h2 id="Pandas-Dataframe增、删、改、查、去重、抽样基本操作"><a href="#Pandas-Dataframe增、删、改、查、去重、抽样基本操作" class="headerlink" title="Pandas Dataframe增、删、改、查、去重、抽样基本操作"></a>Pandas Dataframe增、删、改、查、去重、抽样基本操作</h2><p>pandas的索引函数主要有三种：<br>loc 标签索引，行和列的名称<br>iloc 整型索引（绝对位置索引），绝对意义上的几行几列，起始索引为0<br>ix 是 iloc 和 loc的合体<br>at是loc的快捷方式<br>iat是iloc的快捷方式</p>
 <p><a href="https://www.cnblogs.com/zknublx/p/9645204.html" target="_blank" rel="external">https://www.cnblogs.com/zknublx/p/9645204.html</a></p>
+<h2 id="dataframe一列成多列"><a href="#dataframe一列成多列" class="headerlink" title="dataframe一列成多列"></a>dataframe一列成多列</h2><p>场景：一列中的值出现 1|2|3|56，这样用|分割的值，需要将其转换成4列。</p>
+<p>2、操作：</p>
+<p>names=df[‘names’].str.split(‘|’,expand=True)#多名字分列</p>
+<p>names.columns=[‘ids0’,’ids1’,’ids2’,’ids3’,’ids4’,’ids5’,’ids6’,’ids7’]#</p>
+<p>df=df.join(names)</p>
+<p>其中names字段的列是包含|分割的值，最后将多列合并会原dataframe里。</p>
+<h2 id="pandas应用函数-它将多个值返回到pandas-dataframe中的行"><a href="#pandas应用函数-它将多个值返回到pandas-dataframe中的行" class="headerlink" title="pandas应用函数,它将多个值返回到pandas dataframe中的行"></a>pandas应用函数,它将多个值返回到pandas dataframe中的行</h2><p>apply 中函数返回一个Series或列表<br>如返回：pd.Series([e,f,g], index=[‘a’, ‘b’, ‘c’])</p>
+<p><a href="https://codeday.me/bug/20180820/223407.html" target="_blank" rel="external">https://codeday.me/bug/20180820/223407.html</a></p>
+<p><a href="https://stackoverflow.com/questions/23690284/pandas-apply-function-that-returns-multiple-values-to-rows-in-pandas-dataframe" target="_blank" rel="external">https://stackoverflow.com/questions/23690284/pandas-apply-function-that-returns-multiple-values-to-rows-in-pandas-dataframe</a></p>
 
           
         
@@ -2019,8 +2034,8 @@ import logging.handlers
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-29T16:33:48+08:00">
-                2018-12-29
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-05T11:22:45+08:00">
+                2019-01-05
               </time>
             
           </span>
@@ -2058,7 +2073,7 @@ import logging.handlers
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  856 字
+                  897 字
                 </span>
               
 
@@ -2074,7 +2089,7 @@ import logging.handlers
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -2107,6 +2122,8 @@ import logging.handlers
 <h1 id="我这里和环境名字一样，使用myPython2这个名字"><a href="#我这里和环境名字一样，使用myPython2这个名字" class="headerlink" title="我这里和环境名字一样，使用myPython2这个名字"></a>我这里和环境名字一样，使用myPython2这个名字</h1><p>python -m ipykernel install –name XXXX</p>
 <hr>
 <p><a href="https://blog.csdn.net/wj1066/article/details/72891667?utm_source=copy" target="_blank" rel="external">https://blog.csdn.net/wj1066/article/details/72891667?utm_source=copy</a> </p>
+<h2 id="修改启动默认路径"><a href="#修改启动默认路径" class="headerlink" title="修改启动默认路径"></a>修改启动默认路径</h2><p>jupyter notebook –generate-config</p>
+<p>会在用户路径下生成.jupyter文件夹，修改ipython_notebook_config.py <strong>(小心会覆盖)</strong><br>修改c.NotebookApp.notebook_dir = ‘E://jupyter’</p>
 
           
         
