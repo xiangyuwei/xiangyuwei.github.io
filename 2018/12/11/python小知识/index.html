@@ -100,7 +100,7 @@
 <meta property="og:url" content="http://xiangyuwei.github.io/2018/12/11/python小知识/index.html">
 <meta property="og:site_name" content="就和今天说早安">
 <meta property="og:description" content="np.where()带一个星号（*）参数的函数传人的参数存储为一个元组（tuple）； 而带两个星号（*）参数的函数传人的参数则存储为一个字典（dict）">
-<meta property="og:updated_time" content="2018-12-31T16:14:49.203Z">
+<meta property="og:updated_time" content="2019-01-03T03:17:54.550Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python小知识">
 <meta name="twitter:description" content="np.where()带一个星号（*）参数的函数传人的参数存储为一个元组（tuple）； 而带两个星号（*）参数的函数传人的参数则存储为一个字典（dict）">
@@ -458,8 +458,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-01T00:14:49+08:00">
-                2019-01-01
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-03T11:17:54+08:00">
+                2019-01-03
               </time>
             
           </span>
@@ -519,7 +519,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,768 字
+                  3,211 字
                 </span>
               
 
@@ -535,7 +535,7 @@ $(function() {
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  12 分钟
+                  14 分钟
                 </span>
               
             </div>
@@ -708,6 +708,17 @@ print(elem)
 <p>Node.attributes[“id”]<br>a.name #就是上面的 “id”<br>a.value #属性的值<br>访问元素属性<br>```</p>
 <p>参考网址：<a href="http://www.cnblogs.com/kaituorensheng/p/4493306.html" target="_blank" rel="external">http://www.cnblogs.com/kaituorensheng/p/4493306.html</a><br><a href="https://blog.csdn.net/oopsangle/article/details/24589135（判断类型）" target="_blank" rel="external">https://blog.csdn.net/oopsangle/article/details/24589135（判断类型）</a></p>
 <h2 id="log-日志"><a href="#log-日志" class="headerlink" title="log 日志"></a>log 日志</h2><p><a href="https://docs.python.org/3/library/logging.html#logging.Logger.getEffectiveLevel" target="_blank" rel="external">官方网址</a></p>
+<h2 id="Python-包内的导入问题（绝对导入和相对导入）"><a href="#Python-包内的导入问题（绝对导入和相对导入）" class="headerlink" title="Python 包内的导入问题（绝对导入和相对导入）"></a>Python 包内的导入问题（绝对导入和相对导入）</h2><p>python中，每个py文件都称为模块，每个具有<em>int</em>.py文件的目录被称为包，如numpy、matplotlib等包<br>对于 Python 的包内导入，即包内模块导入包内模块，存在绝对导入和相对导入问题。</p>
+<p>python模块导入时需要经过搜索路径的过程python搜索模块的路径为：1）、程序的主目录（当前目录）2）、pythonpath目录（后面会介绍添加该路径方法）3）、标准链接库目录（在python安装目录中的lib/site-package中）4）、任何的.pth文件的内容（如果存在的话）.新功能，允许用户把有效果的目录添加到模块搜索路径中去</p>
+<p>import sys<br>sys.path.append(r’自己包的路径’)</p>
+<p>存在编码问题时：</p>
+<p>path = ‘c:\xxx\中文文件夹’<br>upath = unicode(path,’utf-8’)</p>
+<p>sklearn是package，一般导入是采用‘from sklearn import xxx’，module是采用import module，这是因为package是单个或多个module组合而成，所以如果直接采用import package，终端会混乱导致error</p>
+<p>包内的文件相互导入分两种，用绝对路径和相对路径，用.或者..都是第二种，相对路径。</p>
+<p>重点是，相对导入的路径依赖于当前模块的<em>name</em>，是根据它的值去找平级或者上级文件。<br>或者from . import XXXX</p>
+<p>在模块A.B.C中的代码<br>from . import D     # 导入A.B.D<br>from .. import E    # 导入A.E<br>from ..F import G    # 导入A.F.G，.. 和 F是连着的，中间没有空格<br>.代表当前目录，..代表上一层目录，…代表上上层目录。</p>
+<p>相对路径是指相对执行脚本的目录</p>
+<h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><p>设置断点<br>F7 进入<br>F8 跳过</p>
 
       
     </div>
@@ -857,7 +868,7 @@ print(elem)
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">70</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -868,7 +879,7 @@ print(elem)
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -879,7 +890,7 @@ print(elem)
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -997,7 +1008,7 @@ print(elem)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#np-where"><span class="nav-number">1.</span> <span class="nav-text">np.where()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pycharm-配置"><span class="nav-number">2.</span> <span class="nav-text">pycharm 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python中的字符数字之间的转换函数"><span class="nav-number">3.</span> <span class="nav-text">python中的字符数字之间的转换函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取绝对路径，相对路径"><span class="nav-number">4.</span> <span class="nav-text">获取绝对路径，相对路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件和目录访问"><span class="nav-number">4.1.</span> <span class="nav-text">文件和目录访问</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数中×和××的区别"><span class="nav-number">5.</span> <span class="nav-text">函数中×和××的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看帮助"><span class="nav-number">6.</span> <span class="nav-text">查看帮助</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zip"><span class="nav-number">7.</span> <span class="nav-text">zip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pd-cut"><span class="nav-number">8.</span> <span class="nav-text">pd.cut</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python3pandas库transform"><span class="nav-number">9.</span> <span class="nav-text">Python3pandas库transform</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groupby-agg"><span class="nav-number">10.</span> <span class="nav-text">groupby+agg</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特征选择-feature-selection"><span class="nav-number">11.</span> <span class="nav-text">特征选择 (feature_selection)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bagging（Bootstrap-aggregating）、随机森林（random-forests）、AdaBoost"><span class="nav-number">12.</span> <span class="nav-text">Bagging（Bootstrap aggregating）、随机森林（random forests）、AdaBoost</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列-——-gt-索引"><span class="nav-number">13.</span> <span class="nav-text">列 ——> 索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引-——-gt-列"><span class="nav-number">14.</span> <span class="nav-text">索引 ——> 列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loc——通过行标签索引行数据"><span class="nav-number">15.</span> <span class="nav-text">loc——通过行标签索引行数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数注解"><span class="nav-number">16.</span> <span class="nav-text">函数注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jieba-分词及词性表"><span class="nav-number">17.</span> <span class="nav-text">jieba 分词及词性表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型和运算"><span class="nav-number">18.</span> <span class="nav-text">类型和运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python里的那些坑"><span class="nav-number">19.</span> <span class="nav-text">python里的那些坑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#嵌套列表的创建"><span class="nav-number">19.1.</span> <span class="nav-text">嵌套列表的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表元素的引用"><span class="nav-number">19.2.</span> <span class="nav-text">列表元素的引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#log-日志"><span class="nav-number">20.</span> <span class="nav-text">log 日志</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#np-where"><span class="nav-number">1.</span> <span class="nav-text">np.where()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pycharm-配置"><span class="nav-number">2.</span> <span class="nav-text">pycharm 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python中的字符数字之间的转换函数"><span class="nav-number">3.</span> <span class="nav-text">python中的字符数字之间的转换函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取绝对路径，相对路径"><span class="nav-number">4.</span> <span class="nav-text">获取绝对路径，相对路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件和目录访问"><span class="nav-number">4.1.</span> <span class="nav-text">文件和目录访问</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数中×和××的区别"><span class="nav-number">5.</span> <span class="nav-text">函数中×和××的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看帮助"><span class="nav-number">6.</span> <span class="nav-text">查看帮助</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zip"><span class="nav-number">7.</span> <span class="nav-text">zip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pd-cut"><span class="nav-number">8.</span> <span class="nav-text">pd.cut</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python3pandas库transform"><span class="nav-number">9.</span> <span class="nav-text">Python3pandas库transform</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groupby-agg"><span class="nav-number">10.</span> <span class="nav-text">groupby+agg</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特征选择-feature-selection"><span class="nav-number">11.</span> <span class="nav-text">特征选择 (feature_selection)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bagging（Bootstrap-aggregating）、随机森林（random-forests）、AdaBoost"><span class="nav-number">12.</span> <span class="nav-text">Bagging（Bootstrap aggregating）、随机森林（random forests）、AdaBoost</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列-——-gt-索引"><span class="nav-number">13.</span> <span class="nav-text">列 ——> 索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引-——-gt-列"><span class="nav-number">14.</span> <span class="nav-text">索引 ——> 列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loc——通过行标签索引行数据"><span class="nav-number">15.</span> <span class="nav-text">loc——通过行标签索引行数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数注解"><span class="nav-number">16.</span> <span class="nav-text">函数注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jieba-分词及词性表"><span class="nav-number">17.</span> <span class="nav-text">jieba 分词及词性表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型和运算"><span class="nav-number">18.</span> <span class="nav-text">类型和运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python里的那些坑"><span class="nav-number">19.</span> <span class="nav-text">python里的那些坑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#嵌套列表的创建"><span class="nav-number">19.1.</span> <span class="nav-text">嵌套列表的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表元素的引用"><span class="nav-number">19.2.</span> <span class="nav-text">列表元素的引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#log-日志"><span class="nav-number">20.</span> <span class="nav-text">log 日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-包内的导入问题（绝对导入和相对导入）"><span class="nav-number">21.</span> <span class="nav-text">Python 包内的导入问题（绝对导入和相对导入）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调试"><span class="nav-number">22.</span> <span class="nav-text">调试</span></a></li></ol></div>
             
 
           </div>
