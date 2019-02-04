@@ -1,0 +1,4 @@
+https://scholar.google.com/citations?hl=en&user=2oclnIwAAAAJ&view_op=list_works
+Intel的特权环--联系linux和windows的内核安全机制 https://blog.csdn.net/dog250/article/details/5302836
+沈昌祥, 张焕国, 冯登国, 等. 信息安全综述[D]. , 2007.
+沈海波, 洪帆. 访问控制模型研究综述[D]. , 2005.

@@ -413,6 +413,408 @@ $(function() {
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/08/13/远程jupyter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/13/远程jupyter/" itemprop="url">远程登录jupyter notebook</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-13T21:38:08+08:00">
+                2018-08-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-13T22:21:09+08:00">
+                2018-08-13
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/13/远程jupyter/" class="leancloud_visitors" data-flag-title="远程登录jupyter notebook">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  570 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="服务器上设置"><a href="#服务器上设置" class="headerlink" title="服务器上设置"></a>服务器上设置</h2><h3 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h3><blockquote>
+<p>jupyter notebook –generate-config</p>
+</blockquote>
+<h3 id="生成密码"><a href="#生成密码" class="headerlink" title="生成密码"></a>生成密码</h3><blockquote>
+<p>ipython</p>
+</blockquote>
+<p>In [1]: from notebook.auth import passwd<br>In [2]: passwd()<br>Enter password:<br>Verify password:<br>Out[2]: ‘sha1:ce23d945972f:34769685a7ccd3d08c84a18c63968a41f1140274’<br>把生成的密文‘sha:ce…’复制下来</p>
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><blockquote>
+<p>vim ~/.jupyter/jupyter_notebook_config.py</p>
+</blockquote>
+<p>c.NotebookApp.ip=’*’<br>c.NotebookApp.password = u’sha:ce…刚才复制的那个密文’<br>c.NotebookApp.open_browser = False<br>c.NotebookApp.port =8888 #随便指定一个端口</p>
+<h2 id="本地"><a href="#本地" class="headerlink" title="本地"></a>本地</h2><p>本地建立一个ssh通道：</p>
+<p>ssh wxy@服务器ＩＰ -p 端口  -L 127.0.0.1:12345:127.0.0.1:8888<br>浏览器上输入<a href="http://127.0.0.1:12345" target="_blank" rel="external">http://127.0.0.1:12345</a></p>
+<p><a href="http://frankchen.xyz/2017/12/25/Remote-jupyter-notebook/（&#39;开机自启&#39;）" target="_blank" rel="external">http://frankchen.xyz/2017/12/25/Remote-jupyter-notebook/（&#39;开机自启&#39;）</a><br><a href="https://www.cnblogs.com/wushaogui/p/8797841.html(windows" target="_blank" rel="external">https://www.cnblogs.com/wushaogui/p/8797841.html(windows</a>)</p>
+<h2 id="另（不成功）"><a href="#另（不成功）" class="headerlink" title="另（不成功）"></a>另（不成功）</h2><p><a href="https://blog.csdn.net/danlei94/article/details/74049975?utm_source=itdadao&amp;utm_medium=referral" target="_blank" rel="external">https://blog.csdn.net/danlei94/article/details/74049975?utm_source=itdadao&amp;utm_medium=referral</a></p>
+<blockquote>
+<p>jupyter notebook –ip 0.0.0.0<br>接着你会看到有一个带token的url地址，你可以将此地址复制粘贴在你本地的浏览器，并且更换掉ip 0.0.0.0–&gt;你服务器的ip地址</p>
+</blockquote>
+<pre><code>按住 Ctrl+z键，即可将一个正在前台执行的命令放到后台，并且暂停
+</code></pre><blockquote>
+<p>Ctrl +z （按键）</p>
+</blockquote>
+<pre><code>输入jobs查看当前job的情况
+
+&gt;jobs
+
+利用bg命令将一个在后台暂停的命令，变成继续执行
+
+&gt;bg 1
+// “1” 这里就可以替换为你运行的jupyter的job号，上一步可以查到
+</code></pre><p>参考文献　<a href="https://bitmingw.com/2017/07/09/run-jupyter-notebook-server/" target="_blank" rel="external">https://bitmingw.com/2017/07/09/run-jupyter-notebook-server/</a><br><a href="http://bbs.bugcode.cn/t/71596" target="_blank" rel="external">http://bbs.bugcode.cn/t/71596</a> (错误，并没有用上)</p>
+<h2 id="增加内核"><a href="#增加内核" class="headerlink" title="增加内核"></a>增加内核</h2><p>自己是在python3环境中conda install jupyter 下载jupyter,网上是pip3 install ipykernel<br>然后在python3坏境中执行’python -m ipykernel install –name XXXX’<br>使用命令jupyter kernelspec list可以查看当前的kernel<br>jupyter notebook –config = /home…/ipython_notebook_config.py   # .py配置文件的路径,在运行时指定配置文件(只需运行一次即可更新.json配置文件，后面再运行时不用添加路径信息)</p>
+<p><a href="https://blog.csdn.net/Lazybones_3/article/details/78631232" target="_blank" rel="external">https://blog.csdn.net/Lazybones_3/article/details/78631232</a><br><a href="https://blog.csdn.net/qq_24027563/article/details/80589880(密码没有修改的问题解决" target="_blank" rel="external">https://blog.csdn.net/qq_24027563/article/details/80589880(密码没有修改的问题解决</a>)</p>
+<h2 id="在当前环境下安装anaconda包集合"><a href="#在当前环境下安装anaconda包集合" class="headerlink" title="在当前环境下安装anaconda包集合"></a>在当前环境下安装anaconda包集合</h2><p>conda install anaconda<br><a href="http://www.mamicode.com/info-detail-2287955.html" target="_blank" rel="external">http://www.mamicode.com/info-detail-2287955.html</a></p>
+<h2 id="出现错误"><a href="#出现错误" class="headerlink" title="出现错误"></a>出现错误</h2><p>channel 2: open failed: connect failed: Connection refused<br>不知道这个错误是什么原因造成的，最后换了ｃｈｒｏｍｅ浏览器访问成功</p>
+<p><a href="https://www.alibabacloud.com/help/zh/doc-detail/53650.htm（阿里使用jupyter）" target="_blank" rel="external">https://www.alibabacloud.com/help/zh/doc-detail/53650.htm（阿里使用jupyter）</a></p>
+<p><a href="http://www.itkeyword.com/doc/8934890860339928285/how-to-start-ipython-notebook-remotely" target="_blank" rel="external">http://www.itkeyword.com/doc/8934890860339928285/how-to-start-ipython-notebook-remotely</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/08/13/社交网络论文记忆点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/13/社交网络论文记忆点/" itemprop="url">社交网络论文记忆点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-13T21:38:08+08:00">
+                2018-08-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-04-09T21:51:16+08:00">
+                2018-04-09
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/13/社交网络论文记忆点/" class="leancloud_visitors" data-flag-title="社交网络论文记忆点">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  28 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>基于社交媒体的关联性用户属性推断</p>
+<p>超图，多个属性进行关联预测</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/08/13/爬虫错误/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1947,389 +2349,11 @@ $(function() {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/01/23/参考文献怎么看/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/23/参考文献怎么看/" itemprop="url">参考文献怎么看</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-23T22:45:48+08:00">
-                2018-01-23
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-13T22:01:44+08:00">
-                2018-08-13
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/写作/" itemprop="url" rel="index">
-                    <span itemprop="name">写作</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/01/23/参考文献怎么看/" class="leancloud_visitors" data-flag-title="参考文献怎么看">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  475 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  2 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="文献三部曲"><a href="#文献三部曲" class="headerlink" title="文献三部曲"></a>文献三部曲</h2><p>一、<br>5-10分钟</p>
-<p>a.题目，摘要，引言</p>
-<p>b.每部分标题及二级标题</p>
-<p>c.结论</p>
-<p>d.参考文献，标注已读过的文献</p>
-<p>二、<br>1个小时</p>
-<p>a.仔细看文中的表，图例，判断结论是否显然</p>
-<p>b.标注没有读的参考文献</p>
-<p>三、3到4个小时，专家1个小时</p>
-<p>a.重复作者的工作，知道作者的创新点，发现错误或假设错误</p>
-<p>b.重构文章，识别文章主次</p>
-<h2 id="带着问题读文献"><a href="#带着问题读文献" class="headerlink" title="带着问题读文献"></a>带着问题读文献</h2><p>我要解决什么问题而看的文献</p>
-<p>本文主要讲了什么？本文的目的是什么？作者用了什么方法？作者的结果是什么？这些结果在这个课题中达到了什么高度？是否是非常重要的贡献？哪些东西是有原创性的，哪些东西没有？哪些数据是合理解释的，哪些有问题？哪些实验做得不好？哪些问题还没有搞清楚？还缺乏什么实验？这篇文章写得好还是写得不好？哪些部份写得好，哪些部份写得不好？如果自己是作者，应该怎样写才能写得更好？</p>
-<p>在手头没有资料的情况下回忆文献，明白自己的不理解的地方，找到改进的地方</p>
-<p>这篇文章的重要性，为什么，我能够想到这个选题吗<br>本文解决了什么问题，提出了什么问题</p>
-<p>哪些不足，怎么改进<br>结果是否有其他解释</p>
-<p>我有哪些想法</p>
-<h2 id="评价文献"><a href="#评价文献" class="headerlink" title="评价文献"></a>评价文献</h2><p>选题<br>实验点子<br>实验设计<br>实验结果<br>写作<br>评论强项和弱项</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://mp.weixin.qq.com/s?__biz=MzA3NTE5MzIzMg==&amp;mid=2654250306&amp;idx=1&amp;sn=0dd84c8cf9611d036e456b3cee9c1b90&amp;chksm=84b44bbdb3c3c2abfbabfc94cec0a84752b7d4ca7a7eec10c908ae1e8485094717f616231beb&amp;mpshare=1&amp;scene=1&amp;srcid=1216PZ1K9fHLgbB52aXTruCV#rd" target="_blank" rel="external">这样读文献，你才能进行“再创造”</a></p>
-<p><a href="https://mp.weixin.qq.com/s?__biz=MzA3NTE5MzIzMg==&amp;mid=2654249983&amp;idx=1&amp;sn=6282ede5ca2123fddd35a7f2e84d0c13&amp;chksm=84b44d00b3c3c4166fd0dab53a98dd164e336a44945f67a1e8754aede1f924ede0b28ef697e7&amp;mpshare=1&amp;scene=1&amp;srcid=12160yp5b68WoHzVvjlozLz9#rd" target="_blank" rel="external">文献按这些步骤读3遍，不止会读，你还会写！</a></p>
-<p><a href="https://mp.weixin.qq.com/s?__biz=MzA3NTE5MzIzMg==&amp;mid=207695857&amp;idx=3&amp;sn=1ab7dfbd6f1031d89521acc07e5a61a9&amp;mpshare=1&amp;scene=1&amp;srcid=1216j8BBYAzykxUAJMPdISuq#rd" target="_blank" rel="external">手把手教你：阅读文献与综述的写作</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/01/23/冬至/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/23/冬至/" itemprop="url">一九二九不出手</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-23T22:45:48+08:00">
-                2018-01-23
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-01-05T16:46:25+08:00">
-                2018-01-05
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/01/23/冬至/" class="leancloud_visitors" data-flag-title="一九二九不出手">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1,105 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  4 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>市气象专家说，冬至以后，北半球夜晚逐渐缩短，白天逐渐增长。冬至的到来，最重要的气象意义就是数九寒天的开始，也就是说一年中最冷的一段时间要来了。冬至也是一九的第一天，这是我国古代对寒冬的记时方法。我国民间将冬至后的 81 天划分为 9 个阶段，每一个阶段为 9 天。数九寒天历时近3个月，时间是很长的，从开始数九到九九，正是一个由冬寒到春暖的渐变过程。另外，我国民间有“冷在三九”的说法，这是因为“三九四九”前后，地面积蓄的热量最少，天气也最冷。因此，《九九歌》说“一九二九不出手 ，三九四九冰上走”。</p>
-<p>河大文学院教授李国平说，冬至是我国农历中一个非常重要的节气，也是一个传统节日，至今不少地方仍有过冬至节的习俗。冬至俗称“冬节”“长至节”“亚岁”等。早在2500多年前的春秋时代，我国已经通过观测太阳测定出了冬至，它是二十四节气中最早制定的一个，时间在每年的阳历12月22日或者23日之间。我国古代对冬至很重视，冬至被当作一个较大节日，曾有“冬至大如年”的说法，而且有庆贺冬至的习俗。《汉书》中说：“冬至阳气起，君道长，故贺。”就是说过了冬至，白昼一天比一天长，阳气回升，是一个节气循环的开始，也是一个吉日，应该庆贺。就这个层面来讲，英国诗人雪莱的名句“冬天到了，春天还会远吗”与“冬至阳来复”倒有异曲同工之妙。</p>
-<p>市民李昆顶说，小时候饺子在老家通许县被称作“扁食”，如果冬至这天不吃“扁食”，就有可能被冻掉耳朵。相传这是一个关于医圣张仲景的故事，说是张仲景告老还乡回到南阳老家时，见到很多穷苦百姓忍饥受寒，耳朵都被冻烂了，就研制了一个可以御寒的食疗方子“祛寒娇耳汤”，用羊肉和一些祛寒药材在锅里煮熬，煮好后再把这些东西捞出来切碎，用面皮包成耳朵状的“娇耳”，吃一段时间后，患者的烂耳朵就好了。后来，人们称这种食物为“饺耳”“饺子”或“扁食”，在冬至和大年初一吃，以纪念张仲景治愈病人。</p>
-<p>冬至后，阳气缓缓回升，是阴阳转化的关键节气，也是夏病冬防、冬病冬治的最好时机。俗谚说：“今年冬令进补，明年三春打虎。”中医大夫娄琪认为，这个时节要多吃能增加热能供给，富含脂肪、蛋白质和碳水化合物的食物，包括肉类、蛋类、鱼类及豆制品等。要补充矿物质。中国人一般以“五谷为养、五果为助、五畜为益、五菜为充”，只要不偏食，就可以保证人体对钾、铁、钠等矿物质的需求。特别怕冷的人可多补充一些根部带皮的蔬菜，这类蔬菜生长在土壤里，其根部和皮壳中含有大量的矿物质及营养素。冬季气候干燥，人们常有鼻干舌燥、皮肤干裂等症状，补充维生素B2和维生素C十分必要。维生素B2多存于动物的肝、蛋、乳中，维生素C主要存在于新鲜蔬菜和水果中。</p>
-<p>在寒冷的冬至时节，受新陈代谢加快影响，人会胃口大开，吃下更多的食物。这个时候要想保持良好身材，运动是很有必要的。国家级健身教练陈启亮说，此时的运动要遵循两个原则：一是选择适当的运动方式，避免大汗淋漓的高强度运动，以强度适中的运动为主，让身体发热或微微出汗即可。二是选择恰当的运动时间，时间自由度大的锻炼者可将晨练安排在7时至9时，时间紧张的上班族则可在6时至7时进行适度锻炼。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2374,7 +2398,7 @@ $(function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">70</span>
+                <span class="site-state-item-count">72</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2396,7 +2420,7 @@ $(function() {
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-count">55</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

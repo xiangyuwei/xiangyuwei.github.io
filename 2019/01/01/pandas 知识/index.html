@@ -100,7 +100,7 @@
 <meta property="og:url" content="http://xiangyuwei.github.io/2019/01/01/pandas 知识/index.html">
 <meta property="og:site_name" content="就和今天说早安">
 <meta property="og:description" content="drop_duplicates：去除重复项12DataFrame.drop_duplicates(subset=None, keep=&amp;apos;first&amp;apos;, inplace=False) 这个drop_duplicate方法是对DataFrame格式的数据，去除特定列下面的重复行。返回DataFrame格式的数据。  subset : column label or sequence">
-<meta property="og:updated_time" content="2019-01-05T09:14:18.209Z">
+<meta property="og:updated_time" content="2019-01-20T15:43:15.438Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pandas 使用">
 <meta name="twitter:description" content="drop_duplicates：去除重复项12DataFrame.drop_duplicates(subset=None, keep=&amp;apos;first&amp;apos;, inplace=False) 这个drop_duplicate方法是对DataFrame格式的数据，去除特定列下面的重复行。返回DataFrame格式的数据。  subset : column label or sequence">
@@ -458,8 +458,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-05T17:14:18+08:00">
-                2019-01-05
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-20T23:43:15+08:00">
+                2019-01-20
               </time>
             
           </span>
@@ -519,7 +519,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  359 字
+                  1,324 字
                 </span>
               
 
@@ -535,7 +535,7 @@ $(function() {
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -574,6 +574,48 @@ $(function() {
 <h2 id="pandas应用函数-它将多个值返回到pandas-dataframe中的行"><a href="#pandas应用函数-它将多个值返回到pandas-dataframe中的行" class="headerlink" title="pandas应用函数,它将多个值返回到pandas dataframe中的行"></a>pandas应用函数,它将多个值返回到pandas dataframe中的行</h2><p>apply 中函数返回一个Series或列表<br>如返回：pd.Series([e,f,g], index=[‘a’, ‘b’, ‘c’])</p>
 <p><a href="https://codeday.me/bug/20180820/223407.html" target="_blank" rel="external">https://codeday.me/bug/20180820/223407.html</a></p>
 <p><a href="https://stackoverflow.com/questions/23690284/pandas-apply-function-that-returns-multiple-values-to-rows-in-pandas-dataframe" target="_blank" rel="external">https://stackoverflow.com/questions/23690284/pandas-apply-function-that-returns-multiple-values-to-rows-in-pandas-dataframe</a></p>
+<h2 id="groupby"><a href="#groupby" class="headerlink" title="groupby"></a>groupby</h2><p>1.groupby(“id”).resample(“M”).agg(“mean”)会报错：Exception: Column(s) num_temp selected 并不知道原因<br>但可以这样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">df.set_index(&apos;date&apos;).groupby(&apos;name&apos;)[&apos;ext price&apos;].resample(&quot;M&quot;).sum()</div><div class="line"></div><div class="line">df[[&quot;ext price&quot;, &quot;quantity&quot;, &quot;unit price&quot;]].agg([&apos;sum&apos;, &apos;mean&apos;])</div><div class="line"></div><div class="line">df.agg(&#123;&apos;ext price&apos;: [&apos;sum&apos;, &apos;mean&apos;], &apos;quantity&apos;: [&apos;sum&apos;, &apos;mean&apos;], &apos;unit price&apos;: [&apos;mean&apos;]&#125;)</div></pre></td></tr></table></figure></p>
+<p><a href="https://segmentfault.com/a/1190000012394176?utm_medium=referral&amp;utm_source=tuicool" target="_blank" rel="external">python处理数据的风骚操作pandas 之 groupby&amp;agg</a></p>
+<p>2.这些操作对数值型的列自动进行计算，非数值型的会去掉<br>如果不对原始数据作限制的话，聚合函数会自动选择数值型数据进行聚合计算。如果不想对年龄计算平均值的话，就需要剔除改变量：<br>student.drop(“age”).groupby(“id”).mean()</p>
+<p>“”统计值””<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">def stats(x,time_interval):</div><div class="line">    return pd.Series([x.count(),x.min(),x.idxmin(),</div><div class="line">    x.quantile(.25),x.median(),</div><div class="line">    x.quantile(.75),x.mean(),</div><div class="line">    x.max(),x.idxmax(),</div><div class="line">    x.mad(),x.var(),</div><div class="line">    x.std(),x.skew(),x.kurt()],</div><div class="line">    index = [time_interval+&apos;_Count&apos;,time_interval+&apos;_Min&apos;,time_interval+&apos;_Whicn_Min&apos;,</div><div class="line">    time_interval+&apos;_Q1&apos;,time_interval+&apos;_Median&apos;,time_interval+&apos;_Q3&apos;,time_interval+&apos;_Mean&apos;,</div><div class="line">    time_interval+&apos;_Max&apos;,time_interval+&apos;_Which_Max&apos;,time_interval+&apos;_Mad&apos;,</div><div class="line">    time_interval+&apos;_Var&apos;,time_interval+&apos;_Std&apos;,time_interval+&apos;_Skew&apos;,time_interval+&apos;_Kurt&apos;])</div></pre></td></tr></table></figure></p>
+<p><a href="Python数据分析之pandas学习">Python数据分析之pandas学习</a></p>
+<p>3.对分组进行迭代：<br>for name, group in df.groupby(‘key1’):<br>        print (name)<br>        print (group)</p>
+<p><a href="https://blog.csdn.net/youngbit007/article/details/54288603" target="_blank" rel="external">python/pandas数据挖掘（十四）-groupby,聚合，分组级运算</a></p>
+<p><a href="https://segmentfault.com/q/1010000009769989" target="_blank" rel="external">Pandas按日期对状态进行汇总统计</a><br><a href="https://cloud.tencent.com/developer/article/1365705" target="_blank" rel="external">《Pandas Cookbook》第10章 时间序列分析1. Python和Pandas日期工具的区别2. 智能切分时间序列3. 只使用适用于DatetimeIndex的方法4. 计算每周的犯罪数5.</a></p>
+<h3 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h3><p><a href="https://www.cnblogs.com/huiyang865/p/5577772.html" target="_blank" rel="external">pandas聚合和分组运算——GroupBy技术(1)</a></p>
+<h2 id="时间序列划分时间间隔"><a href="#时间序列划分时间间隔" class="headerlink" title="时间序列划分时间间隔"></a>时间序列划分时间间隔</h2><p>在进行数据操作时, 经常会碰到基于同一列进行错位相加减的操作, 即对某一列进行向上或向下平移(shift).<br>我需要计算网络数据包之间的时间间隔，使用pandas的实现过程如下。</p>
+<p>例如  a = ​[‘2011-08-10 03:56:10’,  ‘2011-08-10 03:56:20’,  ‘2011-08-10 03:56:40’,  ‘2011-08-10 03:56:50’]， 时间字符串列表。</p>
+<p>import pandas as pd​</p>
+<p>import numpy as np​</p>
+<ol>
+<li><p>将a转换为Series结构， b = ​pd.Series(a)</p>
+</li>
+<li><p>将b转换为DateTime数据类型， c = pd.to_datetime(b)</p>
+</li>
+<li><p>计算时间间隔TimeDelta， d = (c - c.shift()​).dropna()</p>
+</li>
+<li><p>计算间隔了多少秒(将TimeDelta类型数据转换为基于秒的整数)， e = d.map(lambda x: x/np.timedelta64(1, ‘s’))</p>
+</li>
+</ol>
+<p><em>*</em> Pandas计算出的时间间隔数据的类型是np.timedelta64, 不是Python标准库中的timedelta类型，因此没有total_seconds()函数，需要除以np.timedelta64的1秒来计算间隔了多少秒。</p>
+<p>也可以将Pandas的Series转换成numpy的ndarray后计算间隔的秒数：</p>
+<ol>
+<li><p>b = np.array(a)</p>
+</li>
+<li><p>c = np.diff(b)/np.timedelta64(1, ‘s’)​</p>
+</li>
+</ol>
+<p><em>*</em>numpy的diff()函数实在是太赞了。​</p>
+<p><a href="http://blog.sina.com.cn/s/blog_4ddef8f80102vtun.html" target="_blank" rel="external">使用Pandas获得数据的时间间隔序列</a><br><a href="https://blog.csdn.net/kizgel/article/details/78333833" target="_blank" rel="external">python对列进行平移变换(shift)</a></p>
+<p><a href="https://blog.csdn.net/weixin_38656890/article/details/79782188" target="_blank" rel="external">pandas 时间序列 之日期范围、频率及移动</a>中图<br><a href="/img/pandas频率选项.png">!频率选项</a></p>
+<p>##</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">print(‘---------获取2013年的数据-----------‘)</div><div class="line">print(df[‘2013‘].head(2)) # 获取2013年的数据</div><div class="line">print(df[‘2013‘].tail(2)) # 获取2013年的数据</div></pre></td></tr></table></figure>
+<p><a href="https://blog.csdn.net/mhywoniu/article/details/78514664" target="_blank" rel="external">Pandas日期数据处理：如何按日期筛选、显示及统计数据</a></p>
+<h2 id="滑窗，Rolling-和-Expanding-待研究"><a href="#滑窗，Rolling-和-Expanding-待研究" class="headerlink" title="滑窗，Rolling 和 Expanding 待研究"></a>滑窗，Rolling 和 Expanding 待研究</h2><p>移动窗口函数</p>
+<h2 id="一种用于时间序列操作的重要用法，是使用滑窗（sliding-windown）或呈指数降低的权重（exponentially-decaying-weights），来对时间序列进行统计值计算和其他一些函数计算。-这个对于消除噪声或有缺陷的数据是很有用的。这里我们称之为Moving-Window-Functions（移动窗口函数），不过其中也包括了不适用固定长度窗口的函数-functions-without-a-fixed-length-window-，比如指数加权移动平均数（exponentially-weighted-moving-average）。和其他一些统计函数以后，这些函数也会自动无视缺失值。"><a href="#一种用于时间序列操作的重要用法，是使用滑窗（sliding-windown）或呈指数降低的权重（exponentially-decaying-weights），来对时间序列进行统计值计算和其他一些函数计算。-这个对于消除噪声或有缺陷的数据是很有用的。这里我们称之为Moving-Window-Functions（移动窗口函数），不过其中也包括了不适用固定长度窗口的函数-functions-without-a-fixed-length-window-，比如指数加权移动平均数（exponentially-weighted-moving-average）。和其他一些统计函数以后，这些函数也会自动无视缺失值。" class="headerlink" title="一种用于时间序列操作的重要用法，是使用滑窗（sliding windown）或呈指数降低的权重（exponentially decaying weights），来对时间序列进行统计值计算和其他一些函数计算。 这个对于消除噪声或有缺陷的数据是很有用的。这里我们称之为Moving Window Functions（移动窗口函数），不过其中也包括了不适用固定长度窗口的函数(functions without a fixed-length window)，比如指数加权移动平均数（exponentially weighted moving average）。和其他一些统计函数以后，这些函数也会自动无视缺失值。"></a>一种用于时间序列操作的重要用法，是使用滑窗（sliding windown）或呈指数降低的权重（exponentially decaying weights），来对时间序列进行统计值计算和其他一些函数计算。 这个对于消除噪声或有缺陷的数据是很有用的。这里我们称之为Moving Window Functions（移动窗口函数），不过其中也包括了不适用固定长度窗口的函数(functions without a fixed-length window)，比如指数加权移动平均数（exponentially weighted moving average）。和其他一些统计函数以后，这些函数也会自动无视缺失值。</h2><p>作者：蜘蛛侠不会飞<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/qq_40587575/article/details/81205873" target="_blank" rel="external">https://blog.csdn.net/qq_40587575/article/details/81205873</a> </p>
+<p><a href="https://www.jianshu.com/p/67f9dfa31c67" target="_blank" rel="external">Rolling 和 Expanding</a></p>
+<h2 id="多级索引"><a href="#多级索引" class="headerlink" title="多级索引"></a>多级索引</h2><p><a href="https://zhuanlan.zhihu.com/p/36160627" target="_blank" rel="external">给妹子讲python-S02E16多级索引Pandas的取值、分片与运算</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><a href="http://www.cnblogs.com/en-heng/p/5630849.html" target="_blank" rel="external">Pandas：让你像写SQL一样做数据分析（一）</a></p>
 
       
     </div>
@@ -723,7 +765,7 @@ $(function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">70</span>
+                <span class="site-state-item-count">72</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -745,7 +787,7 @@ $(function() {
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-count">55</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -871,7 +913,7 @@ $(function() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#drop-duplicates：去除重复项"><span class="nav-number">1.</span> <span class="nav-text">drop_duplicates：去除重复项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pandas-Dataframe增、删、改、查、去重、抽样基本操作"><span class="nav-number">2.</span> <span class="nav-text">Pandas Dataframe增、删、改、查、去重、抽样基本操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dataframe一列成多列"><span class="nav-number">3.</span> <span class="nav-text">dataframe一列成多列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pandas应用函数-它将多个值返回到pandas-dataframe中的行"><span class="nav-number">4.</span> <span class="nav-text">pandas应用函数,它将多个值返回到pandas dataframe中的行</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#drop-duplicates：去除重复项"><span class="nav-number">1.</span> <span class="nav-text">drop_duplicates：去除重复项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pandas-Dataframe增、删、改、查、去重、抽样基本操作"><span class="nav-number">2.</span> <span class="nav-text">Pandas Dataframe增、删、改、查、去重、抽样基本操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dataframe一列成多列"><span class="nav-number">3.</span> <span class="nav-text">dataframe一列成多列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pandas应用函数-它将多个值返回到pandas-dataframe中的行"><span class="nav-number">4.</span> <span class="nav-text">pandas应用函数,它将多个值返回到pandas dataframe中的行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#groupby"><span class="nav-number">5.</span> <span class="nav-text">groupby</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#详解"><span class="nav-number">5.1.</span> <span class="nav-text">详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间序列划分时间间隔"><span class="nav-number">6.</span> <span class="nav-text">时间序列划分时间间隔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#滑窗，Rolling-和-Expanding-待研究"><span class="nav-number">7.</span> <span class="nav-text">滑窗，Rolling 和 Expanding 待研究</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一种用于时间序列操作的重要用法，是使用滑窗（sliding-windown）或呈指数降低的权重（exponentially-decaying-weights），来对时间序列进行统计值计算和其他一些函数计算。-这个对于消除噪声或有缺陷的数据是很有用的。这里我们称之为Moving-Window-Functions（移动窗口函数），不过其中也包括了不适用固定长度窗口的函数-functions-without-a-fixed-length-window-，比如指数加权移动平均数（exponentially-weighted-moving-average）。和其他一些统计函数以后，这些函数也会自动无视缺失值。"><span class="nav-number">8.</span> <span class="nav-text">一种用于时间序列操作的重要用法，是使用滑窗（sliding windown）或呈指数降低的权重（exponentially decaying weights），来对时间序列进行统计值计算和其他一些函数计算。 这个对于消除噪声或有缺陷的数据是很有用的。这里我们称之为Moving Window Functions（移动窗口函数），不过其中也包括了不适用固定长度窗口的函数(functions without a fixed-length window)，比如指数加权移动平均数（exponentially weighted moving average）。和其他一些统计函数以后，这些函数也会自动无视缺失值。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多级索引"><span class="nav-number">9.</span> <span class="nav-text">多级索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">10.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>

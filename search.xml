@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[远程服务器链接失败调试]]></title>
+    <url>%2F2019%2F01%2F23%2Fssh%E8%B0%83%E8%AF%95%2F</url>
+    <content type="text"><![CDATA[检测是否已启动 ps -e | grep ssh 看到有ssh字样，说明已启动，如果没有就手动启动 /etc/init.d/ssh startvi /etc/ssh/sshd_config 没找到错误原因启动失败，systemctl status ssh.service 查找具体信息，发现Failed to start OpenBSD Secure Shell server 用sshd -T 查找错误原因，出现报错信息：fatal: Missing privilege separation directory: /var/empty/sshd检查/var/empty/sshd目录，发现确实不存在。手工创建此目录后，重新启动，发现sshd可以发起新的连接了。 Failed to start OpenBSD Secure Shell server [closed] ssh连接不上linux服务器（fatal: Missing privilege sepa]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[python 多线程，多进程，多协程]]></title>
+    <url>%2F2019%2F01%2F16%2Fpython%E8%BF%9B%E7%A8%8B%2F</url>
+    <content type="text"><![CDATA[进程，线程，协程如果你的代码是IO密集型的，线程和多进程可以帮到你。多进程比线程更易用，但是消耗更多的内存。如果你的代码是CPU密集型的，多进程就明显是更好的选择——特别是所使用的机器是多核或多CPU的。对于网络应用，在你需要扩展到多台机器上执行任务，RQ是更好的选择。使用多进程，我们得建立一个多进程池。通过它提供的map方法，我们把URL列表传给池，然后8个新进程就会生成，它们将并行地去下载图片。这就是真正的并行，不过这是有代价的。整个脚本的内存将会被拷贝到各个子进程中。在我们的例子中这不算什么，但是在大型程序中它很容易导致严重的问题。浅析Python中的多进程与多线程的使用 为什么在Python里推荐使用多进程而不是多线程 python多线程、多进程、协程的使用 关于python多线程编程中join()和setDaemon()的一点儿探究 进程池创建进程需要消耗时间，销毁进程也需要时间。其次，即使开启了成千上万的进程，操作系统也不能让它们同时执行，这样反而会影响程序的效率。因此我们不能无限制的根据任务开启或者结束进程。 进程池：定义了一个池子，在里面放上固定数量的进程，有需求来了，就拿这个池中的一个进程来处理任务，等到处理完毕，进程并不关闭，而是将进程再放回进程池中继续等待认为。如果有许多任务需要执行，池中的进程数量不够，任务就要等待之前的进程执行任务完毕归来，拿到空闲进程才能继续执行。 对于python而言，由于其使用了全局解释锁(GIL)，所以python的多线程并不能实现并发。因此，python的并发是通过多进程来实现的！！ 12345678910111213141516171819202122import osimport timeimport randomfrom multiprocessing import Poolfrom multiprocessing import Processdef func(i): i += 1if __name__ == &apos;__main__&apos;: p = Pool(5) # 创建了5个进程 start = time.time() p.map(func,range(1000)) p.close() # 是不允许再向进程池中添加任务 p.join() print(time.time() - start) # 0.35544490814208984 start = time.time() l = [] for i in range(1000): p = Process(target=func,args=(i,)) # 创建了一百个进程 p.start() l.append(p) [i.join() for i in l] print(time.time() - start) # 101.00088691711426 在写代码时，pool（3）之后程序好像死锁，搞了两天，终于知道是因为from gevent import monkey; monkey.patch_all();引入了这个，但并不知道原因 apply_async(func[,args[,kwds[,callback = None]]]) #非阻塞且支持结果返回进行回调 apply_async(函数,不定参数) #四个进程在Pool进程池内并行(分给4核cpu),剩下的交替进行. 1234567891011121314151617181920from multiprocessing import Pool,Processimport time,osdef Foo(a):#创建函数 time.sleep(2) print(&apos;in the process:&apos;,os.getpid(),os.getppid()) return a+100def bar(arga):#创建函数 print(&apos;----&gt;&apos;,arga)if __name__ == &apos;__main__&apos;: print(&apos;父进程ID:&apos;,os.getpid()) pool = Pool(2)#创建进程池最大容量为2，最多允许2个进程同时运行，参照线程信号量模式 for i in range(10):#创建10个进程 pool.apply_async(func=Foo,args=(i,),callback=bar)#创建线程，参数1调用函数，参数2设置i为函数FOO参数，参数3为返回函数 #参数三为回调函数，将FOO函数的返回值作为参数调用bar函数。 #pool.apply(func=Foo,args=(i,),callback=bar)#串行 #pool.apply_async(func=Foo,args=(i,),callback=bar)#并行 pool.close()#关闭 #pool.join()#如果没有.join语句，程序不执行就会关闭。这里是个大坑。 对写入操作 进行加锁就是说:对当前进行写入操作的进程锁定，直到该进程写完十个字，也就是一个完成的操作，后解除该进程的锁定，放它离开。切换到另外一个进程来操作。因为一次只能一个进程执行写入操作，而且必须执行完成完整的操作，才允许切换。所以不会造成文件内容的混乱。但是加锁一般会完造成程序的执行效率下降。而且，如果写入操作分散在整个代码的多处，总不能把整个代码都锁起来吧，这样岂不是又成单进程了么？所以:把写入操作抽象出来为单独的一个函数，这样对单独的一个函数加群，这样问题就不大了。更优雅的方法:使用multiprocessing的回调函数。1。把写入操作抽象为单独的一个函数2。把进程需要写入的内容，作为返回值返回3。使用回调函数写入进程返回内容。 python多进程文件加锁与回调[进程与线程，加锁]（https://blog.csdn.net/u014265088/article/details/53128108） python进程池：multiprocessing.pool 进程能否实例化能否定义在类中的进程，这个目前还没有实验 Can’t pickle when using multiprocessing Pool.map()另外找到的可能出错的原因：Windows下面的multiprocessing跟Linux下面略有不同，Linux下面基于fork，fork之后所有的本地变量都复制一份，因此可以使用任意的全局变量；在Windows下面，多进程是通过启动新进程完成的，所有的全局变量都是重新初始化的，在运行过程中动态生成、修改过的全局变量是不能使用的。multiprocessing内部使用pickling传递map的参数到不同的进程，当传递一个函数或类时，pickling将函数或者类用所在模块+函数/类名的方式表示，如果对端的Python进程无法在对应的模块中找到相应的函数或者类，就会出错。当你在Interactive Console当中创建函数的时候，这个函数是动态添加到main模块中的，在重新启动的新进程当中不存在，所以会出错。当不在Console中，而是在独立Python文件中运行时，你会遇到另一个问题：由于你下面调用multiprocessing的代码没有保护，在新进程加载这个模块的时候会重新执行这段代码，创建出新的multiprocessing池，无限调用下去。解决这个问题的方法是永远把实际执行功能的代码加入到带保护的区域中：if name == ‘mian‘: 总结pool 可以创建进程池from functools import partial 引入多个参数pool.mappool.applypool.apply_aysnc这些的区别在这片博客中：https://www.cnblogs.com/alan-babyblog/p/5351031.html 进程池 进程池报错可能中断运行，但不显示错误]]></content>
+      <tags>
+        <tag>标签</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[windows 使用]]></title>
     <url>%2F2019%2F01%2F05%2Fwindows%E4%BD%BF%E7%94%A8%2F</url>
     <content type="text"><![CDATA[systeminfo | more查看系统参数 相同命令运行讲命令行写入bat文件中 后台运行 start /mim在Linux下要使程序后台运行，可通过 java -jar Client.jar &amp; 来实现 在Windows下，则通过 start /b java -jar Client.jar 来实现 这里说的后台运行是指在当前Terminal后台执行，不会把结果直接输出到当前Terminal。然而，关闭了Terminal后程序还是会退出的。 解决：Linux下可以借助nohup、Windows下的查了下可以 start /min java -jar Client.jar 。后者未经验证，可参考链接：https://stackoverflow.com/questions/3382082/whats-the-nohup-on-windows]]></content>
@@ -48,7 +64,7 @@
   <entry>
     <title><![CDATA[pandas 使用]]></title>
     <url>%2F2019%2F01%2F01%2Fpandas%20%E7%9F%A5%E8%AF%86%2F</url>
-    <content type="text"><![CDATA[drop_duplicates：去除重复项12DataFrame.drop_duplicates(subset=None, keep=&apos;first&apos;, inplace=False) 这个drop_duplicate方法是对DataFrame格式的数据，去除特定列下面的重复行。返回DataFrame格式的数据。 subset : column label or sequence of labels, optional 用来指定特定的列，默认所有列 keep : {‘first’, ‘last’, False}, default ‘first’ 删除重复项并保留第一次出现的项 inplace : boolean, default False 是直接在原来数据上修改还是保留一个副本 Pandas Dataframe增、删、改、查、去重、抽样基本操作pandas的索引函数主要有三种：loc 标签索引，行和列的名称iloc 整型索引（绝对位置索引），绝对意义上的几行几列，起始索引为0ix 是 iloc 和 loc的合体at是loc的快捷方式iat是iloc的快捷方式 https://www.cnblogs.com/zknublx/p/9645204.html dataframe一列成多列场景：一列中的值出现 1|2|3|56，这样用|分割的值，需要将其转换成4列。 2、操作： names=df[‘names’].str.split(‘|’,expand=True)#多名字分列 names.columns=[‘ids0’,’ids1’,’ids2’,’ids3’,’ids4’,’ids5’,’ids6’,’ids7’]# df=df.join(names) 其中names字段的列是包含|分割的值，最后将多列合并会原dataframe里。 pandas应用函数,它将多个值返回到pandas dataframe中的行apply 中函数返回一个Series或列表如返回：pd.Series([e,f,g], index=[‘a’, ‘b’, ‘c’]) https://codeday.me/bug/20180820/223407.html https://stackoverflow.com/questions/23690284/pandas-apply-function-that-returns-multiple-values-to-rows-in-pandas-dataframe]]></content>
+    <content type="text"><![CDATA[drop_duplicates：去除重复项12DataFrame.drop_duplicates(subset=None, keep=&apos;first&apos;, inplace=False) 这个drop_duplicate方法是对DataFrame格式的数据，去除特定列下面的重复行。返回DataFrame格式的数据。 subset : column label or sequence of labels, optional 用来指定特定的列，默认所有列 keep : {‘first’, ‘last’, False}, default ‘first’ 删除重复项并保留第一次出现的项 inplace : boolean, default False 是直接在原来数据上修改还是保留一个副本 Pandas Dataframe增、删、改、查、去重、抽样基本操作pandas的索引函数主要有三种：loc 标签索引，行和列的名称iloc 整型索引（绝对位置索引），绝对意义上的几行几列，起始索引为0ix 是 iloc 和 loc的合体at是loc的快捷方式iat是iloc的快捷方式 https://www.cnblogs.com/zknublx/p/9645204.html dataframe一列成多列场景：一列中的值出现 1|2|3|56，这样用|分割的值，需要将其转换成4列。 2、操作： names=df[‘names’].str.split(‘|’,expand=True)#多名字分列 names.columns=[‘ids0’,’ids1’,’ids2’,’ids3’,’ids4’,’ids5’,’ids6’,’ids7’]# df=df.join(names) 其中names字段的列是包含|分割的值，最后将多列合并会原dataframe里。 pandas应用函数,它将多个值返回到pandas dataframe中的行apply 中函数返回一个Series或列表如返回：pd.Series([e,f,g], index=[‘a’, ‘b’, ‘c’]) https://codeday.me/bug/20180820/223407.html https://stackoverflow.com/questions/23690284/pandas-apply-function-that-returns-multiple-values-to-rows-in-pandas-dataframe groupby1.groupby(“id”).resample(“M”).agg(“mean”)会报错：Exception: Column(s) num_temp selected 并不知道原因但可以这样12345df.set_index(&apos;date&apos;).groupby(&apos;name&apos;)[&apos;ext price&apos;].resample(&quot;M&quot;).sum()df[[&quot;ext price&quot;, &quot;quantity&quot;, &quot;unit price&quot;]].agg([&apos;sum&apos;, &apos;mean&apos;])df.agg(&#123;&apos;ext price&apos;: [&apos;sum&apos;, &apos;mean&apos;], &apos;quantity&apos;: [&apos;sum&apos;, &apos;mean&apos;], &apos;unit price&apos;: [&apos;mean&apos;]&#125;) python处理数据的风骚操作pandas 之 groupby&amp;agg 2.这些操作对数值型的列自动进行计算，非数值型的会去掉如果不对原始数据作限制的话，聚合函数会自动选择数值型数据进行聚合计算。如果不想对年龄计算平均值的话，就需要剔除改变量：student.drop(“age”).groupby(“id”).mean() “”统计值””1234567891011def stats(x,time_interval): return pd.Series([x.count(),x.min(),x.idxmin(), x.quantile(.25),x.median(), x.quantile(.75),x.mean(), x.max(),x.idxmax(), x.mad(),x.var(), x.std(),x.skew(),x.kurt()], index = [time_interval+&apos;_Count&apos;,time_interval+&apos;_Min&apos;,time_interval+&apos;_Whicn_Min&apos;, time_interval+&apos;_Q1&apos;,time_interval+&apos;_Median&apos;,time_interval+&apos;_Q3&apos;,time_interval+&apos;_Mean&apos;, time_interval+&apos;_Max&apos;,time_interval+&apos;_Which_Max&apos;,time_interval+&apos;_Mad&apos;, time_interval+&apos;_Var&apos;,time_interval+&apos;_Std&apos;,time_interval+&apos;_Skew&apos;,time_interval+&apos;_Kurt&apos;]) Python数据分析之pandas学习 3.对分组进行迭代：for name, group in df.groupby(‘key1’): print (name) print (group) python/pandas数据挖掘（十四）-groupby,聚合，分组级运算 Pandas按日期对状态进行汇总统计《Pandas Cookbook》第10章 时间序列分析1. Python和Pandas日期工具的区别2. 智能切分时间序列3. 只使用适用于DatetimeIndex的方法4. 计算每周的犯罪数5. 详解pandas聚合和分组运算——GroupBy技术(1) 时间序列划分时间间隔在进行数据操作时, 经常会碰到基于同一列进行错位相加减的操作, 即对某一列进行向上或向下平移(shift).我需要计算网络数据包之间的时间间隔，使用pandas的实现过程如下。 例如 a = ​[‘2011-08-10 03:56:10’, ‘2011-08-10 03:56:20’, ‘2011-08-10 03:56:40’, ‘2011-08-10 03:56:50’]， 时间字符串列表。 import pandas as pd​ import numpy as np​ 将a转换为Series结构， b = ​pd.Series(a) 将b转换为DateTime数据类型， c = pd.to_datetime(b) 计算时间间隔TimeDelta， d = (c - c.shift()​).dropna() 计算间隔了多少秒(将TimeDelta类型数据转换为基于秒的整数)， e = d.map(lambda x: x/np.timedelta64(1, ‘s’)) * Pandas计算出的时间间隔数据的类型是np.timedelta64, 不是Python标准库中的timedelta类型，因此没有total_seconds()函数，需要除以np.timedelta64的1秒来计算间隔了多少秒。 也可以将Pandas的Series转换成numpy的ndarray后计算间隔的秒数： b = np.array(a) c = np.diff(b)/np.timedelta64(1, ‘s’)​ *numpy的diff()函数实在是太赞了。​ 使用Pandas获得数据的时间间隔序列python对列进行平移变换(shift) pandas 时间序列 之日期范围、频率及移动中图!频率选项 ## 123print(‘---------获取2013年的数据-----------‘)print(df[‘2013‘].head(2)) # 获取2013年的数据print(df[‘2013‘].tail(2)) # 获取2013年的数据 Pandas日期数据处理：如何按日期筛选、显示及统计数据 滑窗，Rolling 和 Expanding 待研究移动窗口函数 一种用于时间序列操作的重要用法，是使用滑窗（sliding windown）或呈指数降低的权重（exponentially decaying weights），来对时间序列进行统计值计算和其他一些函数计算。 这个对于消除噪声或有缺陷的数据是很有用的。这里我们称之为Moving Window Functions（移动窗口函数），不过其中也包括了不适用固定长度窗口的函数(functions without a fixed-length window)，比如指数加权移动平均数（exponentially weighted moving average）。和其他一些统计函数以后，这些函数也会自动无视缺失值。作者：蜘蛛侠不会飞来源：CSDN原文：https://blog.csdn.net/qq_40587575/article/details/81205873 Rolling 和 Expanding 多级索引给妹子讲python-S02E16多级索引Pandas的取值、分片与运算 总结Pandas：让你像写SQL一样做数据分析（一）]]></content>
       <categories>
         <category>pandas</category>
       </categories>
@@ -183,7 +199,7 @@
   <entry>
     <title><![CDATA[linux 命令]]></title>
     <url>%2F2018%2F12%2F11%2Flinux%E5%91%BD%E4%BB%A4%2F</url>
-    <content type="text"><![CDATA[后台运行在应用Unix/Linux时，我们一般想让某个程序在后台运行，于是我们将常会用 &amp; 在程序结尾来让程序自动运行。比如我们要运行mysql在后台： /usr/local/mysql/bin/mysqld_safe –user=mysql &amp;。可是有很多程序并不想mysqld一样，这样我们就需要nohup命令，怎样使用nohup命令呢？这里讲解nohup命令的一些用法。 RC版本百度百科解释发布候选版，主要在于除错 查看文件夹中文件或文件夹的个数内容详细介绍 查看目录下有多少个文件及文件夹需在终端输入搜索 ls | wc -w 查看目录下有多少个文件需在终端输入 ls | wc -c 查看文件夹下有多少个文件，多少个子目录需在终端输入 ls -l |wc -l 若只想知道文件的个数，则需在终端输入 /bin/ls -l |grep ^-|wc -l 修改用户环境~/.bashrcLinux下 环境变量/etc/profile、/etc/bashrc、~/.bashrc的区别中： /etc/profile:该文件登录操作系统时，为每个用户设置环境信息，当用户第一次登录时,该文件被执行。也就是说这个文件对每个shell都有效，用于获取系统的环境信息。 etc/bashrc：为每一个运行bash shell的用户执行此文件，当bash shell被打开时,该文件被读取。也就是说，当用户shell执行了bash时，运行这个文件。 ~/.bashrc该文件存储的是专属于个人bash shell的信息，当登录时以及每次打开一个新的shell时,执行这个文件。在这个文件里可以自定义用户专属的个人信息。在刚登录Linux时，首先启动 /etc/profile 文件，然后再启动用户目录下的 ~/.bash_profile、 ~/.bash_login或 ~/.profile文件中的其中一个，执行的顺序为：~/.bash_profile、 ~/.bash_login、 ~/.profile。如果 ~/.bash_profile文件存在的话，一般还会执行 ~/.bashrc文件 linux下文件的复制、移动与删除文件复制命令cp命令格式：cp [-adfilprsu] 源文件(source) 目标文件(destination) cp [option] source1 source2 source3 ... directory 参数说明： -a:是指archive的意思，也说是指复制所有的目录 -d:若源文件为连接文件(link file)，则复制连接文件属性而非文件本身 -f:强制(force)，若有重复或其它疑问时，不会询问用户，而强制复制 -i:若目标文件(destination)已存在，在覆盖时会先询问是否真的操作 -l:建立硬连接(hard link)的连接文件，而非复制文件本身 -p:与文件的属性一起复制，而非使用默认属性 -r:递归复制，用于目录的复制操作 -s:复制成符号连接文件(symbolic link)，即“快捷方式”文件 -u:若目标文件比源文件旧，更新目标文件 如将/test1目录下的file1复制到/test3目录，并将文件名改为file2,可输入以下命令： cp /test1/file1 /test3/file2 cp {id_rsa.pub*,id_rsa*} /home/wxy/.ssh 文件移动命令mv命令格式：mv [-fiv] source destination 参数说明： -f:force，强制直接移动而不询问 -i:若目标文件(destination)已经存在，就会询问是否覆盖 -u:若目标文件已经存在，且源文件比较新，才会更新 如将/test1目录下的file1复制到/test3 目录，并将文件名改为file2,可输入以下命令： mv /test1/file1 /test3/file2 文件删除命令rm命令格式：rm [fir] 文件或目录 参数说明： -f:强制删除 -i:交互模式，在删除前询问用户是否操作 -r:递归删除，常用在目录的删除 如删除/test目录下的file1文件，可以输入以下命令： rm -i /test/file1 删除文件夹linux删除目录很简单，很多人还是习惯用rmdir，不过一旦目录非空，就陷入深深的苦恼之中，现在使用rm -rf命令即可。直接rm就可以了，不过要加两个参数-rf 即：rm -rf 目录名字-r 就是向下递归，不管有多少级目录，一并删除-f 就是直接强行删除，不作任何提示的意思 使用awk命令获取文本的某一行,某一列du命令也是查看使用空间的，但是与df命令不同的是Linux du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的来自: http://man.linuxde.net/du 创建文件，文件夹touch testfilemkdir testname1、vi vi 1.txt 会直接创建并打开一个文件1.txt 2、touch touch的作用是更改一个文件或目录的时间。touch 2.txt 如果2.txt不存在，则创建空文件2.txt 3、echo echo “abcd” &gt; 3.txt 可以直接创建文件3.txt并将abcd写入。 4、less 、more 、cat 三者都是将文件内容输出到标准输出，其中less和more可以分页显示，cat是显示全部。 三者可以根据已经存在的文件创建新的文件。假设已经存在文件1.txt。 cat 1.txt &gt; 2.txt less 1.txt &gt; 3.txt more 1.txt &gt; 4.txt 此时创建的文件内容都和1.txt中文件内容相同。 显卡信息查看lspci | grep -i vga如果想看详细的信息，比如 GeForce GT 240，即 02:00.0 [root@localhost conf]# lspci -v -s 02:00.0 如何查看GPU信息1、显示当前GPU使用情况Nvidia自带了一个nvidia-smi的命令行工具，会显示显存使用情况： $ nvidia-smi scp获取远程服务器上的文件 上传文件scp -P 2222 root@www.vpser.net:/root/lnmp0.4.tar.gz /home/lnmp0.4.tar.gz上端口大写P 为参数，2222 表示更改SSH端口后的端口，如果没有更改SSH端口可以不用添加该参数。 root@www.vpser.net 表示使用root用户登录远程服务器www.vpser.net，:/root/lnmp0.4.tar.gz 表示远程服务器上的文件，最后面的/home/lnmp0.4.tar.gz表示保存在本地上的路径和文件名。 上传目录到服务器scp -r local_dir username@servername:remote_dir 查看磁盘信息及/boot空间不足123456789df -lh dpkg --get-selections|grep linux-image uname -asudo apt-get purge linux-image-3.5.0-27-generic 使用purge卸载3.5.0-27，若使用remove卸载则会有类似3.5.0-17的遗留dffdiskfdisk -lsudo fdisk -lsudo ntfsfix /dev/sda5 (修复分区，挂载) http://blog.csdn.net/cloud_xy/article/details/10278769新建备份文件夹：devel@devServer:~$ sudo mkdir /opt/kernel 挑选/boot下体积较大的几个文件备份出来，其中，以vmlinuz、initrd.img开头的文件较大，然后将21~27的内核中以这两个开头的全部备份至刚才新建的文件夹，最后直接删除(sudo rm –f),再查看一下，这回腾出好几十M的空间了，然后再执行之前的那个命令（sudo apt-get -f install），这回顺利更新完毕！然后再去尝试卸载那些旧的内核，所有的都能正常卸载了！ nohup(no hang up)nohup python -u test.py &gt; out.log &amp;无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中ohup命令：如果你正在运行一个进程，而且你觉得在退出帐户时该进程还不会结束，那么可以使用nohup命令。该命令可以在你退出帐户/关闭终端之后继续运行相应的进程。nohup就是不挂起的意思( n ohang up)。 查看守护进程ps -ef | grep xxxlinux进程查看系统进程信息命令主要分为：静态进程查看命令（ps）、动态进程查看命令（top）和查看进程树命令(pstree)http://blog.csdn.net/longerzone/article/details/8015941一、静态进程查看 ps ps命令格式： ps -aux 查看系统所有进程 ps -lA 查看所有系统的数据 ps axjf 连通部分进程树状态 -A：与-e意思一样，表列出所有进程 -a ：不与terminal有关的进程 -u：有效用户相关的进程 x：通常与a这个参数一起用，可以列出完整信息 输出格式： l：较仔细列出该pid信息 j：工作格式 -f：做一个更为完整的输出 pts是所谓的伪终端或虚拟终端，具体表现就是你打开一个终端，这个终端就叫pts/0，如果你再打开一个终端，这个新的终端就叫pts /1。比如用who命令查询当前登录的用户，可以看到每个用户的TTY设备（简单来说就是用户输入命令还有显示信息的设备，比如终端）有一个tty7是表示图形界面，我当前登录的是GNOME，当然就是图形界面了。还有tty1-tty6表示文字界面，可以用Ctrl+Alt+F1-F6切换，+F7就是切换回图形界面。下面两行说明我当前打开了两个终端窗口，所以就有pts/0和pts/1tmux是指通过一个终端登录远程主机并运行后，在其中可以开启多个控制台的终端复用软件tty是Teletype的缩写 伪终端（Pseudo Terminal）如果你发现某个进程的CMD后面接上时，就代表该进程是僵尸进程，例如： 1 2598 2598 2598 ? -1 Ss 0 0:00 /usr/sbin/hcid 后台进程后台进程退出是由于登陆shell收到了SIGHUP信号后在退出前将SIGHUP转发给所有的作业(jobs)。jobs由于收到SIGHUP而终止运行。http://doc.okbase.net/leehomjan/archive/107550.htmlhttp://www.cnblogs.com/xianlai-huang/p/6543751.html dpkg：处理 smbclient (–configure)时出错： 依赖关系问题 - 仍未被配置因为错误消息指示这是由于上一个问题导致的错误，没有写入 apport 报告。 由于已经达到 MaxReports 限制，没有写入 apport 报告。 在处理时有错误发生： nfs-common samba-common samba smbclientE: Sub-process /usr/bin/dpkg returned an error code (1) 虽然出错，但是装的软件还是可以用的，这里好象是由于当时安装samba服务器的时候没有安装好，在网上有一篇文章: http://hi.baidu.com/dream__land/blog/item/46dfe6fded06880109244d18.html 1.$ sudo mv /var/lib/dpkg/info /var/lib/dpkg/info_old //现将info文件夹更名2.$ sudo mkdir /var/lib/dpkg/info //再新建一个新的info文件夹3.$ sudo apt-get update, apt-get -f install //不用解释了吧4.$ sudo mv /var/lib/dpkg/info/* /var/lib/dpkg/info_old //执行完上一步操作后会在新的info文件夹下生成一些文件，现将这些文件全部移到info_old文件夹下5.$ sudo rm -rf /var/lib/dpkg/info //把自己新建的info文件夹删掉6.$ sudo mv /var/lib/dpkg/info_old /var/lib/dpkg/info //把以前的info文件夹重新改回名字 重复执行历史命令history 查看历史命令 例如：！255 查看文件大小file ##.pngidentify ##.jpg 最大的前10个文件find / -type f -exec du -Sh {} + | sort -rh | head -n 10https://linux.cn/article-9495-1.html?pr find：在目录结构中搜索文件的命令 /：在整个系统（从根目录开始）中查找 -type：指定文件类型 f：普通文件 -print0：输出完整的文件名，其后跟一个空字符（null） |：控制操作符，将一条命令的输出传递给下一个命令以供进一步处理 xargs：将标准输入转换成命令行参数的命令 -0：以空字符（null）而不是空白字符来分割记录 du：计算文件占用的磁盘空间的命令 sort：对文本文件进行按行排序的命令 -n：根据数字大小进行比较 tail -10：输出文件结尾部分的命令（最后 10 个文件） cut：从每行删除特定部分的命令 -f2：只选择特定字段值 -I{}：将初始参数中出现的每个替换字符串都替换为从标准输入读取的名称 -s：仅显示每个参数的总和 -h：用可读格式打印输出 {}：递归地查找目录，统计每个文件占用的磁盘空间 密钥环密钥环是存放保存密码的地方，以明文的方式，需要装系统时设置的密钥进行解锁忘记登录密钥，在启动界面，进入高级选项，修复模式，ｒｏｏｔ下修改密码，passwd XXX 然后reboot参考官方文档 seahorse 进入密钥环 bash快捷键ctrl键组合ctrl+a:光标移到行首。ctrl+b:光标左移一个字母ctrl+c:杀死当前进程。ctrl+d:退出当前 Shell。ctrl+e:光标移到行尾。ctrl+h:删除光标前一个字符，同 backspace 键相同。ctrl+k:清除光标后至行尾的内容。ctrl+l:清屏，相当于clear。ctrl+r:搜索之前打过的命令。会有一个提示，根据你输入的关键字进行搜索bash的historyctrl+u: 清除光标前至行首间的所有内容。ctrl+w: 移除光标前的一个单词ctrl+t: 交换光标位置前的两个字符ctrl+y: 粘贴或者恢复上次的删除ctrl+d: 删除光标所在字母;注意和backspace以及ctrl+h的区别，这2个是删除光标前的字符ctrl+f: 光标右移ctrl+z : 把当前进程转到后台运行，使用’ fg ‘命令恢复。比如top -d1 然后ctrl+z ，到后台，然后fg,重新恢复esc组合esc+d: 删除光标后的一个词esc+f: 往右跳一个词esc+b: 往左跳一个词esc+t: 交换光标位置前的两个单词。 压缩文件压缩服务器上当前目录的内容为xxx.zip文件 zip -r xxx.zip ./* 解压zip文件到当前目录 unzip filename.zipzip -r filename.zip filesdir 在这个例子里，filename.zip 代表你创建的文件，filesdir 代表你想放置新 zip 文件的目录。-r 选项指定你想递归地（recursively）包括所有包括在 filesdir 目录中的文件。 tar 命令详解 -c: 建立压缩档案 -x：解压 -t：查看内容 -r：向压缩归档文件末尾追加文件 -u：更新原压缩包中的文件 这五个是独立的命令，压缩解压都要用到其中一个，可以和别的命令连用但只能用其中一个。下面的参数是根据需要在压缩或解压档案时可选的。 -c: 建立压缩档案 -x：解压 -t：查看内容 -r：向压缩归档文件末尾追加文件 -u：更新原压缩包中的文件 下面的参数-f是必须的 -f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。主选项： c 创建新的档案文件。如果用户想备份一个目录或是一些文件，就要选择这个选项。 r 把要存档的文件追加到档案文件的未尾。例如用户已经作好备份文件，又发现还有一个目录或是一些文件忘记备份了，这时可以使用该选项，将忘记的目录或文件追加到备份文件中。 t 列出档案文件的内容，查看已经备份了哪些文件。 u 更新文件。就是说，用新增的文件取代原备份文件，如果在备份文件中找不到要更新的文件，则把它追加到备份文件的最后。 x 从档案文件中释放文件。 辅助选项： b 该选项是为磁带机设定的。其后跟一数字，用来说明区块的大小，系统预设值为20(20*512 bytes)。 f 使用档案文件或设备，这个选项通常是必选的。 k 保存已经存在的文件。例如我们把某个文件还原，在还原的过程中，遇到相同的文件，不会进行覆盖。 m 在还原文件时，把所有文件的修改时间设定为现在。 M 创建多卷的档案文件，以便在几个磁盘中存放。 v 详细报告tar处理的文件信息。如无此选项，tar不报告文件信息。 w 每一步都要求确认。 z 用gzip来压缩/解压缩文件，加上该选项后可以将档案文件进行压缩，但还原时也一定要使用该选项进行解压缩。 # tar -cf all.tar *.jpg 这条命令是将所有.jpg的文件打成一个名为all.tar的包。-c是表示产生新的包，-f指定包的文 本地共享 sudo smbpasswd -a wxy tail1．命令格式; tail[必要参数][选择参数][文件] 2．命令功能： 用于显示指定文件末尾内容，不指定文件时，作为输入信息进行处理。常用查看日志文件。 3．命令参数： -f 循环读取-q 不显示处理信息-v 显示详细的处理信息-c&lt;数目&gt; 显示的字节数-n&lt;行数&gt; 显示行数–pid=PID 与-f合用,表示在进程ID,PID死掉之后结束.-q, –quiet, –silent 从不输出给出文件名的首部-s, –sleep-interval=S 与-f合用,表示在每次反复的间隔休眠S秒 moremore作用：类似cat，不过会以一页一页的显示方便使用者一页页阅读使用方法：more [选项] 文件名 Linux 终端复用神器Tmuxpychram 配置代码到服务器时ｍａｐ中服务器是新建文件夹名字，与ｃｏｎｎｎｅｃｔｉｏｎ中的路径连起来才是完整路径名winscp类似的软件Fillzilla查看图片命令eog关机注销或者重启一次ubuntu桌面。 $sudo pkill Xorg 在当前目录下找出占用空间最大的前10大文件了解三个常用命令： du : 计算出单个文件或者文件夹的磁盘空间占用. sort : 对文件行或者标准输出行记录排序后输出. head : 输出文件内容的前面部分. du： -a：显示目录占用空间的大小，还要显示其下目录占用空间的大小sort： -n : 按照字符串表示的数字值来排序 -r ：按照反序排列 head : -n : 取出前多少行 以上的问题可以使用命令： du -a | sort -n -r | head -n 10 du -h -x –max-depth=1可以查看每个目录下文件 文件夹的占用体积。du -sh * | sort -n 统计当前文件夹(目录)大小，并按文件大小排序 du -sk filename 查看指定文件大小 linux系统下/var空间不足的解决办法mv /var/cuda-repo-8-0-local-ga2 /home ln -s /home/cuda-repo-8-0-local-ga2 /var sudo mv /var/tmp /home/var_tmp sudo mv var_tmp tmp 改文件名 mv 命令 将文件移动，目标地址如果加 / 就 代表文件夹，如果没有 / 就会重新命名 sudo ln -s /home/tmp /var 文件末尾星号ls -F /bin/你会看到所有可执行文件后面都带有*这些特殊符号有什么含义？ : 可执行文件/ : 目录= : 套接字@ : 符号链接| : 管道文件 到了这，问题已经明白了大部分，但是为什么有的系统上只是执行了ls就会显示出这个结尾的特殊符号？并没有加-F呢！ 阿铭从公司的一台服务器上获得了答案：cat ~/.bashrc //其中有两行unalias lsalias ls=’ls -Fa’ 合并压缩文件 cat file* &gt; file md5值校验 md5sum file1 file2 添加用户首先用adduser命令添加一个普通用户，命令如下： adduser tommy//添加一个名为tommy的用户 #passwd tommy //修改密码Changing password for user tommy.New UNIX password: //在这里输入新密码Retype new UNIX password: //再次输入新密码passwd: all authentication tokens updated successfully. 2、赋予root权限 方法一： 修改 /etc/sudoers 文件，找到下面一行，把前面的注释（#）去掉 Allows people in group wheel to run all commands%wheel ALL=(ALL) ALL 然后修改用户，使其属于root组（wheel），命令如下： usermod -g root tommy修改完毕，现在可以用tommy帐号登录，然后用命令 su - ，即可获得root权限进行操作。 方法二： 修改 /etc/sudoers 文件，找到下面一行，在root下面添加一行，如下所示： Allow root to run any commands anywhereroot ALL=(ALL) ALLtommy ALL=(ALL) ALL 修改完毕，现在可以用tommy帐号登录，然后用命令 su - ，即可获得root权限进行操作。 按时间顺序查看文件 ls -alt # 按修改时间排序 ls –sort=time -la # 等价于&gt; ls -altls -alc # 按创建时间排序ls -alu # 按访问时间排序 以上均可使用-r实现逆序排序 ls -alrt # 按修改时间排序ls –sort=time -lra # 等价于&gt; ls -alrtls -alrc # 按创建时间排序 ls -alru # 按访问时间排序 后台命令1）&amp;命令 功能：加在一个命令的最后，可以把这个命令放在后台执行 （2）nohup命令 功能：不挂断的运行命令 2、查看当前后台运行的命令 有两个命令可以用，jobs和ps,区别是jobs用于查看当前终端后台运行的任务，换了终端就看不到了。而ps命令用于查看瞬间进程的动态，可以看到别的终端运行的后台进程。 （1）jobs命令 功能：查看当前终端后台运行的任务 jobs -l选项可显示当前终端所有任务的PID，jobs的状态可以是running，stopped，Terminated。+ 号表示当前任务，- 号表示后一个任务。 （2）ps命令 功能：查看当前的所有进程 ps -aux | grep &quot;test.sh&quot; #a:显示所有程序 u:以用户为主的格式来显示 x:显示所有程序，不以终端机来区分 3、关闭当前后台运行的命令 kill命令：结束进程 （1）通过jobs命令查看jobnum，然后执行 kill %jobnum （2）通过ps命令查看进程号PID，然后执行 kill %PID 如果是前台进程的话，直接执行 Ctrl+c 就可以终止了 4、前后台进程的切换与控制 （1）fg命令 功能：将后台中的命令调至前台继续运行 如果后台中有多个命令，可以先用jobs查看jobnun，然后用 fg %jobnum 将选中的命令调出。 （2）Ctrl + z 命令 功能：将一个正在前台执行的命令放到后台，并且处于暂停状态 （3）bg命令 功能：将一个在后台暂停的命令，变成在后台继续执行 如果后台中有多个命令，可以先用jobs查看jobnum，然后用 bg %jobnum 将选中的命令调出继续执行。 内存1，Linux下可以在/proc/cpuinfo中看到每个cpu的详细信息。但是对于双核的cpu，在cpuinfo中会看到两个cpu。常常会让人误以为是两个单核的cpu。其实应该通过Physical Processor ID来区分单核和双核。而Physical Processor ID可以从cpuinfo或者dmesg中找到. flags 如果有 ht 说明支持超线程技术 判断物理CPU的个数可以查看physical id 的值，相同则为同一个物理CPU 2，查看内存大小:cat /proc/meminfo |grep MemTotal‘free’ 会以 KB 为单位显示信息。free 同样提供给我们 b (B), -k (KB), -m (MB), -g (GB) and –tera (TB)这些单位。要显示我们想要的单位，只要选择一个并在 free 后面跟上。下面一个是以 MB 为单位的输出样例。我们想要每3秒统计一次内存利用率并且适于人类可读，那么就像这样做: $ free -hs 3 3，其他一些可以查看详细信息的命令和方法:uname -a # 查看内核//的信息命令head -n 1 /etc/issue # 查看版本，是数字1不是字母Lcat /proc/cpuinfo # 查看的信息命令hostname # 查看计算机名的linux系统信息命令lspci -tv # 列出所有PCI设备lsusb -tv # 列出所有USB设备的linux系统信息命令lsmod # 列出加载的内核模块env # 查看环境变量资源free -m # 查看内存使用量和交换区使用量df -h # 查看各分区使用情况du -sh # 查看指定目录的大小grep MemTotal /proc/meminfo # 查看内存总量grep MemFree /proc/meminfo # 查看空闲内存量uptime # 查看系统运行时间、用户数、负载cat /proc/loadavg # 查看系统负载磁盘和分区mount | column -t # 查看挂接的分区状态fdisk -l # 查看所有分区swapon -s # 查看所有hdparm -i /dev/hda # 查看磁盘参数(仅适用于)dmesg | grep IDE # 查看启动时检测状况网络ifconfig # 查看所有的属性iptables -L # 查看防火墙设置route -n # 查看路由表netstat -lntp # 查看所有监听端口netstat -antp # 查看所有已经建立的连接netstat -s # 查看网络统计信息进程ps -ef # 查看所有进程top # 实时显示用户w # 查看活动用户id # 查看指定用户信息last # 查看日志cut -d: - /etc/passwd # 查看系统所有用户cut -d: - /etc/group # 查看系统所有组crontab -l # 查看当前用户的计划任务服务chkconfig –list # 列出所有系统服务chkconfig –list | grep on # 列出所有启动的系统服务程序rpm -qa # 查看所有安装的软件包cat /proc/cpuinfo ：查看CPU相关参数的linux系统命令cat /proc/partitions ：查看linux硬盘和分区信息的系统信息命令cat /proc/meminfo ：查看linux系统内存信息的linux系统命令cat /proc/version ：查看版本，类似uname -rcat /proc/ioports ：查看设备cat /proc/interrupts ：查看中断cat /proc/pci ：查看pci设备的信息cat /proc/swaps ：查看所有swap分区的信息 ps aux显示其他用户启动的进程（a）查看系统中属于自己的进程（x）启动这个进程的用户和它启动的时间（u） pts虚拟终端 scp XXX.txt XXX@192.168.1.50:/home/XXX/data内网ip而不是路由器ip 查看文件大小du -h –max-depth=1 /home https://www.cnblogs.com/lixuwu/p/5944062.html ubuntu系统强制关闭程序或窗口1.最为常用的方法： $ps -aux 查看所有运行的进程 $kill -9 (PID) 杀死进程号为PID的进程 （基本都能处理卡住的程序或窗口，适合处理僵尸进程～我的就用这个解决的～） 2.其他常用的类似的方法： $killall (program) killall 加上程序的名字，直接杀掉所有进程 $pkill (program) pkill 加上程序的名字,方法killall类似 $xkill xkill 是在桌面用的杀死图形界面的程序。比如当firefox 出现崩溃不能退出时，点 鼠标就能杀死firefox 。当xkill运行时出来和个人脑骨的图标，哪个图形程序崩溃一点就 OK了。如果您想终止xkill ，就按右键取消。 3.系统方法： 使用 系统监视器或者面板中加入强制关闭按钮，然后点击关闭进程就ok了 试用xkill命令把那个小叉号点到了终端上～弄得系统死住了～只能强制重启～so～那个小叉号 不要乱点在桌面或系统进程上 以前用过xkill命令感觉很好用～今天kill的这个程序用它就不行了～我用了kill -9才行的 还有就是系统监视器也不行～推荐用kill -9命令 还有有人说-9到底是什么意思 ~好象是强制的意思 上边的命令不行可以在前面加上sudo～～～～～～～～ 脚本开机自启不执行https://www.linuxidc.com/Linux/2017-09/147178.htmhttps://www.linuxidc.com/Linux/2017-09/147166.htmhttps://blog.csdn.net/qq_25241325/article/details/80691271https://fantaxy025025.iteye.com/blog/2097862https://blog.csdn.net/jacson_bai/article/details/45149431]]></content>
+    <content type="text"><![CDATA[后台运行在应用Unix/Linux时，我们一般想让某个程序在后台运行，于是我们将常会用 &amp; 在程序结尾来让程序自动运行。比如我们要运行mysql在后台： /usr/local/mysql/bin/mysqld_safe –user=mysql &amp;。可是有很多程序并不想mysqld一样，这样我们就需要nohup命令，怎样使用nohup命令呢？这里讲解nohup命令的一些用法。 RC版本百度百科解释发布候选版，主要在于除错 查看文件夹中文件或文件夹的个数内容详细介绍 查看目录下有多少个文件及文件夹需在终端输入搜索 ls | wc -w 查看目录下有多少个文件需在终端输入 ls | wc -c 查看文件夹下有多少个文件，多少个子目录需在终端输入 ls -l |wc -l 若只想知道文件的个数，则需在终端输入 /bin/ls -l |grep ^-|wc -l 修改用户环境~/.bashrcLinux下 环境变量/etc/profile、/etc/bashrc、~/.bashrc的区别中： /etc/profile:该文件登录操作系统时，为每个用户设置环境信息，当用户第一次登录时,该文件被执行。也就是说这个文件对每个shell都有效，用于获取系统的环境信息。 etc/bashrc：为每一个运行bash shell的用户执行此文件，当bash shell被打开时,该文件被读取。也就是说，当用户shell执行了bash时，运行这个文件。 ~/.bashrc该文件存储的是专属于个人bash shell的信息，当登录时以及每次打开一个新的shell时,执行这个文件。在这个文件里可以自定义用户专属的个人信息。在刚登录Linux时，首先启动 /etc/profile 文件，然后再启动用户目录下的 ~/.bash_profile、 ~/.bash_login或 ~/.profile文件中的其中一个，执行的顺序为：~/.bash_profile、 ~/.bash_login、 ~/.profile。如果 ~/.bash_profile文件存在的话，一般还会执行 ~/.bashrc文件 linux下文件的复制、移动与删除文件复制命令cp命令格式：cp [-adfilprsu] 源文件(source) 目标文件(destination) cp [option] source1 source2 source3 ... directory 参数说明： -a:是指archive的意思，也说是指复制所有的目录 -d:若源文件为连接文件(link file)，则复制连接文件属性而非文件本身 -f:强制(force)，若有重复或其它疑问时，不会询问用户，而强制复制 -i:若目标文件(destination)已存在，在覆盖时会先询问是否真的操作 -l:建立硬连接(hard link)的连接文件，而非复制文件本身 -p:与文件的属性一起复制，而非使用默认属性 -r:递归复制，用于目录的复制操作 -s:复制成符号连接文件(symbolic link)，即“快捷方式”文件 -u:若目标文件比源文件旧，更新目标文件 如将/test1目录下的file1复制到/test3目录，并将文件名改为file2,可输入以下命令： cp /test1/file1 /test3/file2 cp {id_rsa.pub*,id_rsa*} /home/wxy/.ssh 文件移动命令mv命令格式：mv [-fiv] source destination 参数说明： -f:force，强制直接移动而不询问 -i:若目标文件(destination)已经存在，就会询问是否覆盖 -u:若目标文件已经存在，且源文件比较新，才会更新 如将/test1目录下的file1复制到/test3 目录，并将文件名改为file2,可输入以下命令： mv /test1/file1 /test3/file2 文件删除命令rm命令格式：rm [fir] 文件或目录 参数说明： -f:强制删除 -i:交互模式，在删除前询问用户是否操作 -r:递归删除，常用在目录的删除 如删除/test目录下的file1文件，可以输入以下命令： rm -i /test/file1 删除文件夹linux删除目录很简单，很多人还是习惯用rmdir，不过一旦目录非空，就陷入深深的苦恼之中，现在使用rm -rf命令即可。直接rm就可以了，不过要加两个参数-rf 即：rm -rf 目录名字-r 就是向下递归，不管有多少级目录，一并删除-f 就是直接强行删除，不作任何提示的意思 使用awk命令获取文本的某一行,某一列du命令也是查看使用空间的，但是与df命令不同的是Linux du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的来自: http://man.linuxde.net/du 创建文件，文件夹touch testfilemkdir testname1、vi vi 1.txt 会直接创建并打开一个文件1.txt 2、touch touch的作用是更改一个文件或目录的时间。touch 2.txt 如果2.txt不存在，则创建空文件2.txt 3、echo echo “abcd” &gt; 3.txt 可以直接创建文件3.txt并将abcd写入。 4、less 、more 、cat 三者都是将文件内容输出到标准输出，其中less和more可以分页显示，cat是显示全部。 三者可以根据已经存在的文件创建新的文件。假设已经存在文件1.txt。 cat 1.txt &gt; 2.txt less 1.txt &gt; 3.txt more 1.txt &gt; 4.txt 此时创建的文件内容都和1.txt中文件内容相同。 显卡信息查看lspci | grep -i vga如果想看详细的信息，比如 GeForce GT 240，即 02:00.0 [root@localhost conf]# lspci -v -s 02:00.0 如何查看GPU信息1、显示当前GPU使用情况Nvidia自带了一个nvidia-smi的命令行工具，会显示显存使用情况： $ nvidia-smi scp获取远程服务器上的文件 上传文件scp -P 2222 root@www.vpser.net:/root/lnmp0.4.tar.gz /home/lnmp0.4.tar.gz上端口大写P 为参数，2222 表示更改SSH端口后的端口，如果没有更改SSH端口可以不用添加该参数。 root@www.vpser.net 表示使用root用户登录远程服务器www.vpser.net，:/root/lnmp0.4.tar.gz 表示远程服务器上的文件，最后面的/home/lnmp0.4.tar.gz表示保存在本地上的路径和文件名。 上传目录到服务器scp -r local_dir username@servername:remote_dir 查看磁盘信息及/boot空间不足123456789df -lh dpkg --get-selections|grep linux-image uname -asudo apt-get purge linux-image-3.5.0-27-generic 使用purge卸载3.5.0-27，若使用remove卸载则会有类似3.5.0-17的遗留dffdiskfdisk -lsudo fdisk -lsudo ntfsfix /dev/sda5 (修复分区，挂载) http://blog.csdn.net/cloud_xy/article/details/10278769新建备份文件夹：devel@devServer:~$ sudo mkdir /opt/kernel 挑选/boot下体积较大的几个文件备份出来，其中，以vmlinuz、initrd.img开头的文件较大，然后将21~27的内核中以这两个开头的全部备份至刚才新建的文件夹，最后直接删除(sudo rm –f),再查看一下，这回腾出好几十M的空间了，然后再执行之前的那个命令（sudo apt-get -f install），这回顺利更新完毕！然后再去尝试卸载那些旧的内核，所有的都能正常卸载了！ nohup(no hang up)nohup python -u test.py &gt; out.log &amp;无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中ohup命令：如果你正在运行一个进程，而且你觉得在退出帐户时该进程还不会结束，那么可以使用nohup命令。该命令可以在你退出帐户/关闭终端之后继续运行相应的进程。nohup就是不挂起的意思( n ohang up)。 查看守护进程ps -ef | grep xxxlinux进程查看系统进程信息命令主要分为：静态进程查看命令（ps）、动态进程查看命令（top）和查看进程树命令(pstree)http://blog.csdn.net/longerzone/article/details/8015941一、静态进程查看 ps ps命令格式： ps -aux 查看系统所有进程 ps -lA 查看所有系统的数据 ps axjf 连通部分进程树状态 -A：与-e意思一样，表列出所有进程 -a ：不与terminal有关的进程 -u：有效用户相关的进程 x：通常与a这个参数一起用，可以列出完整信息 输出格式： l：较仔细列出该pid信息 j：工作格式 -f：做一个更为完整的输出 pts是所谓的伪终端或虚拟终端，具体表现就是你打开一个终端，这个终端就叫pts/0，如果你再打开一个终端，这个新的终端就叫pts /1。比如用who命令查询当前登录的用户，可以看到每个用户的TTY设备（简单来说就是用户输入命令还有显示信息的设备，比如终端）有一个tty7是表示图形界面，我当前登录的是GNOME，当然就是图形界面了。还有tty1-tty6表示文字界面，可以用Ctrl+Alt+F1-F6切换，+F7就是切换回图形界面。下面两行说明我当前打开了两个终端窗口，所以就有pts/0和pts/1tmux是指通过一个终端登录远程主机并运行后，在其中可以开启多个控制台的终端复用软件tty是Teletype的缩写 伪终端（Pseudo Terminal）如果你发现某个进程的CMD后面接上时，就代表该进程是僵尸进程，例如： 1 2598 2598 2598 ? -1 Ss 0 0:00 /usr/sbin/hcid 后台进程后台进程退出是由于登陆shell收到了SIGHUP信号后在退出前将SIGHUP转发给所有的作业(jobs)。jobs由于收到SIGHUP而终止运行。http://doc.okbase.net/leehomjan/archive/107550.htmlhttp://www.cnblogs.com/xianlai-huang/p/6543751.html dpkg：处理 smbclient (–configure)时出错： 依赖关系问题 - 仍未被配置因为错误消息指示这是由于上一个问题导致的错误，没有写入 apport 报告。 由于已经达到 MaxReports 限制，没有写入 apport 报告。 在处理时有错误发生： nfs-common samba-common samba smbclientE: Sub-process /usr/bin/dpkg returned an error code (1) 虽然出错，但是装的软件还是可以用的，这里好象是由于当时安装samba服务器的时候没有安装好，在网上有一篇文章: http://hi.baidu.com/dream__land/blog/item/46dfe6fded06880109244d18.html 1.$ sudo mv /var/lib/dpkg/info /var/lib/dpkg/info_old //现将info文件夹更名2.$ sudo mkdir /var/lib/dpkg/info //再新建一个新的info文件夹3.$ sudo apt-get update, apt-get -f install //不用解释了吧4.$ sudo mv /var/lib/dpkg/info/* /var/lib/dpkg/info_old //执行完上一步操作后会在新的info文件夹下生成一些文件，现将这些文件全部移到info_old文件夹下5.$ sudo rm -rf /var/lib/dpkg/info //把自己新建的info文件夹删掉6.$ sudo mv /var/lib/dpkg/info_old /var/lib/dpkg/info //把以前的info文件夹重新改回名字 重复执行历史命令history 查看历史命令 例如：！255 查看文件大小file ##.pngidentify ##.jpg 最大的前10个文件find / -type f -exec du -Sh {} + | sort -rh | head -n 10https://linux.cn/article-9495-1.html?pr find：在目录结构中搜索文件的命令 /：在整个系统（从根目录开始）中查找 -type：指定文件类型 f：普通文件 -print0：输出完整的文件名，其后跟一个空字符（null） |：控制操作符，将一条命令的输出传递给下一个命令以供进一步处理 xargs：将标准输入转换成命令行参数的命令 -0：以空字符（null）而不是空白字符来分割记录 du：计算文件占用的磁盘空间的命令 sort：对文本文件进行按行排序的命令 -n：根据数字大小进行比较 tail -10：输出文件结尾部分的命令（最后 10 个文件） cut：从每行删除特定部分的命令 -f2：只选择特定字段值 -I{}：将初始参数中出现的每个替换字符串都替换为从标准输入读取的名称 -s：仅显示每个参数的总和 -h：用可读格式打印输出 {}：递归地查找目录，统计每个文件占用的磁盘空间 密钥环密钥环是存放保存密码的地方，以明文的方式，需要装系统时设置的密钥进行解锁忘记登录密钥，在启动界面，进入高级选项，修复模式，ｒｏｏｔ下修改密码，passwd XXX 然后reboot参考官方文档 seahorse 进入密钥环 bash快捷键ctrl键组合ctrl+a:光标移到行首。ctrl+b:光标左移一个字母ctrl+c:杀死当前进程。ctrl+d:退出当前 Shell。ctrl+e:光标移到行尾。ctrl+h:删除光标前一个字符，同 backspace 键相同。ctrl+k:清除光标后至行尾的内容。ctrl+l:清屏，相当于clear。ctrl+r:搜索之前打过的命令。会有一个提示，根据你输入的关键字进行搜索bash的historyctrl+u: 清除光标前至行首间的所有内容。ctrl+w: 移除光标前的一个单词ctrl+t: 交换光标位置前的两个字符ctrl+y: 粘贴或者恢复上次的删除ctrl+d: 删除光标所在字母;注意和backspace以及ctrl+h的区别，这2个是删除光标前的字符ctrl+f: 光标右移ctrl+z : 把当前进程转到后台运行，使用’ fg ‘命令恢复。比如top -d1 然后ctrl+z ，到后台，然后fg,重新恢复esc组合esc+d: 删除光标后的一个词esc+f: 往右跳一个词esc+b: 往左跳一个词esc+t: 交换光标位置前的两个单词。 压缩文件压缩服务器上当前目录的内容为xxx.zip文件 zip -r xxx.zip ./* 解压zip文件到当前目录 unzip filename.zipzip -r filename.zip filesdir 在这个例子里，filename.zip 代表你创建的文件，filesdir 代表你想放置新 zip 文件的目录。-r 选项指定你想递归地（recursively）包括所有包括在 filesdir 目录中的文件。 tar 命令详解 -c: 建立压缩档案 -x：解压 -t：查看内容 -r：向压缩归档文件末尾追加文件 -u：更新原压缩包中的文件 这五个是独立的命令，压缩解压都要用到其中一个，可以和别的命令连用但只能用其中一个。下面的参数是根据需要在压缩或解压档案时可选的。 -c: 建立压缩档案 -x：解压 -t：查看内容 -r：向压缩归档文件末尾追加文件 -u：更新原压缩包中的文件 下面的参数-f是必须的 -f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。主选项： c 创建新的档案文件。如果用户想备份一个目录或是一些文件，就要选择这个选项。 r 把要存档的文件追加到档案文件的未尾。例如用户已经作好备份文件，又发现还有一个目录或是一些文件忘记备份了，这时可以使用该选项，将忘记的目录或文件追加到备份文件中。 t 列出档案文件的内容，查看已经备份了哪些文件。 u 更新文件。就是说，用新增的文件取代原备份文件，如果在备份文件中找不到要更新的文件，则把它追加到备份文件的最后。 x 从档案文件中释放文件。 辅助选项： b 该选项是为磁带机设定的。其后跟一数字，用来说明区块的大小，系统预设值为20(20*512 bytes)。 f 使用档案文件或设备，这个选项通常是必选的。 k 保存已经存在的文件。例如我们把某个文件还原，在还原的过程中，遇到相同的文件，不会进行覆盖。 m 在还原文件时，把所有文件的修改时间设定为现在。 M 创建多卷的档案文件，以便在几个磁盘中存放。 v 详细报告tar处理的文件信息。如无此选项，tar不报告文件信息。 w 每一步都要求确认。 z 用gzip来压缩/解压缩文件，加上该选项后可以将档案文件进行压缩，但还原时也一定要使用该选项进行解压缩。 # tar -cf all.tar *.jpg 这条命令是将所有.jpg的文件打成一个名为all.tar的包。-c是表示产生新的包，-f指定包的文 本地共享 sudo smbpasswd -a wxy tail1．命令格式; tail[必要参数][选择参数][文件] 2．命令功能： 用于显示指定文件末尾内容，不指定文件时，作为输入信息进行处理。常用查看日志文件。 3．命令参数： -f 循环读取-q 不显示处理信息-v 显示详细的处理信息-c&lt;数目&gt; 显示的字节数-n&lt;行数&gt; 显示行数–pid=PID 与-f合用,表示在进程ID,PID死掉之后结束.-q, –quiet, –silent 从不输出给出文件名的首部-s, –sleep-interval=S 与-f合用,表示在每次反复的间隔休眠S秒 moremore作用：类似cat，不过会以一页一页的显示方便使用者一页页阅读使用方法：more [选项] 文件名 Linux 终端复用神器Tmuxpychram 配置代码到服务器时ｍａｐ中服务器是新建文件夹名字，与ｃｏｎｎｎｅｃｔｉｏｎ中的路径连起来才是完整路径名winscp类似的软件Fillzilla查看图片命令eog关机注销或者重启一次ubuntu桌面。 $sudo pkill Xorg 在当前目录下找出占用空间最大的前10大文件了解三个常用命令： du : 计算出单个文件或者文件夹的磁盘空间占用. sort : 对文件行或者标准输出行记录排序后输出. head : 输出文件内容的前面部分. du： -a：显示目录占用空间的大小，还要显示其下目录占用空间的大小sort： -n : 按照字符串表示的数字值来排序 -r ：按照反序排列 head : -n : 取出前多少行 以上的问题可以使用命令： du -a | sort -n -r | head -n 10 du -h -x –max-depth=1可以查看每个目录下文件 文件夹的占用体积。du -sh * | sort -n 统计当前文件夹(目录)大小，并按文件大小排序 du -sk filename 查看指定文件大小 linux系统下/var空间不足的解决办法mv /var/cuda-repo-8-0-local-ga2 /home ln -s /home/cuda-repo-8-0-local-ga2 /var sudo mv /var/tmp /home/var_tmp sudo mv var_tmp tmp 改文件名 mv 命令 将文件移动，目标地址如果加 / 就 代表文件夹，如果没有 / 就会重新命名 sudo ln -s /home/tmp /var 文件末尾星号ls -F /bin/你会看到所有可执行文件后面都带有*这些特殊符号有什么含义？ : 可执行文件/ : 目录= : 套接字@ : 符号链接| : 管道文件 到了这，问题已经明白了大部分，但是为什么有的系统上只是执行了ls就会显示出这个结尾的特殊符号？并没有加-F呢！ 阿铭从公司的一台服务器上获得了答案：cat ~/.bashrc //其中有两行unalias lsalias ls=’ls -Fa’ 合并压缩文件 cat file* &gt; file md5值校验 md5sum file1 file2 添加用户首先用adduser命令添加一个普通用户，命令如下： adduser tommy//添加一个名为tommy的用户 #passwd tommy //修改密码Changing password for user tommy.New UNIX password: //在这里输入新密码Retype new UNIX password: //再次输入新密码passwd: all authentication tokens updated successfully. 2、赋予root权限 方法一： 修改 /etc/sudoers 文件，找到下面一行，把前面的注释（#）去掉 Allows people in group wheel to run all commands%wheel ALL=(ALL) ALL 然后修改用户，使其属于root组（wheel），命令如下： usermod -g root tommy修改完毕，现在可以用tommy帐号登录，然后用命令 su - ，即可获得root权限进行操作。 方法二： 修改 /etc/sudoers 文件，找到下面一行，在root下面添加一行，如下所示： Allow root to run any commands anywhereroot ALL=(ALL) ALLtommy ALL=(ALL) ALL 修改完毕，现在可以用tommy帐号登录，然后用命令 su - ，即可获得root权限进行操作。 按时间顺序查看文件 ls -alt # 按修改时间排序 ls –sort=time -la # 等价于&gt; ls -altls -alc # 按创建时间排序ls -alu # 按访问时间排序 以上均可使用-r实现逆序排序 ls -alrt # 按修改时间排序ls –sort=time -lra # 等价于&gt; ls -alrtls -alrc # 按创建时间排序 ls -alru # 按访问时间排序 后台命令1）&amp;命令 功能：加在一个命令的最后，可以把这个命令放在后台执行 （2）nohup命令 功能：不挂断的运行命令 2、查看当前后台运行的命令 有两个命令可以用，jobs和ps,区别是jobs用于查看当前终端后台运行的任务，换了终端就看不到了。而ps命令用于查看瞬间进程的动态，可以看到别的终端运行的后台进程。 （1）jobs命令 功能：查看当前终端后台运行的任务 jobs -l选项可显示当前终端所有任务的PID，jobs的状态可以是running，stopped，Terminated。+ 号表示当前任务，- 号表示后一个任务。 （2）ps命令 功能：查看当前的所有进程 ps -aux | grep &quot;test.sh&quot; #a:显示所有程序 u:以用户为主的格式来显示 x:显示所有程序，不以终端机来区分 3、关闭当前后台运行的命令 kill命令：结束进程 （1）通过jobs命令查看jobnum，然后执行 kill %jobnum （2）通过ps命令查看进程号PID，然后执行 kill %PID 如果是前台进程的话，直接执行 Ctrl+c 就可以终止了 4、前后台进程的切换与控制 （1）fg命令 功能：将后台中的命令调至前台继续运行 如果后台中有多个命令，可以先用jobs查看jobnun，然后用 fg %jobnum 将选中的命令调出。 （2）Ctrl + z 命令 功能：将一个正在前台执行的命令放到后台，并且处于暂停状态 （3）bg命令 功能：将一个在后台暂停的命令，变成在后台继续执行 如果后台中有多个命令，可以先用jobs查看jobnum，然后用 bg %jobnum 将选中的命令调出继续执行。 内存1，Linux下可以在/proc/cpuinfo中看到每个cpu的详细信息。但是对于双核的cpu，在cpuinfo中会看到两个cpu。常常会让人误以为是两个单核的cpu。其实应该通过Physical Processor ID来区分单核和双核。而Physical Processor ID可以从cpuinfo或者dmesg中找到. flags 如果有 ht 说明支持超线程技术 判断物理CPU的个数可以查看physical id 的值，相同则为同一个物理CPU 2，查看内存大小:cat /proc/meminfo |grep MemTotal‘free’ 会以 KB 为单位显示信息。free 同样提供给我们 b (B), -k (KB), -m (MB), -g (GB) and –tera (TB)这些单位。要显示我们想要的单位，只要选择一个并在 free 后面跟上。下面一个是以 MB 为单位的输出样例。我们想要每3秒统计一次内存利用率并且适于人类可读，那么就像这样做: $ free -hs 3 3，其他一些可以查看详细信息的命令和方法:uname -a # 查看内核//的信息命令head -n 1 /etc/issue # 查看版本，是数字1不是字母Lcat /proc/cpuinfo # 查看的信息命令hostname # 查看计算机名的linux系统信息命令lspci -tv # 列出所有PCI设备lsusb -tv # 列出所有USB设备的linux系统信息命令lsmod # 列出加载的内核模块env # 查看环境变量资源free -m # 查看内存使用量和交换区使用量df -h # 查看各分区使用情况du -sh # 查看指定目录的大小grep MemTotal /proc/meminfo # 查看内存总量grep MemFree /proc/meminfo # 查看空闲内存量uptime # 查看系统运行时间、用户数、负载cat /proc/loadavg # 查看系统负载磁盘和分区mount | column -t # 查看挂接的分区状态fdisk -l # 查看所有分区swapon -s # 查看所有hdparm -i /dev/hda # 查看磁盘参数(仅适用于)dmesg | grep IDE # 查看启动时检测状况网络ifconfig # 查看所有的属性iptables -L # 查看防火墙设置route -n # 查看路由表netstat -lntp # 查看所有监听端口netstat -antp # 查看所有已经建立的连接netstat -s # 查看网络统计信息进程ps -ef # 查看所有进程top # 实时显示用户w # 查看活动用户id # 查看指定用户信息last # 查看日志cut -d: - /etc/passwd # 查看系统所有用户cut -d: - /etc/group # 查看系统所有组crontab -l # 查看当前用户的计划任务服务chkconfig –list # 列出所有系统服务chkconfig –list | grep on # 列出所有启动的系统服务程序rpm -qa # 查看所有安装的软件包cat /proc/cpuinfo ：查看CPU相关参数的linux系统命令cat /proc/partitions ：查看linux硬盘和分区信息的系统信息命令cat /proc/meminfo ：查看linux系统内存信息的linux系统命令cat /proc/version ：查看版本，类似uname -rcat /proc/ioports ：查看设备cat /proc/interrupts ：查看中断cat /proc/pci ：查看pci设备的信息cat /proc/swaps ：查看所有swap分区的信息 ps aux显示其他用户启动的进程（a）查看系统中属于自己的进程（x）启动这个进程的用户和它启动的时间（u） pts虚拟终端 scp XXX.txt XXX@192.168.1.50:/home/XXX/data内网ip而不是路由器ip 查看文件大小du -h –max-depth=1 /home https://www.cnblogs.com/lixuwu/p/5944062.html ubuntu系统强制关闭程序或窗口1.最为常用的方法： $ps -aux 查看所有运行的进程 $kill -9 (PID) 杀死进程号为PID的进程 （基本都能处理卡住的程序或窗口，适合处理僵尸进程～我的就用这个解决的～） 2.其他常用的类似的方法： $killall (program) killall 加上程序的名字，直接杀掉所有进程 $pkill (program) pkill 加上程序的名字,方法killall类似 $xkill xkill 是在桌面用的杀死图形界面的程序。比如当firefox 出现崩溃不能退出时，点 鼠标就能杀死firefox 。当xkill运行时出来和个人脑骨的图标，哪个图形程序崩溃一点就 OK了。如果您想终止xkill ，就按右键取消。 3.系统方法： 使用 系统监视器或者面板中加入强制关闭按钮，然后点击关闭进程就ok了 试用xkill命令把那个小叉号点到了终端上～弄得系统死住了～只能强制重启～so～那个小叉号 不要乱点在桌面或系统进程上 以前用过xkill命令感觉很好用～今天kill的这个程序用它就不行了～我用了kill -9才行的 还有就是系统监视器也不行～推荐用kill -9命令 还有有人说-9到底是什么意思 ~好象是强制的意思 上边的命令不行可以在前面加上sudo～～～～～～～～ 脚本开机自启不执行https://www.linuxidc.com/Linux/2017-09/147178.htmhttps://www.linuxidc.com/Linux/2017-09/147166.htmhttps://blog.csdn.net/qq_25241325/article/details/80691271https://fantaxy025025.iteye.com/blog/2097862https://blog.csdn.net/jacson_bai/article/details/45149431 查看服务器启动时间123456date -d &quot;$(awk -F. &apos;&#123;print $1&#125;&apos; /proc/uptime) second ago&quot; +&quot;%Y-%m-%d %H:%M:%S&quot;who -b last -x | grep shutdown #以关机时间段显示 https://blog.csdn.net/cainiao2013/article/details/78952376]]></content>
       <categories>
         <category>Linux</category>
       </categories>
@@ -422,6 +438,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[自动备份Hexo博客源文件]]></title>
+    <url>%2F2017%2F12%2F04%2F%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BDhexo%2F</url>
+    <content type="text"><![CDATA[原文出自：http://zhujiegao.com/2015/12/06/automatic-backup/ 先安装git和node 原理通过通过监听Hexo的其它事件来完成自动执行Git命令完成自动备份。通过查阅Hexo文档，找到了Hexo的主要事件，见下表： 事件名 事件发生时间 deployBefore 在部署完成前发布 deployAfter 在部署成功后发布 exit 在 Hexo 结束前发布 generateBefore 在静态文件生成前发布 generateAfter 在静态文件生成后发布 new 在文章文件建立后发布 实现 在Github下创建新的仓库，取名hexo 进入本地hexo文件夹，执行以下命令 123456git initgit remote add origin git@github.com:XXX/XXX.gitgit pull -u origin mastergit add .git commit -m &quot;添加hexo源码文件备份&quot;git pull -u origin master 3.安装shelljs模块要实现这个自动备份功能，需要依赖Node.js的一个shelljs模块,该模块重新包装了child_process,调用系统命令更加的方便。该模块需要安装后使用 1npm install --save shelljs 4 自动备份脚本 待到模块安装完成，在Hexo根目录的scripts文件夹下新建一个js文件，文件名随意取。 ps: 如果没有scripts目录，请新建一个。 然后在脚本中，写入以下内容： 123456789101112131415161718192021222324252627282930require(&apos;shelljs/global&apos;);try &#123; hexo.on(&apos;deployAfter&apos;, function() &#123;//当deploy完成后执行备份 run(); &#125;);&#125; catch (e) &#123; console.log(&quot;产生了一个错误&lt;(￣3￣)&gt; !，错误详情为：&quot; + e.toString());&#125;function run() &#123; if (!which(&apos;git&apos;)) &#123; echo(&apos;Sorry, this script requires git&apos;); exit(1); &#125; else &#123; echo(&quot;======================Auto Backup Begin===========================&quot;); cd(&apos;D:/hexo&apos;); //此处修改为Hexo根目录路径 if (exec(&apos;git add --all&apos;).code !== 0) &#123; echo(&apos;Error: Git add failed&apos;); exit(1); &#125; if (exec(&apos;git commit -am &quot;Form auto backup script\&apos;s commit&quot;&apos;).code !== 0) &#123; echo(&apos;Error: Git commit failed&apos;); exit(1); &#125; if (exec(&apos;git push origin master&apos;).code !== 0) &#123; echo(&apos;Error: Git push failed&apos;); exit(1); &#125; echo(&quot;==================Auto Backup Complete============================&quot;) &#125;&#125;]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>GitHub</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[识别系统前期调研]]></title>
     <url>%2F2017%2F12%2F04%2F%E8%AF%86%E5%88%AB%E7%B3%BB%E7%BB%9F%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94%2F</url>
     <content type="text"><![CDATA[三星S8—虹膜识别 ①首先需要可以捕捉红外光的相机（目前市场已经没有） ② 然后对机主的虹膜进行高分辨捕捉 ③ 偷取他的手机 ④ 再用特殊的打印方式打印出来 iphone X—人脸识别苹果在Face ID的人脸识别中加入了深度信息的技术。 Face ID的实现靠的是iPhone X顶部一小块没被屏幕覆盖的区域。这一小块区域集成了多达八个组件，除了麦克风、扬声器、前置摄像头、环境光传感器、距离感应器等我们熟知的部分，还集成了红外镜头、泛光感应元件（Flood illuminator）、点阵投影器。 深度信息技术在Face ID的认证过程中分为以下两个步骤① 在注册时，点阵投影仪会投射3万多个点在人脸上，从而形成一张3D人脸图，并存储在A11芯片上 ② 使用时，泛光感应元件会打一道看不见的光在人的脸上（这样在黑暗中也可以识别人脸），读取用户的脸部3D几何结构图，并将它与存储在A11芯片隔区内的数据进行对比，如果两者一致，iPhone X就会解锁 越南网络安全公司Bkav绕过了首批由华硕、联想、东芝等笔记本电脑部署的面部识别系统，而使用的不过是一张简单的照片 门禁系统支付宝，ＱＱ安全中心人脸改密打卡机人脸（得力，中控）app以及线下互联网领域存在很多提供人脸识别技术的服务商，比如一登、facevisa 研究人员教导人工智能研究社交网络用户的行为，然后设计并实施自己的网络钓鱼诱饵。在测试中，AI 比人类竞争对手强大得多，制造并分发了比人类更多的网络钓鱼微博人工智能可用于挖掘大量公共领域和社交网络数据，以提取出生日期、性别、位置电话号码、邮箱地址等个人身份信息，可用于黑客入侵个人账户它还可以用于自动监控电子邮件和短信，并为社会工程攻击创建个性化的网络钓鱼邮件网络钓鱼诈骗是非法尝试从不知情的用户获取敏感信息。AI 可以更容易地突变恶意软件、更智能地搜索并挖掘和利用系统中的漏洞 ｆａｃｅ＋＋人脸识别语音：ＡＬＥＸＡ 智能设备语音助手公安部旗下NCIIC的人脸比对优图独创Uface深度人脸模型SeetaFace开源人脸识别引擎车牌识别及普通验证码 目标：Deep-pwning是一个轻量级的机器学习模型的实验框架，其目的是评估其对抗动机的强大对手。 请注意，目前状态下的深层次不在接近到期或完成的地方。 这是为了试验，扩展和扩展你。只有这样我们才能真正成为统计机器学习模型的渗透测试工具包。 Visual Question Answering (VQA）Can you fool AI with adversarial examples on a visual Turing test?]]></content>
@@ -430,6 +458,18 @@
       </categories>
       <tags>
         <tag>人脸识别</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[对抗样本]]></title>
+    <url>%2F2017%2F12%2F04%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87%E9%9B%86%2F</url>
+    <content type="text"><![CDATA[“Explaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”如何让神经网络把熊猫识别为秃鹫正向传播与反向传播的区别、这个博客表达了对此论文的一些看法。 通过利用比你想象更简单（更线性！）的网络事实来做到这一点。我们会使用一个线性函数来逼近这个网络！ 生成对抗网络的发明人Ian Goodfellow在《Explaining and Harnessing Adversarial Examples》中提出了一种更快速方便的方法来产生对抗样本： 技术分享 这种方法的思想非常简单，就是让输入图像朝着让类别置信度降低的方向上移动一个在各个维度上都是技术分享这么大小的一步。因为输入通常是高维的（比如224x224），再加上现在的主流神经网络结构都是ReLU系的激活函数，线性程度其实很高，所以即使是很小的技术分享，每个维度的效果加一块，通常也足以对结果产生很大的影响，比如下面这样： 正则化激活函数优化问题的解决损失函数梯度 下面是L1正则化和L2正则化的作用，这些表述可以在很多文章中找到。 L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩罚』是指对损失函数中的某些参数做一些限制。对于线性回归模型，使用L1正则化的模型建叫做Lasso回归，使用L2正则化的模型叫做Ridge回归（岭回归）。L1正则化是指权值向量w中各个元素的绝对值之和，通常表示为||w||1 L2正则化是指权值向量w中各个元素的平方和然后再求平方根（可以看到Ridge回归的L2正则化项有平方符号），通常表示为||w||2 L1正则化可以产生稀疏权值矩阵，即产生一个稀疏模型，可以用于特征选择 L2正则化可以防止模型过拟合（overfitting）；一定程度上，L1也可以防止过拟合 Adversarial Examples and their implications - Deep Learning bits #3这篇博客主要引用别人论文介绍了概念。应用和几种对抗样本防御方法。对我比较新颖的一点是介绍了图像误分类的区别：一种是图像本身有歧义或者裁剪失败，再一种图像中包含很多类别。这些都可以造成分类器分类失败，但对抗样本是指它不是正常产生的，而是人为构造的。 ##我们可以利用对抗样本做什么 绕过安全过滤机制加载图片通过穿戴特别眼镜假冒他人编过人脸识别装置改变交通标志误导自动驾驶伪装武器躲避视频检测绕过声音或指纹识别 ##怎样防范该博客提出防止模型隐私泄露这种方法是不值得采用的。并列举几种论文中的方法，等详细看了之后在写。]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>对抗样本</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -446,27 +486,27 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[对抗样本]]></title>
-    <url>%2F2017%2F12%2F04%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87%E9%9B%86%2F</url>
-    <content type="text"><![CDATA[“Explaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”如何让神经网络把熊猫识别为秃鹫正向传播与反向传播的区别、这个博客表达了对此论文的一些看法。 通过利用比你想象更简单（更线性！）的网络事实来做到这一点。我们会使用一个线性函数来逼近这个网络！ 生成对抗网络的发明人Ian Goodfellow在《Explaining and Harnessing Adversarial Examples》中提出了一种更快速方便的方法来产生对抗样本： 技术分享 这种方法的思想非常简单，就是让输入图像朝着让类别置信度降低的方向上移动一个在各个维度上都是技术分享这么大小的一步。因为输入通常是高维的（比如224x224），再加上现在的主流神经网络结构都是ReLU系的激活函数，线性程度其实很高，所以即使是很小的技术分享，每个维度的效果加一块，通常也足以对结果产生很大的影响，比如下面这样： 正则化激活函数优化问题的解决损失函数梯度 下面是L1正则化和L2正则化的作用，这些表述可以在很多文章中找到。 L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩罚』是指对损失函数中的某些参数做一些限制。对于线性回归模型，使用L1正则化的模型建叫做Lasso回归，使用L2正则化的模型叫做Ridge回归（岭回归）。L1正则化是指权值向量w中各个元素的绝对值之和，通常表示为||w||1 L2正则化是指权值向量w中各个元素的平方和然后再求平方根（可以看到Ridge回归的L2正则化项有平方符号），通常表示为||w||2 L1正则化可以产生稀疏权值矩阵，即产生一个稀疏模型，可以用于特征选择 L2正则化可以防止模型过拟合（overfitting）；一定程度上，L1也可以防止过拟合 Adversarial Examples and their implications - Deep Learning bits #3这篇博客主要引用别人论文介绍了概念。应用和几种对抗样本防御方法。对我比较新颖的一点是介绍了图像误分类的区别：一种是图像本身有歧义或者裁剪失败，再一种图像中包含很多类别。这些都可以造成分类器分类失败，但对抗样本是指它不是正常产生的，而是人为构造的。 ##我们可以利用对抗样本做什么 绕过安全过滤机制加载图片通过穿戴特别眼镜假冒他人编过人脸识别装置改变交通标志误导自动驾驶伪装武器躲避视频检测绕过声音或指纹识别 ##怎样防范该博客提出防止模型隐私泄露这种方法是不值得采用的。并列举几种论文中的方法，等详细看了之后在写。]]></content>
+    <title><![CDATA[斯人若彩虹，遇上方知有]]></title>
+    <url>%2F2017%2F12%2F04%2F%E4%B8%83%E5%A4%95%2F</url>
+    <content type="text"><![CDATA[我们分担寒潮、风雷、霹雳；我们共享雾霭流岚、虹霓，仿佛永远分离，却又终身相依]]></content>
       <categories>
-        <category>深度学习</category>
+        <category>随笔</category>
       </categories>
       <tags>
-        <tag>对抗样本</tag>
-        <tag>深度学习</tag>
+        <tag>七夕</tag>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[自动备份Hexo博客源文件]]></title>
-    <url>%2F2017%2F12%2F04%2F%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BDhexo%2F</url>
-    <content type="text"><![CDATA[原文出自：http://zhujiegao.com/2015/12/06/automatic-backup/ 先安装git和node 原理通过通过监听Hexo的其它事件来完成自动执行Git命令完成自动备份。通过查阅Hexo文档，找到了Hexo的主要事件，见下表： 事件名 事件发生时间 deployBefore 在部署完成前发布 deployAfter 在部署成功后发布 exit 在 Hexo 结束前发布 generateBefore 在静态文件生成前发布 generateAfter 在静态文件生成后发布 new 在文章文件建立后发布 实现 在Github下创建新的仓库，取名hexo 进入本地hexo文件夹，执行以下命令 123456git initgit remote add origin git@github.com:XXX/XXX.gitgit pull -u origin mastergit add .git commit -m &quot;添加hexo源码文件备份&quot;git pull -u origin master 3.安装shelljs模块要实现这个自动备份功能，需要依赖Node.js的一个shelljs模块,该模块重新包装了child_process,调用系统命令更加的方便。该模块需要安装后使用 1npm install --save shelljs 4 自动备份脚本 待到模块安装完成，在Hexo根目录的scripts文件夹下新建一个js文件，文件名随意取。 ps: 如果没有scripts目录，请新建一个。 然后在脚本中，写入以下内容： 123456789101112131415161718192021222324252627282930require(&apos;shelljs/global&apos;);try &#123; hexo.on(&apos;deployAfter&apos;, function() &#123;//当deploy完成后执行备份 run(); &#125;);&#125; catch (e) &#123; console.log(&quot;产生了一个错误&lt;(￣3￣)&gt; !，错误详情为：&quot; + e.toString());&#125;function run() &#123; if (!which(&apos;git&apos;)) &#123; echo(&apos;Sorry, this script requires git&apos;); exit(1); &#125; else &#123; echo(&quot;======================Auto Backup Begin===========================&quot;); cd(&apos;D:/hexo&apos;); //此处修改为Hexo根目录路径 if (exec(&apos;git add --all&apos;).code !== 0) &#123; echo(&apos;Error: Git add failed&apos;); exit(1); &#125; if (exec(&apos;git commit -am &quot;Form auto backup script\&apos;s commit&quot;&apos;).code !== 0) &#123; echo(&apos;Error: Git commit failed&apos;); exit(1); &#125; if (exec(&apos;git push origin master&apos;).code !== 0) &#123; echo(&apos;Error: Git push failed&apos;); exit(1); &#125; echo(&quot;==================Auto Backup Complete============================&quot;) &#125;&#125;]]></content>
+    <title><![CDATA[官方文档]]></title>
+    <url>%2F2017%2F12%2F04%2F%E5%AE%98%E7%BD%91%E6%96%87%E6%A1%A3%2F</url>
+    <content type="text"><![CDATA[linux命令大全tensorflow中文官方文档tensorflow英文文档scipy]]></content>
       <categories>
-        <category>Web</category>
+        <category>学习</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
-        <tag>GitHub</tag>
+        <tag>学习</tag>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -505,15 +545,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[斯人若彩虹，遇上方知有]]></title>
-    <url>%2F2017%2F12%2F04%2F%E4%B8%83%E5%A4%95%2F</url>
-    <content type="text"><![CDATA[我们分担寒潮、风雷、霹雳；我们共享雾霭流岚、虹霓，仿佛永远分离，却又终身相依]]></content>
+    <title><![CDATA[书单]]></title>
+    <url>%2F2017%2F12%2F04%2F%E4%B9%A6%E5%8D%95%2F</url>
+    <content type="text"><![CDATA[书单：理性乐观派]]></content>
       <categories>
-        <category>随笔</category>
+        <category>读书</category>
       </categories>
       <tags>
-        <tag>七夕</tag>
-        <tag>随笔</tag>
+        <tag>书籍</tag>
       </tags>
   </entry>
   <entry>
@@ -526,29 +565,6 @@
       <tags>
         <tag>对抗样本</tag>
         <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[官方文档]]></title>
-    <url>%2F2017%2F12%2F04%2F%E5%AE%98%E7%BD%91%E6%96%87%E6%A1%A3%2F</url>
-    <content type="text"><![CDATA[linux命令大全tensorflow中文官方文档tensorflow英文文档scipy]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>学习</tag>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[书单]]></title>
-    <url>%2F2017%2F12%2F04%2F%E4%B9%A6%E5%8D%95%2F</url>
-    <content type="text"><![CDATA[书单：理性乐观派]]></content>
-      <categories>
-        <category>读书</category>
-      </categories>
-      <tags>
-        <tag>书籍</tag>
       </tags>
   </entry>
   <entry>
@@ -580,9 +596,21 @@
     <content type="text"><![CDATA[$$ \frac $$ $$\begin{eqnarray}\nabla\cdot\vec{E} &amp;=&amp; \frac{\rho}{\epsilon_0} \\nabla\cdot\vec{B} &amp;=&amp; 0 \\nabla\times\vec{E} &amp;=&amp; -\frac{\partial B}{\partial t} \\nabla\times\vec{B} &amp;=&amp; \mu_0\left(\vec{J}+\epsilon_0\frac{\partial E}{\partial t} \right)\end{eqnarray}$$]]></content>
   </entry>
   <entry>
-    <title><![CDATA[ON THE INTEGRITY OF DEEP LEARNING SYSTEMS IN ADVERSARIAL SETTINGS]]></title>
-    <url>%2F2017%2F12%2F04%2FON%20THE%20INTEGRITY%20OF%20DEEP%20LEARNING%20SYSTEMS%20IN%20ADVERSARIAL%20SETTINGS%2F</url>
-    <content type="text"><![CDATA[未来工作这个架构可以用于监督学习也可以用于非监督学习，但目前只能用于前馈神经网络，不能用于循环神经网络探索在更多对抗设置中的攻击 研究现状攻击测试时间 - 探索性攻击[2] - 不会篡改目标模型，而是要么直接行为不端或者只是简单地使用攻击来收集关于模型特征的证据。这是我们在本手稿的前几章中所描述的攻击类型。 Biggio等人[6]在测试时引入了对二进制分类器（例如用于检测）的攻击，并将恶意样本分类为良性的目标考虑为攻击者。假设对手具有（至少部分）目标分类器的知识。他们将对手的攻击策略制定为一个最小化问题，以找到最接近敌对目标的归类为良性的输入（归类为恶意）。为了帮助处理非线性和潜在的非凸性问题，他们使用了一种启发式方法来支持合法点集合（称为模仿）的密集区域中的攻击点。他们使用单个隐藏层对线性分类器，SVM和低维神经网络进行攻击。同样假设目标分类器的知识，Fogla等人详细描述了一个多态混合攻击来规避网络异常检测系统[24,25]。他们的攻击是基于将入侵检测系统建模为常规语法，并发现该语法所接受的突变攻击实例。生成这样的实例是一个NP完全问题，但作者表明，可以找到接近最优的解决方案，使用减少SAT可满足性问题及其相关的求解器]]></content>
+    <title><![CDATA[没想到你是这样的Linux | 终端下有趣的命令合集]]></title>
+    <url>%2F2017%2F12%2F04%2FLinux%20%E6%9C%89%E8%B6%A3%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[转载Freebuf toilet简介 toilet能用字母拼写出更大字母的工具，具体拼出什么字由命令后面的参数决定，不仅如此，它还能打印出各种风格的效果，比如彩色，金属光泽等。安装 apt-get install toilet 参数解释 toilet -f mono12 -F metal FreeBuf sl简介 你可能了解Linux的ls命令，并经常使用它来查看文件夹的内容。但是，有些时候你可能会拼写成sl ,这时我们应该如何获得一些乐趣而不是看见“command not found”呢？某编程牛人也经常犯把ls敲成sl的错误，所以他自己编了一个程序娱乐一下,这个程序的作用很简单，就是当你输入sl的时候终端会出现一个火车呼啸而过～～安装 apt-get install sl cmatrix简介 《黑客帝国》的代码雨视觉特效。安装 apt-get install cmatrix 参数解释 -B: 字体加粗-C: 颜色 后面跟上参数颜色 cowsay简介 Cowsay命令是一个有趣的命令。它会用ASCII字符描绘牛，羊和许多其他动物。但是不是每个Linux发行版都带有这个命令。安装 apt-get install cowsay 参数解释 列出所有支持可用的动物:cowsay -l list sciinema简介 本文其实最初很多特效都用这个终端去录制的，但是由于需要引用外部的js，所以最后这些终端下的特效才换成了gif图。asciineme 可以完美录制完美终端下所敲的命令。官网:https://asciinema.org/]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>有趣命令</tag>
+        <tag>软件安装</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[One pixel attack for fooling deep neural networks Jiawei]]></title>
+    <url>%2F2017%2F12%2F04%2FOne%20pixel%20attack%20for%20fooling%20deep%20neural%20networks%20Jiawei%2F</url>
+    <content type="text"><![CDATA[摘要在图像识别领域，基于 DNN 的方法突破了传统的图像处理技术，达到了可与人类媲美的结果 [9]。但是，多个研究证明自然图像中的人工扰动可以轻易使 DNN 对图像进行错误分类，研究者提出了生成此类「对抗图像」的高效算法 [1, 2, 3, 4]。生成对抗图像（adversarial images）的主要方式是向准确分类的自然图像中添加精心设计的额外扰动，该扰动不影响人类对图像的识别。这样的修改导致分类器将修改后的图像标注为完全不同的其他物体。但是，大多数之前的攻击并未考虑非常有限的对抗实例，即扰动的量有时候也会影响到人眼的识别能力（示例见图 2）。此外，研究在有限场景中创建的对抗图像更加有趣，因为它们可能更接近原始类别和目标类别（target class）之间的边界，研究此类关键点可以使人类更多地了解 DNN 输入空间的几何特征 方法贡献 非目标攻击，修改1,3,5个像素黑盒攻击可攻击不同模型对特征目标有相同的扰动方向 方法它不抽象的问题将扰动搜索到任意显式的目标函数进行求解，而直接关注提高目标类别的概率标注值全局对抗扰动可以泄露标签 固定修改像素的个数，增改像素改变的强度 Differential evolution (DE) which belongs to the generalclass of genetic algorithm (GA 实验结论]]></content>
       <categories>
         <category>论文</category>
       </categories>
@@ -591,9 +619,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[DELVING INTO TRANSFERABLE ADVERSARIAL EX- AMPLES AND BLACK-BOX ATTACKS]]></title>
-    <url>%2F2017%2F12%2F04%2FDELVING%20INTO%20TRANSFERABLE%20ADVERSARIAL%20EX-%20AMPLES%20AND%20BLACK-BOX%20ATTACKS%2F</url>
-    <content type="text"><![CDATA[贡献研究目标和非目标攻击，转移性在非目标攻击时更容易发生用已有的方法进行目标攻击时，几乎没有转移性提出基于集成的方法生成对抗样本，这样在进行目标攻击时可提高攻击成功率。 此前转移性只在小的数据集，如MNIST (LeCun et al. (1998)) and CIFAR-10 (Krizhevsky &amp; Hinton (2009))中进行试验，本论文在在大规模数据集，ImageNet (Russakovsky et al. (2015))进行试验 不同模型的梯度方向是正交的，决策边界是对齐的 攻击了Clarifai.com, a commercial com- pany providing state-of-the-art image classification services 转移性的研究：（1）在同样数据集的不同模型间 （2）相同模型在不相交的数据集上 （3）不同模型在不同数据集上]]></content>
+    <title><![CDATA[ON THE INTEGRITY OF DEEP LEARNING SYSTEMS IN ADVERSARIAL SETTINGS]]></title>
+    <url>%2F2017%2F12%2F04%2FON%20THE%20INTEGRITY%20OF%20DEEP%20LEARNING%20SYSTEMS%20IN%20ADVERSARIAL%20SETTINGS%2F</url>
+    <content type="text"><![CDATA[未来工作这个架构可以用于监督学习也可以用于非监督学习，但目前只能用于前馈神经网络，不能用于循环神经网络探索在更多对抗设置中的攻击 研究现状攻击测试时间 - 探索性攻击[2] - 不会篡改目标模型，而是要么直接行为不端或者只是简单地使用攻击来收集关于模型特征的证据。这是我们在本手稿的前几章中所描述的攻击类型。 Biggio等人[6]在测试时引入了对二进制分类器（例如用于检测）的攻击，并将恶意样本分类为良性的目标考虑为攻击者。假设对手具有（至少部分）目标分类器的知识。他们将对手的攻击策略制定为一个最小化问题，以找到最接近敌对目标的归类为良性的输入（归类为恶意）。为了帮助处理非线性和潜在的非凸性问题，他们使用了一种启发式方法来支持合法点集合（称为模仿）的密集区域中的攻击点。他们使用单个隐藏层对线性分类器，SVM和低维神经网络进行攻击。同样假设目标分类器的知识，Fogla等人详细描述了一个多态混合攻击来规避网络异常检测系统[24,25]。他们的攻击是基于将入侵检测系统建模为常规语法，并发现该语法所接受的突变攻击实例。生成这样的实例是一个NP完全问题，但作者表明，可以找到接近最优的解决方案，使用减少SAT可满足性问题及其相关的求解器]]></content>
       <categories>
         <category>论文</category>
       </categories>
@@ -614,21 +642,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[没想到你是这样的Linux | 终端下有趣的命令合集]]></title>
-    <url>%2F2017%2F12%2F04%2FLinux%20%E6%9C%89%E8%B6%A3%E5%91%BD%E4%BB%A4%2F</url>
-    <content type="text"><![CDATA[转载Freebuf toilet简介 toilet能用字母拼写出更大字母的工具，具体拼出什么字由命令后面的参数决定，不仅如此，它还能打印出各种风格的效果，比如彩色，金属光泽等。安装 apt-get install toilet 参数解释 toilet -f mono12 -F metal FreeBuf sl简介 你可能了解Linux的ls命令，并经常使用它来查看文件夹的内容。但是，有些时候你可能会拼写成sl ,这时我们应该如何获得一些乐趣而不是看见“command not found”呢？某编程牛人也经常犯把ls敲成sl的错误，所以他自己编了一个程序娱乐一下,这个程序的作用很简单，就是当你输入sl的时候终端会出现一个火车呼啸而过～～安装 apt-get install sl cmatrix简介 《黑客帝国》的代码雨视觉特效。安装 apt-get install cmatrix 参数解释 -B: 字体加粗-C: 颜色 后面跟上参数颜色 cowsay简介 Cowsay命令是一个有趣的命令。它会用ASCII字符描绘牛，羊和许多其他动物。但是不是每个Linux发行版都带有这个命令。安装 apt-get install cowsay 参数解释 列出所有支持可用的动物:cowsay -l list sciinema简介 本文其实最初很多特效都用这个终端去录制的，但是由于需要引用外部的js，所以最后这些终端下的特效才换成了gif图。asciineme 可以完美录制完美终端下所敲的命令。官网:https://asciinema.org/]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>有趣命令</tag>
-        <tag>软件安装</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[One pixel attack for fooling deep neural networks Jiawei]]></title>
-    <url>%2F2017%2F12%2F04%2FOne%20pixel%20attack%20for%20fooling%20deep%20neural%20networks%20Jiawei%2F</url>
-    <content type="text"><![CDATA[摘要在图像识别领域，基于 DNN 的方法突破了传统的图像处理技术，达到了可与人类媲美的结果 [9]。但是，多个研究证明自然图像中的人工扰动可以轻易使 DNN 对图像进行错误分类，研究者提出了生成此类「对抗图像」的高效算法 [1, 2, 3, 4]。生成对抗图像（adversarial images）的主要方式是向准确分类的自然图像中添加精心设计的额外扰动，该扰动不影响人类对图像的识别。这样的修改导致分类器将修改后的图像标注为完全不同的其他物体。但是，大多数之前的攻击并未考虑非常有限的对抗实例，即扰动的量有时候也会影响到人眼的识别能力（示例见图 2）。此外，研究在有限场景中创建的对抗图像更加有趣，因为它们可能更接近原始类别和目标类别（target class）之间的边界，研究此类关键点可以使人类更多地了解 DNN 输入空间的几何特征 方法贡献 非目标攻击，修改1,3,5个像素黑盒攻击可攻击不同模型对特征目标有相同的扰动方向 方法它不抽象的问题将扰动搜索到任意显式的目标函数进行求解，而直接关注提高目标类别的概率标注值全局对抗扰动可以泄露标签 固定修改像素的个数，增改像素改变的强度 Differential evolution (DE) which belongs to the generalclass of genetic algorithm (GA 实验结论]]></content>
+    <title><![CDATA[DELVING INTO TRANSFERABLE ADVERSARIAL EX- AMPLES AND BLACK-BOX ATTACKS]]></title>
+    <url>%2F2017%2F12%2F04%2FDELVING%20INTO%20TRANSFERABLE%20ADVERSARIAL%20EX-%20AMPLES%20AND%20BLACK-BOX%20ATTACKS%2F</url>
+    <content type="text"><![CDATA[贡献研究目标和非目标攻击，转移性在非目标攻击时更容易发生用已有的方法进行目标攻击时，几乎没有转移性提出基于集成的方法生成对抗样本，这样在进行目标攻击时可提高攻击成功率。 此前转移性只在小的数据集，如MNIST (LeCun et al. (1998)) and CIFAR-10 (Krizhevsky &amp; Hinton (2009))中进行试验，本论文在在大规模数据集，ImageNet (Russakovsky et al. (2015))进行试验 不同模型的梯度方向是正交的，决策边界是对齐的 攻击了Clarifai.com, a commercial com- pany providing state-of-the-art image classification services 转移性的研究：（1）在同样数据集的不同模型间 （2）相同模型在不相交的数据集上 （3）不同模型在不同数据集上]]></content>
       <categories>
         <category>论文</category>
       </categories>
@@ -660,6 +676,40 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[深度学习资料]]></title>
+    <url>%2F2017%2F12%2F04%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%2F</url>
+    <content type="text"><![CDATA[深度学习资料2015年5月《自然》上刊登的一篇概述性论文《深度学习》（Deep learning），由我自己、Yoshua Bengio 、Geoff Hinton共同撰写。 系统性的课本方面，由 Goodfellow、Bengio 和 Courville共同撰写的《深度学习》（Deep learning）（这个在网上有HTML版本，本书旨在帮助学生和从业人员入门机器学习，尤其是深度学习领域。HTML版本已经编辑完成，并且永久免费。网址：） 2012 年 IPAM上针对研究生的“深度学习和特征学习夏季课程”（这个夏季课程的授课老师包括 Geoff Hinton 、Yann LeCun、吴恩达、Yoshua Bengio等众多深度学习专家，历时半个多月时间，网上有完整视频录像：） 2015年在加拿大蒙特利尔市举行了“深度学习夏季课程”（该课程的对象为：已经具备的机器学习基本知识的研究生、业界工程师和研究人员，授课量十分丰富。 推荐一些关于特定平台的使用教程，比如Torch、TensorFlow 和 Theano。 百度paddle开发团队介绍的深度学习基本概念：深度学习适用于大数据.其中查了两个概念:word embedding,过拟合 知乎上关于深度学习入门的讨论,列了很多资料，一天搞懂深度学习图解深度学习这个网页动画做的很好。 机器学习中文社区 还有斯坦福大学公开课，讲机器学习,CS231 再看Dawn Song团队的一篇论文时查的VAEGAN（生成对抗网络）的最新应用状况结合代码讲解VAE-GAN比较透彻的一篇文章 应该搜搜深度学习暑期学校或深度学习项目实践 教程Udacity 深度学习知乎231翻译没有博士学位，照样玩转TensorFlow深度学习零基础入门深度学习 对抗样本MNIST的对抗噪声TensorFlow生成对抗样本（微信） https://yq.aliyun.com/articles/149583?utm_content=m_27089]]></content>
+      <categories>
+        <category>科研</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[有趣的尝试]]></title>
+    <url>%2F2017%2F12%2F04%2F%E5%AF%84%E8%AF%AD%2F</url>
+    <content type="text"><![CDATA[寄语 “大部分人都是不好不坏，平庸乏味，跟一次性塑料饭盒一样。对这种长方形塑料，你连闻一闻的兴趣都不会有。大多数音乐、大部分书，都是。他们的刻度永远都打在一个最正确的正中间，永远不犯错、永远不会失败，最终出来一个光溜溜的东西。但美是不正确，美是错乱。”在《所有失败的鱼》里，绿妖这样说道。 明天就是新的一周，希望你也能开始一些全新而有趣的尝试。 晚安，好眠。：）]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>寄语</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[利用Wireshark任意获取QQ好友IP实施精准定位]]></title>
+    <url>%2F2017%2F12%2F04%2F%E5%88%A9%E7%94%A8wireshark%E8%BF%9B%E8%A1%8Cqq%E5%A5%BD%E5%8F%8B%E5%AE%9A%E4%BD%8D%2F</url>
+    <content type="text"><![CDATA[利用Wireshark任意获取QQ好友IP实施精准定位在freebuf上看到了利用Wireshark任意获取QQ好友IP实施精准定位这篇文章，就想试试。wireshark抓取数据包，然后查找。 1,选择搜索 “字符串”; 2,选择搜索 “分组详情”;3,填写搜索数据 “020048”; 当发现查找能自动定位到连接数据的时候就可以关闭电话邀请一个IP在线定位的网站openGPS.cn 进入页面后，选择高精度IP定位.wireshark功能使用的详细介绍 wireshark抓包常见提示含义解析 我是如何轻松拿到Google$1337现金奖励这篇文章主要是讲漏洞挖掘可适当关注Fofa、Shodan、Zoomeye等网络空间数据平台。]]></content>
+      <categories>
+        <category>数据分析</category>
+      </categories>
+      <tags>
+        <tag>wireshark</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[今夜 仰望星空]]></title>
     <url>%2F2017%2F12%2F04%2F%E4%BB%8A%E5%A4%9C%20%E4%BB%B0%E6%9C%9B%E6%98%9F%E7%A9%BA%2F</url>
     <content type="text"><![CDATA[一片朦胧的夕光衬着暗绿的楼影你从雾雨中显现带着浴后的红晕多少语言和往事都在微笑中消溶我们走进了夜海去打捞遗失的繁星]]></content>
@@ -684,37 +734,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[利用Wireshark任意获取QQ好友IP实施精准定位]]></title>
-    <url>%2F2017%2F12%2F04%2F%E5%88%A9%E7%94%A8wireshark%E8%BF%9B%E8%A1%8Cqq%E5%A5%BD%E5%8F%8B%E5%AE%9A%E4%BD%8D%2F</url>
-    <content type="text"><![CDATA[利用Wireshark任意获取QQ好友IP实施精准定位在freebuf上看到了利用Wireshark任意获取QQ好友IP实施精准定位这篇文章，就想试试。wireshark抓取数据包，然后查找。 1,选择搜索 “字符串”; 2,选择搜索 “分组详情”;3,填写搜索数据 “020048”; 当发现查找能自动定位到连接数据的时候就可以关闭电话邀请一个IP在线定位的网站openGPS.cn 进入页面后，选择高精度IP定位.wireshark功能使用的详细介绍 wireshark抓包常见提示含义解析 我是如何轻松拿到Google$1337现金奖励这篇文章主要是讲漏洞挖掘可适当关注Fofa、Shodan、Zoomeye等网络空间数据平台。]]></content>
-      <categories>
-        <category>数据分析</category>
-      </categories>
-      <tags>
-        <tag>wireshark</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[有趣的尝试]]></title>
-    <url>%2F2017%2F12%2F04%2F%E5%AF%84%E8%AF%AD%2F</url>
-    <content type="text"><![CDATA[寄语 “大部分人都是不好不坏，平庸乏味，跟一次性塑料饭盒一样。对这种长方形塑料，你连闻一闻的兴趣都不会有。大多数音乐、大部分书，都是。他们的刻度永远都打在一个最正确的正中间，永远不犯错、永远不会失败，最终出来一个光溜溜的东西。但美是不正确，美是错乱。”在《所有失败的鱼》里，绿妖这样说道。 明天就是新的一周，希望你也能开始一些全新而有趣的尝试。 晚安，好眠。：）]]></content>
+    <title><![CDATA[沉默的大多数]]></title>
+    <url>%2F2017%2F12%2F04%2F%E4%B8%80%E5%8F%A5%E8%AF%9D%2F</url>
+    <content type="text"><![CDATA[一句话 区别对待 方向 伙伴 理解 话语权 探索与重复 晚安，好眠。：）]]></content>
       <categories>
         <category>随笔</category>
       </categories>
       <tags>
-        <tag>寄语</tag>
-        <tag>心情</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[深度学习资料]]></title>
-    <url>%2F2017%2F12%2F04%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%2F</url>
-    <content type="text"><![CDATA[深度学习资料2015年5月《自然》上刊登的一篇概述性论文《深度学习》（Deep learning），由我自己、Yoshua Bengio 、Geoff Hinton共同撰写。 系统性的课本方面，由 Goodfellow、Bengio 和 Courville共同撰写的《深度学习》（Deep learning）（这个在网上有HTML版本，本书旨在帮助学生和从业人员入门机器学习，尤其是深度学习领域。HTML版本已经编辑完成，并且永久免费。网址：） 2012 年 IPAM上针对研究生的“深度学习和特征学习夏季课程”（这个夏季课程的授课老师包括 Geoff Hinton 、Yann LeCun、吴恩达、Yoshua Bengio等众多深度学习专家，历时半个多月时间，网上有完整视频录像：） 2015年在加拿大蒙特利尔市举行了“深度学习夏季课程”（该课程的对象为：已经具备的机器学习基本知识的研究生、业界工程师和研究人员，授课量十分丰富。 推荐一些关于特定平台的使用教程，比如Torch、TensorFlow 和 Theano。 百度paddle开发团队介绍的深度学习基本概念：深度学习适用于大数据.其中查了两个概念:word embedding,过拟合 知乎上关于深度学习入门的讨论,列了很多资料，一天搞懂深度学习图解深度学习这个网页动画做的很好。 机器学习中文社区 还有斯坦福大学公开课，讲机器学习,CS231 再看Dawn Song团队的一篇论文时查的VAEGAN（生成对抗网络）的最新应用状况结合代码讲解VAE-GAN比较透彻的一篇文章 应该搜搜深度学习暑期学校或深度学习项目实践 教程Udacity 深度学习知乎231翻译没有博士学位，照样玩转TensorFlow深度学习零基础入门深度学习 对抗样本MNIST的对抗噪声TensorFlow生成对抗样本（微信） https://yq.aliyun.com/articles/149583?utm_content=m_27089]]></content>
-      <categories>
-        <category>科研</category>
-      </categories>
-      <tags>
-        <tag>深度学习</tag>
+        <tag>一句话</tag>
       </tags>
   </entry>
   <entry>
@@ -740,17 +767,6 @@
       <tags>
         <tag>Hexo</tag>
         <tag>GitHub</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[沉默的大多数]]></title>
-    <url>%2F2017%2F12%2F04%2F%E4%B8%80%E5%8F%A5%E8%AF%9D%2F</url>
-    <content type="text"><![CDATA[一句话 区别对待 方向 伙伴 理解 话语权 探索与重复 晚安，好眠。：）]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>一句话</tag>
       </tags>
   </entry>
 </search>
