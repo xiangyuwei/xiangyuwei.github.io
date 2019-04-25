@@ -99,7 +99,7 @@
 <meta property="og:url" content="http://xiangyuwei.github.io/2019/01/23/ssh调试/index.html">
 <meta property="og:site_name" content="就和今天说早安">
 <meta property="og:description" content="检测是否已启动 ps -e | grep ssh 看到有ssh字样，说明已启动，如果没有就手动启动 /etc/init.d/ssh startvi /etc/ssh/sshd_config 没找到错误原因启动失败，systemctl status ssh.service 查找具体信息，发现Failed to start OpenBSD Secure Shell server 用sshd -T 查找">
-<meta property="og:updated_time" content="2019-01-23T12:29:00.283Z">
+<meta property="og:updated_time" content="2019-04-25T01:57:03.879Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="远程服务器链接失败调试">
 <meta name="twitter:description" content="检测是否已启动 ps -e | grep ssh 看到有ssh字样，说明已启动，如果没有就手动启动 /etc/init.d/ssh startvi /etc/ssh/sshd_config 没找到错误原因启动失败，systemctl status ssh.service 查找具体信息，发现Failed to start OpenBSD Secure Shell server 用sshd -T 查找">
@@ -457,8 +457,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-23T20:29:00+08:00">
-                2019-01-23
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-25T09:57:03+08:00">
+                2019-04-25
               </time>
             
           </span>
@@ -518,7 +518,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  151 字
+                  196 字
                 </span>
               
 
@@ -559,6 +559,7 @@ $(function() {
 <p>用sshd -T 查找错误原因，出现报错信息：<br>fatal: Missing privilege separation directory: /var/empty/sshd<br>检查/var/empty/sshd目录，发现确实不存在。手工创建此目录后，重新启动，发现sshd可以发起新的连接了。</p>
 <p><a href="https://serverfault.com/questions/798283/failed-to-start-openbsd-secure-shell-server" target="_blank" rel="external">Failed to start OpenBSD Secure Shell server [closed]</a></p>
 <p><a href="http://www.linuxyw.com/linux/yunweiguzhang/20130520/415.html" target="_blank" rel="external">ssh连接不上linux服务器（fatal: Missing privilege sepa</a></p>
+<h2 id="终端闪退"><a href="#终端闪退" class="headerlink" title="终端闪退"></a>终端闪退</h2><p>可能Host key verification failed.REMOTE HOST IDENTIFICATION HAS CHANGED! 服务器被重新安装过<br>windows:在本地机器上，不是服务器，删除 .ssh/known_hosts<br>linux:ssh-keygen -R ip</p>
 
       
     </div>
@@ -626,6 +627,10 @@ $(function() {
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/02/04/编程软件安装/" rel="prev" title="编程软件安装">
+                编程软件安装 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -671,8 +676,17 @@ $(function() {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/avatar.jpg"
@@ -687,7 +701,7 @@ $(function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">72</span>
+                <span class="site-state-item-count">74</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -825,6 +839,22 @@ $(function() {
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#终端闪退"><span class="nav-number">1.</span> <span class="nav-text">终端闪退</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
