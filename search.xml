@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[tensorflow 函数]]></title>
+    <url>%2F2019%2F07%2F22%2Ftensorflow%20%E5%87%BD%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[tf.sliceslice( input_, begin, size, name=None) 从张量中提取切片. 此操作从由begin指定位置开始的张量input中提取一个尺寸size的切片.切片size被表示为张量形状,其中size[i]是你想要分割的input的第i维的元素的数量.切片的起始位置(begin)表示为每个input维度的偏移量.换句话说,begin[i]是你想从中分割出来的input的“第i个维度”的偏移量.begin是基于零的···t = tf.constant([[[1, 1, 1], [2, 2, 2]], [[3, 3, 3], [4, 4, 4]], [[5, 5, 5], [6, 6, 6]]])tf.slice(t, [1, 0, 0], [1, 1, 3]) # [[[3, 3, 3]]]tf.slice(t, [1, 0, 0], [1, 2, 3]) # [[[3, 3, 3], # [4, 4, 4]]] tf.slice(t, [1, 0, 0], [2, 1, 3]) # [[[3, 3, 3]], # [[5, 5, 5]]] ··· shape可以理解为一个数组的维度。[5,5]就是个2维数组，第一维有5个值，第二维有5个值。[5, 5, 1, 32]就是个4维数组，第一维有5个值，第二维有5个值，第三维有1个值，第四维有32个值。数组维度可以理解为[],最外层有5个[]，每个[]里还有5个[]，以此类推 shape 表示是输出张量的形状 [5,5]应该是大小55的矩阵 [5,5,1,32]这个在卷积网络里应该是卷积核大小55,1个颜色通道，32个不同的卷积核 刚看TensorFlow， tf.layers.dense(inut,units=k)tf.layers.dense( input, units=k )会在内部自动生成一个权矩阵kernel和偏移项bias，各变量具体尺寸如下：对于尺寸为[m, n]的二维张量input, tf.layers.dense()会生成：尺寸为[n, k]的权矩阵kernel，和尺寸为[m, k]的偏移项bias。内部的计算过程为y=input * kernel + bias，输出值y的维度为[m, k]。 可以自己构造权重矩阵W和偏移矩阵b，利用矩阵乘法实现全连接层 matmul两个三维矩阵的乘法怎样计算呢?我通过实验发现，tensorflow把前面的维度当成是batch，对最后两维进行普通的矩阵乘法。也就是说，最后两维之前的维度，都需要相同 tf.shape根据shape如何变换矩阵。其实简单的想就是， reshape（t, shape） =&gt; reshape(t, [-1]) =&gt; reshape(t, shape) 首先将矩阵t变为一维矩阵，然后再对矩阵的形式更改就可以了 1234567891011121314151617181920212223242526272829# tensor &apos;t&apos; is [[[1, 1, 1],# [2, 2, 2]],# [[3, 3, 3],# [4, 4, 4]],# [[5, 5, 5],# [6, 6, 6]]]# tensor &apos;t&apos; has shape [3, 2, 3]# pass &apos;[-1]&apos; to flatten &apos;t&apos;reshape(t, [-1]) ==&gt; [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6]# -1 can also be used to infer the shape# -1 is inferred to be 9:reshape(t, [2, -1]) ==&gt; [[1, 1, 1, 2, 2, 2, 3, 3, 3], [4, 4, 4, 5, 5, 5, 6, 6, 6]]# -1 is inferred to be 2:reshape(t, [-1, 9]) ==&gt; [[1, 1, 1, 2, 2, 2, 3, 3, 3], [4, 4, 4, 5, 5, 5, 6, 6, 6]]# -1 is inferred to be 3:reshape(t, [ 2, -1, 3]) ==&gt; [[[1, 1, 1], [2, 2, 2], [3, 3, 3]], [[4, 4, 4], [5, 5, 5], [6, 6, 6]]]--------------------- 作者：lxg0807 来源：CSDN 原文：https://blog.csdn.net/lxg0807/article/details/53021859]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[概率图模型]]></title>
+    <url>%2F2019%2F06%2F24%2F%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%2F</url>
+    <content type="text"><![CDATA[概率图模型（PGM/probabilistic graphical model）是一种用于学习这些带有依赖（dependency）的模型的强大框架。 在探讨如何将概率图模型用于机器学习问题之前，我们需要先理解 PGM 框架。概率图模型（或简称图模型）在形式上是由图结构组成的。图的每个节点（node）都关联了一个随机变量，而图的边（edge）则被用于编码这些随机变量之间的关系。 在这个图中，每个结点表示一个变量，每个箭头表示一个条件概率，起点是条件概率中的条件，终点是该随机变量。比如，从a指向b的箭头表示p(b|a)，并称a是b的父结点参考文献：https://blog.csdn.net/isMarvellous/article/details/78828566]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>%2F2019%2F05%2F13%2F%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%E9%9A%8F%E7%AC%94%2F</url>
+    <content type="text"><![CDATA[卷积就是加权求和]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>%2F2019%2F05%2F11%2F%E7%A4%BE%E4%BA%A4%E5%8F%91%E7%8E%B0%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%93%2F</url>
+    <content type="text"><![CDATA[title:社交网络论文总结 Understanding the Facets of Homophily in Social Psycho-Sociological Network Communities这篇论文研究朋友，亲属，同事之间的同质性： 人工标注了关系类型 建立了四个模型预测年龄，性别，人格，values 最后还进行了链接预测和社区发现的比较，比较这三个不同群体中引入人格特征后社区发现的准确度 Metadata vs. Ground-truth: A Myth behind the Evolution of Community Detection Methods基于不同属性建立的社区与基于社区发现的社区进行比较，分析每种社区发现算法在链接预测，信息传播，病毒感染之间的区别 代码库：snap:https://github.com/snap-stanford/snap 图神经网络图网络主要解决的是AI对结构化数据的处理，而在动态数据、大规模数据、非结构化数据等领域，图网络的作为依旧有限 影响力distinguish the effect of peer influence and group conformity. Confluence: Conformity Influence in Large Social Networks从众效应群体，个人，同伴 根据历史行为预测下一行为 Social Influence Analysis in Large-scale Networks在不同主题下的社会影响力Topical Affinity Propagation (TAP) 应用于专家发现相似的节点，哪一个节点对另一个节点有较强的影响 ##Mining Topic-level Influence in Heterogeneous Networks ##Topic-Level Opinion Influence Model (TOIM): An Investigation Using Tencent Microblogging 问题网络表示的作用聚类的作用 GraphSAGEWeisfeiler-Lehman Isomorphism Test（图同构算法）对于不带标签的图，初始的时候，两个图的全部节点赋值1（或以度为标签），然后做多轮wl，出现节点ID和各ID出现次数不一致的情况就认为不是Isomorphism 图注意网络通俗易懂！使用Excel和TF实现Transformerhttps://mp.weixin.qq.com/s/3_dK289DPREI0KNj0NaR-A]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>%2F2019%2F05%2F06%2F%E6%96%B0%E6%96%87%E6%A1%A3%2F</url>
+    <content type="text"><![CDATA[title: 网络表示学习论文 transNET: 边的关系是两个合作者摘要的关键词 研究目的：为什么相互关注 兴趣节点：位置节点：内容节点：内容风格出行方式来源内容主题 工作量，总结，突出问题数据集大小对比实验参考文献（新）格式]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[igraph 安装]]></title>
+    <url>%2F2019%2F04%2F25%2Figraph%2F</url>
+    <content type="text"><![CDATA[windows 安装在非官官方库找到对应的python-igraph pip install python_igraph-0.7.1.post6-cp36-none-win_amd64.whl python-igraph在绘图的时候依赖pycairo模块 linuxpip3 install python_igraph 下载到了user/.local/python3.5,原因未知 失败方式：sudo add-apt-repository ppa:igraph/ppasudo apt-get update # update your package databasesudo apt-get install python-igraph pycairopip install pycairo -i https://pypi.tuna.tsinghua.edu.cn/simple sudo pip install cairocffi -i https://pypi.tuna.tsinghua.edu.cn/simple 查找whereisdpkg -L python-igraphpip3 show python-igraph]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[tensorflow1.11 + cuda 9.0+ cudnn 7.0]]></title>
+    <url>%2F2019%2F04%2F25%2Ftensorflow%20%E5%AE%89%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[要查看tensorflow 与cuda版本的对应关系 查看cuda版本cat /usr/local/cuda/version.txt cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2 nvcc -V 下载cuda,cudnncudnn需要登陆下载 library 版本 cuda网址，下载runfil(local)版本 安装cudasudo chmod +x cuda_9.0.176_384.81_linux.run # 为 cuda_9.0.176_384.81_linux.run 添加可执行权限 ./cuda_9.0.176_384.81_linux.run # 安装 cuda_9.0.176_384.81_linux.run Install NVIDIA Accelerated Graphics Driver for Linux-x86_64 384.81?(y)es/(n)o/(q)uit: n # 如果已经安装过了，则不需要安装显卡驱动 cudnn1234567sudo tar -xzvf cudnn-8.0-linux-x64-v5.1.tgzsudo cp cuda/include/cudnn.h /usr/local/cuda/includesudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn* sudo vim ~/.bashrcexport PATH=/usr/local/cuda/bin${PATH:+:${PATH}} export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}} export CUDA_HOME=/usr/local/cudasource ~/.bashrc 使之生效 安装tensorflowconda create -n name python=3.6pip install tensorflow-gpu==1.11 -i https://pypi.tuna.tsinghua.edu.cn/simple 参考：https://blog.csdn.net/uhauha2929/article/details/83448909 https://www.cnblogs.com/jins-note/p/9598178.htmltensorflow指定版本的安装及升级到最新版：https://blog.csdn.net/leitouguan8655/article/details/82897525]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[论文写作]]></title>
     <url>%2F2019%2F03%2F22%2F%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C%2F</url>
     <content type="text"><![CDATA[IntroductionSome conventional community detection methods may have limited performance becausethey merely focus on the networks’ topological structure In order to compensate for the possible deficiencies of utilizingFor instance,MoreoverAdditionallyindicatessuch assumption is not sufficientEspeciallyMore importantly,FurthermoreIn fact,in particularillustratedemonstratewherereasSinceIn the meanwhilehencethusrespectively Extensive expeperience conducted on a large dataset motiveThe concept of emotional intelligence (EI) has drawn a great amount of scholarly interest in recent years; however, attempts to measure individual differences in this ability remain controversial. There is less research on the EI ability of Jordanian nurses, and the present study was undertaken to address this gap 介绍结构The paper is structured as follows. In Sect.2we discuss the basic conceptsof information-theoretic bounded rationality, sampled-based interpretations ofbounded rationality in the context of Markov Chain Monte Carlo (MCMC),and the basic concepts of Variational Autoencoders. In Sect.3. we present theproposed decision-making model by combining sample-based decision-makingwith concurrent learning of priors parameterized by Variational Autoencoders.In Sect.4we evaluate the model with toy examples. In Sect.5we discuss ourresults. 贡献Understanding the structure and analyzing properties of graphs are hence paramount to developing insights into the physical systems. ##方法 公式, the expectationthe solution of s is given by the following set of equationswhere A j = A ji = 1 when there is an edge between node i and j , and otherwise =0where Xiris defined as the propensity that node i belongs to community r.utilizesrepresentsTherefore, we can formulate another objective function asX corresponds to the topological structureWe denote a density on X by p(X), 实验Based on the models derived above, in this section, we introduce a simplified unified model that integrates topology as wellas content to conduct a pre-experiment about the mismatch effect we designed thefollowing pre-experiment to illustrate the different influences ofsemantic information with different trade-offs between topologyand content. In the pre-experiment, we applied the unified model (5) to two real network datasetstake the following two steps in turns. 实验结果We observe that HOPE, LLE and SDNE achieve high MAP values. Furthermore, HOPE can predict top 5 links with perfect accuracy. A paper showcasing the results to demonstrate our approach we evaluate two scenarios. Our results indicate that using to illustrate the differences in efficiency between the single prior agent andthe multi-prior agents, we plotted in Fig.4 Furthermore our results indicate that the multi-prior system generally outperforms the single-prior system in terms of utility. We executed above initialization with regard to the result of Facebook inFig. 1(b) reflects the fact thatwe can still observeAs shown in Fig. 2, for both ASCD-ARC and ASCD-NMI methods,the values of the objective function converge fast straight from the beginning and ASCD-ARC converges faster than ASCD-NMI which are shown in Fig. 2 总结In this study we ‘implemented bounded rational decision makers with adap-tive priors. We achieved this with Variational Autoencoder priors. 因为Since 并且AccordinglyMoreover 然而whileNevertheless hencerespectively]]></content>
@@ -459,16 +494,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[jsma 报错集]]></title>
-    <url>%2F2017%2F12%2F04%2F%E9%A1%B9%E7%9B%AE%E6%8A%A5%E9%94%99%2F</url>
-    <content type="text"><![CDATA[UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe9 in position 0: ordinal not in range(128)Python在进行编码方式之间的转换时，会将 unicode 作为“中间编码”，但 unicode 最大只有 128 那么长，所以这里当尝试将 ascii 编码字符串转换成”中间编码” unicode 时由于超出了其范围，就报出了如上错误。我们在/usr/lib/python2.7/site-packages/目录下添加一个sitecustomize.py文件，内容如下： import syssys.setdefaultencoding(‘utf-8’) 忘了操作什么什么之后报的错，记起后补上…… 参考博客 OSError: [Errno 2] No such file or directory１．代码上传服务器后，空文件没有上传，导致自己一直以为存在文件夹，不明白为什么错误，以后应仔细检查一遍２．在路径前加“./” raise IOError, ‘Not a gzipped file’服务器中代码运行报错，不能下载MNIST数据集, 1.首先在当前项目下新建 MNIST_data2.https://gitee.com/Gssol/tensorflow_mnist_Data/attach_files 从该目录将4个附件全部下载 将下载的四个文件(不用解压)直接放到MNIST_data文件夹里面4.就可以调用该数据集了参考博客 ValueError: Parent directory of trained_variables.ckpt doesn’t exist, can’t save.模型存储路径在本地没有加ckpt,可以运行，但在服务器上却必须加，原因不明 ##mport sklearn.model_selection 出错ImportError: No module named model_selectionconda list 查看包安装列表conda update scikit-learn 命令更新sklearn的版本 conda install Matlotlib、Scikit-Learn注意再激活tensorflow情况下查看某个指定环境的已安装包conda list -n python27查找package信息conda search numpy 安装packageconda install -n python27 numpy更新packageconda update -n python27 numpy 删除packageconda remove -n python27 numpy SCP: No such file or directoryscp就是secure copy，一个在linux下用来进行远程拷贝文件的命令。符号软链接，应该写真正指向的地址，不明白这一点，所以浪费了很多时间 If you are logged into the local machine, you would use scp like this: scp /home/username/some.xml root@remote.machine.ip.address:/path/to/directory/ If you are logged into the remote machine (as in the OP), use scp like this: scp username@local.machine.ip.address:/home/username/some.xml /path/to/directory Substitute the IP addresses as directed in the commands./的问题还没弄明白 权限问题，上层目录也就是home目录被别人误改了权限，处理xxuser，其他用户都没了权限 ##anaconda search -t conda tensorflow 服务器上配置tensorflow 环境安装anocanda2 后，安装ＧＰＵ版本GPU安装只能用pip,conda只能安装cpu版本tensorflow版本简单 pip install tensorflow-gpu==1.1.0pip3 install tensorflow==1.1.0 python3.6 cpu版本 CUDA是NVIDIA 推出的使用GPU 资源进行计算的SDK ，CUDA 里面集成了显卡驱动,GPU加速首先就是安装CUDA，然而CUDA只支持NVIDIA显卡,因为CUDA软件就是他家出的注意GPU版本的不支持CUDNNV5，必须要V5.1以上GPU版本需要安装CUDA和ｃｕＤＮＮ,注意版本问题安装CUDA,参考一下网址：博客http://blog.csdn.net/binglel/article/details/70230276http://blog.csdn.net/stronger19890215/article/details/71411981?locationNum=8&amp;fps=1http://blog.csdn.net/jteng/article/details/52975247http://blog.csdn.net/zhaoyu106/article/details/52793183mingw CUDA安装和测试 检查自己的GPU是否是CUDA-capable在终端中输入： lspci | grep -i nvidia 安装qt createrhttps://www.ics.com/blog/getting-started-qt-and-qt-creator-linux sudo apt-get install qtcreator sudo apt-get install build-essential libgl1-mesa-dev cd ~/Downloads$ chmod a+x qt-unified-linux-x64-2.0.3-1-online.run apt-get install qt4-designer下载后找不到在哪儿运行 配置PyCharm1）打开PyCharm，执行快捷键ctrl+alt+s打开设置界面，输入tool，点开external tools，配置qtdesigner。 点击左上角的加号，作如下配置： 在Qt Designer的设置中，Program选择PyQt安装目录中 designer.exe 的路径 Work directory 使用变量 $FileDir$设置“PyUIC” – 这个主要是用来将 Qt界面 转换成 py代码 在PyUIC的设置中，其他的都差不多，Program 写入Python的地址，Parameters写入 -m PyQt5.uic.pyuic $FileName$ -o $FileNameWithoutExtension$.py 把上面的Python路径修改成自己的即可！ Work directory 使用变量 $FileDir$ 转化py代码 creater集成了pyqt desiner,sudo apt-get install qttools5-dev-tools这个因为安装了creater,暂时没试 Python中TypeError: unbound method 问题在运行时报错：TypeError: unbound method onlyCellValue() must be called with dictionary instance as first argument (got str instance instead) 后经在网上查看，发现时由于调用其他类时，未在后面添加括号，添加括号后，运行正常。这是由于未添加括号情况下，未被认为是类的实例，故报此错]]></content>
+    <title><![CDATA[自动备份Hexo博客源文件]]></title>
+    <url>%2F2017%2F12%2F04%2F%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BDhexo%2F</url>
+    <content type="text"><![CDATA[原文出自：http://zhujiegao.com/2015/12/06/automatic-backup/ 先安装git和node 原理通过通过监听Hexo的其它事件来完成自动执行Git命令完成自动备份。通过查阅Hexo文档，找到了Hexo的主要事件，见下表： 事件名 事件发生时间 deployBefore 在部署完成前发布 deployAfter 在部署成功后发布 exit 在 Hexo 结束前发布 generateBefore 在静态文件生成前发布 generateAfter 在静态文件生成后发布 new 在文章文件建立后发布 实现 在Github下创建新的仓库，取名hexo 进入本地hexo文件夹，执行以下命令 123456git initgit remote add origin git@github.com:XXX/XXX.gitgit pull -u origin mastergit add .git commit -m &quot;添加hexo源码文件备份&quot;git pull -u origin master 3.安装shelljs模块要实现这个自动备份功能，需要依赖Node.js的一个shelljs模块,该模块重新包装了child_process,调用系统命令更加的方便。该模块需要安装后使用 1npm install --save shelljs 4 自动备份脚本 待到模块安装完成，在Hexo根目录的scripts文件夹下新建一个js文件，文件名随意取。 ps: 如果没有scripts目录，请新建一个。 然后在脚本中，写入以下内容： 123456789101112131415161718192021222324252627282930require(&apos;shelljs/global&apos;);try &#123; hexo.on(&apos;deployAfter&apos;, function() &#123;//当deploy完成后执行备份 run(); &#125;);&#125; catch (e) &#123; console.log(&quot;产生了一个错误&lt;(￣3￣)&gt; !，错误详情为：&quot; + e.toString());&#125;function run() &#123; if (!which(&apos;git&apos;)) &#123; echo(&apos;Sorry, this script requires git&apos;); exit(1); &#125; else &#123; echo(&quot;======================Auto Backup Begin===========================&quot;); cd(&apos;D:/hexo&apos;); //此处修改为Hexo根目录路径 if (exec(&apos;git add --all&apos;).code !== 0) &#123; echo(&apos;Error: Git add failed&apos;); exit(1); &#125; if (exec(&apos;git commit -am &quot;Form auto backup script\&apos;s commit&quot;&apos;).code !== 0) &#123; echo(&apos;Error: Git commit failed&apos;); exit(1); &#125; if (exec(&apos;git push origin master&apos;).code !== 0) &#123; echo(&apos;Error: Git push failed&apos;); exit(1); &#125; echo(&quot;==================Auto Backup Complete============================&quot;) &#125;&#125;]]></content>
       <categories>
-        <category>深度学习</category>
-        <category>编程</category>
+        <category>Web</category>
       </categories>
       <tags>
-        <tag>对抗样本</tag>
-        <tag>深度学习</tag>
+        <tag>Hexo</tag>
+        <tag>GitHub</tag>
       </tags>
   </entry>
   <entry>
@@ -484,15 +518,16 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[自动备份Hexo博客源文件]]></title>
-    <url>%2F2017%2F12%2F04%2F%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BDhexo%2F</url>
-    <content type="text"><![CDATA[原文出自：http://zhujiegao.com/2015/12/06/automatic-backup/ 先安装git和node 原理通过通过监听Hexo的其它事件来完成自动执行Git命令完成自动备份。通过查阅Hexo文档，找到了Hexo的主要事件，见下表： 事件名 事件发生时间 deployBefore 在部署完成前发布 deployAfter 在部署成功后发布 exit 在 Hexo 结束前发布 generateBefore 在静态文件生成前发布 generateAfter 在静态文件生成后发布 new 在文章文件建立后发布 实现 在Github下创建新的仓库，取名hexo 进入本地hexo文件夹，执行以下命令 123456git initgit remote add origin git@github.com:XXX/XXX.gitgit pull -u origin mastergit add .git commit -m &quot;添加hexo源码文件备份&quot;git pull -u origin master 3.安装shelljs模块要实现这个自动备份功能，需要依赖Node.js的一个shelljs模块,该模块重新包装了child_process,调用系统命令更加的方便。该模块需要安装后使用 1npm install --save shelljs 4 自动备份脚本 待到模块安装完成，在Hexo根目录的scripts文件夹下新建一个js文件，文件名随意取。 ps: 如果没有scripts目录，请新建一个。 然后在脚本中，写入以下内容： 123456789101112131415161718192021222324252627282930require(&apos;shelljs/global&apos;);try &#123; hexo.on(&apos;deployAfter&apos;, function() &#123;//当deploy完成后执行备份 run(); &#125;);&#125; catch (e) &#123; console.log(&quot;产生了一个错误&lt;(￣3￣)&gt; !，错误详情为：&quot; + e.toString());&#125;function run() &#123; if (!which(&apos;git&apos;)) &#123; echo(&apos;Sorry, this script requires git&apos;); exit(1); &#125; else &#123; echo(&quot;======================Auto Backup Begin===========================&quot;); cd(&apos;D:/hexo&apos;); //此处修改为Hexo根目录路径 if (exec(&apos;git add --all&apos;).code !== 0) &#123; echo(&apos;Error: Git add failed&apos;); exit(1); &#125; if (exec(&apos;git commit -am &quot;Form auto backup script\&apos;s commit&quot;&apos;).code !== 0) &#123; echo(&apos;Error: Git commit failed&apos;); exit(1); &#125; if (exec(&apos;git push origin master&apos;).code !== 0) &#123; echo(&apos;Error: Git push failed&apos;); exit(1); &#125; echo(&quot;==================Auto Backup Complete============================&quot;) &#125;&#125;]]></content>
+    <title><![CDATA[jsma 报错集]]></title>
+    <url>%2F2017%2F12%2F04%2F%E9%A1%B9%E7%9B%AE%E6%8A%A5%E9%94%99%2F</url>
+    <content type="text"><![CDATA[UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe9 in position 0: ordinal not in range(128)Python在进行编码方式之间的转换时，会将 unicode 作为“中间编码”，但 unicode 最大只有 128 那么长，所以这里当尝试将 ascii 编码字符串转换成”中间编码” unicode 时由于超出了其范围，就报出了如上错误。我们在/usr/lib/python2.7/site-packages/目录下添加一个sitecustomize.py文件，内容如下： import syssys.setdefaultencoding(‘utf-8’) 忘了操作什么什么之后报的错，记起后补上…… 参考博客 OSError: [Errno 2] No such file or directory１．代码上传服务器后，空文件没有上传，导致自己一直以为存在文件夹，不明白为什么错误，以后应仔细检查一遍２．在路径前加“./” raise IOError, ‘Not a gzipped file’服务器中代码运行报错，不能下载MNIST数据集, 1.首先在当前项目下新建 MNIST_data2.https://gitee.com/Gssol/tensorflow_mnist_Data/attach_files 从该目录将4个附件全部下载 将下载的四个文件(不用解压)直接放到MNIST_data文件夹里面4.就可以调用该数据集了参考博客 ValueError: Parent directory of trained_variables.ckpt doesn’t exist, can’t save.模型存储路径在本地没有加ckpt,可以运行，但在服务器上却必须加，原因不明 ##mport sklearn.model_selection 出错ImportError: No module named model_selectionconda list 查看包安装列表conda update scikit-learn 命令更新sklearn的版本 conda install Matlotlib、Scikit-Learn注意再激活tensorflow情况下查看某个指定环境的已安装包conda list -n python27查找package信息conda search numpy 安装packageconda install -n python27 numpy更新packageconda update -n python27 numpy 删除packageconda remove -n python27 numpy SCP: No such file or directoryscp就是secure copy，一个在linux下用来进行远程拷贝文件的命令。符号软链接，应该写真正指向的地址，不明白这一点，所以浪费了很多时间 If you are logged into the local machine, you would use scp like this: scp /home/username/some.xml root@remote.machine.ip.address:/path/to/directory/ If you are logged into the remote machine (as in the OP), use scp like this: scp username@local.machine.ip.address:/home/username/some.xml /path/to/directory Substitute the IP addresses as directed in the commands./的问题还没弄明白 权限问题，上层目录也就是home目录被别人误改了权限，处理xxuser，其他用户都没了权限 ##anaconda search -t conda tensorflow 服务器上配置tensorflow 环境安装anocanda2 后，安装ＧＰＵ版本GPU安装只能用pip,conda只能安装cpu版本tensorflow版本简单 pip install tensorflow-gpu==1.1.0pip3 install tensorflow==1.1.0 python3.6 cpu版本 CUDA是NVIDIA 推出的使用GPU 资源进行计算的SDK ，CUDA 里面集成了显卡驱动,GPU加速首先就是安装CUDA，然而CUDA只支持NVIDIA显卡,因为CUDA软件就是他家出的注意GPU版本的不支持CUDNNV5，必须要V5.1以上GPU版本需要安装CUDA和ｃｕＤＮＮ,注意版本问题安装CUDA,参考一下网址：博客http://blog.csdn.net/binglel/article/details/70230276http://blog.csdn.net/stronger19890215/article/details/71411981?locationNum=8&amp;fps=1http://blog.csdn.net/jteng/article/details/52975247http://blog.csdn.net/zhaoyu106/article/details/52793183mingw CUDA安装和测试 检查自己的GPU是否是CUDA-capable在终端中输入： lspci | grep -i nvidia 安装qt createrhttps://www.ics.com/blog/getting-started-qt-and-qt-creator-linux sudo apt-get install qtcreator sudo apt-get install build-essential libgl1-mesa-dev cd ~/Downloads$ chmod a+x qt-unified-linux-x64-2.0.3-1-online.run apt-get install qt4-designer下载后找不到在哪儿运行 配置PyCharm1）打开PyCharm，执行快捷键ctrl+alt+s打开设置界面，输入tool，点开external tools，配置qtdesigner。 点击左上角的加号，作如下配置： 在Qt Designer的设置中，Program选择PyQt安装目录中 designer.exe 的路径 Work directory 使用变量 $FileDir$设置“PyUIC” – 这个主要是用来将 Qt界面 转换成 py代码 在PyUIC的设置中，其他的都差不多，Program 写入Python的地址，Parameters写入 -m PyQt5.uic.pyuic $FileName$ -o $FileNameWithoutExtension$.py 把上面的Python路径修改成自己的即可！ Work directory 使用变量 $FileDir$ 转化py代码 creater集成了pyqt desiner,sudo apt-get install qttools5-dev-tools这个因为安装了creater,暂时没试 Python中TypeError: unbound method 问题在运行时报错：TypeError: unbound method onlyCellValue() must be called with dictionary instance as first argument (got str instance instead) 后经在网上查看，发现时由于调用其他类时，未在后面添加括号，添加括号后，运行正常。这是由于未添加括号情况下，未被认为是类的实例，故报此错]]></content>
       <categories>
-        <category>Web</category>
+        <category>深度学习</category>
+        <category>编程</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
-        <tag>GitHub</tag>
+        <tag>对抗样本</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -508,14 +543,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[当难过时]]></title>
-    <url>%2F2017%2F12%2F04%2F%E5%BD%93%E9%9A%BE%E8%BF%87%E6%97%B6%2F</url>
-    <content type="text"><![CDATA[一屋两人三餐四季]]></content>
+    <title><![CDATA[深度学习对抗攻击]]></title>
+    <url>%2F2017%2F12%2F04%2F%E5%AF%B9%E6%8A%97%E6%A0%B7%E6%9C%AC%E8%AE%BA%E6%96%87%E9%9B%86%2F</url>
+    <content type="text"><![CDATA[深度学习１、2014-ｅxlaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”[ArXiv][code][code] 提出对抗样本不是因为非线性，而是因为模型在高维空间中的线性性。FSM 方法是计算关于x的导数，然后ｓｉｇｎ函数取值进行扰动,在$$ L{无穷} $$距离度量下。$$ X^{adv}＝Ｘ＋ \varepsilon \cdot sign (\bigtriangledown \ J(X,y{true})) $$梯度可以通过反向传播算法（backpropagation）计算获得。 ２、2015-DeepFool: a simple and accurate method to fool deep neural networks [ArXiv][code]基于$L_2$距离度量的非目标攻击$min ||D(x)-X||2subject\ to\ argmaxf(D(X) \neq\ y{true})$ ３、2015-The Limitations of Deep Learning in Adversarial Settings[ArXiv][code]通过计算对抗显著图，寻找对输出影响最大的两个输入，每次迭代修改两个像素点，直到达到目标图像。L0 distance metric ４、2015-Distributional Smoothing with Virtual Adversarial Training [ArXiv][code]KL散度 ５、2016-Exploring the space of adversarial images[ArXiv][code]-lua６、2016-Adversarial Machine Learning at Scale[ArXiv][code]９、2016-Adversarial examples in the physical world [ArXiv][code][code]通过对对抗样本拍照片，改变了某些像素来测试对抗样本的有效性拓展FGSM,多次应用，每次一小步,中间结果被$\varepsilon$截断$X0^{adv}=X \X{N+1}^{adv}=Clip{X,\varepsilon}{X{N}^{adv}+\alpha\cdot sign (\bigtriangledown J(X,y_{true}))}$ 10、2016-Simple Black-Box Adversarial Perturbations for Deep Networks[ArXiv]数据集：CIFAR10, MNIST, SVHN, STL10, and ImageNet1000 datasets 11、2017-Towards Evaluating the Robustness of Neural Networks[ArXiv][code][code]It is noteworthy that the original defensive distillation is broken by Carlini and Wagner’s attack$min ||1/2(tanh(W)+1)-x)||^2_2+c\cdot l(1/2(tanh(W)+1))$ 12、2017-Fast Feature Fool: A data independent approach to universal adversarial perturbations[ArXiv][code]13、2017-Towards Deep Learning Models Resistant to Adversarial Attacks[ArXiv][code]14、2017-Ensemble Adversarial Training: Attacks and Defenses[ArXiv][code]15、S. Zagoruyko. Are deep learning algorithms easily hackable?[code]16、2015-Deep neural networks are easily fooled: High confidence predictions for unrecognizable images[ArXiv]16、2016-Transferability in Machine Learning: from Phenomena to Black-Box Attacks using Adversarial Samples[ArXiv]17、2013-Intriguing properties of neural networkss[ArXiv]通过在$Ｌ_２$距离度量下Ｌ—BFGS解决优化问题来生成对抗样本。 $min\ c|r|+loss_f(x+r,l)\ s.t\ x+r \subset[0,1]^m$ L-BFGS attack and DeepFool attacks have been implemented in the Foolbox[code] 2017-Robust Physical-World Attacks on Deep Learning Models Evasion attacks against machine learning at test time adversary goal（攻击目标）: 分为两种目标，一是能够分类为好的即可（在垃圾邮件检测中，指分类为好的邮件）。如果有一个函数g定义在样本空间中X，g(x)&lt;0表示分类为好，那么敌人的目标就是设计一个样本x，让g(x)&lt;0。这种攻击很容易破解，只要调整分类界限即可（这里指g(x)=0这条边界）。所以，其实攻击者还有一个更好的目标是让g(x)尽可能小 Universal adversarial perturbations[ArXiv][code]黑盒攻击2017-10-WHITENING BLACK-BOX NEURAL NETWORKS[ArXiv]窃取隐私数据然后进行白盒攻击 ７、2016-Delving into Transferable Adversarial Examples and Black-box Attacks [ArXiv][code]作者还使用了同样的实验方法测试了定向性对抗性攻击在目标模型的效果。结果表明定向类标记的传递性差了很多，只有小于等于4%的对抗性图像在源、目标机器学习模型中都识别出相同的定向标记。基于此，作者提出了ensemble方法。它是以多个深度神经网络模型为基础构造对抗图片，即将图4中单个已知机器学习模型替换成多个不同的已知机器学习模型，并共同产生一个对抗性图像。在实验设计中，作者对5个不同的深度神经网络模型一一实施了黑盒子攻击。在对每一个模型攻击的时候，作者假设已知其余的4个模型，并用集合的方式作白盒子对抗图形的构造。同样的，作者分别使用基于优化的攻击手段，和基于Fast Gradient的手段构造对抗性图片。构造图片依然使用的是Adam优化器。在算法经过100次的迭代对权重向量的更新，loss function得以汇聚。作者发现有许多攻击者预先设定的标记也得到了传递。详细结果参见表2。格子(i,j)代表用除了模型i之外的4个其他算法生成的对抗图片，用模型j来验证得到的定向标记的准确值。可以看出，当目标模型包含在已知模型集合中，定向类标记的传递性都在60%以上。即使目标模型不在已知模型集合中，定向标记的准确值也在30%以上。 ８、2016-Practical Black-Box Attacks against Machine Learning[ArXiv][code]敌手不需要知道目标模型的结构和参数，只能够根据输入得到输出。由于对抗样本的迁移性，可以先构建替代模型训练对抗样本再在目标模型上测试生成的对抗样本。替代模型的结构和目标模型结构要能够处理相同的任务。 Machine Learning as an Adversarial Service:Learning Black-Box Adversarial Examples一种直接攻击目标黑盒神经网络的方法MNIST数据集，CIFAR-10图片数据集应用在物理世界中的目的模型——Amazon Machine Learning Prediction Universal adversarial perturbationsGenerating Adversarial Malware Examples for Black-Box Attacks Based on GAN利用生成对抗网络原理生成对抗样本的方法文中称之为MalGAN。其中，GAN 网络中的判别器是一个人为构建的替代探测器网络。生成器则是目的网络，能生成恶意软件对抗样本。 隐私问题1、Hacking Smart Machines with Smarter Ones : How to Extract Meaningful Data from Machine Learning Classifiers[ArXiv]２、Membership Inference Attacks Against Machine Learning Models[ArXiv]3、Stealing machine learning models via prediction apis4、An end-to-end case study of personal- ized warfarin dosingOn the Protection of Private Information in Machine Learning Systems:Two Recent Approaches其他机器学习技术1、Vulnerability of Deep Reinforcement Learning to Policy Induction Attacks[ArXiv]2、Tactics of Adversarial Attack on Deep Reinforcement Learning Agents[ArXiv]3、Adversarial examples for generative models[ArXiv]4、Adversarial Attacks on Neural Network Policies防御技术1、2016-Distillation as a Defense to Adversarial Perturbations Against Deep Neural Networks[ArXiv]机器学习1、2006-Can machine learning be secure?[paper]2、2011-Adversarial machine learning3、Take two software updates and see me in the morning: The Case for Software Security Evaluations of Medical Devices [paper]4、Adversarial AI5、2017-机器学习安全性问题及其防御技术研究综述6、Concrete Problems in AI Safety[ArXiv]7、Towards the Science of Security and Privacy in Machine Learning[ArXiv]8、Stealing Machine Learning Models via Prediction APIs[paper][code]GAN和对抗样本1、2017-APE-GAN : Adversarial Perturbation Elimination with GAN[ArXiv][code]数据集：including MNIST, CIFAR10 and ImageNet 生成网络将对抗样本还原为真实图片 2、2017-Generative Adversarial Trainer : Defense to Adversarial Perturbations with GAN[ArXiv]增强判别器的识别能力 ３、2017-Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN[ArXiv]GAN也可以产生针对恶意 软件分类器的对抗样本在提取的恶意软件特征上增加噪声使分类器误分类。 ４、2017-Adversarial examples for generative models[ArXiv]5、Generative Poisoning Attack Method Against Neural Networks[ArXiv]提出了 一种更有效的产生对抗样本的方法，它采用生成对 抗网络（GAN）中生成模型（Generative Model）和 判别模型（Discriminative model）的思想，即先用生成模型产生候选的对抗样本，再用判别模型进行 筛选最优对抗样本。 博士论文ON THE INTEGRITY OF DEEP LEARNING SYSTEMS IN ADVERSARIAL SETTINGSSegmentation &amp; Object DetectionAdversarial Examples for Semantic Segmentation and Object Detection Visual Question Answering (VQA）Can you fool AI with adversarial examples on a visual Turing test? 应用场景１．Accessorize to a crime: Real and stealthy attacks on state-of-the-art face recognition２．Robust Physical-World Attacks on Machine Learning Models 软件及应用1.AdversariaLib (includes implementation of evasion attacks from .2.AdLib. A python library with a scikit-style interface which includes implementations of a number of published evasion attacks and defenses.3.AlfaSVMLib. Adversarial Label Flip Attacks against Support Vector Machines.4.Poisoning Attacks against Support Vector Machines, and Attacks against Clustering Algorithms5.deep-pwning Metasploit for deep learning which currently has attacks on deep neural networks using Tensorflow6.Cleverhans is a great TensorFlow-based library for adversarial attacks and defences: https://github.com/tensorflow/cleverhans7.FoolBox – another collection of attacks that you can use with a framework of your preferencehttps://foolbox.readthedocs.io/en/latest/8.EvadeML - Machine Learning in the Presence of Adversaries9.Adversarial Machine Learning - PRA Lab]]></content>
       <categories>
-        <category>随笔</category>
+        <category>深度学习</category>
       </categories>
       <tags>
-        <tag>心情</tag>
+        <tag>对抗样本</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -531,17 +567,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[书单]]></title>
-    <url>%2F2017%2F12%2F04%2F%E4%B9%A6%E5%8D%95%2F</url>
-    <content type="text"><![CDATA[书单：理性乐观派]]></content>
-      <categories>
-        <category>读书</category>
-      </categories>
-      <tags>
-        <tag>书籍</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[正则化]]></title>
     <url>%2F2017%2F12%2F04%2F%E6%AD%A3%E5%88%99%E5%8C%96%2F</url>
     <content type="text"><![CDATA[正则化是为了解决过拟合问题。在Andrew Ng的机器学习视频中有提到（详见http://www.cnblogs.com/jianxinzhou/p/4083921.html）。 正则化产生了稀疏性（Sparsity），减少了特征向量个数，降低了模型的复杂度。 例如一回归问题，假设回归模型为：y=w1x1+w2x2+…+w1000*x1000+b 通过学习，如果最后学习到的w就只有很少的非零元素，大部分W为0或接近于0，例如只有5个非零的wi，那可以认为y之于这5个（因素）xi有关系，这更有利于人们对问题的认识和分析，抓住影响问题的主要方面（因素）更符合人们的认知习惯。(1)L0范数 L0范数是指向量中非零元素的个数。L0正则化的值是模型中非零参数的个数，L0正则化可以实现模型参数的的稀疏化 （2）L1范数 L1范数是指向量中各个元素绝对值之和，又叫“稀疏规则算子”（Lasso regularization）。 L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩罚』是指对损失函数中的某些参数做一些限制。知乎中陶轻松的答案指出正则项使W向量中项的个数最小化，从而防止过拟合]]></content>
@@ -554,6 +579,28 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[书单]]></title>
+    <url>%2F2017%2F12%2F04%2F%E4%B9%A6%E5%8D%95%2F</url>
+    <content type="text"><![CDATA[书单：理性乐观派]]></content>
+      <categories>
+        <category>读书</category>
+      </categories>
+      <tags>
+        <tag>书籍</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[当难过时]]></title>
+    <url>%2F2017%2F12%2F04%2F%E5%BD%93%E9%9A%BE%E8%BF%87%E6%97%B6%2F</url>
+    <content type="text"><![CDATA[一屋两人三餐四季]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[斯人若彩虹，遇上方知有]]></title>
     <url>%2F2017%2F12%2F04%2F%E4%B8%83%E5%A4%95%2F</url>
     <content type="text"><![CDATA[我们分担寒潮、风雷、霹雳；我们共享雾霭流岚、虹霓，仿佛永远分离，却又终身相依]]></content>
@@ -563,18 +610,6 @@
       <tags>
         <tag>七夕</tag>
         <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[深度学习对抗攻击]]></title>
-    <url>%2F2017%2F12%2F04%2F%E5%AF%B9%E6%8A%97%E6%A0%B7%E6%9C%AC%E8%AE%BA%E6%96%87%E9%9B%86%2F</url>
-    <content type="text"><![CDATA[深度学习１、2014-ｅxlaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”[ArXiv][code][code] 提出对抗样本不是因为非线性，而是因为模型在高维空间中的线性性。FSM 方法是计算关于x的导数，然后ｓｉｇｎ函数取值进行扰动,在$$ L{无穷} $$距离度量下。$$ X^{adv}＝Ｘ＋ \varepsilon \cdot sign (\bigtriangledown \ J(X,y{true})) $$梯度可以通过反向传播算法（backpropagation）计算获得。 ２、2015-DeepFool: a simple and accurate method to fool deep neural networks [ArXiv][code]基于$L_2$距离度量的非目标攻击$min ||D(x)-X||2subject\ to\ argmaxf(D(X) \neq\ y{true})$ ３、2015-The Limitations of Deep Learning in Adversarial Settings[ArXiv][code]通过计算对抗显著图，寻找对输出影响最大的两个输入，每次迭代修改两个像素点，直到达到目标图像。L0 distance metric ４、2015-Distributional Smoothing with Virtual Adversarial Training [ArXiv][code]KL散度 ５、2016-Exploring the space of adversarial images[ArXiv][code]-lua６、2016-Adversarial Machine Learning at Scale[ArXiv][code]９、2016-Adversarial examples in the physical world [ArXiv][code][code]通过对对抗样本拍照片，改变了某些像素来测试对抗样本的有效性拓展FGSM,多次应用，每次一小步,中间结果被$\varepsilon$截断$X0^{adv}=X \X{N+1}^{adv}=Clip{X,\varepsilon}{X{N}^{adv}+\alpha\cdot sign (\bigtriangledown J(X,y_{true}))}$ 10、2016-Simple Black-Box Adversarial Perturbations for Deep Networks[ArXiv]数据集：CIFAR10, MNIST, SVHN, STL10, and ImageNet1000 datasets 11、2017-Towards Evaluating the Robustness of Neural Networks[ArXiv][code][code]It is noteworthy that the original defensive distillation is broken by Carlini and Wagner’s attack$min ||1/2(tanh(W)+1)-x)||^2_2+c\cdot l(1/2(tanh(W)+1))$ 12、2017-Fast Feature Fool: A data independent approach to universal adversarial perturbations[ArXiv][code]13、2017-Towards Deep Learning Models Resistant to Adversarial Attacks[ArXiv][code]14、2017-Ensemble Adversarial Training: Attacks and Defenses[ArXiv][code]15、S. Zagoruyko. Are deep learning algorithms easily hackable?[code]16、2015-Deep neural networks are easily fooled: High confidence predictions for unrecognizable images[ArXiv]16、2016-Transferability in Machine Learning: from Phenomena to Black-Box Attacks using Adversarial Samples[ArXiv]17、2013-Intriguing properties of neural networkss[ArXiv]通过在$Ｌ_２$距离度量下Ｌ—BFGS解决优化问题来生成对抗样本。 $min\ c|r|+loss_f(x+r,l)\ s.t\ x+r \subset[0,1]^m$ L-BFGS attack and DeepFool attacks have been implemented in the Foolbox[code] 2017-Robust Physical-World Attacks on Deep Learning Models Evasion attacks against machine learning at test time adversary goal（攻击目标）: 分为两种目标，一是能够分类为好的即可（在垃圾邮件检测中，指分类为好的邮件）。如果有一个函数g定义在样本空间中X，g(x)&lt;0表示分类为好，那么敌人的目标就是设计一个样本x，让g(x)&lt;0。这种攻击很容易破解，只要调整分类界限即可（这里指g(x)=0这条边界）。所以，其实攻击者还有一个更好的目标是让g(x)尽可能小 Universal adversarial perturbations[ArXiv][code]黑盒攻击2017-10-WHITENING BLACK-BOX NEURAL NETWORKS[ArXiv]窃取隐私数据然后进行白盒攻击 ７、2016-Delving into Transferable Adversarial Examples and Black-box Attacks [ArXiv][code]作者还使用了同样的实验方法测试了定向性对抗性攻击在目标模型的效果。结果表明定向类标记的传递性差了很多，只有小于等于4%的对抗性图像在源、目标机器学习模型中都识别出相同的定向标记。基于此，作者提出了ensemble方法。它是以多个深度神经网络模型为基础构造对抗图片，即将图4中单个已知机器学习模型替换成多个不同的已知机器学习模型，并共同产生一个对抗性图像。在实验设计中，作者对5个不同的深度神经网络模型一一实施了黑盒子攻击。在对每一个模型攻击的时候，作者假设已知其余的4个模型，并用集合的方式作白盒子对抗图形的构造。同样的，作者分别使用基于优化的攻击手段，和基于Fast Gradient的手段构造对抗性图片。构造图片依然使用的是Adam优化器。在算法经过100次的迭代对权重向量的更新，loss function得以汇聚。作者发现有许多攻击者预先设定的标记也得到了传递。详细结果参见表2。格子(i,j)代表用除了模型i之外的4个其他算法生成的对抗图片，用模型j来验证得到的定向标记的准确值。可以看出，当目标模型包含在已知模型集合中，定向类标记的传递性都在60%以上。即使目标模型不在已知模型集合中，定向标记的准确值也在30%以上。 ８、2016-Practical Black-Box Attacks against Machine Learning[ArXiv][code]敌手不需要知道目标模型的结构和参数，只能够根据输入得到输出。由于对抗样本的迁移性，可以先构建替代模型训练对抗样本再在目标模型上测试生成的对抗样本。替代模型的结构和目标模型结构要能够处理相同的任务。 Machine Learning as an Adversarial Service:Learning Black-Box Adversarial Examples一种直接攻击目标黑盒神经网络的方法MNIST数据集，CIFAR-10图片数据集应用在物理世界中的目的模型——Amazon Machine Learning Prediction Universal adversarial perturbationsGenerating Adversarial Malware Examples for Black-Box Attacks Based on GAN利用生成对抗网络原理生成对抗样本的方法文中称之为MalGAN。其中，GAN 网络中的判别器是一个人为构建的替代探测器网络。生成器则是目的网络，能生成恶意软件对抗样本。 隐私问题1、Hacking Smart Machines with Smarter Ones : How to Extract Meaningful Data from Machine Learning Classifiers[ArXiv]２、Membership Inference Attacks Against Machine Learning Models[ArXiv]3、Stealing machine learning models via prediction apis4、An end-to-end case study of personal- ized warfarin dosingOn the Protection of Private Information in Machine Learning Systems:Two Recent Approaches其他机器学习技术1、Vulnerability of Deep Reinforcement Learning to Policy Induction Attacks[ArXiv]2、Tactics of Adversarial Attack on Deep Reinforcement Learning Agents[ArXiv]3、Adversarial examples for generative models[ArXiv]4、Adversarial Attacks on Neural Network Policies防御技术1、2016-Distillation as a Defense to Adversarial Perturbations Against Deep Neural Networks[ArXiv]机器学习1、2006-Can machine learning be secure?[paper]2、2011-Adversarial machine learning3、Take two software updates and see me in the morning: The Case for Software Security Evaluations of Medical Devices [paper]4、Adversarial AI5、2017-机器学习安全性问题及其防御技术研究综述6、Concrete Problems in AI Safety[ArXiv]7、Towards the Science of Security and Privacy in Machine Learning[ArXiv]8、Stealing Machine Learning Models via Prediction APIs[paper][code]GAN和对抗样本1、2017-APE-GAN : Adversarial Perturbation Elimination with GAN[ArXiv][code]数据集：including MNIST, CIFAR10 and ImageNet 生成网络将对抗样本还原为真实图片 2、2017-Generative Adversarial Trainer : Defense to Adversarial Perturbations with GAN[ArXiv]增强判别器的识别能力 ３、2017-Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN[ArXiv]GAN也可以产生针对恶意 软件分类器的对抗样本在提取的恶意软件特征上增加噪声使分类器误分类。 ４、2017-Adversarial examples for generative models[ArXiv]5、Generative Poisoning Attack Method Against Neural Networks[ArXiv]提出了 一种更有效的产生对抗样本的方法，它采用生成对 抗网络（GAN）中生成模型（Generative Model）和 判别模型（Discriminative model）的思想，即先用生成模型产生候选的对抗样本，再用判别模型进行 筛选最优对抗样本。 博士论文ON THE INTEGRITY OF DEEP LEARNING SYSTEMS IN ADVERSARIAL SETTINGSSegmentation &amp; Object DetectionAdversarial Examples for Semantic Segmentation and Object Detection Visual Question Answering (VQA）Can you fool AI with adversarial examples on a visual Turing test? 应用场景１．Accessorize to a crime: Real and stealthy attacks on state-of-the-art face recognition２．Robust Physical-World Attacks on Machine Learning Models 软件及应用1.AdversariaLib (includes implementation of evasion attacks from .2.AdLib. A python library with a scikit-style interface which includes implementations of a number of published evasion attacks and defenses.3.AlfaSVMLib. Adversarial Label Flip Attacks against Support Vector Machines.4.Poisoning Attacks against Support Vector Machines, and Attacks against Clustering Algorithms5.deep-pwning Metasploit for deep learning which currently has attacks on deep neural networks using Tensorflow6.Cleverhans is a great TensorFlow-based library for adversarial attacks and defences: https://github.com/tensorflow/cleverhans7.FoolBox – another collection of attacks that you can use with a framework of your preferencehttps://foolbox.readthedocs.io/en/latest/8.EvadeML - Machine Learning in the Presence of Adversaries9.Adversarial Machine Learning - PRA Lab]]></content>
-      <categories>
-        <category>深度学习</category>
-      </categories>
-      <tags>
-        <tag>对抗样本</tag>
-        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -606,6 +641,28 @@
     <content type="text"><![CDATA[$$ \frac $$ $$\begin{eqnarray}\nabla\cdot\vec{E} &amp;=&amp; \frac{\rho}{\epsilon_0} \\nabla\cdot\vec{B} &amp;=&amp; 0 \\nabla\times\vec{E} &amp;=&amp; -\frac{\partial B}{\partial t} \\nabla\times\vec{B} &amp;=&amp; \mu_0\left(\vec{J}+\epsilon_0\frac{\partial E}{\partial t} \right)\end{eqnarray}$$]]></content>
   </entry>
   <entry>
+    <title><![CDATA[DELVING INTO TRANSFERABLE ADVERSARIAL EX- AMPLES AND BLACK-BOX ATTACKS]]></title>
+    <url>%2F2017%2F12%2F04%2FDELVING%20INTO%20TRANSFERABLE%20ADVERSARIAL%20EX-%20AMPLES%20AND%20BLACK-BOX%20ATTACKS%2F</url>
+    <content type="text"><![CDATA[贡献研究目标和非目标攻击，转移性在非目标攻击时更容易发生用已有的方法进行目标攻击时，几乎没有转移性提出基于集成的方法生成对抗样本，这样在进行目标攻击时可提高攻击成功率。 此前转移性只在小的数据集，如MNIST (LeCun et al. (1998)) and CIFAR-10 (Krizhevsky &amp; Hinton (2009))中进行试验，本论文在在大规模数据集，ImageNet (Russakovsky et al. (2015))进行试验 不同模型的梯度方向是正交的，决策边界是对齐的 攻击了Clarifai.com, a commercial com- pany providing state-of-the-art image classification services 转移性的研究：（1）在同样数据集的不同模型间 （2）相同模型在不相交的数据集上 （3）不同模型在不同数据集上]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>对抗样本</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[One pixel attack for fooling deep neural networks Jiawei]]></title>
+    <url>%2F2017%2F12%2F04%2FOne%20pixel%20attack%20for%20fooling%20deep%20neural%20networks%20Jiawei%2F</url>
+    <content type="text"><![CDATA[摘要在图像识别领域，基于 DNN 的方法突破了传统的图像处理技术，达到了可与人类媲美的结果 [9]。但是，多个研究证明自然图像中的人工扰动可以轻易使 DNN 对图像进行错误分类，研究者提出了生成此类「对抗图像」的高效算法 [1, 2, 3, 4]。生成对抗图像（adversarial images）的主要方式是向准确分类的自然图像中添加精心设计的额外扰动，该扰动不影响人类对图像的识别。这样的修改导致分类器将修改后的图像标注为完全不同的其他物体。但是，大多数之前的攻击并未考虑非常有限的对抗实例，即扰动的量有时候也会影响到人眼的识别能力（示例见图 2）。此外，研究在有限场景中创建的对抗图像更加有趣，因为它们可能更接近原始类别和目标类别（target class）之间的边界，研究此类关键点可以使人类更多地了解 DNN 输入空间的几何特征 方法贡献 非目标攻击，修改1,3,5个像素黑盒攻击可攻击不同模型对特征目标有相同的扰动方向 方法它不抽象的问题将扰动搜索到任意显式的目标函数进行求解，而直接关注提高目标类别的概率标注值全局对抗扰动可以泄露标签 固定修改像素的个数，增改像素改变的强度 Differential evolution (DE) which belongs to the generalclass of genetic algorithm (GA 实验结论]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>对抗样本</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[anaconda+jupyter notebook安装]]></title>
     <url>%2F2017%2F12%2F04%2Fjupyter%20notebook%20%E5%AE%89%E8%A3%85%2F</url>
     <content type="text"><![CDATA[安装anaconda2和anaconda3先在清华镜像站下载2和3可以任意先安装一个版本，然后另一个版本安装在/envs/py2路径下，py2是自己起的文件名。再打开CMD下载jupyter notebook 1pip install jupyter notebook notebook同时有两个版本时，可在kernel文件夹中，例如路径为D:\ProgramData\Anaconda3\share\jupyter\kernels，放两个kernel 可把/envs文件下的python拷贝到此路径中。 跟新源http://so.kszixue.com/?id=20 channels: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/ https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/ https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/show_channel_urls: true 例 conda config –add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/]]></content>
@@ -627,28 +684,6 @@
       <tags>
         <tag>有趣命令</tag>
         <tag>软件安装</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[DELVING INTO TRANSFERABLE ADVERSARIAL EX- AMPLES AND BLACK-BOX ATTACKS]]></title>
-    <url>%2F2017%2F12%2F04%2FDELVING%20INTO%20TRANSFERABLE%20ADVERSARIAL%20EX-%20AMPLES%20AND%20BLACK-BOX%20ATTACKS%2F</url>
-    <content type="text"><![CDATA[贡献研究目标和非目标攻击，转移性在非目标攻击时更容易发生用已有的方法进行目标攻击时，几乎没有转移性提出基于集成的方法生成对抗样本，这样在进行目标攻击时可提高攻击成功率。 此前转移性只在小的数据集，如MNIST (LeCun et al. (1998)) and CIFAR-10 (Krizhevsky &amp; Hinton (2009))中进行试验，本论文在在大规模数据集，ImageNet (Russakovsky et al. (2015))进行试验 不同模型的梯度方向是正交的，决策边界是对齐的 攻击了Clarifai.com, a commercial com- pany providing state-of-the-art image classification services 转移性的研究：（1）在同样数据集的不同模型间 （2）相同模型在不相交的数据集上 （3）不同模型在不同数据集上]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>对抗样本</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[One pixel attack for fooling deep neural networks Jiawei]]></title>
-    <url>%2F2017%2F12%2F04%2FOne%20pixel%20attack%20for%20fooling%20deep%20neural%20networks%20Jiawei%2F</url>
-    <content type="text"><![CDATA[摘要在图像识别领域，基于 DNN 的方法突破了传统的图像处理技术，达到了可与人类媲美的结果 [9]。但是，多个研究证明自然图像中的人工扰动可以轻易使 DNN 对图像进行错误分类，研究者提出了生成此类「对抗图像」的高效算法 [1, 2, 3, 4]。生成对抗图像（adversarial images）的主要方式是向准确分类的自然图像中添加精心设计的额外扰动，该扰动不影响人类对图像的识别。这样的修改导致分类器将修改后的图像标注为完全不同的其他物体。但是，大多数之前的攻击并未考虑非常有限的对抗实例，即扰动的量有时候也会影响到人眼的识别能力（示例见图 2）。此外，研究在有限场景中创建的对抗图像更加有趣，因为它们可能更接近原始类别和目标类别（target class）之间的边界，研究此类关键点可以使人类更多地了解 DNN 输入空间的几何特征 方法贡献 非目标攻击，修改1,3,5个像素黑盒攻击可攻击不同模型对特征目标有相同的扰动方向 方法它不抽象的问题将扰动搜索到任意显式的目标函数进行求解，而直接关注提高目标类别的概率标注值全局对抗扰动可以泄露标签 固定修改像素的个数，增改像素改变的强度 Differential evolution (DE) which belongs to the generalclass of genetic algorithm (GA 实验结论]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>对抗样本</tag>
       </tags>
   </entry>
   <entry>
@@ -698,28 +733,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[深度学习资料]]></title>
-    <url>%2F2017%2F12%2F04%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%2F</url>
-    <content type="text"><![CDATA[深度学习资料2015年5月《自然》上刊登的一篇概述性论文《深度学习》（Deep learning），由我自己、Yoshua Bengio 、Geoff Hinton共同撰写。 系统性的课本方面，由 Goodfellow、Bengio 和 Courville共同撰写的《深度学习》（Deep learning）（这个在网上有HTML版本，本书旨在帮助学生和从业人员入门机器学习，尤其是深度学习领域。HTML版本已经编辑完成，并且永久免费。网址：） 2012 年 IPAM上针对研究生的“深度学习和特征学习夏季课程”（这个夏季课程的授课老师包括 Geoff Hinton 、Yann LeCun、吴恩达、Yoshua Bengio等众多深度学习专家，历时半个多月时间，网上有完整视频录像：） 2015年在加拿大蒙特利尔市举行了“深度学习夏季课程”（该课程的对象为：已经具备的机器学习基本知识的研究生、业界工程师和研究人员，授课量十分丰富。 推荐一些关于特定平台的使用教程，比如Torch、TensorFlow 和 Theano。 百度paddle开发团队介绍的深度学习基本概念：深度学习适用于大数据.其中查了两个概念:word embedding,过拟合 知乎上关于深度学习入门的讨论,列了很多资料，一天搞懂深度学习图解深度学习这个网页动画做的很好。 机器学习中文社区 还有斯坦福大学公开课，讲机器学习,CS231 再看Dawn Song团队的一篇论文时查的VAEGAN（生成对抗网络）的最新应用状况结合代码讲解VAE-GAN比较透彻的一篇文章 应该搜搜深度学习暑期学校或深度学习项目实践 教程Udacity 深度学习知乎231翻译没有博士学位，照样玩转TensorFlow深度学习零基础入门深度学习 对抗样本MNIST的对抗噪声TensorFlow生成对抗样本（微信） https://yq.aliyun.com/articles/149583?utm_content=m_27089]]></content>
-      <categories>
-        <category>科研</category>
-      </categories>
-      <tags>
-        <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[利用Wireshark任意获取QQ好友IP实施精准定位]]></title>
-    <url>%2F2017%2F12%2F04%2F%E5%88%A9%E7%94%A8wireshark%E8%BF%9B%E8%A1%8Cqq%E5%A5%BD%E5%8F%8B%E5%AE%9A%E4%BD%8D%2F</url>
-    <content type="text"><![CDATA[利用Wireshark任意获取QQ好友IP实施精准定位在freebuf上看到了利用Wireshark任意获取QQ好友IP实施精准定位这篇文章，就想试试。wireshark抓取数据包，然后查找。 1,选择搜索 “字符串”; 2,选择搜索 “分组详情”;3,填写搜索数据 “020048”; 当发现查找能自动定位到连接数据的时候就可以关闭电话邀请一个IP在线定位的网站openGPS.cn 进入页面后，选择高精度IP定位.wireshark功能使用的详细介绍 wireshark抓包常见提示含义解析 我是如何轻松拿到Google$1337现金奖励这篇文章主要是讲漏洞挖掘可适当关注Fofa、Shodan、Zoomeye等网络空间数据平台。]]></content>
-      <categories>
-        <category>数据分析</category>
-      </categories>
-      <tags>
-        <tag>wireshark</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[有趣的尝试]]></title>
     <url>%2F2017%2F12%2F04%2F%E5%AF%84%E8%AF%AD%2F</url>
     <content type="text"><![CDATA[寄语 “大部分人都是不好不坏，平庸乏味，跟一次性塑料饭盒一样。对这种长方形塑料，你连闻一闻的兴趣都不会有。大多数音乐、大部分书，都是。他们的刻度永远都打在一个最正确的正中间，永远不犯错、永远不会失败，最终出来一个光溜溜的东西。但美是不正确，美是错乱。”在《所有失败的鱼》里，绿妖这样说道。 明天就是新的一周，希望你也能开始一些全新而有趣的尝试。 晚安，好眠。：）]]></content>
@@ -732,6 +745,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[深度学习资料]]></title>
+    <url>%2F2017%2F12%2F04%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%2F</url>
+    <content type="text"><![CDATA[深度学习资料2015年5月《自然》上刊登的一篇概述性论文《深度学习》（Deep learning），由我自己、Yoshua Bengio 、Geoff Hinton共同撰写。 系统性的课本方面，由 Goodfellow、Bengio 和 Courville共同撰写的《深度学习》（Deep learning）（这个在网上有HTML版本，本书旨在帮助学生和从业人员入门机器学习，尤其是深度学习领域。HTML版本已经编辑完成，并且永久免费。网址：） 2012 年 IPAM上针对研究生的“深度学习和特征学习夏季课程”（这个夏季课程的授课老师包括 Geoff Hinton 、Yann LeCun、吴恩达、Yoshua Bengio等众多深度学习专家，历时半个多月时间，网上有完整视频录像：） 2015年在加拿大蒙特利尔市举行了“深度学习夏季课程”（该课程的对象为：已经具备的机器学习基本知识的研究生、业界工程师和研究人员，授课量十分丰富。 推荐一些关于特定平台的使用教程，比如Torch、TensorFlow 和 Theano。 百度paddle开发团队介绍的深度学习基本概念：深度学习适用于大数据.其中查了两个概念:word embedding,过拟合 知乎上关于深度学习入门的讨论,列了很多资料，一天搞懂深度学习图解深度学习这个网页动画做的很好。 机器学习中文社区 还有斯坦福大学公开课，讲机器学习,CS231 再看Dawn Song团队的一篇论文时查的VAEGAN（生成对抗网络）的最新应用状况结合代码讲解VAE-GAN比较透彻的一篇文章 应该搜搜深度学习暑期学校或深度学习项目实践 教程Udacity 深度学习知乎231翻译没有博士学位，照样玩转TensorFlow深度学习零基础入门深度学习 对抗样本MNIST的对抗噪声TensorFlow生成对抗样本（微信） https://yq.aliyun.com/articles/149583?utm_content=m_27089]]></content>
+      <categories>
+        <category>科研</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[人生百态 千翻滋味]]></title>
     <url>%2F2017%2F12%2F04%2F%E8%AE%A9%E6%88%91%E6%8E%A5%E5%8F%97%E5%B9%B3%E5%BA%B8%E7%9A%84%E7%94%9F%E6%B4%BB%2F</url>
     <content type="text"><![CDATA[红黄蓝白黑，酸甜苦辣咸。每个人都带着一生的历史，半个月的哀乐，在街上走。 ——汪曾祺 让我接受平庸的生活 作家苏芩在她的新书《你要世俗地活着，才有不俗的未来》里也讲过这样一段话： 了解俗世的规则，也懂得世俗外的享受，才深切地明白，如果没有足够的力量去赢得生活，那一切优雅的享用，都会转瞬即逝。美是一种力量，任何软绵绵的优雅都不值得被欣赏，你要知道：你能驾驭的，才是你真正拥有的。 因此，我们都需要修炼，在尘世的烟火中，修炼出一颗通透的心。成为这样一种人：可以很俗世，却又似在世俗之外。 希望你也可以，如愿活成自己梦想的样子。 不知，还在俗世中忙碌着的你，是否已然活成了自己梦想的样子了呢？ 我们终归要回到俗世的繁华中去磨砺成长，增长出足够的力量来支撑和应对庸忙的生活。所谓的诗意生活，并不是疏离尘世，而是让自己在尘世中修炼得更加清澈，通透。]]></content>
@@ -741,6 +765,17 @@
       <tags>
         <tag>寄语</tag>
         <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[利用Wireshark任意获取QQ好友IP实施精准定位]]></title>
+    <url>%2F2017%2F12%2F04%2F%E5%88%A9%E7%94%A8wireshark%E8%BF%9B%E8%A1%8Cqq%E5%A5%BD%E5%8F%8B%E5%AE%9A%E4%BD%8D%2F</url>
+    <content type="text"><![CDATA[利用Wireshark任意获取QQ好友IP实施精准定位在freebuf上看到了利用Wireshark任意获取QQ好友IP实施精准定位这篇文章，就想试试。wireshark抓取数据包，然后查找。 1,选择搜索 “字符串”; 2,选择搜索 “分组详情”;3,填写搜索数据 “020048”; 当发现查找能自动定位到连接数据的时候就可以关闭电话邀请一个IP在线定位的网站openGPS.cn 进入页面后，选择高精度IP定位.wireshark功能使用的详细介绍 wireshark抓包常见提示含义解析 我是如何轻松拿到Google$1337现金奖励这篇文章主要是讲漏洞挖掘可适当关注Fofa、Shodan、Zoomeye等网络空间数据平台。]]></content>
+      <categories>
+        <category>数据分析</category>
+      </categories>
+      <tags>
+        <tag>wireshark</tag>
       </tags>
   </entry>
   <entry>

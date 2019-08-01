@@ -413,6 +413,1227 @@ $(function() {
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/07/22/tensorflow 函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/22/tensorflow 函数/" itemprop="url">tensorflow 函数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-22T16:36:16+08:00">
+                2019-07-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-07-22T18:57:19+08:00">
+                2019-07-22
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/07/22/tensorflow 函数/" class="leancloud_visitors" data-flag-title="tensorflow 函数">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  763 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="tf-slice"><a href="#tf-slice" class="headerlink" title="tf.slice"></a>tf.slice</h2><p>slice(<br>    input_,<br>    begin,<br>    size,<br>    name=None<br>)</p>
+<p>从张量中提取切片.</p>
+<p>此操作从由begin指定位置开始的张量input中提取一个尺寸size的切片.切片size被表示为张量形状,其中size[i]是你想要分割的input的第i维的元素的数量.切片的起始位置(begin)表示为每个input维度的偏移量.换句话说,begin[i]是你想从中分割出来的input的“第i个维度”的偏移量.<br>begin是基于零的<br>···<br>t = tf.constant([[[1, 1, 1], [2, 2, 2]],<br>                 [[3, 3, 3], [4, 4, 4]],<br>                 [[5, 5, 5], [6, 6, 6]]])<br>tf.slice(t, [1, 0, 0], [1, 1, 3])  # [[[3, 3, 3]]]<br>tf.slice(t, [1, 0, 0], [1, 2, 3])  # [[[3, 3, 3],</p>
+<pre><code>#   [4, 4, 4]]]
+</code></pre><p>tf.slice(t, [1, 0, 0], [2, 1, 3])  # [[[3, 3, 3]],</p>
+<pre><code>#  [[5, 5, 5]]]
+</code></pre><p>···</p>
+<p> shape可以理解为一个数组的维度。[5,5]就是个2维数组，第一维有5个值，第二维有5个值。[5, 5, 1, 32]就是个4维数组，第一维有5个值，第二维有5个值，第三维有1个值，第四维有32个值。数组维度可以理解为[],最外层有5个[]，每个[]里还有5个[]，以此类推</p>
+<p>shape 表示是输出张量的形状 [5,5]应该是大小5<em>5的矩阵 [5,5,1,32]这个在卷积网络里应该是卷积核大小5</em>5,1个颜色通道，32个不同的卷积核 刚看TensorFlow，</p>
+<h2 id="tf-layers-dense-inut-units-k"><a href="#tf-layers-dense-inut-units-k" class="headerlink" title="tf.layers.dense(inut,units=k)"></a>tf.layers.dense(inut,units=k)</h2><p>tf.layers.dense( input, units=k )会在内部自动生成一个权矩阵kernel和偏移项bias，各变量具体尺寸如下：对于尺寸为[m, n]的二维张量input, tf.layers.dense()会生成：尺寸为[n, k]的权矩阵kernel，和尺寸为[m, k]的偏移项bias。内部的计算过程为y=input * kernel + bias，输出值y的维度为[m, k]。</p>
+<p>可以自己构造权重矩阵W和偏移矩阵b，利用矩阵乘法实现全连接层</p>
+<h2 id="matmul"><a href="#matmul" class="headerlink" title="matmul"></a>matmul</h2><p>两个三维矩阵的乘法怎样计算呢?我通过实验发现，tensorflow把前面的维度当成是batch，对最后两维进行普通的矩阵乘法。也就是说，最后两维之前的维度，都需要相同</p>
+<h2 id="tf-shape"><a href="#tf-shape" class="headerlink" title="tf.shape"></a>tf.shape</h2><p>根据shape如何变换矩阵。其实简单的想就是，</p>
+<p>reshape（t, shape） =&gt; reshape(t, [-1]) =&gt; reshape(t, shape)</p>
+<p>首先将矩阵t变为一维矩阵，然后再对矩阵的形式更改就可以了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"># tensor &apos;t&apos; is [[[1, 1, 1],</div><div class="line">#                 [2, 2, 2]],</div><div class="line">#                [[3, 3, 3],</div><div class="line">#                 [4, 4, 4]],</div><div class="line">#                [[5, 5, 5],</div><div class="line">#                 [6, 6, 6]]]</div><div class="line"># tensor &apos;t&apos; has shape [3, 2, 3]</div><div class="line"># pass &apos;[-1]&apos; to flatten &apos;t&apos;</div><div class="line">reshape(t, [-1]) ==&gt; [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6]</div><div class="line"></div><div class="line"># -1 can also be used to infer the shape</div><div class="line"></div><div class="line"># -1 is inferred to be 9:</div><div class="line">reshape(t, [2, -1]) ==&gt; [[1, 1, 1, 2, 2, 2, 3, 3, 3],</div><div class="line">                         [4, 4, 4, 5, 5, 5, 6, 6, 6]]</div><div class="line"># -1 is inferred to be 2:</div><div class="line">reshape(t, [-1, 9]) ==&gt; [[1, 1, 1, 2, 2, 2, 3, 3, 3],</div><div class="line">                         [4, 4, 4, 5, 5, 5, 6, 6, 6]]</div><div class="line"># -1 is inferred to be 3:</div><div class="line">reshape(t, [ 2, -1, 3]) ==&gt; [[[1, 1, 1],</div><div class="line">                              [2, 2, 2],</div><div class="line">                              [3, 3, 3]],</div><div class="line">                             [[4, 4, 4],</div><div class="line">                              [5, 5, 5],</div><div class="line">                              [6, 6, 6]]]</div><div class="line">--------------------- </div><div class="line">作者：lxg0807 </div><div class="line">来源：CSDN </div><div class="line">原文：https://blog.csdn.net/lxg0807/article/details/53021859</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/06/24/概率图模型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/24/概率图模型/" itemprop="url">概率图模型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-24T20:44:03+08:00">
+                2019-06-24
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-06-24T21:02:16+08:00">
+                2019-06-24
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/06/24/概率图模型/" class="leancloud_visitors" data-flag-title="概率图模型">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  203 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>概率图模型（PGM/probabilistic graphical model）是一种用于学习这些带有依赖（dependency）的模型的强大框架。</p>
+<p>在探讨如何将概率图模型用于机器学习问题之前，我们需要先理解 PGM 框架。概率图模型（或简称图模型）在形式上是由图结构组成的。图的每个节点（node）都关联了一个随机变量，而图的边（edge）则被用于编码这些随机变量之间的关系。</p>
+<p>在这个图中，每个结点表示一个变量，每个箭头表示一个条件概率，起点是条件概率中的条件，终点是该随机变量。比如，从a指向b的箭头表示p(b|a)，并称a是b的父结点<br>参考文献：<a href="https://blog.csdn.net/isMarvellous/article/details/78828566" target="_blank" rel="external">https://blog.csdn.net/isMarvellous/article/details/78828566</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/05/13/卷积网络随笔/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/13/卷积网络随笔/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-13T10:07:16+08:00">
+                2019-05-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-05-13T10:07:16+08:00">
+                2019-05-13
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/05/13/卷积网络随笔/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  8 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>卷积就是加权求和</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/05/11/社交发现论文总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/11/社交发现论文总结/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T15:05:34+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-06-19T14:35:40+08:00">
+                2019-06-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/05/11/社交发现论文总结/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  452 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>title:社交网络论文总结</p>
+<hr>
+<h2 id="Understanding-the-Facets-of-Homophily-in-Social-Psycho-Sociological-Network-Communities"><a href="#Understanding-the-Facets-of-Homophily-in-Social-Psycho-Sociological-Network-Communities" class="headerlink" title="Understanding the Facets of Homophily in Social Psycho-Sociological Network Communities"></a>Understanding the Facets of Homophily in Social Psycho-Sociological Network Communities</h2><p>这篇论文研究朋友，亲属，同事之间的同质性：</p>
+<p>人工标注了关系类型</p>
+<p>建立了四个模型预测年龄，性别，人格，values</p>
+<p>最后还进行了链接预测和社区发现的比较，比较这三个不同群体中引入人格特征后社区发现的准确度</p>
+<h2 id="Metadata-vs-Ground-truth-A-Myth-behind-the-Evolution-of-Community-Detection-Methods"><a href="#Metadata-vs-Ground-truth-A-Myth-behind-the-Evolution-of-Community-Detection-Methods" class="headerlink" title="Metadata vs. Ground-truth: A Myth behind the Evolution of Community Detection Methods"></a>Metadata vs. Ground-truth: A Myth behind the Evolution of Community Detection Methods</h2><p>基于不同属性建立的社区与基于社区发现的社区进行比较，分析每种社区发现算法在链接预测，信息传播，病毒感染之间的区别</p>
+<h2 id="代码库："><a href="#代码库：" class="headerlink" title="代码库："></a>代码库：</h2><p>snap:<a href="https://github.com/snap-stanford/snap" target="_blank" rel="external">https://github.com/snap-stanford/snap</a></p>
+<h2 id="图神经网络"><a href="#图神经网络" class="headerlink" title="图神经网络"></a>图神经网络</h2><p>图网络主要解决的是AI对结构化数据的处理，而在动态数据、大规模数据、非结构化数据等领域，图网络的作为依旧有限</p>
+<h2 id="影响力"><a href="#影响力" class="headerlink" title="影响力"></a>影响力</h2><p>distinguish the effect of peer influence and group conformity.</p>
+<h2 id="Confluence-Conformity-Influence-in-Large-Social-Networks"><a href="#Confluence-Conformity-Influence-in-Large-Social-Networks" class="headerlink" title="Confluence: Conformity Influence in Large Social Networks"></a>Confluence: Conformity Influence in Large Social Networks</h2><p>从众效应<br>群体，个人，同伴</p>
+<p>根据历史行为预测下一行为</p>
+<h2 id="Social-Influence-Analysis-in-Large-scale-Networks"><a href="#Social-Influence-Analysis-in-Large-scale-Networks" class="headerlink" title="Social Influence Analysis in Large-scale Networks"></a>Social Influence Analysis in Large-scale Networks</h2><p>在不同主题下的社会影响力<br>Topical Affinity Propagation (TAP) </p>
+<p>应用于专家发现<br>相似的节点，哪一个节点对另一个节点有较强的影响</p>
+<p>##Mining Topic-level Influence in Heterogeneous Networks</p>
+<p>##Topic-Level Opinion Influence Model (TOIM): An Investigation Using Tencent Microblogging</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>网络表示的作用<br>聚类的作用</p>
+<h2 id="GraphSAGE"><a href="#GraphSAGE" class="headerlink" title="GraphSAGE"></a>GraphSAGE</h2><p>Weisfeiler-Lehman Isomorphism Test（图同构算法）<br>对于不带标签的图，初始的时候，两个图的全部节点赋值1（或以度为标签），然后做多轮wl，出现节点ID和各ID出现次数不一致的情况就认为不是Isomorphism</p>
+<h2 id="图注意网络"><a href="#图注意网络" class="headerlink" title="图注意网络"></a>图注意网络</h2><p>通俗易懂！使用Excel和TF实现Transformer<br><a href="https://mp.weixin.qq.com/s/3_dK289DPREI0KNj0NaR-A" target="_blank" rel="external">https://mp.weixin.qq.com/s/3_dK289DPREI0KNj0NaR-A</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/05/06/新文档/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/06/新文档/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-06T21:49:58+08:00">
+                2019-05-06
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-05-07T10:02:49+08:00">
+                2019-05-07
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/05/06/新文档/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  88 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="title-网络表示学习论文"><a href="#title-网络表示学习论文" class="headerlink" title="title: 网络表示学习论文"></a>title: 网络表示学习论文</h1><hr>
+<p>transNET:</p>
+<p>边的关系是两个合作者摘要的关键词</p>
+<p>研究目的：为什么相互关注</p>
+<p>兴趣节点：<br>位置节点：<br>内容节点：内容风格<br>出行方式<br>来源<br>内容主题</p>
+<p>工作量，总结，突出问题<br>数据集大小<br>对比实验<br>参考文献（新）<br>格式</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/04/25/igraph/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/25/igraph/" itemprop="url">igraph 安装</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-25T18:03:39+08:00">
+                2019-04-25
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-26T10:54:33+08:00">
+                2019-04-26
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/04/25/igraph/" class="leancloud_visitors" data-flag-title="igraph 安装">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  115 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="windows-安装"><a href="#windows-安装" class="headerlink" title="windows 安装"></a>windows 安装</h2><p>在<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/" target="_blank" rel="external">非官官方库</a><br>找到对应的python-igraph</p>
+<p>pip install python_igraph-0.7.1.post6-cp36-none-win_amd64.whl</p>
+<p>python-igraph在绘图的时候依赖pycairo模块</p>
+<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><p>pip3 install python_igraph 下载到了user/.local/python3.5,原因未知</p>
+<p>失败方式：<br>sudo add-apt-repository ppa:igraph/ppa<br>sudo apt-get update # update your package database<br>sudo apt-get install python-igraph</p>
+<h3 id="pycairo"><a href="#pycairo" class="headerlink" title="pycairo"></a>pycairo</h3><p>pip install pycairo -i <a href="https://pypi.tuna.tsinghua.edu.cn/simple" target="_blank" rel="external">https://pypi.tuna.tsinghua.edu.cn/simple</a></p>
+<p>sudo pip install cairocffi -i <a href="https://pypi.tuna.tsinghua.edu.cn/simple" target="_blank" rel="external">https://pypi.tuna.tsinghua.edu.cn/simple</a></p>
+<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p>whereis<br>dpkg -L python-igraph<br>pip3 show python-igraph </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/04/25/tensorflow 安装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/25/tensorflow 安装/" itemprop="url">tensorflow1.11 + cuda 9.0+ cudnn 7.0</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-25T17:44:30+08:00">
+                2019-04-25
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-25T18:11:00+08:00">
+                2019-04-25
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/04/25/tensorflow 安装/" class="leancloud_visitors" data-flag-title="tensorflow1.11 + cuda 9.0+ cudnn 7.0">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  271 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>要查看tensorflow 与cuda版本的对应关系</p>
+<h2 id="查看cuda版本"><a href="#查看cuda版本" class="headerlink" title="查看cuda版本"></a>查看cuda版本</h2><p>cat /usr/local/cuda/version.txt</p>
+<p>cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2</p>
+<p>nvcc -V</p>
+<h2 id="下载cuda-cudnn"><a href="#下载cuda-cudnn" class="headerlink" title="下载cuda,cudnn"></a>下载cuda,cudnn</h2><p><a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="external">cudnn</a><br>需要登陆下载 library 版本</p>
+<p><a href="https://developer.nvidia.com/cuda-90-download-archive?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=Ubuntu&amp;target_version=1604&amp;target_type=runfilelocal" target="_blank" rel="external">cuda网址</a>，下载runfil(local)版本</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="cuda"><a href="#cuda" class="headerlink" title="cuda"></a>cuda</h3><p>sudo chmod +x cuda_9.0.176_384.81_linux.run # 为 cuda_9.0.176_384.81_linux.run 添加可执行权限</p>
+<p>./cuda_9.0.176_384.81_linux.run # 安装 cuda_9.0.176_384.81_linux.run</p>
+<p>Install NVIDIA Accelerated Graphics Driver for Linux-x86_64 384.81?<br>(y)es/(n)o/(q)uit: n # 如果已经安装过了，则不需要安装显卡驱动</p>
+<h2 id="cudnn"><a href="#cudnn" class="headerlink" title="cudnn"></a>cudnn</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">sudo tar -xzvf cudnn-8.0-linux-x64-v5.1.tgz</div><div class="line"></div><div class="line">sudo cp cuda/include/cudnn.h /usr/local/cuda/include</div><div class="line"></div><div class="line">sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64</div><div class="line"></div><div class="line">sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*</div></pre></td></tr></table></figure>
+<p>sudo vim ~/.bashrc<br>export PATH=/usr/local/cuda/bin${PATH:+:${PATH}} export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}} export CUDA_HOME=/usr/local/cuda<br>source ~/.bashrc 使之生效</p>
+<h2 id="安装tensorflow"><a href="#安装tensorflow" class="headerlink" title="安装tensorflow"></a>安装tensorflow</h2><p>conda create -n name python=3.6<br>pip install tensorflow-gpu==1.11 -i <a href="https://pypi.tuna.tsinghua.edu.cn/simple" target="_blank" rel="external">https://pypi.tuna.tsinghua.edu.cn/simple</a> </p>
+<p>参考：<a href="https://blog.csdn.net/uhauha2929/article/details/83448909" target="_blank" rel="external">https://blog.csdn.net/uhauha2929/article/details/83448909</a></p>
+<p><a href="https://www.cnblogs.com/jins-note/p/9598178.html" target="_blank" rel="external">https://www.cnblogs.com/jins-note/p/9598178.html</a><br>tensorflow指定版本的安装及升级到最新版：<a href="https://blog.csdn.net/leitouguan8655/article/details/82897525" target="_blank" rel="external">https://blog.csdn.net/leitouguan8655/article/details/82897525</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/03/22/论文写作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -965,1398 +2186,11 @@ $(function() {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/01/16/python进程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/16/python进程/" itemprop="url">python 多线程，多进程，多协程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-16T15:33:22+08:00">
-                2019-01-16
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-30T15:09:24+08:00">
-                2019-01-30
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/01/16/python进程/" class="leancloud_visitors" data-flag-title="python 多线程，多进程，多协程">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1,715 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  6 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="进程，线程，协程"><a href="#进程，线程，协程" class="headerlink" title="进程，线程，协程"></a>进程，线程，协程</h2><p>如果你的代码是IO密集型的，线程和多进程可以帮到你。多进程比线程更易用，但是消耗更多的内存。如果你的代码是CPU密集型的，多进程就明显是更好的选择——特别是所使用的机器是多核或多CPU的。对于网络应用，在你需要扩展到多台机器上执行任务，RQ是更好的选择。<br>使用多进程，我们得建立一个多进程池。通过它提供的map方法，我们把URL列表传给池，然后8个新进程就会生成，它们将并行地去下载图片。这就是真正的并行，不过这是有代价的。整个脚本的内存将会被拷贝到各个子进程中。在我们的例子中这不算什么，但是在大型程序中它很容易导致严重的问题。<br><a href="https://www.jb51.net/article/63558.htm" target="_blank" rel="external">浅析Python中的多进程与多线程的使用</a></p>
-<p><a href="https://blog.csdn.net/universe_ant/article/details/51243137" target="_blank" rel="external">为什么在Python里推荐使用多进程而不是多线程</a></p>
-<p><a href="https://www.cnblogs.com/lingwang3/p/6753388.html" target="_blank" rel="external">python多线程、多进程、协程的使用</a></p>
-<p><a href="https://www.cnblogs.com/cjyfff/p/3662355.html" target="_blank" rel="external">关于python多线程编程中join()和setDaemon()的一点儿探究</a></p>
-<h2 id="进程池"><a href="#进程池" class="headerlink" title="进程池"></a>进程池</h2><p>创建进程需要消耗时间，销毁进程也需要时间。其次，即使开启了成千上万的进程，操作系统也不能让它们同时执行，这样反而会影响程序的效率。因此我们不能无限制的根据任务开启或者结束进程。</p>
-<p>进程池：定义了一个池子，在里面放上固定数量的进程，有需求来了，就拿这个池中的一个进程来处理任务，等到处理完毕，进程并不关闭，而是将进程再放回进程池中继续等待认为。如果有许多任务需要执行，池中的进程数量不够，任务就要等待之前的进程执行任务完毕归来，拿到空闲进程才能继续执行。</p>
-<p>对于python而言，由于其使用了全局解释锁(GIL)，所以python的多线程并不能实现并发。因此，python的并发是通过多进程来实现的！！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">import os</div><div class="line">import time</div><div class="line">import random</div><div class="line">from multiprocessing import Pool</div><div class="line">from multiprocessing import Process</div><div class="line">def func(i):</div><div class="line">    i += 1</div><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">    p = Pool(5)          # 创建了5个进程</div><div class="line">    start = time.time()</div><div class="line">    p.map(func,range(1000))  </div><div class="line">    p.close()   # 是不允许再向进程池中添加任务</div><div class="line">    p.join()</div><div class="line">    print(time.time() - start)  # 0.35544490814208984</div><div class="line">    start = time.time()</div><div class="line">    l = []</div><div class="line">    for i in range(1000):</div><div class="line">        p = Process(target=func,args=(i,))  # 创建了一百个进程</div><div class="line">        p.start()</div><div class="line">        l.append(p)</div><div class="line">    [i.join() for i in l]</div><div class="line">    print(time.time() - start)  #  101.00088691711426</div></pre></td></tr></table></figure>
-<p>在写代码时，pool（3）之后程序好像死锁，搞了两天，终于知道是因为from gevent import monkey; monkey.patch_all();引入了这个，但并不知道原因</p>
-<p>apply_async(func[,args[,kwds[,callback = None]]])    #非阻塞且支持结果返回进行回调</p>
-<p>apply_async(函数,不定参数)     #四个进程在Pool进程池内并行(分给4核cpu),剩下的交替进行.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">from multiprocessing import Pool,Process</div><div class="line">import time,os</div><div class="line">def Foo(a):#创建函数</div><div class="line">    time.sleep(2)</div><div class="line">    print(&apos;in the process:&apos;,os.getpid(),os.getppid())</div><div class="line">    return a+100</div><div class="line"></div><div class="line">def bar(arga):#创建函数</div><div class="line">    print(&apos;----&gt;&apos;,arga)</div><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">    print(&apos;父进程ID:&apos;,os.getpid())</div><div class="line">    pool = Pool(2)#创建进程池最大容量为2，最多允许2个进程同时运行，参照线程信号量模式</div><div class="line">    for i in range(10):#创建10个进程</div><div class="line">        pool.apply_async(func=Foo,args=(i,),callback=bar)#创建线程，参数1调用函数，参数2设置i为函数FOO参数，参数3为返回函数</div><div class="line">        #参数三为回调函数，将FOO函数的返回值作为参数调用bar函数。</div><div class="line">        #pool.apply(func=Foo,args=(i,),callback=bar)#串行</div><div class="line">         #pool.apply_async(func=Foo,args=(i,),callback=bar)#并行</div><div class="line"></div><div class="line">    pool.close()#关闭</div><div class="line">    #pool.join()#如果没有.join语句，程序不执行就会关闭。这里是个大坑。</div></pre></td></tr></table></figure>
-<ol>
-<li>对写入操作 进行加锁<br>就是说:对当前进行写入操作的进程锁定，直到该进程写完十个字，也就是一个完成的操作，后解除该进程的锁定，放它离开。切换到另外一个进程来操作。<br>因为一次只能一个进程执行写入操作，而且必须执行完成完整的操作，才允许切换。所以不会造成文件内容的混乱。<br>但是加锁一般会完造成程序的执行效率下降。而且，如果写入操作分散在整个代码的多处，<br>总不能把整个代码都锁起来吧，这样岂不是又成单进程了么？<br>所以:把写入操作抽象出来为单独的一个函数，这样对单独的一个函数加群，这样问题就不大了。<br>更优雅的方法:使用multiprocessing的回调函数。<br>1。把写入操作抽象为单独的一个函数<br>2。把进程需要写入的内容，作为返回值返回<br>3。使用回调函数写入进程返回内容。</li>
-</ol>
-<p><a href="https://www.jianshu.com/p/dc3cb5315ded" target="_blank" rel="external">python多进程文件加锁与回调</a><br>[进程与线程，加锁]（<a href="https://blog.csdn.net/u014265088/article/details/53128108）" target="_blank" rel="external">https://blog.csdn.net/u014265088/article/details/53128108）</a></p>
-<p><a href="https://www.cnblogs.com/kaituorensheng/p/4465768.html" target="_blank" rel="external">python进程池：multiprocessing.pool</a></p>
-<h2 id="进程能否实例化"><a href="#进程能否实例化" class="headerlink" title="进程能否实例化"></a>进程能否实例化</h2><p>能否定义在类中的进程，这个目前还没有实验</p>
-<p><a href="https://stackoverflow.com/questions/1816958/cant-pickle-type-instancemethod-when-using-multiprocessing-pool-map" target="_blank" rel="external">Can’t pickle <type 'instancemethod'=""> when using multiprocessing Pool.map()</type></a><br>另外找到的可能出错的原因：<br>Windows下面的multiprocessing跟Linux下面略有不同，Linux下面基于fork，fork之后所有的本地变量都复制一份，因此可以使用任意的全局变量；在Windows下面，多进程是通过启动新进程完成的，所有的全局变量都是重新初始化的，在运行过程中动态生成、修改过的全局变量是不能使用的。multiprocessing内部使用pickling传递map的参数到不同的进程，当传递一个函数或类时，pickling将函数或者类用所在模块+函数/类名的方式表示，如果对端的Python进程无法在对应的模块中找到相应的函数或者类，就会出错。当你在Interactive Console当中创建函数的时候，这个函数是动态添加到<strong>main</strong>模块中的，在重新启动的新进程当中不存在，所以会出错。当不在Console中，而是在独立Python文件中运行时，你会遇到另一个问题：由于你下面调用multiprocessing的代码没有保护，在新进程加载这个模块的时候会重新执行这段代码，创建出新的multiprocessing池，无限调用下去。解决这个问题的方法是永远把实际执行功能的代码加入到带保护的区域中：if <strong>name</strong> == ‘<strong>mian</strong>‘:</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>pool 可以创建进程池<br>from functools import  partial 引入多个参数<br>pool.map<br>pool.apply<br>pool.apply_aysnc<br>这些的区别在这片博客中：<a href="https://www.cnblogs.com/alan-babyblog/p/5351031.html" target="_blank" rel="external">https://www.cnblogs.com/alan-babyblog/p/5351031.html</a></p>
-<p><a href="https://blog.csdn.net/weixin_42233629/article/details/82974456）
-[进程和线程的简单解释](https://www.cnblogs.com/smallmars/p/7093603.html" target="_blank" rel="external">进程池</a></p>
-<p>进程池报错可能中断运行，但不显示错误</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/01/05/windows使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/05/windows使用/" itemprop="url">windows 使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-05T10:27:48+08:00">
-                2019-01-05
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-05T11:47:57+08:00">
-                2019-01-05
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/软件/" itemprop="url" rel="index">
-                    <span itemprop="name">软件</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/01/05/windows使用/" class="leancloud_visitors" data-flag-title="windows 使用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  155 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="systeminfo-more"><a href="#systeminfo-more" class="headerlink" title="systeminfo | more"></a>systeminfo | more</h2><p>查看系统参数</p>
-<h2 id="相同命令运行"><a href="#相同命令运行" class="headerlink" title="相同命令运行"></a>相同命令运行</h2><p>讲命令行写入bat文件中</p>
-<h2 id="后台运行-start-mim"><a href="#后台运行-start-mim" class="headerlink" title="后台运行 start /mim"></a>后台运行 start /mim</h2><p>在Linux下要使程序后台运行，可通过  java -jar Client.jar &amp;  来实现</p>
-<p>在Windows下，则通过  start /b java -jar Client.jar  来实现<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/05/windows使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/01/04/ubuntu死机及内存查看/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/04/ubuntu死机及内存查看/" itemprop="url">Ubuntu 死机原因</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-04T17:48:22+08:00">
-                2019-01-04
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-04T17:48:22+08:00">
-                2019-01-04
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/01/04/ubuntu死机及内存查看/" class="leancloud_visitors" data-flag-title="Ubuntu 死机原因">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  736 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  3 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Linux查看内存大小和插槽"><a href="#Linux查看内存大小和插槽" class="headerlink" title="Linux查看内存大小和插槽"></a>Linux查看内存大小和插槽</h2><p>Linux 查看内存的插槽数，已经使用多少插槽，每条内存多大，已使用内存多大<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dmidecode | grep  -P  -A5  &quot;Memory\s+Device&quot; | grep Size | grep -v Range </div><div class="line"></div><div class="line">Linux 查看内存支持的最大内存容量</div></pre></td></tr></table></figure></p>
-<p>dmidecode | grep -P  ‘Maximum\s+Capacity’</p>
-<p>Linux 查看内存的频率<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">dmidecode | grep -A16 &quot;Memory Device&quot; | grep &quot;Speed&quot; </div><div class="line"></div><div class="line">查看详细的主板信息</div><div class="line"></div><div class="line">dmidecode | grep -A16 &quot;System Information$&quot;</div><div class="line"></div><div class="line">查看详细的内存信息</div></pre></td></tr></table></figure></p>
-<p>dmidecode | grep -A16 “Memory Device$”<br>dmidecode -t memory</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/04/ubuntu死机及内存查看/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/01/03/pycharm快捷键及使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/03/pycharm快捷键及使用/" itemprop="url">pycharn使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-03T21:05:12+08:00">
-                2019-01-03
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-03T21:08:32+08:00">
-                2019-01-03
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/01/03/pycharm快捷键及使用/" class="leancloud_visitors" data-flag-title="pycharn使用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  641 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  3 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="pycharm-配置"><a href="#pycharm-配置" class="headerlink" title="pycharm 配置"></a>pycharm 配置</h2><p>一、在PyCharm下为你的Python项目配置Python解释器</p>
-<p>　　　　1、Settings–》Editor–》Project：当前项目名–》Project Interpreter–》Add Local</p>
-<p>二、在Python下创建Python文件、Python模块</p>
-<p>　　　　1、File–》New–》Python File</p>
-<p>　　　　2、File–》New–》Python Package<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/03/pycharm快捷键及使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/01/02/numpy知识/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/02/numpy知识/" itemprop="url">numpy 知识</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-02T15:22:14+08:00">
-                2019-01-02
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-02T15:24:04+08:00">
-                2019-01-02
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程/" itemprop="url" rel="index">
-                    <span itemprop="name">编程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/01/02/numpy知识/" class="leancloud_visitors" data-flag-title="numpy 知识">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  91 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="如何找到list中的np-nan值项"><a href="#如何找到list中的np-nan值项" class="headerlink" title="如何找到list中的np.nan值项"></a>如何找到list中的np.nan值项</h2><p>x = np.array([[1,2,3,4],<br>              [2,3,np.nan,5],<br>              [np.nan,5,2,3]])<br>print（np.argwhere(np.isnan(x))）</p>
-<p>然而实际上，有些时候，如果是用pandas读出的数据，在list中print时提示为nan，但用isnan方法却并不能正确判断，会提示TypeError，此时需要用pandas.isnull（）判断该值是否为空</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/01/01/pandas 知识/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/01/pandas 知识/" itemprop="url">pandas 使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-01T00:05:56+08:00">
-                2019-01-01
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-20T23:43:15+08:00">
-                2019-01-20
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/pandas/" itemprop="url" rel="index">
-                    <span itemprop="name">pandas</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/01/01/pandas 知识/" class="leancloud_visitors" data-flag-title="pandas 使用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1,324 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  6 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="drop-duplicates：去除重复项"><a href="#drop-duplicates：去除重复项" class="headerlink" title="drop_duplicates：去除重复项"></a>drop_duplicates：去除重复项</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">DataFrame.drop_duplicates(subset=None, keep=&apos;first&apos;, inplace=False)</div></pre></td></tr></table></figure>
-<p>这个drop_duplicate方法是对DataFrame格式的数据，去除特定列下面的重复行。返回DataFrame格式的数据。</p>
-<blockquote>
-<pre><code>subset : column label or sequence of labels, optional
-  用来指定特定的列，默认所有列
-  keep : {‘first’, ‘last’, False}, default ‘first’
-  删除重复项并保留第一次出现的项
-  inplace : boolean, default False
-  是直接在原来数据上修改还是保留一个副本
-</code></pre></blockquote>
-<h2 id="Pandas-Dataframe增、删、改、查、去重、抽样基本操作"><a href="#Pandas-Dataframe增、删、改、查、去重、抽样基本操作" class="headerlink" title="Pandas Dataframe增、删、改、查、去重、抽样基本操作"></a>Pandas Dataframe增、删、改、查、去重、抽样基本操作</h2><p>pandas的索引函数主要有三种：<br>loc 标签索引，行和列的名称<br>iloc 整型索引（绝对位置索引），绝对意义上的几行几列，起始索引为0<br>ix 是 iloc 和 loc的合体<br>at是loc的快捷方式<br>iat是iloc的快捷方式</p>
-<p><a href="https://www.cnblogs.com/zknublx/p/9645204.html" target="_blank" rel="external">https://www.cnblogs.com/zknublx/p/9645204.html</a></p>
-<h2 id="dataframe一列成多列"><a href="#dataframe一列成多列" class="headerlink" title="dataframe一列成多列"></a>dataframe一列成多列</h2><p>场景：一列中的值出现 1|2|3|56，这样用|分割的值，需要将其转换成4列。</p>
-<p>2、操作：</p>
-<p>names=df[‘names’].str.split(‘|’,expand=True)#多名字分列</p>
-<p>names.columns=[‘ids0’,’ids1’,’ids2’,’ids3’,’ids4’,’ids5’,’ids6’,’ids7’]#</p>
-<p>df=df.join(names)</p>
-<p>其中names字段的列是包含|分割的值，最后将多列合并会原dataframe里。</p>
-<h2 id="pandas应用函数-它将多个值返回到pandas-dataframe中的行"><a href="#pandas应用函数-它将多个值返回到pandas-dataframe中的行" class="headerlink" title="pandas应用函数,它将多个值返回到pandas dataframe中的行"></a>pandas应用函数,它将多个值返回到pandas dataframe中的行</h2><p>apply 中函数返回一个Series或列表<br>如返回：pd.Series([e,f,g], index=[‘a’, ‘b’, ‘c’])</p>
-<p><a href="https://codeday.me/bug/20180820/223407.html" target="_blank" rel="external">https://codeday.me/bug/20180820/223407.html</a></p>
-<p><a href="https://stackoverflow.com/questions/23690284/pandas-apply-function-that-returns-multiple-values-to-rows-in-pandas-dataframe" target="_blank" rel="external">https://stackoverflow.com/questions/23690284/pandas-apply-function-that-returns-multiple-values-to-rows-in-pandas-dataframe</a></p>
-<h2 id="groupby"><a href="#groupby" class="headerlink" title="groupby"></a>groupby</h2><p>1.groupby(“id”).resample(“M”).agg(“mean”)会报错：Exception: Column(s) num_temp selected 并不知道原因<br>但可以这样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">df.set_index(&apos;date&apos;).groupby(&apos;name&apos;)[&apos;ext price&apos;].resample(&quot;M&quot;).sum()</div><div class="line"></div><div class="line">df[[&quot;ext price&quot;, &quot;quantity&quot;, &quot;unit price&quot;]].agg([&apos;sum&apos;, &apos;mean&apos;])</div><div class="line"></div><div class="line">df.agg(&#123;&apos;ext price&apos;: [&apos;sum&apos;, &apos;mean&apos;], &apos;quantity&apos;: [&apos;sum&apos;, &apos;mean&apos;], &apos;unit price&apos;: [&apos;mean&apos;]&#125;)</div></pre></td></tr></table></figure></p>
-<p><a href="https://segmentfault.com/a/1190000012394176?utm_medium=referral&amp;utm_source=tuicool" target="_blank" rel="external">python处理数据的风骚操作pandas 之 groupby&amp;agg</a></p>
-<p>2.这些操作对数值型的列自动进行计算，非数值型的会去掉<br>如果不对原始数据作限制的话，聚合函数会自动选择数值型数据进行聚合计算。如果不想对年龄计算平均值的话，就需要剔除改变量：<br>student.drop(“age”).groupby(“id”).mean()</p>
-<p>“”统计值””<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">def stats(x,time_interval):</div><div class="line">    return pd.Series([x.count(),x.min(),x.idxmin(),</div><div class="line">    x.quantile(.25),x.median(),</div><div class="line">    x.quantile(.75),x.mean(),</div><div class="line">    x.max(),x.idxmax(),</div><div class="line">    x.mad(),x.var(),</div><div class="line">    x.std(),x.skew(),x.kurt()],</div><div class="line">    index = [time_interval+&apos;_Count&apos;,time_interval+&apos;_Min&apos;,time_interval+&apos;_Whicn_Min&apos;,</div><div class="line">    time_interval+&apos;_Q1&apos;,time_interval+&apos;_Median&apos;,time_interval+&apos;_Q3&apos;,time_interval+&apos;_Mean&apos;,</div><div class="line">    time_interval+&apos;_Max&apos;,time_interval+&apos;_Which_Max&apos;,time_interval+&apos;_Mad&apos;,</div><div class="line">    time_interval+&apos;_Var&apos;,time_interval+&apos;_Std&apos;,time_interval+&apos;_Skew&apos;,time_interval+&apos;_Kurt&apos;])</div></pre></td></tr></table></figure></p>
-<p><a href="Python数据分析之pandas学习">Python数据分析之pandas学习</a></p>
-<p>3.对分组进行迭代：<br>for name, group in df.groupby(‘key1’):<br>        print (name)<br>        print (group)</p>
-<p><a href="https://blog.csdn.net/youngbit007/article/details/54288603" target="_blank" rel="external">python/pandas数据挖掘（十四）-groupby,聚合，分组级运算</a></p>
-<p><a href="https://segmentfault.com/q/1010000009769989" target="_blank" rel="external">Pandas按日期对状态进行汇总统计</a><br><a href="https://cloud.tencent.com/developer/article/1365705" target="_blank" rel="external">《Pandas Cookbook》第10章 时间序列分析1. Python和Pandas日期工具的区别2. 智能切分时间序列3. 只使用适用于DatetimeIndex的方法4. 计算每周的犯罪数5.</a></p>
-<h3 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h3><p><a href="https://www.cnblogs.com/huiyang865/p/5577772.html" target="_blank" rel="external">pandas聚合和分组运算——GroupBy技术(1)</a></p>
-<h2 id="时间序列划分时间间隔"><a href="#时间序列划分时间间隔" class="headerlink" title="时间序列划分时间间隔"></a>时间序列划分时间间隔</h2><p>在进行数据操作时, 经常会碰到基于同一列进行错位相加减的操作, 即对某一列进行向上或向下平移(shift).<br>我需要计算网络数据包之间的时间间隔，使用pandas的实现过程如下。</p>
-<p>例如  a = ​[‘2011-08-10 03:56:10’,  ‘2011-08-10 03:56:20’,  ‘2011-08-10 03:56:40’,  ‘2011-08-10 03:56:50’]， 时间字符串列表。</p>
-<p>import pandas as pd​</p>
-<p>import numpy as np​</p>
-<ol>
-<li><p>将a转换为Series结构， b = ​pd.Series(a)</p>
-</li>
-<li><p>将b转换为DateTime数据类型， c = pd.to_datetime(b)</p>
-</li>
-<li><p>计算时间间隔TimeDelta， d = (c - c.shift()​).dropna()</p>
-</li>
-<li><p>计算间隔了多少秒(将TimeDelta类型数据转换为基于秒的整数)， e = d.map(lambda x: x/np.timedelta64(1, ‘s’))</p>
-</li>
-</ol>
-<p><em>*</em> Pandas计算出的时间间隔数据的类型是np.timedelta64, 不是Python标准库中的timedelta类型，因此没有total_seconds()函数，需要除以np.timedelta64的1秒来计算间隔了多少秒。</p>
-<p>也可以将Pandas的Series转换成numpy的ndarray后计算间隔的秒数：</p>
-<ol>
-<li><p>b = np.array(a)</p>
-</li>
-<li><p>c = np.diff(b)/np.timedelta64(1, ‘s’)​</p>
-</li>
-</ol>
-<p><em>*</em>numpy的diff()函数实在是太赞了。​</p>
-<p><a href="http://blog.sina.com.cn/s/blog_4ddef8f80102vtun.html" target="_blank" rel="external">使用Pandas获得数据的时间间隔序列</a><br><a href="https://blog.csdn.net/kizgel/article/details/78333833" target="_blank" rel="external">python对列进行平移变换(shift)</a></p>
-<p><a href="https://blog.csdn.net/weixin_38656890/article/details/79782188" target="_blank" rel="external">pandas 时间序列 之日期范围、频率及移动</a>中图<br><a href="/img/pandas频率选项.png">!频率选项</a></p>
-<p>##</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">print(‘---------获取2013年的数据-----------‘)</div><div class="line">print(df[‘2013‘].head(2)) # 获取2013年的数据</div><div class="line">print(df[‘2013‘].tail(2)) # 获取2013年的数据</div></pre></td></tr></table></figure>
-<p><a href="https://blog.csdn.net/mhywoniu/article/details/78514664" target="_blank" rel="external">Pandas日期数据处理：如何按日期筛选、显示及统计数据</a></p>
-<h2 id="滑窗，Rolling-和-Expanding-待研究"><a href="#滑窗，Rolling-和-Expanding-待研究" class="headerlink" title="滑窗，Rolling 和 Expanding 待研究"></a>滑窗，Rolling 和 Expanding 待研究</h2><p>移动窗口函数</p>
-<h2 id="一种用于时间序列操作的重要用法，是使用滑窗（sliding-windown）或呈指数降低的权重（exponentially-decaying-weights），来对时间序列进行统计值计算和其他一些函数计算。-这个对于消除噪声或有缺陷的数据是很有用的。这里我们称之为Moving-Window-Functions（移动窗口函数），不过其中也包括了不适用固定长度窗口的函数-functions-without-a-fixed-length-window-，比如指数加权移动平均数（exponentially-weighted-moving-average）。和其他一些统计函数以后，这些函数也会自动无视缺失值。"><a href="#一种用于时间序列操作的重要用法，是使用滑窗（sliding-windown）或呈指数降低的权重（exponentially-decaying-weights），来对时间序列进行统计值计算和其他一些函数计算。-这个对于消除噪声或有缺陷的数据是很有用的。这里我们称之为Moving-Window-Functions（移动窗口函数），不过其中也包括了不适用固定长度窗口的函数-functions-without-a-fixed-length-window-，比如指数加权移动平均数（exponentially-weighted-moving-average）。和其他一些统计函数以后，这些函数也会自动无视缺失值。" class="headerlink" title="一种用于时间序列操作的重要用法，是使用滑窗（sliding windown）或呈指数降低的权重（exponentially decaying weights），来对时间序列进行统计值计算和其他一些函数计算。 这个对于消除噪声或有缺陷的数据是很有用的。这里我们称之为Moving Window Functions（移动窗口函数），不过其中也包括了不适用固定长度窗口的函数(functions without a fixed-length window)，比如指数加权移动平均数（exponentially weighted moving average）。和其他一些统计函数以后，这些函数也会自动无视缺失值。"></a>一种用于时间序列操作的重要用法，是使用滑窗（sliding windown）或呈指数降低的权重（exponentially decaying weights），来对时间序列进行统计值计算和其他一些函数计算。 这个对于消除噪声或有缺陷的数据是很有用的。这里我们称之为Moving Window Functions（移动窗口函数），不过其中也包括了不适用固定长度窗口的函数(functions without a fixed-length window)，比如指数加权移动平均数（exponentially weighted moving average）。和其他一些统计函数以后，这些函数也会自动无视缺失值。</h2><p>作者：蜘蛛侠不会飞<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/qq_40587575/article/details/81205873" target="_blank" rel="external">https://blog.csdn.net/qq_40587575/article/details/81205873</a> </p>
-<p><a href="https://www.jianshu.com/p/67f9dfa31c67" target="_blank" rel="external">Rolling 和 Expanding</a></p>
-<h2 id="多级索引"><a href="#多级索引" class="headerlink" title="多级索引"></a>多级索引</h2><p><a href="https://zhuanlan.zhihu.com/p/36160627" target="_blank" rel="external">给妹子讲python-S02E16多级索引Pandas的取值、分片与运算</a></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><a href="http://www.cnblogs.com/en-heng/p/5630849.html" target="_blank" rel="external">Pandas：让你像写SQL一样做数据分析（一）</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/12/31/python错误/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/31/python错误/" itemprop="url">python错误</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T22:08:54+08:00">
-                2018-12-31
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-31T22:09:22+08:00">
-                2018-12-31
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程/" itemprop="url" rel="index">
-                    <span itemprop="name">编程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/12/31/python错误/" class="leancloud_visitors" data-flag-title="python错误">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  258 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="AttributeError-‘module’-object-has-no-attribute-‘handlers’"><a href="#AttributeError-‘module’-object-has-no-attribute-‘handlers’" class="headerlink" title="AttributeError: ‘module’ object has no attribute ‘handlers’"></a>AttributeError: ‘module’ object has no attribute ‘handlers’</h2><p>原来导入logging模块后并没有自动导入其子模块handlers</p>
-<pre><code>import logging
-import logging.handlers
-……
-</code></pre>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/31/python错误/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2401,7 +2235,7 @@ import logging.handlers
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">74</span>
+                <span class="site-state-item-count">81</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
