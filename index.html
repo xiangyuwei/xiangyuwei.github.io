@@ -761,179 +761,6 @@ $(function() {
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/06/20/tensorflow 代码总结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/20/tensorflow 代码总结/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-20T10:16:15+08:00">
-                2019-06-20
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-08-01T16:46:59+08:00">
-                2019-08-01
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/06/20/tensorflow 代码总结/" class="leancloud_visitors" data-flag-title="">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  481 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  3 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: tensorflow 代码总结</p>
-<p>categories:<br>– 代码</p>
-<h2 id="数据不平衡"><a href="#数据不平衡" class="headerlink" title="数据不平衡"></a>数据不平衡</h2><p>pip install tf-nightly-gpu-2.0-preview</p>
-<p>首先我们需要统计每种类别包含的样本数量，并基于此计算类别权重：</p>
-<h1 id="计算每种类别数据的数量"><a href="#计算每种类别数据的数量" class="headerlink" title="计算每种类别数据的数量"></a>计算每种类别数据的数量</h1><p>counts = np.bincount(train_targets[:, 0])</p>
-<h1 id="基于数量计算类别权重"><a href="#基于数量计算类别权重" class="headerlink" title="基于数量计算类别权重"></a>基于数量计算类别权重</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">weight_for_0 = 1. / counts[0]</div><div class="line">weight_for_1 = 1. / counts[1]</div><div class="line">class_weight = &#123;0: weight_for_0, 1: weight_for_1&#125;</div><div class="line"></div><div class="line">在训练时，加上一行代码设置类别权重即可：</div><div class="line">model.fit(train_features, train_targets,</div><div class="line">          batch_size=2048,</div><div class="line">          epochs=50,</div><div class="line">          verbose=2,</div><div class="line">          callbacks=callbacks,</div><div class="line">          validation_data=(val_features, val_targets),</div><div class="line">          # 设置类别权重</div><div class="line">          class_weight=class_weight)</div></pre></td></tr></table></figure>
-<p>完整代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div></pre></td><td class="code"><pre><div class="line"># -*- coding: utf-8 -*-</div><div class="line">&quot;&quot;&quot;## First, vectorize the CSV data&quot;&quot;&quot;</div><div class="line">import csv</div><div class="line">import numpy as np</div><div class="line"></div><div class="line"># Get the real data from https://www.kaggle.com/mlg-ulb/creditcardfraud/downloads/creditcardfraud.zip/</div><div class="line">fname = &apos;/Users/fchollet/Downloads/creditcard.csv&apos;</div><div class="line">all_features = []</div><div class="line">all_targets = []</div><div class="line">with open(fname) as f:</div><div class="line">    for i, line in enumerate(f):</div><div class="line">        if i == 0:</div><div class="line">            print(&apos;HEADER:&apos;, line.strip())</div><div class="line">            continue  # Skip header</div><div class="line">        fields = line.strip().split(&apos;,&apos;)</div><div class="line">        all_features.append([float(v.replace(&apos;&quot;&apos;, &apos;&apos;)) for v in fields[:-1]])</div><div class="line">        all_targets.append([int(fields[-1].replace(&apos;&quot;&apos;, &apos;&apos;))])</div><div class="line">        if i == 1:</div><div class="line">            print(&apos;EXAMPLE FEATURES:&apos;, all_features[-1])</div><div class="line"></div><div class="line">features = np.array(all_features, dtype=&apos;float32&apos;)</div><div class="line">targets = np.array(all_targets, dtype=&apos;uint8&apos;)</div><div class="line">print(&apos;features.shape:&apos;, features.shape)</div><div class="line">print(&apos;targets.shape:&apos;, targets.shape)</div><div class="line"></div><div class="line">&quot;&quot;&quot;## Prepare a validation set&quot;&quot;&quot;</div><div class="line">num_val_samples = int(len(features) * 0.2)</div><div class="line">train_features = features[:-num_val_samples]</div><div class="line">train_targets = targets[:-num_val_samples]</div><div class="line">val_features = features[-num_val_samples:]</div><div class="line">val_targets = targets[-num_val_samples:]</div><div class="line"></div><div class="line">print(&apos;Number of training samples:&apos;, len(train_features))</div><div class="line">print(&apos;Number of validation samples:&apos;, len(val_features))</div><div class="line"></div><div class="line">&quot;&quot;&quot;## Analyze class imbalance in the targets&quot;&quot;&quot;</div><div class="line">counts = np.bincount(train_targets[:, 0])</div><div class="line">print(&apos;Number of positive samples in training data: &#123;&#125; (&#123;:.2f&#125;% of total)&apos;.format(counts[1],</div><div class="line">                                                                                  100 * float(counts[1]) / len(</div><div class="line">                                                                                      train_targets)))</div><div class="line"></div><div class="line">weight_for_0 = 1. / counts[0]</div><div class="line">weight_for_1 = 1. / counts[1]</div><div class="line"></div><div class="line">&quot;&quot;&quot;## Normalize the data using training set statistics&quot;&quot;&quot;</div><div class="line">mean = np.mean(train_features, axis=0)</div><div class="line">train_features -= mean</div><div class="line">val_features -= mean</div><div class="line">std = np.std(train_features, axis=0)</div><div class="line">train_features /= std</div><div class="line">val_features /= std</div><div class="line"></div><div class="line">from tensorflow import keras</div><div class="line"></div><div class="line">model = keras.Sequential([</div><div class="line">    keras.layers.Dense(256, activation=&apos;relu&apos;,</div><div class="line">                       input_shape=(train_features.shape[-1],)),</div><div class="line">    keras.layers.Dense(256, activation=&apos;relu&apos;),</div><div class="line">    keras.layers.Dropout(0.3),</div><div class="line">    keras.layers.Dense(256, activation=&apos;relu&apos;),</div><div class="line">    keras.layers.Dropout(0.3),</div><div class="line">    keras.layers.Dense(1, activation=&apos;sigmoid&apos;),</div><div class="line">])</div><div class="line">model.summary()</div><div class="line"></div><div class="line">metrics = [keras.metrics.FalseNegatives(name=&apos;fn&apos;),</div><div class="line">           keras.metrics.FalsePositives(name=&apos;fp&apos;),</div><div class="line">           keras.metrics.TrueNegatives(name=&apos;tn&apos;),</div><div class="line">           keras.metrics.TruePositives(name=&apos;tp&apos;),</div><div class="line">           keras.metrics.Precision(name=&apos;precision&apos;),</div><div class="line">           keras.metrics.Recall(name=&apos;recall&apos;)]</div><div class="line"></div><div class="line">model.compile(optimizer=keras.optimizers.Adam(1e-2),</div><div class="line">              loss=&apos;binary_crossentropy&apos;,</div><div class="line">              metrics=metrics)</div><div class="line"></div><div class="line">callbacks = [keras.callbacks.ModelCheckpoint(&apos;fraud_model_at_epoch_&#123;epoch&#125;.h5&apos;)]</div><div class="line">class_weight = &#123;0: weight_for_0, 1: weight_for_1&#125;</div><div class="line"></div><div class="line">model.fit(train_features, train_targets,</div><div class="line">          batch_size=2048,</div><div class="line">          epochs=50,</div><div class="line">          verbose=2,</div><div class="line">          callbacks=callbacks,</div><div class="line">          validation_data=(val_features, val_targets),</div><div class="line">          class_weight=class_weight)</div></pre></td></tr></table></figure></p>
-<p>参考：<a href="https://mp.weixin.qq.com/s/K9U3GCW1tAIYRoKKq_nG9w" target="_blank" rel="external">https://mp.weixin.qq.com/s/K9U3GCW1tAIYRoKKq_nG9w</a><br>代码地址：<br><a href="https://colab.research.google.com/drive/1xL2jSdY-MGlN60gGuSH_L30P7kxxwUfM" target="_blank" rel="external">https://colab.research.google.com/drive/1xL2jSdY-MGlN60gGuSH_L30P7kxxwUfM</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/05/13/卷积网络随笔/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -953,7 +780,7 @@ $(function() {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/13/卷积网络随笔/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2019/05/13/卷积网络随笔/" itemprop="url">卷积网络</a></h1>
         
 
         <div class="post-meta">
@@ -981,7 +808,7 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-08-01T16:41:59+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-08-01T16:56:16+08:00">
                 2019-08-01
               </time>
             
@@ -995,7 +822,7 @@ $(function() {
 
           
           
-             <span id="/2019/05/13/卷积网络随笔/" class="leancloud_visitors" data-flag-title="">
+             <span id="/2019/05/13/卷积网络随笔/" class="leancloud_visitors" data-flag-title="卷积网络">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1020,7 +847,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  13 字
+                  8 字
                 </span>
               
 
@@ -1056,8 +883,7 @@ $(function() {
       
         
           
-            <p>title:卷积网络</p>
-<p>卷积就是加权求和</p>
+            <p>卷积就是加权求和</p>
 
           
         
@@ -1120,7 +946,7 @@ $(function() {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/11/社交发现论文总结/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2019/05/11/社交发现论文总结/" itemprop="url">社交网络论文总结</a></h1>
         
 
         <div class="post-meta">
@@ -1148,8 +974,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-06-19T14:35:40+08:00">
-                2019-06-19
+              <time title="更新于" itemprop="dateModified" datetime="2019-08-01T16:56:19+08:00">
+                2019-08-01
               </time>
             
           </span>
@@ -1162,7 +988,7 @@ $(function() {
 
           
           
-             <span id="/2019/05/11/社交发现论文总结/" class="leancloud_visitors" data-flag-title="">
+             <span id="/2019/05/11/社交发现论文总结/" class="leancloud_visitors" data-flag-title="社交网络论文总结">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1187,7 +1013,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  452 字
+                  443 字
                 </span>
               
 
@@ -1223,9 +1049,7 @@ $(function() {
       
         
           
-            <p>title:社交网络论文总结</p>
-<hr>
-<h2 id="Understanding-the-Facets-of-Homophily-in-Social-Psycho-Sociological-Network-Communities"><a href="#Understanding-the-Facets-of-Homophily-in-Social-Psycho-Sociological-Network-Communities" class="headerlink" title="Understanding the Facets of Homophily in Social Psycho-Sociological Network Communities"></a>Understanding the Facets of Homophily in Social Psycho-Sociological Network Communities</h2><p>这篇论文研究朋友，亲属，同事之间的同质性：</p>
+            <h2 id="Understanding-the-Facets-of-Homophily-in-Social-Psycho-Sociological-Network-Communities"><a href="#Understanding-the-Facets-of-Homophily-in-Social-Psycho-Sociological-Network-Communities" class="headerlink" title="Understanding the Facets of Homophily in Social Psycho-Sociological Network Communities"></a>Understanding the Facets of Homophily in Social Psycho-Sociological Network Communities</h2><p>这篇论文研究朋友，亲属，同事之间的同质性：</p>
 <p>人工标注了关系类型</p>
 <p>建立了四个模型预测年龄，性别，人格，values</p>
 <p>最后还进行了链接预测和社区发现的比较，比较这三个不同群体中引入人格特征后社区发现的准确度</p>
@@ -2164,6 +1988,201 @@ $(function() {
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/01/23/ssh调试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/23/ssh调试/" itemprop="url">远程服务器链接失败调试</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T20:18:50+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-25T09:57:03+08:00">
+                2019-04-25
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/01/23/ssh调试/" class="leancloud_visitors" data-flag-title="远程服务器链接失败调试">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  196 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>检测是否已启动</p>
+<p>ps -e | grep ssh</p>
+<p>看到有ssh字样，说明已启动，如果没有就手动启动</p>
+<p>/etc/init.d/ssh start<br>vi /etc/ssh/sshd_config 没找到错误原因<br>启动失败，systemctl status ssh.service 查找具体信息，发现<br>Failed to start OpenBSD Secure Shell server</p>
+<p>用sshd -T 查找错误原因，出现报错信息：<br>fatal: Missing privilege separation directory: /var/empty/sshd<br>检查/var/empty/sshd目录，发现确实不存在。手工创建此目录后，重新启动，发现sshd可以发起新的连接了。</p>
+<p><a href="https://serverfault.com/questions/798283/failed-to-start-openbsd-secure-shell-server" target="_blank" rel="external">Failed to start OpenBSD Secure Shell server [closed]</a></p>
+<p><a href="http://www.linuxyw.com/linux/yunweiguzhang/20130520/415.html" target="_blank" rel="external">ssh连接不上linux服务器（fatal: Missing privilege sepa</a></p>
+<h2 id="终端闪退"><a href="#终端闪退" class="headerlink" title="终端闪退"></a>终端闪退</h2><p>可能Host key verification failed.REMOTE HOST IDENTIFICATION HAS CHANGED! 服务器被重新安装过<br>windows:在本地机器上，不是服务器，删除 .ssh/known_hosts<br>linux:ssh-keygen -R ip</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -2213,7 +2232,7 @@ $(function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-count">81</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
