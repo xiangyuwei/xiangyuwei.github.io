@@ -13,7 +13,7 @@
   <entry>
     <title></title>
     <url>%2F2019%2F05%2F13%2F%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%E9%9A%8F%E7%AC%94%2F</url>
-    <content type="text"><![CDATA[卷积就是加权求和]]></content>
+    <content type="text"><![CDATA[title:卷积网络 卷积就是加权求和]]></content>
   </entry>
   <entry>
     <title></title>
@@ -21,9 +21,9 @@
     <content type="text"><![CDATA[title:社交网络论文总结 Understanding the Facets of Homophily in Social Psycho-Sociological Network Communities这篇论文研究朋友，亲属，同事之间的同质性： 人工标注了关系类型 建立了四个模型预测年龄，性别，人格，values 最后还进行了链接预测和社区发现的比较，比较这三个不同群体中引入人格特征后社区发现的准确度 Metadata vs. Ground-truth: A Myth behind the Evolution of Community Detection Methods基于不同属性建立的社区与基于社区发现的社区进行比较，分析每种社区发现算法在链接预测，信息传播，病毒感染之间的区别 代码库：snap:https://github.com/snap-stanford/snap 图神经网络图网络主要解决的是AI对结构化数据的处理，而在动态数据、大规模数据、非结构化数据等领域，图网络的作为依旧有限 影响力distinguish the effect of peer influence and group conformity. Confluence: Conformity Influence in Large Social Networks从众效应群体，个人，同伴 根据历史行为预测下一行为 Social Influence Analysis in Large-scale Networks在不同主题下的社会影响力Topical Affinity Propagation (TAP) 应用于专家发现相似的节点，哪一个节点对另一个节点有较强的影响 ##Mining Topic-level Influence in Heterogeneous Networks ##Topic-Level Opinion Influence Model (TOIM): An Investigation Using Tencent Microblogging 问题网络表示的作用聚类的作用 GraphSAGEWeisfeiler-Lehman Isomorphism Test（图同构算法）对于不带标签的图，初始的时候，两个图的全部节点赋值1（或以度为标签），然后做多轮wl，出现节点ID和各ID出现次数不一致的情况就认为不是Isomorphism 图注意网络通俗易懂！使用Excel和TF实现Transformerhttps://mp.weixin.qq.com/s/3_dK289DPREI0KNj0NaR-A]]></content>
   </entry>
   <entry>
-    <title></title>
-    <url>%2F2019%2F05%2F06%2F%E6%96%B0%E6%96%87%E6%A1%A3%2F</url>
-    <content type="text"><![CDATA[title: 网络表示学习论文 transNET: 边的关系是两个合作者摘要的关键词 研究目的：为什么相互关注 兴趣节点：位置节点：内容节点：内容风格出行方式来源内容主题 工作量，总结，突出问题数据集大小对比实验参考文献（新）格式]]></content>
+    <title><![CDATA[网络表示学习论文]]></title>
+    <url>%2F2019%2F05%2F06%2F%E7%BD%91%E7%BB%9C%E8%A1%A8%E7%A4%BA%E8%AE%BA%E6%96%87%2F</url>
+    <content type="text"><![CDATA[transNET: 边的关系是两个合作者摘要的关键词 研究目的：为什么相互关注 兴趣节点：位置节点：内容节点：内容风格出行方式来源内容主题 工作量，总结，突出问题数据集大小对比实验参考文献（新）格式]]></content>
   </entry>
   <entry>
     <title><![CDATA[igraph 安装]]></title>
