@@ -413,6 +413,1208 @@ $(function() {
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/12/11/情感分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/11/情感分析/" itemprop="url">情感分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-11T23:40:07+08:00">
+                2018-12-11
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-08-03T19:56:17+08:00">
+                2019-08-03
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/科研/" itemprop="url" rel="index">
+                    <span itemprop="name">科研</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/12/11/情感分析/" class="leancloud_visitors" data-flag-title="情感分析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2,844 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  10 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>情感分析（SA）又称为倾向性分析和意见挖掘，它是对带有情感色彩的主观性文本进行分析、处理、归纳和推理的过程，其中情感分析还可以细分为情感极性（倾向）分析，情感程度分析，主客观分析等。</p>
+<p>情感极性分析的目的是对文本进行褒义、贬义、中性的进行判断。</p>
+<p>情感程度分析主要是对同一情感极性中再进行划分或者细分，以描述该极性的强度。例如“喜爱”和“敬爱”都是褒义词，但是“敬爱”相对来说褒义的程度更加强烈一些。</p>
+<p>主客观分析主要目的是识别文本中哪些部分是客观称述而不带情感色彩，哪些是带有情感的主管描述。在对于微博，或者商品评论时，这个分析步骤一般都忽略，因为微博和商品评论本身就一定存在强烈的情感色彩，而且客观描述的情感值理论上是为零，不影响最终的情感分析结果。</p>
+<h2 id="基于词典"><a href="#基于词典" class="headerlink" title="基于词典"></a>基于词典</h2><p>基于词典的方法主要通过制定一系列的情感词典和规则，对文本进行段落拆借、句法分析，计算情感值，最后通过情感值来作为文本的情感倾向依据。<br><a href="https://kexue.fm/archives/3360" target="_blank" rel="external">基于词典的比较直观的博客</a><br><a href="http://bigdata.51cto.com/art/201705/539695.htm" target="_blank" rel="external">Python做文本挖掘的情感极性分析（基于情感词典的方法）</a></p>
+<p>基于词典的情感分析：</p>
+<p>情感分析对象的粒度最小是词汇，但是表达一个情感的最基本的单位则是句子，词汇虽然能描述情感的基本信息，但是单一的词汇缺少对象，缺少关联程度，并且不同的词汇组合在一起所得到的情感程度不同甚至情感倾向都相反。所以以句子为最基本的情感分析粒度是较为合理的。篇章或者段落的情感可以通过句子的情感来计算。<br>词典可从《知网》情感分析用词语集(beta版)<a href="http://www.keenage.com/download/sentiment.rar" target="_blank" rel="external">http://www.keenage.com/download/sentiment.rar</a><br>1.1.2 否定词词典<br>1.1.3 程度副词词典</p>
+<p>基于词典的情感分析大致步骤如下：</p>
+<p>考虑到语句中的褒贬并非稳定分布，以上步骤对于积极和消极的情感词分开执行，最终的到两个分值，分别表示文本的正向情感值和负向情感值。</p>
+<p>进过以上的步骤，每篇文章的每个段落的每个句子都会有相应的情感分值，之后针对需求，可以针对句子的分值作统计计算，也可以针对段落的分值作统计计算，得到最后的文本的正向情感值和负向情感值。</p>
+<p>四、基于词典的情感分析实践：</p>
+<p>(1）基于词典的情感分析首先要构建情感词典及程度副词词典。通常是拉取一些比较成熟的情感词典。常见的如知网，台湾大学简体中文情感极性词典。将几个词典组合后再针对需要添加领域内的一些词就差不多了。情感词典，有多家研究机构进行了分析，并且公布了结果，比如大连理工、汉语情感词极值表、台湾大学情感NTUSD、知网Hownet情感词、中文褒贬义词典v1.0（清华大学李军）等，有些词典分为正向、逆向单词两个部分；有些放在一起，然后有单独的标签，可以cbind合并在一起。本文引用的是谭松波老师的正向、逆向情感词典。</p>
+<p>各个词典对情感词的倾向定义可能矛盾，出现同一个词具有情感正向和负向两种倾向的情况，尽管这种情况更加符合现实，但是违背了基于词典的情感分析的原假设，所以要将这些词去重，我们的方法是一个词如果同时属于正向和负向，仅保留正向分类。</p>
+<p>(2)  准备待分析文本、分词工具：</p>
+<p>待分析文本：可以爬取一些购物网站、团购、电影平台的评论数据作为实验数据。</p>
+<p>分析工具：中文的话推荐使用结巴分析，python、java等都有对应的接口，文档和应用案例也相对较多。同时需要准备一份自定义词典，由于领域内的新词及一些网络流行语等不容易切分出来，自己制作一份词典就OK了。<br>1、一、二级清洗</p>
+<p>文本挖掘中，对文本的清洗工作尤为重要，会出现比如：英文逗号、波浪线、英文单引号、英文双引号、分隔符等。</p>
+<p>(3）利用结巴分词分解出一段文本中的句子、及每个句子中词汇：</p>
+<p>(4）计算部分：首先将一段输入文本调用句子切分函数得到一系列句子，对每个句子进行分析处理，得到每个句子的分词结果。搜索分词结果中的情感词并标注和计数，由于情感词存在一些修饰词(如非常、一般、不等)对情感词的情感程度甚至情感极性影响很大，在此，搜索情感词前的程度词，根据程度大小，赋予不同权值，同时搜索情感词前的否定词，赋予反转权值（-1）。综合得到一个句子的正向情感得分、负向情感得分。</p>
+<p>(5）综合每个句子的结果得到最后的文本情感值。</p>
+<p>语言很复杂。讽刺、歧义、多义性、否定性和俚语都是机器难以理解的因素，对情感分析有巨大的影响。因此，简单的基于字典的方法往往无法分析复杂的情感表达。</p>
+<h2 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h2><p>基于机器学习的方法大多将这个问题转化为一个分类问题来看待，对于情感极性的判断，将目标情感分类2类：正、负；对情感程度的分析则转化为回归问题看待。对训练文本进行人工标标注，然后进行有监督的机器学习过程。</p>
+<p>在还没有获得大量文本的情况下，使用基于词典的方法或者简单的机器学习方法是一个不错的选择。获得大量文本后，可以尝试使用一些复杂的机器学习方法甚至使用深度学习来进一步提升分析效果。<br>机器学习的方法精确度更高，因为词典匹配会由于语义表达的丰富性而出现很大误差，而机器学习方法不会。而且它可使用的场景更多样。无论是主客观分类还是正负面情感分类，机器学习都可以完成任务。而无需像词典匹配那样要深入到词语、句子、语法这些层面。</p>
+<p>而词典方法适用的语料范围更广，无论是手机、电脑这些商品，还是书评、影评这些语料，都可以适用。但机器学习则极度依赖语料，把手机语料训练出来的的分类器拿去给书评分类，那是注定要失败的。</p>
+<p>nltk 进行情感分析<a href="http://bigdata.51cto.com/art/201801/562716.htm" target="_blank" rel="external">使用python+机器学习方法进行情感分析</a><br><a href="https://www.jianshu.com/p/4cfcf1610a73" target="_blank" rel="external">Python做文本情感分析之情感极性分析</a>‘包括词典和情感学习’,这篇文章的<a href="http://www.aidnoob.com/ai/python/qinggan2/" target="_blank" rel="external">代码实现</a><br><a href="https://yq.aliyun.com/articles/65239" target="_blank" rel="external">Twitter是怎么做情感分析的？长文解读！</a></p>
+<h2 id="非监督情感分类"><a href="#非监督情感分类" class="headerlink" title="非监督情感分类"></a>非监督情感分类</h2><p>论文：文本情感分类中生成式情感模型的发展<br>依次介绍了隐性情感模型（lsm）,联合情感主题模型（jts）,主题情感混合模型（TSM）</p>
+<p><a href="https://blog.csdn.net/laozhaokun/article/details/30767353" target="_blank" rel="external">一个简单的情感识别系统的实现</a><br><a href="Ahttps://blog.csdn.net/ABCD2010014357/article/details/48031393?locationNum=9" target="_blank" rel="external">Analysis of sentiments using unsupervised learning techniques 使用非监督学习技术分析情感（IEEE2013</a></p>
+<h3 id="主题模型"><a href="#主题模型" class="headerlink" title="主题模型"></a>主题模型</h3><p>要了解主题模型，先了解贝叶斯分类<br>潜在狄立克雷分配的显著特征——集合中所有文档共享同一主题集合，但每个文档中各个主题所占的比例又都各不相同</p>
+<h4 id="贝叶斯分类"><a href="#贝叶斯分类" class="headerlink" title="贝叶斯分类"></a>贝叶斯分类</h4><p><a href="https://blog.csdn.net/u011508640/article/details/72815981" target="_blank" rel="external">详解最大似然估计（MLE）、最大后验概率估计（MAP），以及贝叶斯公式的理解</a></p>
+<p>主题模型就是利用了词语的同现特性<br><a href="http://v.qiye10000.com/v/XODAyNvImMvIy.html" target="_blank" rel="external">http://v.qiye10000.com/v/XODAyNvImMvIy.html</a>　吴立德<br><a href="https://www.bilibili.com/video/av27193854/?p=3" target="_blank" rel="external">https://www.bilibili.com/video/av27193854/?p=3</a>　七月在线</p>
+<p>主题模型参考文献汇总 <a href="https://blog.csdn.net/aws3217150/article/details/53840029" target="_blank" rel="external">https://blog.csdn.net/aws3217150/article/details/53840029</a></p>
+<p>专知主题模型汇总<a href="https://cloud.tencent.com/developer/article/1090052" target="_blank" rel="external">【专知荟萃16】主题模型Topic Model知识资料全集（基础/进阶/论文/综述/代码/专家，附PDF下载</a></p>
+<h2 id="word2vec"><a href="#word2vec" class="headerlink" title="word2vec"></a>word2vec</h2><p>直观理解输入什么，输出什么<br><a href="https://zhuanlan.zhihu.com/p/26306795?utm_source=wechat_session&amp;utm_medium=social&amp;from=groupmessage" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/26306795?utm_source=wechat_session&amp;utm_medium=social&amp;from=groupmessage</a><br><a href="https://www.jianshu.com/p/def47a349299" target="_blank" rel="external">【译】word2vec&amp;doc2vec做文本情感分析</a><br><a href="https://github.com/AimeeLee77/wiki_zh_word2vec" target="_blank" rel="external">利用Python构建Wiki中文语料词向量模型试验</a></p>
+<h2 id="词典及语料库"><a href="#词典及语料库" class="headerlink" title="词典及语料库"></a>词典及语料库</h2><p><a href="http://www.cnblogs.com/finesite/p/3381803.html" target="_blank" rel="external">http://www.cnblogs.com/finesite/p/3381803.html</a><br>有多家研究机构进行了分析，并且公布了结果，比如大连理工、汉语情感词极值表、台湾大学情感NTUSD、知网Hownet情感词、中文褒贬义词典v1.0（清华大学李军），谭松波老师的正向、逆向情感词典等，有些词典分为正向、逆向单词两个部分；有些放在一起，然后有单独的标签，可以cbind合并在一起。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.cnblogs.com/arkenstone/p/6064196.html" target="_blank" rel="external">Stanford NLP学习笔记：7. 情感分析（Sentiment）</a></p>
+<h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><p>(词向量已训练好)基于微博评论的数据挖掘与情感分析(cnn,lstm) <a href="https://github.com/joliph/" target="_blank" rel="external">https://github.com/joliph/</a><br>Text-Classify</p>
+<p>贝叶斯情感分类<a href="https://github.com/RobTomb/pac_ai/blob/master/code/sentimentNaiveBayes.py" target="_blank" rel="external">https://github.com/RobTomb/pac_ai/blob/master/code/sentimentNaiveBayes.py</a></p>
+<p>2017年CCF大数据与计算智能竞赛使用的模型和实现代码，选择了基于主题的文本情感分析赛题。采用情感词典+自定义规则完成比赛　<a href="https://github.com/digfound/CCFCompetition" target="_blank" rel="external">https://github.com/digfound/CCFCompetition</a></p>
+<p>基于Python的新浪微博社交网络分析　<a href="https://github.com/ruansongsong/weibo_forward_analysis" target="_blank" rel="external">https://github.com/ruansongsong/weibo_forward_analysis</a></p>
+<p>基于新浪微博数据的情感极性分析，使用机器学习算法训练模型，使用的分类方法包括朴素贝叶斯、SVM<br><a href="https://github.com/ljw9609/SentimentAnalysis" target="_blank" rel="external">https://github.com/ljw9609/SentimentAnalysis</a></p>
+<p>（snownlp朴素贝叶斯）微博情感分析，支持分析用户最近三个月、六个月、九个月、十二个月（转）发的微博，分析得出用户这段时间内“正能量”的、“负能量”的、“中性”的微博的条数，从而分析得出用户这段时间的情感总体状况，支持将分析结果发到微博。<a href="https://github.com/qibinlou/SinaWeibo-Emotion-Classification" target="_blank" rel="external">https://github.com/qibinlou/SinaWeibo-Emotion-Classification</a></p>
+<p>采用LSTM模型，训练一个能够识别文本postive, neutral, negative三种情感的分类器　<a href="https://github.com/Edward1Chou/SentimentAnalysis" target="_blank" rel="external">https://github.com/Edward1Chou/SentimentAnalysis</a></p>
+<p>英语情感分析模型比较　<a href="https://github.com/sebastianruder/NLP-progress/blob/master/english/sentiment_analysis.md" target="_blank" rel="external">https://github.com/sebastianruder/NLP-progress/blob/master/english/sentiment_analysis.md</a></p>
+<p>Using Spark to analyse weibo emotions <a href="https://github.com/irmowan/Weibo-Emotions" target="_blank" rel="external">https://github.com/irmowan/Weibo-Emotions</a></p>
+<p>在线评论的细粒度情感分析baseline <a href="https://github.com/AIChallenger/AI_Challenger_2018" target="_blank" rel="external">https://github.com/AIChallenger/AI_Challenger_2018</a></p>
+<h2 id="经典论文"><a href="#经典论文" class="headerlink" title="经典论文"></a>经典论文</h2><p>Sentiment Analysis and Opinion Mining　刘冰</p>
+<h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p>twitter 语料Sanders corpus　<a href="http://www.sananalytics.com/la" target="_blank" rel="external">http://www.sananalytics.com/la</a><br>b/twitter-sentiment/) </p>
+<h2 id="词嵌入情感分析"><a href="#词嵌入情感分析" class="headerlink" title="词嵌入情感分析"></a>词嵌入情感分析</h2><p>Sentiment-Polarized Word Embedding for Multi-Label Sentiment Classification</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/12/11/人群聚类动力学/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/11/人群聚类动力学/" itemprop="url">人群聚类动力学</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-11T23:40:07+08:00">
+                2018-12-11
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-26T22:55:02+08:00">
+                2018-11-26
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/研究/" itemprop="url" rel="index">
+                    <span itemprop="name">研究</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/12/11/人群聚类动力学/" class="leancloud_visitors" data-flag-title="人群聚类动力学">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2,351 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  8 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><p>群体类型有哪些，再找划分特征。具体应用分析目标</p>
+<p>1）如果希望对一个小区的居民按常驻和非常驻人口进行一下划分，那么性别，年龄，学历这样的因素应该和结果的相关度是比较低的，而一个人在小区出现的频率、时间点和延续的时间就更应该为分析者关注。<br>  2）如果希望针对一个高科技产品推广的受众人群进行一下划分的话，那么年龄，学历，购买力等可能都是需要考虑关注的因素。<br>关注数据的不同侧面，有可能得到不同的聚类结果。同时这些聚类结果也都是有意义，可以解释的</p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>多维聚类分析：<br>贝叶斯网络，隐树模型，隐树模型允许模型中有多个隐变量，所以自然地可以多维同时聚类（<a href="https://www.cnblogs.com/wentingtu/archive/2011/12/21/2295691.html）" target="_blank" rel="external">https://www.cnblogs.com/wentingtu/archive/2011/12/21/2295691.html）</a></p>
+<p>凸：</p>
+<pre><code>指的是顺着梯度方向走到底就 一定是 最优解 。
+
+大部分 传统机器学习 问题 都是凸的。
+</code></pre><p>非凸：</p>
+<pre><code>指的是顺着梯度方向走到底只能保证是局部最优，不能保证 是全局最优。
+
+深度学习以及小部分传统机器学习问题都是非凸的。
+</code></pre><p>如何对用户进行聚类分析？　<a href="https://www.zhihu.com/question/19982667" target="_blank" rel="external">https://www.zhihu.com/question/19982667</a></p>
+<h2 id="统计学"><a href="#统计学" class="headerlink" title="统计学"></a>统计学</h2><p>协方差就是这样一种用来度量两个随机变量关系的统计量<br>协方差多了就是协方差矩阵。协方差矩阵计算的是不同维度之间的协方差，而不是不同样本之间的。<br>按列计算均值。协方差矩阵还可以这样计算，先让样本矩阵中心化，即每一维度减去该维度的均值，使每一维度上的均值为0，然后直接用新的到的样本矩阵乘上它的转置，然后除以(N-1)即可</p>
+<p><a href="https://www.zhihu.com/question/20852004" target="_blank" rel="external">如何通俗易懂地解释「协方差」与「相关系数」的概念？</a></p>
+<p>标准差描述了变量在整体变化过程中偏离均值的幅度。协方差除以标准差，也就是把协方差中变量变化幅度对协方差的影响剔除掉，这样协方差也就标准化了，它反应的就是两个变量每单位变化时的情况。这也就是相关系数的公式含义了.协方差是会受到单位的影响的，而相关系数就是消除了量纲的影响，来看两者的相关性。</p>
+<p><a href="https://blog.csdn.net/qq_32742009/article/details/82148089" target="_blank" rel="external">主元分析（PCA）以及与SVD的区别联系</a><br><a href="https://blog.csdn.net/wangjian1204/article/details/50642732" target="_blank" rel="external">https://blog.csdn.net/wangjian1204/article/details/50642732</a><br>主成分分析中协方差矩阵用奇异值进行分解</p>
+<p>三大相关系数：统计学之三大相关性系数（pearson、spearman、kendall）</p>
+<p>三个相关性系数（pearson, spearman, kendall）反应的都是两个变量之间变化趋势的方向以及程度，其值范围为-1到+1，0表示两个变量不相关，正值表示正相关，负值表示负相关，值越大表示相关性越强。<br>计算皮尔森相关性系数时，变量的标准差不能为0（分母不能为0），也就是说你的两个变量中任何一个的值不能都是相同的。如果没有变化，用皮尔森相关系数是没办法算出这个变量与另一个变量之间是不是有相关性的。<br>实验数据通常假设是成对的来自于正态分布的总体。为啥通常会假设为正态分布呢？因为我们在求皮尔森相关性系数以后，通常还会用t检验之类的方法来进行皮尔森相关性系数检验，而 t检验是基于数据呈正态分布的假设的。 实验数据之间的差距不能太大，或者说皮尔森相关性系数受异常值的影响比较大。</p>
+<p>斯皮尔曼相关性系数，通常也叫斯皮尔曼秩相关系数。“秩”，可以理解成就是一种顺序或者排序，那么它就是根据原始数据的排序位置进行求解，这种表征形式就没有了求皮尔森相关性系数时那些限制。不用管X和Y这两个变量具体的值到底差了多少，只需要算一下它们每个值所处的排列位置的差值，就可以求出相关性系数了</p>
+<p>肯德尔相关性系数，又称肯德尔秩相关系数，它也是一种秩相关系数，不过它所计算的对象是分类变量。<br>分类变量可以理解成有类别的变量，可以分为<br>无序的，比如性别（男、女）、血型（A、B、O、AB）；<br>有序的，比如肥胖等级（重度肥胖，中度肥胖、轻度肥胖、不肥胖）。<br>通常需要求相关性系数的都是有序分类变量<br>检查所有点对（Point Pairs，即两个二维点），计算二维数据里面符合条件i)的点对（一致点对，concordant point pairs）对数目和ii)的点对(不一致点对，discordant point pairs)数目，如果这两个值的差值来描述关系。显然如果两种情况的点数目大致相当，说明两个维度关系相当“混乱”。</p>
+<p>参考：</p>
+<p>肯德尔相关性系数（点对个数）<a href="https://segmentfault.com/a/1190000007904710?utm_source=tag-newest" target="_blank" rel="external">https://segmentfault.com/a/1190000007904710?utm_source=tag-newest</a><br>斯皮尔曼相关性系数（位置差）<a href="https://blog.csdn.net/sinat_24143931/article/details/78798630" target="_blank" rel="external">https://blog.csdn.net/sinat_24143931/article/details/78798630</a><br>详细说明　<a href="http://bbs.tianya.cn/post-develop-2087551-1.shtml" target="_blank" rel="external">http://bbs.tianya.cn/post-develop-2087551-1.shtml</a><br>如何理解皮尔逊相关系数（Pearson Correlation Coefficient）　<a href="https://www.zhihu.com/question/19734616" target="_blank" rel="external">https://www.zhihu.com/question/19734616</a></p>
+<h2 id="因子分析与pca"><a href="#因子分析与pca" class="headerlink" title="因子分析与ｐｃａ"></a>因子分析与ｐｃａ</h2><p>pca相关矩阵的特征值所对应的特征向量矩阵中的元素， 是原始变量的标准化数据，均值为0，方差为1。其实质是p维空间的坐标变换，不改变原始数据的结构。PCA的计算，协方差矩阵奇异值分解（可以理解为特征值分解，只不过特征值分解只适用于方阵）后，奇异值（就是特征值）从大到小排列，对应特征向量重要性（即数据分布方差的大小）从大到小排列。将特征向量矩阵取前k列，与原矩阵相乘，这样的几何意义是将原矩阵投影到k个特征向量上，因为矩阵乘法的意义就是一个变换矩阵作用于另一个矩阵X。</p>
+<p> 主成分的各系数，是唯一确定的、正交的。不可以对系数矩阵进行任何的旋转，且系数大小并不代表原变量与主成分的相关程度；而因子模型的系数矩阵是不唯一的、可以进行旋转的，且该矩阵表明了原变量和公共因子的相关程度。<br>主成分分析中，主成分的方差等于原始数据相关矩阵的特征根，其标准差也即特征根的平方根，于是可以将除以其标准差（单位化）后转化成合适的公因子，</p>
+<p>因子分析是基于相关矩阵进行的，即要求各指标之间具有一定的相关性，求出相关矩阵是必要的<br>初始因子载荷矩阵（见表3）反映了公因子与原始变量之间的相关程度，而主成分的系数矩阵并不反映公因子与原始变量之间的相关程度</p>
+<p>KMO统计量是0.659，且Bartlett球体检验 值为190.584，卡方统计值的显著性水平为0.000小于0.01，都说明各指标之间具有较高相关性，因此本文数据适用于作因子分析。</p>
+<p>参考：<br>主成分分析与因子分析之比较及实证分析（<a href="https://blog.csdn.net/chen790646223/article/details/45511741）" target="_blank" rel="external">https://blog.csdn.net/chen790646223/article/details/45511741）</a></p>
+<p><a href="https://www.jianshu.com/p/33ad4e2b29b3" target="_blank" rel="external">https://www.jianshu.com/p/33ad4e2b29b3</a><br><a href="http://www.aboutyun.com/blog-29-3403.html" target="_blank" rel="external">http://www.aboutyun.com/blog-29-3403.html</a><br>PCA（主成分分析）与FA（因子分析）的直白理解  <a href="https://blog.csdn.net/yujianmin1990/article/details/49247307" target="_blank" rel="external">https://blog.csdn.net/yujianmin1990/article/details/49247307</a><br>pca实例　<a href="https://blog.csdn.net/zhongkelee/article/details/44064401" target="_blank" rel="external">https://blog.csdn.net/zhongkelee/article/details/44064401</a><br>pca <a href="https://www.jianshu.com/p/07f4c2356965" target="_blank" rel="external">https://www.jianshu.com/p/07f4c2356965</a><br>主成分分析（PCA）原理详解 <a href="https://zhuanlan.zhihu.com/p/37777074" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/37777074</a></p>
+<h2 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h2><p>奇异值分解能够用于任意 m × n {\displaystyle m\times n} m\times n矩阵，而特征分解只能适用于特定类型的方阵</p>
+<p>线性代数中的秩，简单点说就是——矩阵的非零行/列的个数</p>
+<p>奇异矩阵是线性代数的概念，就是该矩阵的秩不是满秩。首先，看这个矩阵是不是方阵（即行数和列数相等的矩阵。若行数和列数不相等，那就谈不上奇异矩阵和非奇异矩阵）。<br>然后，再看此矩阵的行列式|A|是否等于0，若等于0，称矩阵A为奇异矩阵；若不等于0，称矩阵A为非奇异矩阵。 同时，由|A|≠0可知矩阵A可逆，这样可以得出另外一个重要结论:可逆矩阵就是非奇异矩阵，非奇异矩阵也是可逆矩阵。 如果A为奇异矩阵，则AX=0有无穷解，AX=b有无穷解或者无解。如果A为非奇异矩阵，则AX=0有且只有唯一零解，AX=b有唯一解。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/12/11/Ubuntu 系统软件安装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/11/Ubuntu 系统软件安装/" itemprop="url">Ubuntu 系统软件安装</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-11T23:40:07+08:00">
+                2018-12-11
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-20T22:55:33+08:00">
+                2019-04-20
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/12/11/Ubuntu 系统软件安装/" class="leancloud_visitors" data-flag-title="Ubuntu 系统软件安装">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  4,644 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  21 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>注意安装要在安装包目录下。</p>
+<h2 id="安装eclipse-pydev"><a href="#安装eclipse-pydev" class="headerlink" title="安装eclipse+pydev"></a>安装eclipse+pydev</h2><p><a href="http://www.cnblogs.com/restran/archive/2011/11/11/2245812.html" target="_blank" rel="external">教程</a></p>
+<h2 id="安装ss"><a href="#安装ss" class="headerlink" title="安装ss"></a>安装ss</h2><p>参考github上<a href="https://github.com/shadowsocks/shadowsocks-qt5/wiki/%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97" target="_blank" rel="external">内容</a>下载shadowsock</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo add-apt-repository ppa:hzwhuang/ss-qt5</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install shadowsocks-qt5</div></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/11/Ubuntu 系统软件安装/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/12/11/python小知识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/11/python小知识/" itemprop="url">python小知识</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-11T23:40:07+08:00">
+                2018-12-11
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-05T17:18:37+08:00">
+                2019-01-05
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/12/11/python小知识/" class="leancloud_visitors" data-flag-title="python小知识">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2,748 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  12 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="np-where"><a href="#np-where" class="headerlink" title="np.where()"></a>np.where()</h2><p>带一个星号（*）参数的函数传人的参数存储为一个元组（tuple）；</p>
+<p>而带两个星号（*）参数的函数传人的参数则存储为一个字典（dict）</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/11/python小知识/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/12/11/pyhon3与python2的区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/11/pyhon3与python2的区别/" itemprop="url">pyhon3与python2的区别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-11T23:40:07+08:00">
+                2018-12-11
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-01T00:15:31+08:00">
+                2019-01-01
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/12/11/pyhon3与python2的区别/" class="leancloud_visitors" data-flag-title="pyhon3与python2的区别">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  76 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="basestring"><a href="#basestring" class="headerlink" title="basestring"></a>basestring</h2><p>python3 为　str</p>
+<p>ininstance(s,basestring) 为ininstance(s,str) </p>
+<h2 id="python3默认使用UTF-8格式"><a href="#python3默认使用UTF-8格式" class="headerlink" title="python3默认使用UTF-8格式"></a>python3默认使用UTF-8格式</h2><p>开头一般不用加 # -<em>- coding:utf-8 -</em>-</p>
+<p>但是有的中文中还是会出现无法识别的情况，抛出Non-UTF-8 code starting with ‘\xe7’  错误，这时候就需要在第一行加上这句。</p>
+<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding:utf-8 --"></a>-<em>- coding:utf-8 -</em>-</h1>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/12/11/linux命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/11/linux命令/" itemprop="url">linux 命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-11T23:40:07+08:00">
+                2018-12-11
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-03T21:32:17+08:00">
+                2019-04-03
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/12/11/linux命令/" class="leancloud_visitors" data-flag-title="linux 命令">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  7,115 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  28 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="后台运行"><a href="#后台运行" class="headerlink" title="后台运行"></a>后台运行</h2><p>在应用Unix/Linux时，我们一般想让某个程序在后台运行，于是我们将常会用 &amp; 在程序结尾来让程序自动运行。比如我们要运行mysql在后台： /usr/local/mysql/bin/mysqld_safe –user=mysql &amp;。可是有很多程序并不想mysqld一样，这样我们就需要nohup命令，怎样使用nohup命令呢？这里讲解nohup命令的一些用法。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/11/linux命令/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/11/15/熵/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1165,1184 +2367,6 @@ mpl.rcParams[‘axes.unicode_minus’]=False #用来正常显示负号
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/10/20/感兴趣研究点/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/20/感兴趣研究点/" itemprop="url">感兴趣研究点</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-20T15:09:12+08:00">
-                2018-10-20
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-20T15:09:12+08:00">
-                2018-10-20
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/10/20/感兴趣研究点/" class="leancloud_visitors" data-flag-title="感兴趣研究点">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  10 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>识别行人吵架预警视频</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/10/20/奇思妙想/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/20/奇思妙想/" itemprop="url">奇思妙想</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-20T15:05:46+08:00">
-                2018-10-20
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-20T15:05:46+08:00">
-                2018-10-20
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/10/20/奇思妙想/" class="leancloud_visitors" data-flag-title="奇思妙想">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  102 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>1.消息记录的发送时间，间隔所反映的心理活动<br>2.Attention在语义蕴涵 (Entailment) 中的应用</p>
-<p>给定一个用英文描述的前提和假设作为输入，输出假设与前提是否矛盾、是否相关或者是否成立</p>
-<p>前提：在一个婚礼派对上拍照</p>
-<p>假设：有人结婚了</p>
-<p>该例子中的假设是成立的</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/10/09/tmux/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/09/tmux/" itemprop="url">tmux</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-09T15:41:32+08:00">
-                2018-10-09
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-09T15:41:32+08:00">
-                2018-10-09
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/10/09/tmux/" class="leancloud_visitors" data-flag-title="tmux">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  2,134 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  9 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="tmux"><a href="#tmux" class="headerlink" title="tmux"></a>tmux</h2><p>tmux 中直接通过默认前缀 ctrl + b 之后输入对应命令来操作<br>    session 会话：session是一个特定的终端组合。输入tmux就可以打开一个新的session<br>        ‘tmux new -s session_name’ 创建一个叫做 session_name 的 tmux session<br>        ‘tmux attach -t session_name’ 重新开启叫做 session_name 的 tmux session<br>        tmux switch -t session_name 转换到叫做 session_name 的 tmux session<br>        tmux list-sessions / tmux ls 列出现有的所有 session<br>        ‘tmux detach’ 离开当前开启的 session<br>        tmux kill-server 关闭所有 session<br>    window 窗口：session 中可以有不同的 window（但是同时只能看到一个 window）<br>        tmux new-window 创建一个新的 window<br>        tmux list-windows<br>        tmux select-window -t :0-9 根据索引转到该 window<br>        tmux rename-window 重命名当前 window<br>    pane 面板：window 中可以有不同的 pane（可以把 window 分成不同的部分）<br>        tmux split-window 将 window 垂直划分为两个 pane<br>        tmux split-window -h 将 window 水平划分为两个 pane<br>        tmux swap-pane -[UDLR] 在指定的方向交换 pane<br>        tmux select-pane -[UDLR] 在指定的方向选择下一个 pane</p>
-<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><pre><code>? 列出所有快捷键；按q返回
-d 脱离当前会话,可暂时返回Shell界面
-s 选择并切换会话；在同时开启了多个会话时使用
-&apos;D 选择要脱离的会话；在同时开启了多个会话时使用&apos;
-: 进入命令行模式；此时可输入支持的命令，例如 kill-server 关闭所有tmux会话
-[ 复制模式，光标移动到复制内容位置，空格键开始，方向键选择复制，回车确认，q/Esc退出
-] 进入粘贴模式，粘贴之前复制的内容，按q/Esc退出
-~ 列出提示信息缓存；其中包含了之前tmux返回的各种提示信息
-t 显示当前的时间
-ctrl + z 挂起当前会话
-&apos;$ 重命名session&apos;
-</code></pre><h3 id="session"><a href="#session" class="headerlink" title="session"></a>session</h3><ol>
-<li>open session</li>
-</ol>
-<p>$ tmux new-session -s basic<br>或者<br>$ tmux new -s basic</p>
-<p>-s参数表示session名称，如果不加-s参数，那么Tmux默认会新建一个以数字(下标从0开始)命名的session，并默认打开一个window。打开一个session后，后续的所有控制Tmux本身的快捷键都需要加前缀，默认是 Ctrl+b ，以下把前缀按键称为Prefix。</p>
-<ol>
-<li>detach session<br>想要暂时离开Tmux，回到终端环境时，可以通过快捷键 Prefix+d (d for detach)。要注意的时，即使是detach的状态，Tmux中在运行的程序还会继续运行。想要回到Tmux session时，只需执行：</li>
-</ol>
-<p>$ tmux attach -t basic</p>
-<p>-t参数可以指定要attach的session。</p>
-<ol>
-<li><p>list session<br>终端中执行 tmux ls (ls for list session)可以列出当前有多少个session。如果已经在session中，执行 Prefix+s (s for session)可以列出当前有多少个session，并且可通过上、下键选择要进入的session。</p>
-</li>
-<li><p>kill session<br>要真正关闭一个session，可以在终端下执行命令 ‘tmux kill-session -t basic’ ，其中-t参数表示session名称。</p>
-</li>
-</ol>
-<p>###　窗口操作<br>c ‘创建新窗口’<br>&amp; ‘关闭当前窗口’<br>, ‘重命名当前窗口，便于识别’<br>. 修改当前窗口编号，相当于重新排序<br>f 在所有窗口中查找关键词，便于窗口多了切换<br>[0-9] 数字键切换到指定窗口<br>p 切换至上一窗口<br>n 切换至下一窗口<br>l 前后窗口间互相切换<br>w 通过窗口列表切换窗口</p>
-<h3 id="面板操作"><a href="#面板操作" class="headerlink" title="面板操作"></a>面板操作</h3><p>“ ‘将当前面板上下分屏’（我自己改成了 |）<br>% ‘将当前面板左右分屏’（我自己改成了 -）<br>x ‘关闭当前分屏’<br>Ctrl-方向键 ‘调整分隔窗口大小’<br>    ! 将当前面板置于新窗口,即新建一个窗口,其中仅包含当前面板<br>    ctrl+方向键 以1个单元格为单位移动边缘以调整当前面板大小<br>    alt+方向键 以5个单元格为单位移动边缘以调整当前面板大小<br>    q 显示面板编号<br>    o 选择当前窗口中下一个面板<br>    方向键 移动光标选择对应面板<br>    { 向前置换当前面板<br>    } 向后置换当前面板<br>    alt+o 逆时针旋转当前窗口的面板<br>    ctrl+o 顺时针旋转当前窗口的面板<br>    z 最大化当前所在面板<br>    page up 向上滚动屏幕，q 退出<br>    page down 向下滚动屏幕，q 退出<br>Prefix+Space (空格键): 对当前窗口下的所有pane重新排列布局，每按一次，换一种样式。<br>Prefix+z : 最大化当前pane。再按一次后恢复。</p>
-<h3 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h3><p>‘’’试想这样一个场景：当你打开多个窗口后，然后想将其中几个窗口合并到当前窗口中，以便对比观察输出。</p>
-<p>实际上，你的要求就是将其它窗口变成面板，然后合并到当前窗口中。对于这种操作，我们可以在当前窗口，按下prefix + :，打开命令行，然后输入如下命令：</p>
-<p>join-pane -s window01 # 合并名称为window01的窗口的默认（第一个）面板到当前窗口中<br>join-pane -s window01.1 # .1显式指定了第一个面板，.2就是第二个面板(我本地将面板编号起始值设置为1，默认是0)</p>
-<p>每次执行join-pane命令都会合并一个面板，并且指定的窗口会减少一个面板，直到面板数量为0，窗口关闭。</p>
-<p>除了在当前会话中操作外，join-pane命令甚至可以从其它指定会话中合并面板，格式为join-pane -s [session_name]:[window].[pane]，如join-pane -s 2:1.1 即合并第二个会话的第一个窗口的第一个面板到当前窗口，当目标会话的窗口和面板数量为0时，会话便会关闭。</p>
-<h3 id="自定义配置"><a href="#自定义配置" class="headerlink" title="自定义配置"></a>自定义配置</h3><p>如果没有配置文件的话先创建: touch ~/.tmux.conf<br>```</p>
-<h1 id="Send-prefix"><a href="#Send-prefix" class="headerlink" title="Send prefix"></a>Send prefix</h1><p>set-option -g prefix C-a<br>unbind-key C-a<br>bind-key C-a send-prefix </p>
-<h1 id="Use-Alt-arrow-keys-to-switch-panes"><a href="#Use-Alt-arrow-keys-to-switch-panes" class="headerlink" title="Use Alt-arrow keys to switch panes"></a>Use Alt-arrow keys to switch panes</h1><p>bind -n M-Left select-pane -L<br>bind -n M-Right select-pane -R<br>bind -n M-Up select-pane -U<br>bind -n M-Down select-pane -D</p>
-<h1 id="Shift-arrow-to-switch-windows"><a href="#Shift-arrow-to-switch-windows" class="headerlink" title="Shift arrow to switch windows"></a>Shift arrow to switch windows</h1><p>bind -n S-Left previous-window<br>bind -n S-Right next-window </p>
-<h1 id="Mouse-mode"><a href="#Mouse-mode" class="headerlink" title="Mouse mode"></a>Mouse mode</h1><p>set -g mouse on </p>
-<h1 id="Set-easier-window-split-keys"><a href="#Set-easier-window-split-keys" class="headerlink" title="Set easier window split keys"></a>Set easier window split keys</h1><p>bind-key v split-window -h<br>bind-key h split-window -v </p>
-<h1 id="Easy-config-reload"><a href="#Easy-config-reload" class="headerlink" title="Easy config reload"></a>Easy config reload</h1><p>bind-key r source-file ~/.tmux.conf \; display-message “tmux.conf reloaded”</p>
-<h1 id="key-bindings-for-horizontal-and-vertical-panes"><a href="#key-bindings-for-horizontal-and-vertical-panes" class="headerlink" title="key bindings for horizontal and vertical panes"></a>key bindings for horizontal and vertical panes</h1><p>unbind %<br>bind | split-window -h # 使用|竖屏，方便分屏<br>unbind ‘“‘<br>bind - split-window -v # 使用-横屏，方便分屏</p>
-<p>#– statusbar –#<br>set -g status-justify centre<br>set -g status-left “#[fg=red]s#S:w#I.p#P#[default]”<br>set -g status-right ‘[#(whoami)#(date +” %m-%d %H:%M “)]’<br>set -g status-left-attr bright<br>set -g status-left-length 120<br>set -g status-right-length 120<br>set -g status-utf8 on<br>set -g status-interval 1<br>set -g visual-activity on<br>setw -g monitor-activity on<br>setw -g automatic-rename off</p>
-<h1 id="default-statusbar-colors"><a href="#default-statusbar-colors" class="headerlink" title="default statusbar colors"></a>default statusbar colors</h1><p>set -g status-bg colour235 #base02<br>set -g status-fg colour136 #yellow<br>set -g status-attr default</p>
-<h1 id="default-window-title-colors"><a href="#default-window-title-colors" class="headerlink" title="default window title colors"></a>default window title colors</h1><p>setw -g window-status-fg colour244<br>setw -g window-status-bg default</p>
-<p>#setw -g window-status-attr dim</p>
-<h1 id="active-window-title-colors"><a href="#active-window-title-colors" class="headerlink" title="active window title colors"></a>active window title colors</h1><p>setw -g window-status-current-fg colour166 #orange<br>setw -g window-status-current-bg default</p>
-<p>#setw -g window-status-current-attr bright</p>
-<h1 id="window-title-string-uses-statusbar-variables"><a href="#window-title-string-uses-statusbar-variables" class="headerlink" title="window title string (uses statusbar variables)"></a>window title string (uses statusbar variables)</h1><p>set -g set-titles-string ‘#T’<br>set -g status-justify “centre”<br>set -g window-status-format ‘#I #W’<br>set -g window-status-current-format ‘ #I #W ‘</p>
-<h1 id="pane-border"><a href="#pane-border" class="headerlink" title="pane border"></a>pane border</h1><p>set -g pane-active-border-fg ‘#55ff55’<br>set -g pane-border-fg ‘#555555’</p>
-<h1 id="message-text"><a href="#message-text" class="headerlink" title="message text"></a>message text</h1><p>set -g message-bg colour235 #base02<br>set -g message-fg colour166 #orange</p>
-<h1 id="pane-number-display"><a href="#pane-number-display" class="headerlink" title="pane number display"></a>pane number display</h1><p>set -g display-panes-active-colour colour33 #blue<br>set -g display-panes-colour colour166 #orange</p>
-<h1 id="clock"><a href="#clock" class="headerlink" title="clock"></a>clock</h1><p>setw -g clock-mode-colour colour64 #green</p>
-<p>Send prefix<br>把prefix的ctrl+b变为了ctrl+a，因为这样按起来方便些。基本上用tmux的都改了这个。</p>
-<p>Use Alt-arrow keys to switch panes<br>不用按prefix，直接用alt+箭头在pane之间switch。实际用过之后才发现真是太方便了！</p>
-<p>Shift arrow to switch windows<br>不用按prefix，直接用shift+箭头在window之间switch。太方便了！</p>
-<p>Mouse mode<br>开启鼠标模式。用鼠标就能切换window，pane，还能调整pane的大小，方便！</p>
-<p>Set easier window split keys<br>这一部分是用来更方便切分pane的。prefix + v 代表竖着切，prefix + h 代表横着切。比起默认的切割方法不仅直观而且方便。</p>
-<p>首先，在更改了.tmux.conf后，在tmux里的快捷键没有变化。查找后发现是tmux只有在新建session的时候，才会去找tmux.conf文件。所以说，之前创建的那些session都没有参考tmux.conf. 就用tmux ls  tmux kill-session -a只保留当前session。再删除当前session ‘tmux kill-session -t XX’。这下删除了所有创建好的session。</p>
-<h2 id="放大字体"><a href="#放大字体" class="headerlink" title="放大字体"></a>放大字体</h2><p>Ctrl+shift+“+”</p>
-<h2 id="黏贴"><a href="#黏贴" class="headerlink" title="黏贴"></a>黏贴</h2><p>要按住shift,再右键</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://blog.csdn.net/u011138533/article/details/53109247" target="_blank" rel="external">https://blog.csdn.net/u011138533/article/details/53109247</a><br><a href="https://www.cnblogs.com/piperck/p/4992159.html" target="_blank" rel="external">https://www.cnblogs.com/piperck/p/4992159.html</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/09/30/隐私研究方向乱弹/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/30/隐私研究方向乱弹/" itemprop="url">隐私挖掘研究方向乱弹</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T18:14:10+08:00">
-                2018-09-30
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-14T18:47:55+08:00">
-                2018-08-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/研究/" itemprop="url" rel="index">
-                    <span itemprop="name">研究</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/09/30/隐私研究方向乱弹/" class="leancloud_visitors" data-flag-title="隐私挖掘研究方向乱弹">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  60 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>知识融合，预测</p>
-<p>时间：过去，现在，未来。<br>空间：地点</p>
-<p>信息空间和用户空间<br>预测红包流向、学堂在线伴读机器人「小木」</p>
-<p>为什么时间没了<br>思维模式<br>执念，与忧虑</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/09/30/知乎应用技术/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/30/知乎应用技术/" itemprop="url">知乎灵感</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T18:14:10+08:00">
-                2018-09-30
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-23T09:18:10+08:00">
-                2018-08-23
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/项目/" itemprop="url" rel="index">
-                    <span itemprop="name">项目</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/09/30/知乎应用技术/" class="leancloud_visitors" data-flag-title="知乎灵感">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  287 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="悟空"><a href="#悟空" class="headerlink" title="悟空"></a>悟空</h2><p>图谱分析平台的数据基于用户的写行为，将用户，设备，IP， Objects (提问，回答..) 作为节点，具体行为作为边。当行为发生时，将用户与设备，用户与 IP， 用户与对应的 object 关联, 而每个节点的度就代表发生关联的数量。 </p>
-<p>采用了 modularity + fast-unfolding 实现了社区发现的算法，拿设备社区为例，算法的输入是设备与用户的关联，输出是每个设备节点和每个用户节点以及他们的社区号。模块度（modularity）是衡量网络划分非常常用的维度，模块度越大，意味着比期望更多的边落在了一个社区内，划分效果越好。Fast-unfolding 则是一个迭代算法，主要目标就是提升划分社区效率，使得网络划分的模块度不断增大，每次迭代都会将同一社区的节点合并，所以随着迭代的增加，计算量也在不断减少。迭代停止的条件是社区趋于稳定或者达到迭代次数上限。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/09/30/情感分析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/30/情感分析/" itemprop="url">情感分析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T18:14:10+08:00">
-                2018-09-30
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-25T18:00:23+08:00">
-                2018-11-25
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/科研/" itemprop="url" rel="index">
-                    <span itemprop="name">科研</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/09/30/情感分析/" class="leancloud_visitors" data-flag-title="情感分析">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  2,828 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  10 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>情感分析（SA）又称为倾向性分析和意见挖掘，它是对带有情感色彩的主观性文本进行分析、处理、归纳和推理的过程，其中情感分析还可以细分为情感极性（倾向）分析，情感程度分析，主客观分析等。</p>
-<p>情感极性分析的目的是对文本进行褒义、贬义、中性的进行判断。</p>
-<p>情感程度分析主要是对同一情感极性中再进行划分或者细分，以描述该极性的强度。例如“喜爱”和“敬爱”都是褒义词，但是“敬爱”相对来说褒义的程度更加强烈一些。</p>
-<p>主客观分析主要目的是识别文本中哪些部分是客观称述而不带情感色彩，哪些是带有情感的主管描述。在对于微博，或者商品评论时，这个分析步骤一般都忽略，因为微博和商品评论本身就一定存在强烈的情感色彩，而且客观描述的情感值理论上是为零，不影响最终的情感分析结果。</p>
-<h2 id="基于词典"><a href="#基于词典" class="headerlink" title="基于词典"></a>基于词典</h2><p>基于词典的方法主要通过制定一系列的情感词典和规则，对文本进行段落拆借、句法分析，计算情感值，最后通过情感值来作为文本的情感倾向依据。<br><a href="https://kexue.fm/archives/3360" target="_blank" rel="external">基于词典的比较直观的博客</a><br><a href="http://bigdata.51cto.com/art/201705/539695.htm" target="_blank" rel="external">Python做文本挖掘的情感极性分析（基于情感词典的方法）</a></p>
-<p>基于词典的情感分析：</p>
-<p>情感分析对象的粒度最小是词汇，但是表达一个情感的最基本的单位则是句子，词汇虽然能描述情感的基本信息，但是单一的词汇缺少对象，缺少关联程度，并且不同的词汇组合在一起所得到的情感程度不同甚至情感倾向都相反。所以以句子为最基本的情感分析粒度是较为合理的。篇章或者段落的情感可以通过句子的情感来计算。<br>词典可从《知网》情感分析用词语集(beta版)<a href="http://www.keenage.com/download/sentiment.rar" target="_blank" rel="external">http://www.keenage.com/download/sentiment.rar</a><br>1.1.2 否定词词典<br>1.1.3 程度副词词典</p>
-<p>基于词典的情感分析大致步骤如下：</p>
-<p>考虑到语句中的褒贬并非稳定分布，以上步骤对于积极和消极的情感词分开执行，最终的到两个分值，分别表示文本的正向情感值和负向情感值。</p>
-<p>进过以上的步骤，每篇文章的每个段落的每个句子都会有相应的情感分值，之后针对需求，可以针对句子的分值作统计计算，也可以针对段落的分值作统计计算，得到最后的文本的正向情感值和负向情感值。</p>
-<p>四、基于词典的情感分析实践：</p>
-<p>(1）基于词典的情感分析首先要构建情感词典及程度副词词典。通常是拉取一些比较成熟的情感词典。常见的如知网，台湾大学简体中文情感极性词典。将几个词典组合后再针对需要添加领域内的一些词就差不多了。情感词典，有多家研究机构进行了分析，并且公布了结果，比如大连理工、汉语情感词极值表、台湾大学情感NTUSD、知网Hownet情感词、中文褒贬义词典v1.0（清华大学李军）等，有些词典分为正向、逆向单词两个部分；有些放在一起，然后有单独的标签，可以cbind合并在一起。本文引用的是谭松波老师的正向、逆向情感词典。</p>
-<p>各个词典对情感词的倾向定义可能矛盾，出现同一个词具有情感正向和负向两种倾向的情况，尽管这种情况更加符合现实，但是违背了基于词典的情感分析的原假设，所以要将这些词去重，我们的方法是一个词如果同时属于正向和负向，仅保留正向分类。</p>
-<p>(2)  准备待分析文本、分词工具：</p>
-<p>待分析文本：可以爬取一些购物网站、团购、电影平台的评论数据作为实验数据。</p>
-<p>分析工具：中文的话推荐使用结巴分析，python、java等都有对应的接口，文档和应用案例也相对较多。同时需要准备一份自定义词典，由于领域内的新词及一些网络流行语等不容易切分出来，自己制作一份词典就OK了。<br>1、一、二级清洗</p>
-<p>文本挖掘中，对文本的清洗工作尤为重要，会出现比如：英文逗号、波浪线、英文单引号、英文双引号、分隔符等。</p>
-<p>(3）利用结巴分词分解出一段文本中的句子、及每个句子中词汇：</p>
-<p>(4）计算部分：首先将一段输入文本调用句子切分函数得到一系列句子，对每个句子进行分析处理，得到每个句子的分词结果。搜索分词结果中的情感词并标注和计数，由于情感词存在一些修饰词(如非常、一般、不等)对情感词的情感程度甚至情感极性影响很大，在此，搜索情感词前的程度词，根据程度大小，赋予不同权值，同时搜索情感词前的否定词，赋予反转权值（-1）。综合得到一个句子的正向情感得分、负向情感得分。</p>
-<p>(5）综合每个句子的结果得到最后的文本情感值。</p>
-<p>语言很复杂。讽刺、歧义、多义性、否定性和俚语都是机器难以理解的因素，对情感分析有巨大的影响。因此，简单的基于字典的方法往往无法分析复杂的情感表达。</p>
-<h2 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h2><p>基于机器学习的方法大多将这个问题转化为一个分类问题来看待，对于情感极性的判断，将目标情感分类2类：正、负；对情感程度的分析则转化为回归问题看待。对训练文本进行人工标标注，然后进行有监督的机器学习过程。</p>
-<p>在还没有获得大量文本的情况下，使用基于词典的方法或者简单的机器学习方法是一个不错的选择。获得大量文本后，可以尝试使用一些复杂的机器学习方法甚至使用深度学习来进一步提升分析效果。<br>机器学习的方法精确度更高，因为词典匹配会由于语义表达的丰富性而出现很大误差，而机器学习方法不会。而且它可使用的场景更多样。无论是主客观分类还是正负面情感分类，机器学习都可以完成任务。而无需像词典匹配那样要深入到词语、句子、语法这些层面。</p>
-<p>而词典方法适用的语料范围更广，无论是手机、电脑这些商品，还是书评、影评这些语料，都可以适用。但机器学习则极度依赖语料，把手机语料训练出来的的分类器拿去给书评分类，那是注定要失败的。</p>
-<p>nltk 进行情感分析<a href="http://bigdata.51cto.com/art/201801/562716.htm" target="_blank" rel="external">使用python+机器学习方法进行情感分析</a><br><a href="https://www.jianshu.com/p/4cfcf1610a73" target="_blank" rel="external">Python做文本情感分析之情感极性分析</a>‘包括词典和情感学习’,这篇文章的<a href="http://www.aidnoob.com/ai/python/qinggan2/" target="_blank" rel="external">代码实现</a><br><a href="https://yq.aliyun.com/articles/65239" target="_blank" rel="external">Twitter是怎么做情感分析的？长文解读！</a></p>
-<h2 id="非监督情感分类"><a href="#非监督情感分类" class="headerlink" title="非监督情感分类"></a>非监督情感分类</h2><p>论文：文本情感分类中生成式情感模型的发展<br>依次介绍了隐性情感模型（lsm）,联合情感主题模型（jts）,主题情感混合模型（TSM）</p>
-<p><a href="https://blog.csdn.net/laozhaokun/article/details/30767353" target="_blank" rel="external">一个简单的情感识别系统的实现</a><br><a href="Ahttps://blog.csdn.net/ABCD2010014357/article/details/48031393?locationNum=9" target="_blank" rel="external">Analysis of sentiments using unsupervised learning techniques 使用非监督学习技术分析情感（IEEE2013</a></p>
-<h3 id="主题模型"><a href="#主题模型" class="headerlink" title="主题模型"></a>主题模型</h3><p>要了解主题模型，先了解贝叶斯分类<br>潜在狄立克雷分配的显著特征——集合中所有文档共享同一主题集合，但每个文档中各个主题所占的比例又都各不相同</p>
-<h4 id="贝叶斯分类"><a href="#贝叶斯分类" class="headerlink" title="贝叶斯分类"></a>贝叶斯分类</h4><p><a href="https://blog.csdn.net/u011508640/article/details/72815981" target="_blank" rel="external">详解最大似然估计（MLE）、最大后验概率估计（MAP），以及贝叶斯公式的理解</a></p>
-<p>主题模型就是利用了词语的同现特性<br><a href="http://v.qiye10000.com/v/XODAyNvImMvIy.html" target="_blank" rel="external">http://v.qiye10000.com/v/XODAyNvImMvIy.html</a>　吴立德<br><a href="https://www.bilibili.com/video/av27193854/?p=3" target="_blank" rel="external">https://www.bilibili.com/video/av27193854/?p=3</a>　七月在线</p>
-<p>主题模型参考文献汇总 <a href="https://blog.csdn.net/aws3217150/article/details/53840029" target="_blank" rel="external">https://blog.csdn.net/aws3217150/article/details/53840029</a></p>
-<p>专知主题模型汇总<a href="https://cloud.tencent.com/developer/article/1090052" target="_blank" rel="external">【专知荟萃16】主题模型Topic Model知识资料全集（基础/进阶/论文/综述/代码/专家，附PDF下载</a></p>
-<h2 id="word2vec"><a href="#word2vec" class="headerlink" title="word2vec"></a>word2vec</h2><p>直观理解输入什么，输出什么<br><a href="https://zhuanlan.zhihu.com/p/26306795?utm_source=wechat_session&amp;utm_medium=social&amp;from=groupmessage" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/26306795?utm_source=wechat_session&amp;utm_medium=social&amp;from=groupmessage</a><br><a href="https://www.jianshu.com/p/def47a349299" target="_blank" rel="external">【译】word2vec&amp;doc2vec做文本情感分析</a><br><a href="https://github.com/AimeeLee77/wiki_zh_word2vec" target="_blank" rel="external">利用Python构建Wiki中文语料词向量模型试验</a></p>
-<h2 id="词典及语料库"><a href="#词典及语料库" class="headerlink" title="词典及语料库"></a>词典及语料库</h2><p><a href="http://www.cnblogs.com/finesite/p/3381803.html" target="_blank" rel="external">http://www.cnblogs.com/finesite/p/3381803.html</a><br>有多家研究机构进行了分析，并且公布了结果，比如大连理工、汉语情感词极值表、台湾大学情感NTUSD、知网Hownet情感词、中文褒贬义词典v1.0（清华大学李军），谭松波老师的正向、逆向情感词典等，有些词典分为正向、逆向单词两个部分；有些放在一起，然后有单独的标签，可以cbind合并在一起。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.cnblogs.com/arkenstone/p/6064196.html" target="_blank" rel="external">Stanford NLP学习笔记：7. 情感分析（Sentiment）</a></p>
-<h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><p>(词向量已训练好)基于微博评论的数据挖掘与情感分析(cnn,lstm) <a href="https://github.com/joliph/" target="_blank" rel="external">https://github.com/joliph/</a><br>Text-Classify</p>
-<p>贝叶斯情感分类<a href="https://github.com/RobTomb/pac_ai/blob/master/code/sentimentNaiveBayes.py" target="_blank" rel="external">https://github.com/RobTomb/pac_ai/blob/master/code/sentimentNaiveBayes.py</a></p>
-<p>2017年CCF大数据与计算智能竞赛使用的模型和实现代码，选择了基于主题的文本情感分析赛题。采用情感词典+自定义规则完成比赛　<a href="https://github.com/digfound/CCFCompetition" target="_blank" rel="external">https://github.com/digfound/CCFCompetition</a></p>
-<p>基于Python的新浪微博社交网络分析　<a href="https://github.com/ruansongsong/weibo_forward_analysis" target="_blank" rel="external">https://github.com/ruansongsong/weibo_forward_analysis</a></p>
-<p>基于新浪微博数据的情感极性分析，使用机器学习算法训练模型，使用的分类方法包括朴素贝叶斯、SVM<br><a href="https://github.com/ljw9609/SentimentAnalysis" target="_blank" rel="external">https://github.com/ljw9609/SentimentAnalysis</a></p>
-<p>（snownlp朴素贝叶斯）微博情感分析，支持分析用户最近三个月、六个月、九个月、十二个月（转）发的微博，分析得出用户这段时间内“正能量”的、“负能量”的、“中性”的微博的条数，从而分析得出用户这段时间的情感总体状况，支持将分析结果发到微博。<a href="https://github.com/qibinlou/SinaWeibo-Emotion-Classification" target="_blank" rel="external">https://github.com/qibinlou/SinaWeibo-Emotion-Classification</a></p>
-<p>采用LSTM模型，训练一个能够识别文本postive, neutral, negative三种情感的分类器　<a href="https://github.com/Edward1Chou/SentimentAnalysis" target="_blank" rel="external">https://github.com/Edward1Chou/SentimentAnalysis</a></p>
-<p>英语情感分析模型比较　<a href="https://github.com/sebastianruder/NLP-progress/blob/master/english/sentiment_analysis.md" target="_blank" rel="external">https://github.com/sebastianruder/NLP-progress/blob/master/english/sentiment_analysis.md</a></p>
-<p>Using Spark to analyse weibo emotions <a href="https://github.com/irmowan/Weibo-Emotions" target="_blank" rel="external">https://github.com/irmowan/Weibo-Emotions</a></p>
-<p>在线评论的细粒度情感分析baseline <a href="https://github.com/AIChallenger/AI_Challenger_2018" target="_blank" rel="external">https://github.com/AIChallenger/AI_Challenger_2018</a></p>
-<h2 id="经典论文"><a href="#经典论文" class="headerlink" title="经典论文"></a>经典论文</h2><p>Sentiment Analysis and Opinion Mining　刘冰</p>
-<h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p>twitter 语料Sanders corpus　<a href="http://www.sananalytics.com/la" target="_blank" rel="external">http://www.sananalytics.com/la</a><br>b/twitter-sentiment/) </p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2392,7 +2416,7 @@ ctrl + z 挂起当前会话
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
