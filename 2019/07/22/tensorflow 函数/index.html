@@ -99,7 +99,7 @@
 <meta property="og:url" content="http://xiangyuwei.github.io/2019/07/22/tensorflow 函数/index.html">
 <meta property="og:site_name" content="就和今天说早安">
 <meta property="og:description" content="tf.sliceslice(    input_,    begin,    size,    name=None) 从张量中提取切片. 此操作从由begin指定位置开始的张量input中提取一个尺寸size的切片.切片size被表示为张量形状,其中size[i]是你想要分割的input的第i维的元素的数量.切片的起始位置(begin)表示为每个input维度的偏移量.换句话说,begin[i]是">
-<meta property="og:updated_time" content="2019-08-03T13:55:23.691Z">
+<meta property="og:updated_time" content="2019-08-13T06:18:13.973Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tensorflow 函数">
 <meta name="twitter:description" content="tf.sliceslice(    input_,    begin,    size,    name=None) 从张量中提取切片. 此操作从由begin指定位置开始的张量input中提取一个尺寸size的切片.切片size被表示为张量形状,其中size[i]是你想要分割的input的第i维的元素的数量.切片的起始位置(begin)表示为每个input维度的偏移量.换句话说,begin[i]是">
@@ -457,8 +457,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-08-03T21:55:23+08:00">
-                2019-08-03
+              <time title="更新于" itemprop="dateModified" datetime="2019-08-13T14:18:13+08:00">
+                2019-08-13
               </time>
             
           </span>
@@ -496,7 +496,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,903 字
+                  2,501 字
                 </span>
               
 
@@ -512,7 +512,7 @@ $(function() {
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  8 分钟
+                  10 分钟
                 </span>
               
             </div>
@@ -557,10 +557,13 @@ $(function() {
 <p>在我看来，输入矩阵是embeddings和输出矩阵nce_weights</p>
 <p>该embeddings张量是最终输出矩阵。它将单词映射到向量。在单词预测图中使用它。</p>
 <p>输入矩阵是从训练文本生成的一批centre-word : context-word（train_input和train_label分别）对。</p>
-<p>虽然nce_lossop 的确切工作方式还不为我所知，但基本思想是它使用单层网络（参数nce_weights和nce_biases）将输入向量（从embeddings使用embedop中选择）映射到输出字，然后比较输出到训练标签（训练文本中的相邻单词），也输出到词汇中num_sampled所有其他单词的随机子样本（），然后修改输入向量（存储在其中embeddings）和网络参数以最小化错误。s</p>
+<p>虽然nce_lossop 的确切工作方式还不为我所知，但基本思想是它使用单层网络（参数nce_weights和nce_biases）将输入向量（从embeddings使用embedop中选择）映射到输出字，然后比较输出到训练标签（训练文本中的相邻单词），也输出到词汇中num_sampled所有其他单词的随机子样本（），然后修改输入向量（存储在其中embeddings）和网络参数以最小化错误。</p>
 <p>参考文献：<a href="https://cloud.tencent.com/developer/ask/218807" target="_blank" rel="external">理解tensorflow中的`tf.nn.nce_loss（)</a></p>
 <p><a href="https://stackoverflow.com/questions/37982478/what-is-the-purpose-of-weights-and-biases-in-tensorflow-word2vec-example" target="_blank" rel="external">What is the purpose of weights and biases in tensorflow word2vec example</a></p>
 <p><a href="https://www.cnblogs.com/xiaojieshisilang/p/9284634.html" target="_blank" rel="external">关于word2vec的skip-gram模型使用负例采样nce_loss损失函数的源码剖析</a></p>
+<p><a href="https://blog.csdn.net/qq_36092251/article/details/79684721" target="_blank" rel="external">关于采样编号的问题</a> 编号越大，词频越小</p>
+<p><a href="https://docs.pythontab.com/tensorflow/tutorials/word2vec/" target="_blank" rel="external">word2vec官网说明</a><br><a href="https://stackoverflow.com/questions/41475180/understanding-tf-nn-nce-loss-in-tensorflow" target="_blank" rel="external">Understanding <code>tf.nn.nce_loss()</code> in tensorflow</a></p>
+<p><a href="https://www.zhihu.com/question/50043438" target="_blank" rel="external">求通俗易懂解释下nce loss？</a></p>
 <h2 id="from-tensorflow-contrib-import-learn"><a href="#from-tensorflow-contrib-import-learn" class="headerlink" title="from tensorflow.contrib import learn"></a>from tensorflow.contrib import learn</h2><p>vp = learn.preprocessing.VocabularyProcessor(100, 0, tokenizer_fn=chinese_tokenizer)</p>
 <p>其中VocabularyProcessor（max_document_length,min_frequency=0,vocabulary=None, tokenizer_fn=None)的构造函数中有4个参数<br>max_document_length是文档的最大长度。如果文本的长度大于最大长度，那么它会被剪切，反之则用0填充<br>min_frequency词频的最小值，出现次数&gt;最小词频 的词才会被收录到词表中<br>vocabulary CategoricalVocabulary 对象，不太清楚使用方法<br>tokenizer_fn tokenizer function，讲句子或给定文本格式 token化得函数，可以理解为分词函数</p>
 <p>链接： <a href="https://www.jianshu.com/p/db400a569730" target="_blank" rel="external">https://www.jianshu.com/p/db400a569730</a><br>。</p>
@@ -579,6 +582,20 @@ $(function() {
 <p><a href="https://www.cnblogs.com/MY0213/p/9270864.html" target="_blank" rel="external">tf.Variable、tf.get_variable、tf.variable_scope以及tf.name_scope关系</a></p>
 <h2 id="tf-layers-Flatten"><a href="#tf-layers-Flatten" class="headerlink" title="tf.layers.Flatten"></a>tf.layers.Flatten</h2><p>展平向量，把一个Tensor 展平</p>
 <h2 id="tensorflow官方文档"><a href="#tensorflow官方文档" class="headerlink" title="tensorflow官方文档"></a>tensorflow官方文档</h2><p><a href="https://docs.pythontab.com/tensorflow/tutorials/word2vec/" target="_blank" rel="external">https://docs.pythontab.com/tensorflow/tutorials/word2vec/</a></p>
+<h2 id="tensorflow性能调优实践"><a href="#tensorflow性能调优实践" class="headerlink" title="tensorflow性能调优实践"></a>tensorflow性能调优实践</h2><p>tensorflow里，首字母大写的类，首字母小写的才是op。<br>tf.constant()是直接定义在graph里的，它是graph的一部分，会随着graph一起加载。如果通过tf.constant()定义了一个维度很高的张量，那么graph占用的内存就会变大，加载也会变慢。而tf.placeholder就没有这个问题，所以如果数据维度很高的话，定义成tf.placeholder是更好的选择</p>
+<p><a href="https://www.jianshu.com/p/937a0ce99f56" target="_blank" rel="external">https://www.jianshu.com/p/937a0ce99f56</a></p>
+<p><a href="https://www.cnblogs.com/jiaxblog/p/9054051.html" target="_blank" rel="external">TensorFlow学习笔记1：graph、session和op</a></p>
+<h3 id="tensorflow-可视化"><a href="#tensorflow-可视化" class="headerlink" title="tensorflow 可视化"></a>tensorflow 可视化</h3><p>file_writer = tf.summary.FileWriter(‘/path/to/logs’, sess.graph)</p>
+<p>TensorBoard的graph有两种依赖，数据依赖和控制依赖。数据依赖展示了tensors在两个ops之间的流动以及流动方向；控制依赖运用了虚线来表示。TensorBoard显示graph有两个区域，主区域和辅助区域，为了便于观察我们可以把一些高层次的依赖项多的节点从主区域移出到辅助区域，只需要在节点右键点击Remove from main graph即可.</p>
+<p>1.创建一个TensorFlow graph，用summary operations来保存我们需要了解的节点的信息。<br>2.我们需要整合所有节点的信息，如果一个一个提取太耗费精力和时间，我们可以选择tf.summary.merge_all()函数来把所有的op节点整合成一个单一节点，然后通过运行该节点来提取出所有summary op的信息。<br>3.用tf.summary.FileWriter()函数把提取出的所有的summary op信息存入磁盘中。我们同时可以用该函数把graph的信息存入磁盘，用来可视化神经网络的结构。<br>4.在训练过程中用add_summary命令把训练信息存入磁盘，训练结束后记得把FileWriter对象close。</p>
+<p>打开终端，键入以下命令运行TensorBoard：</p>
+<p>tensorboard –logdir=path/to/logs</p>
+<p>得到提示信息“Starting TensorBoard…”则运行成功，我们可以打开浏览器，在地址栏输入localhost:6006进入TensorBoard的操作面板。</p>
+<p>参考：<a href="http://zangbo.me/2017/06/27/TensorFlow_4/" target="_blank" rel="external">TensorBoard可视化</a></p>
+<p><a href="https://www.tensorflow.org/tensorboard/r1/graphs" target="_blank" rel="external">官网</a></p>
+<p><a href="https://towardsdatascience.com/howto-profile-tensorflow-1a49fb18073d" target="_blank" rel="external">HowTo profile TensorFlow</a></p>
+<h2 id="tensorflow-了解"><a href="#tensorflow-了解" class="headerlink" title="tensorflow 了解"></a>tensorflow 了解</h2><p><a href="https://juejin.im/post/5b345a49f265da599c561b25" target="_blank" rel="external">这是我看过解释TensorFlow最透彻的文章！</a></p>
+<h2 id="：池化层（pooling-和全连接层-dense"><a href="#：池化层（pooling-和全连接层-dense" class="headerlink" title="：池化层（pooling)和全连接层(dense)"></a>：池化层（pooling)和全连接层(dense)</h2><p><a href="https://www.cnblogs.com/denny402/p/6933172.html" target="_blank" rel="external">tensorflow 1.0 学习：池化层（pooling)和全连接层(dense)</a></p>
 
       
     </div>
@@ -720,7 +737,7 @@ $(function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">88</span>
+                <span class="site-state-item-count">93</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -868,7 +885,7 @@ $(function() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-slice"><span class="nav-number">1.</span> <span class="nav-text">tf.slice</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-layers-dense-inut-units-k"><span class="nav-number">2.</span> <span class="nav-text">tf.layers.dense(inut,units=k)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#matmul"><span class="nav-number">3.</span> <span class="nav-text">matmul</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-shape"><span class="nav-number">4.</span> <span class="nav-text">tf.shape</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-nn-nce-loss"><span class="nav-number">5.</span> <span class="nav-text">tf.nn.nce_loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#from-tensorflow-contrib-import-learn"><span class="nav-number">6.</span> <span class="nav-text">from tensorflow.contrib import learn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#维度广播"><span class="nav-number">7.</span> <span class="nav-text">维度广播</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-squeeze"><span class="nav-number">8.</span> <span class="nav-text">tf.squeeze</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-concat"><span class="nav-number">9.</span> <span class="nav-text">tf.concat()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-trainable-variables-tf-all-variables-tf-global-variables"><span class="nav-number">10.</span> <span class="nav-text">tf.trainable_variables(), tf.all_variables(), tf.global_variables()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-layers-Flatten"><span class="nav-number">11.</span> <span class="nav-text">tf.layers.Flatten</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tensorflow官方文档"><span class="nav-number">12.</span> <span class="nav-text">tensorflow官方文档</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-slice"><span class="nav-number">1.</span> <span class="nav-text">tf.slice</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-layers-dense-inut-units-k"><span class="nav-number">2.</span> <span class="nav-text">tf.layers.dense(inut,units=k)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#matmul"><span class="nav-number">3.</span> <span class="nav-text">matmul</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-shape"><span class="nav-number">4.</span> <span class="nav-text">tf.shape</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-nn-nce-loss"><span class="nav-number">5.</span> <span class="nav-text">tf.nn.nce_loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#from-tensorflow-contrib-import-learn"><span class="nav-number">6.</span> <span class="nav-text">from tensorflow.contrib import learn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#维度广播"><span class="nav-number">7.</span> <span class="nav-text">维度广播</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-squeeze"><span class="nav-number">8.</span> <span class="nav-text">tf.squeeze</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-concat"><span class="nav-number">9.</span> <span class="nav-text">tf.concat()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-trainable-variables-tf-all-variables-tf-global-variables"><span class="nav-number">10.</span> <span class="nav-text">tf.trainable_variables(), tf.all_variables(), tf.global_variables()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-layers-Flatten"><span class="nav-number">11.</span> <span class="nav-text">tf.layers.Flatten</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tensorflow官方文档"><span class="nav-number">12.</span> <span class="nav-text">tensorflow官方文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tensorflow性能调优实践"><span class="nav-number">13.</span> <span class="nav-text">tensorflow性能调优实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tensorflow-可视化"><span class="nav-number">13.1.</span> <span class="nav-text">tensorflow 可视化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tensorflow-了解"><span class="nav-number">14.</span> <span class="nav-text">tensorflow 了解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#：池化层（pooling-和全连接层-dense"><span class="nav-number">15.</span> <span class="nav-text">：池化层（pooling)和全连接层(dense)</span></a></li></ol></div>
             
 
           </div>

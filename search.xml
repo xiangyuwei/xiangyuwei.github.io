@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[文本表示模型]]></title>
+    <url>%2F2019%2F08%2F09%2F%E6%96%87%E6%9C%AC%E8%A1%A8%E7%A4%BA%E6%A8%A1%E5%9E%8B%2F</url>
+    <content type="text"><![CDATA[textcnn[NLP] TextCNN模型原理和实现 文本分类实战（二）—— textCNN 模型代码 另一个代码(参考过) 吾爱NLP(4)—基于Text-CNN模型的中文文本分类实战 doc2vecDoc2Vec模型介绍及使用基于gensim的doc2vec实践 当每个文档不仅可以由文本信息表示，还有别的其他标签信息时，比如，在商品推荐中，将每个商品看成是一个文档，我们想学习商品向量表示时，可以只使用商品的描述信息来学习商品的向量表示，但有时：商品类别等信息我们也想将其考虑进去， 最简单的方法是：当用文本信息学习到商品向量后，添加一维商品的类别信息，但只用一维来表示商品类别信息的有效性差。gensim 工具包的doc2vec提供了更加合理的方法，将商品标签（如类别）加入到商品向量的训练中，即gensim 中的LabeledSentence方法 fasttext玩转Fasttext]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[机器学习算法大杂烩]]></title>
+    <url>%2F2019%2F08%2F09%2F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9B%B8%E5%85%B3%2F</url>
+    <content type="text"><![CDATA[数据预处理数据预处理：独热编码（One-Hot Encoding）和 LabelEncoder标签编码 数据不平衡CSDN机器学习笔记七 实战样本不均衡数据解决方法 《Python数据分析与数据化运营》中的“3.4 解决样本类别分布不均衡的问题”Python：SMOTE算法——样本不均衡时候生成新样本的算法 另一篇 特征维度减少The Ultimate Guide to 12 Dimensionality Reduction Techniques (with Python codes) Dimensionality Reduction]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[python调试]]></title>
+    <url>%2F2019%2F08%2F08%2Fpython%E8%B0%83%E8%AF%95%2F</url>
+    <content type="text"><![CDATA[问题并没有解决，只是做个记录。 1、生成coredump文件 echo “ulimit -c unlimited” &gt;&gt; /etc/profile 然后记得敲入命令 source /etc/profile 然后敲入命令： ulimit –c 确认能否生成coredump文件，使用如下命令（使用时注意，我在测的时候会直接退出当前用户） kill -s SIGSEGV $$ 然后回到执行上述命令的路径下即可看到coredump文件，我这边生成的文件名为core.3477，依个人会随机生成不同的数字。ulimit -c 可以设置core文件的大小，如果这个值为0.则不会产生core文件，这个值太小，则core文件也不会产生，因为core文件一般都比较大。 使用ulimit -c unlimited来设置无限大，则任意情况下都会产生core文件。 可以通过修改/etc/profile文件:来永久设置文件大小和文件名和存储位,在文件末尾添加:ulimit -c unlimited Installing python3-dbg and python3-dev: $ sudo apt install python3-dbg python3-dev python3-dbg package comes with short documentation how to use it in /usr/share/doc/python3-dbg/README.debug which I will use in the next step. Appending unpacked GDB helper script /usr/share/doc/python3.5/gdbinit.gz to ~/.gdbinit: zcat /usr/share/doc/python3.5/gdbinit.gz &gt;&gt; ~/.gdbinit 刚开始参考这个How can I get python stack trace information using GDB?结果libpython 之类的都找不到，py-bt找不到 [gdb的python接口]（https://segmentfault.com/a/1190000005718889） &lt;如何在virtualenv中使用gdb python调试扩展&gt;我已经通过在gdb上使用strace解决了这个问题，并打开了“open”系统调用。 &gt; 似乎gdb在它猜测的几个路径（根据python二进制文件）中搜索python-gdb.py，并且只要没有找到该文件，它就会失败。 最终解决问题的方法是将 /usr/lib/debug/usr/bin/python2.7-gdb.py 放入env的bin目录中。链接的名称应该是&lt; python二进制名称&gt; -gdb.py ，在我的情况下 python2.7-dbg-gdb.py （…） 如何修改core file的文件名格式和保存位置/proc/sys/kernel /core_pattern可以控制core文件保存位置和文件名格式。可通过以下命令修改此文件： echo “/corefile/core-%e-%p-%t” &gt;/proc/sys/kernel /core_pattern 可以将core文件统一生成到/corefile目录下，产生的文件名为core-命令名-pid-时间戳以下是参数列表:%p - insert pid into filename 添加pid%u - insert current uid into filename 添加当前uid%g - insert current gid into filename 添加当前gid%s - insert signal that caused the coredump into the filename 添加导致产生core的信号%t - insert UNIX time that the coredump occurred into filename 添加core文件生成时的unix时间%h - insert hostname where the coredump happened into filename 添加主机名%e - insert coredumping executable name into filename 添加命令名 官方教程 中文 英文 How to change the Python Interpreter that gdb uses? 123456$ apt-get -qq update$ apt-get install gdb python2.7-dbg python3-all-dbg$ gdb -ex r -ex quit --args python2 -c &quot;import sys ; print(sys.version)&quot; # Py2.7$ gdb -ex r -ex quit --args python3 -c &quot;import sys ; print(sys.version)&quot; # Py3.6 Debugging of CPython processes with gdb 2018-06-01 centos 7.x 版本下用gdb 调试 python3.6.3 解释器使用 gdb 调试运行中的 Python 进程 载入libpython脚本 如果你的gdb是redhat或fedora等厂商修改过的，会有--python选项，使用此选项即可指定gdb启动时载入的Python扩展脚本（此脚本是扩展gdb的，不是我们需要debug的脚本）。 $ gdb --python /path/to/libpython .py -p 1000 如果安装的是GNU的gdb，就需要打开gdb后手动载入libpython.py脚本 (gdb) python &gt; import sys &gt;sys.path.insert(0, &apos;/path/to/libpython.py&apos; ) &gt; import libpython &gt;end (gdb) 下载libpython Debugging Python C/C++ extensions in gdb 一个可视化的工具GDB dashboard Python-Debugginggdb调试python运行中的进程:在stackoverflow一个帖子上找到了灵感，其实就是用含有调试符号的python来运行脚本，也就是用python-dbg或者python2.7-dbg来运行py脚本程序 gdb 与 Python 集成]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[tensorflow 报错]]></title>
+    <url>%2F2019%2F08%2F06%2Ftensorflow%E6%8A%A5%E9%94%99%2F</url>
+    <content type="text"><![CDATA[安装tensorflow 警告信息numpy 版本改为1.15.4 12345678910111213import tensorflow as tf~/.local/lib/python3.7/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:541: FutureWarning: Passing (type, 1) or &apos;1type&apos; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &apos;(1,)type&apos;. _np_qint8 = np.dtype([(&quot;qint8&quot;, np.int8, 1)])~/.local/lib/python3.7/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:542: FutureWarning: Passing (type, 1) or &apos;1type&apos; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &apos;(1,)type&apos;. _np_quint8 = np.dtype([(&quot;quint8&quot;, np.uint8, 1)])~/.local/lib/python3.7/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:543: FutureWarning: Passing (type, 1) or &apos;1type&apos; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &apos;(1,)type&apos;. _np_qint16 = np.dtype([(&quot;qint16&quot;, np.int16, 1)])~/.local/lib/python3.7/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:544: FutureWarning: Passing (type, 1) or &apos;1type&apos; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &apos;(1,)type&apos;. _np_quint16 = np.dtype([(&quot;quint16&quot;, np.uint16, 1)])~/.local/lib/python3.7/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:545: FutureWarning: Passing (type, 1) or &apos;1type&apos; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &apos;(1,)type&apos;. _np_qint32 = np.dtype([(&quot;qint32&quot;, np.int32, 1)])~/.local/lib/python3.7/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:550: FutureWarning: Passing (type, 1) or &apos;1type&apos; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &apos;(1,)type&apos;. np_resource = np.dtype([(&quot;resource&quot;, np.ubyte, 1)]) 网址：https://github.com/tensorflow/tensorflow/issues/31249 核心已转储：（Segmentation fault(core dumped)）core 线圈，代表内存 下标越界，访问了不可访问或不存在的内容 linux下应用 ulimit -a 命令查看当前栈空间大小 ulimit -s 102400 将栈的大小改为100M 或者 ~/.bashrc~/.bashrc 的最后加入： ulimit -c unlimited （一劳永逸）ulimit -s unlimited https://www.xuebuyuan.com/3235632.htmlhttps://blog.csdn.net/qq_39759656/article/details/82858101 python 安装 https://askubuntu.com/questions/175412/how-can-i-get-python-stack-trace-information-using-gdbpython gdb https://wiki.python.org/moin/DebuggingWithGdb]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[图社交网络数据集]]></title>
+    <url>%2F2019%2F08%2F04%2F%E5%9B%BE%E7%A4%BE%E4%BA%A4%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E9%9B%86%2F</url>
+    <content type="text"><![CDATA[异构数据集HGAE： DBLP，IMDB，ACM DBLP cora,citeseer,pubmeb twitter youtubu Amazon 唐杰引文数据：https://www.aminer.cn/citation zhihu 同构##twitter 数据集处理 On retweets, replies, quotes &amp; favorites: A guide for researchersTwitter开放API文档]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[评审意见]]></title>
     <url>%2F2019%2F08%2F03%2F%E8%AF%84%E5%AE%A1%E6%84%8F%E8%A7%81%2F</url>
     <content type="text"><![CDATA[千辛万苦写好的论文，却得到这样的评审意见…… 如何组织评审意见回复 RESPONSES ？]]></content>
@@ -8,27 +33,27 @@
   <entry>
     <title><![CDATA[比赛]]></title>
     <url>%2F2019%2F08%2F03%2F%E6%AF%94%E8%B5%9B%2F</url>
-    <content type="text"><![CDATA[流行度预测。 网址链接：http://www.acmmm.org/2017/challenge/ 【ACMMM17获奖比赛论文报告】让机器告诉你谁是下一个明星？- Social Media Prediction分享（附下载）]]></content>
+    <content type="text"><![CDATA[流行度预测。 网址链接：http://www.acmmm.org/2017/challenge/ 【ACMMM17获奖比赛论文报告】让机器告诉你谁是下一个明星？- Social Media Prediction分享（附下载） 2016CCF-SouGou-大数据精准营销下的用户画像精准识别]]></content>
   </entry>
   <entry>
     <title><![CDATA[聚类算法总结]]></title>
     <url>%2F2019%2F08%2F03%2F%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93%2F</url>
-    <content type="text"><![CDATA[kmeanssklearn 文档: https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html sklearn.cluster常用API介绍(KMeans,MiniBatchKMeans)KMeans聚类后的聚类点(scikit learn) 主题分类主题分类参考目录网站：dmoztool http://dmoztools.net/Society/Philosophy/Aesthetics/]]></content>
+    <content type="text"><![CDATA[kmeanssklearn 文档: https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html sklearn.cluster常用API介绍(KMeans,MiniBatchKMeans)KMeans聚类后的聚类点(scikit learn) 聚类–K均值算法：自主实现与sklearn.cluster.KMeans调用 主题分类主题分类参考目录网站：dmoztool http://dmoztools.net/Society/Philosophy/Aesthetics/]]></content>
   </entry>
   <entry>
     <title><![CDATA[知识图谱]]></title>
     <url>%2F2019%2F08%2F03%2F%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%2F</url>
-    <content type="text"><![CDATA[同一人博客 transE评价方法transE的TensorFlow实现]]></content>
+    <content type="text"><![CDATA[同一人博客 transE评价方法transE的TensorFlow实现 论文集知识图谱论文大合集，干货满满的笔记解读 【知识图谱】——8种Trans模型 知识图谱表示学习与关系推理（2016-2017）基于翻译模型(Trans系列)的知识表示学习 基于知识图谱的表示学习——Trans系列算法介绍（一）]]></content>
   </entry>
   <entry>
     <title><![CDATA[图卷积神经网络]]></title>
     <url>%2F2019%2F08%2F03%2F%E5%9B%BE%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%2F</url>
-    <content type="text"><![CDATA[论文How powerful is the graph neural network 2017CIKM－Network Embedding专题论文分享 ：https://www.sohu.com/a/211628336_99940985 AAAI2019《图表示学习》Tutorial, 180 页 PPT 带你从入门到精通（下载） ##Inductive Representation Learning On Large Graphs Inductive Representation Learning On Large Graphs【阅读笔记】 GraphSAGE 代码解析(一) - unsupervised_train.py 异构网络PTE: Predictive Text Embedding through Large-scale Heterogeneous Text Network GitHub上一份Graph Embedding相关的论文列表，很有价值的参考 GCN图卷积网络到底怎么做，这是一份极简的Numpy实现 行业人物：dblp:Chengqi Zhang]]></content>
+    <content type="text"><![CDATA[论文资料How powerful is the graph neural network 2017CIKM－Network Embedding专题论文分享 AAAI2019《图表示学习》Tutorial, 180 页 PPT 带你从入门到精通（下载）Representation Learning on Network 网络表示学习笔记 ##Inductive Representation Learning On Large Graphs Inductive Representation Learning On Large Graphs【阅读笔记】 GraphSAGE 代码解析(一) - unsupervised_train.py 异构网络PTE: Predictive Text Embedding through Large-scale Heterogeneous Text Network GitHub上一份Graph Embedding相关的论文列表，很有价值的参考 GCN图卷积网络到底怎么做，这是一份极简的Numpy实现 CANECANE ：对于每条边，根据节点的出度随机采样节点，然后在选出不是自环的’一个’负样本点，组成训练集，训练集由若干个三元组组成。 GATNE：基于所有的边进行随机游走，每个节点重复进行采样N次，每次采样L个负样本，这样相当于生成一个句子。基于采样出的顶点数，统计每个顶点的频次，依据频次排序，在根据skip-windows针对每个句子生成训练样本顶点对。训练样本中的index是根据频次进行转换后的。如index2word:[3,4,1]表示1索引对应的节点是3，train_input 按词频编号，TF的word2vec实现里，词频越大，词的类别编号也就越小。因此，在TF的word2vec里，负采样的过程其实就是优先采词频高的词作为负样本。 log_uniform_candidate_sampler是怎么采样的呢？他的实现在这里： 1、会在[0, range_max)中采样出一个整数k 2、P(k) = (log(k + 2) - log(k + 1)) / log(range_max + 1) 可以看到，k越大，被采样到的概率越小。 参考文献：https://blog.csdn.net/qq_36092251/article/details/79684721（采样编号） NLPGraph Convolution Network for NLP 行业人物：dblp:Chengqi Zhang]]></content>
   </entry>
   <entry>
     <title><![CDATA[注意力机制]]></title>
     <url>%2F2019%2F08%2F01%2F%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%2F</url>
-    <content type="text"><![CDATA[##软注意力是只注意的每项都可以是概率值，不一定是有或者无 Graph Attention Network 图注意力网络 (一) 训练运行与代码概览 Transformer中的Multi-Head Attention 总结他们只说注意力机制（Attention Mechanism）不练，还是我来给大家撸代码讲解 注意力能提高模型可解释性？实验表明：并没有 可视化Visualizing attention activation in Tensorflow 文本单词，网页上可视化 matplotlib 文本attention矩阵可视化 论文中注意力机制可视化图的制作seaborn提供的热力图来制作 https://github.com/uhauha2929/examples/blob/master/self-attention.ipynb 可视化循环神经网络的注意力机制 请问注意力机制中生成的类似热力图或者柱状图是如何生成的 其实没啥用]]></content>
+    <content type="text"><![CDATA[##软注意力是只注意的每项都可以是概率值，不一定是有或者无 Graph Attention Network 图注意力网络 (一) 训练运行与代码概览 Transformer中的Multi-Head Attention 关联性图注意力网络：Relational Graph Attention Networks（ICLR2019） Graph Attention Networks网络结构+代码 总结他们只说注意力机制（Attention Mechanism）不练，还是我来给大家撸代码讲解 注意力能提高模型可解释性？实验表明：并没有 可视化Visualizing attention activation in Tensorflow 文本单词，网页上可视化 matplotlib 文本attention矩阵可视化 论文中注意力机制可视化图的制作seaborn提供的热力图来制作 https://github.com/uhauha2929/examples/blob/master/self-attention.ipynb 可视化循环神经网络的注意力机制 请问注意力机制中生成的类似热力图或者柱状图是如何生成的 其实没啥用]]></content>
       <tags>
         <tag>神经网络</tag>
       </tags>
@@ -36,12 +61,12 @@
   <entry>
     <title><![CDATA[tensorflow 函数]]></title>
     <url>%2F2019%2F07%2F22%2Ftensorflow%20%E5%87%BD%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[tf.sliceslice( input_, begin, size, name=None) 从张量中提取切片. 此操作从由begin指定位置开始的张量input中提取一个尺寸size的切片.切片size被表示为张量形状,其中size[i]是你想要分割的input的第i维的元素的数量.切片的起始位置(begin)表示为每个input维度的偏移量.换句话说,begin[i]是你想从中分割出来的input的“第i个维度”的偏移量.begin是基于零的···t = tf.constant([[[1, 1, 1], [2, 2, 2]], [[3, 3, 3], [4, 4, 4]], [[5, 5, 5], [6, 6, 6]]])tf.slice(t, [1, 0, 0], [1, 1, 3]) # [[[3, 3, 3]]]tf.slice(t, [1, 0, 0], [1, 2, 3]) # [[[3, 3, 3], # [4, 4, 4]]] tf.slice(t, [1, 0, 0], [2, 1, 3]) # [[[3, 3, 3]], # [[5, 5, 5]]] ··· shape可以理解为一个数组的维度。[5,5]就是个2维数组，第一维有5个值，第二维有5个值。[5, 5, 1, 32]就是个4维数组，第一维有5个值，第二维有5个值，第三维有1个值，第四维有32个值。数组维度可以理解为[],最外层有5个[]，每个[]里还有5个[]，以此类推 shape 表示是输出张量的形状 [5,5]应该是大小55的矩阵 [5,5,1,32]这个在卷积网络里应该是卷积核大小55,1个颜色通道，32个不同的卷积核 刚看TensorFlow， tf.layers.dense(inut,units=k)tf.layers.dense( input, units=k )会在内部自动生成一个权矩阵kernel和偏移项bias，各变量具体尺寸如下：对于尺寸为[m, n]的二维张量input, tf.layers.dense()会生成：尺寸为[n, k]的权矩阵kernel，和尺寸为[m, k]的偏移项bias。内部的计算过程为y=input * kernel + bias，输出值y的维度为[m, k]。 可以自己构造权重矩阵W和偏移矩阵b，利用矩阵乘法实现全连接层 matmul两个三维矩阵的乘法怎样计算呢?我通过实验发现，tensorflow把前面的维度当成是batch，对最后两维进行普通的矩阵乘法。也就是说，最后两维之前的维度，都需要相同 tf.shape根据shape如何变换矩阵。其实简单的想就是， reshape（t, shape） =&gt; reshape(t, [-1]) =&gt; reshape(t, shape) 首先将矩阵t变为一维矩阵，然后再对矩阵的形式更改就可以了 1234567891011121314151617181920212223242526272829#tensor &apos;t&apos; is [[[1, 1, 1],# [2, 2, 2]],# [[3, 3, 3],# [4, 4, 4]],# [[5, 5, 5],# [6, 6, 6]]]# tensor &apos;t&apos; has shape [3, 2, 3]# pass &apos;[-1]&apos; to flatten &apos;t&apos;reshape(t, [-1]) ==&gt; [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6]# -1 can also be used to infer the shape# -1 is inferred to be 9:reshape(t, [2, -1]) ==&gt; [[1, 1, 1, 2, 2, 2, 3, 3, 3], [4, 4, 4, 5, 5, 5, 6, 6, 6]]# -1 is inferred to be 2:reshape(t, [-1, 9]) ==&gt; [[1, 1, 1, 2, 2, 2, 3, 3, 3], [4, 4, 4, 5, 5, 5, 6, 6, 6]]# -1 is inferred to be 3:reshape(t, [ 2, -1, 3]) ==&gt; [[[1, 1, 1], [2, 2, 2], [3, 3, 3]], [[4, 4, 4], [5, 5, 5], [6, 6, 6]]]--------------------- 作者：lxg0807 来源：CSDN 原文：https://blog.csdn.net/lxg0807/article/details/53021859 tf.nn.nce_loss1234567loss = tf.reduce_mean( tf.nn.nce_loss(weights=nce_weights, biases=nce_biases, labels=train_labels, inputs=embed, num_sampled=num_sampled, num_classes=vocabulary_size)) 其中， train_inputs = tf.placeholder(tf.int32, shape=[batch_size])train_labels = tf.placeholder(tf.int32, shape=[batch_size, 1])embeddings = tf.Variable( tf.random_uniform([vocabulary_size, embedding_size], -1.0, 1.0))embed = tf.nn.embedding_lookup(embeddings, train_inputs) train_inputs中的就是中心词，train_label中的就是语料库中该中心词在滑动窗口内的上下文词。 所以，train_inputs中会有连续n-1（n为滑动窗口大小）个元素是相同的。即同一中心词。 tf.truncated_normal从截断的正态分布中输出随机值。#生成的值服从具有指定平均值和标准偏差的正态分布，如果生成的值大于平均值2个标准偏差的值则丢弃重新选择。#标准差就是标准偏差，是方差的算术平均根。而上面的代码中对标准方差进行了限制的原因就是为了防止神经网络的参数过大。为什么embeddings中的参数没有进行限制呢？是因为最初初始化的时候，所有的词的词向量之间要保证一定的距离。然后通过学习，才能拉近某些词的关系，使得某些词的词向量更加接近。l #因为是单层神经网络，所以要限制参数过大。如果是深层神经网络，就不需要标准差除一一个embedding_size的平方根了。深层神经网络虽然也要进行参数的正则化限制，防止过拟合和梯度爆炸问题，但是很少看见，有直接对stddev进行限制的 embddings是词嵌入，就是要学习的词向量的存储矩阵。共有词汇表大小的行数，每一行对应一个词的向量。 在word2vec模型中，我们感兴趣的是为单词构建表示。在训练过程中，给定一个滑动窗口，每个单词将有两个嵌入：1）当单词是中心单词时; 2）当单词是上下文单词时。这两个嵌入分别称为输入和输出向量。（输入和输出矩阵的更多解释） 在我看来，输入矩阵是embeddings和输出矩阵nce_weights 该embeddings张量是最终输出矩阵。它将单词映射到向量。在单词预测图中使用它。 输入矩阵是从训练文本生成的一批centre-word : context-word（train_input和train_label分别）对。 虽然nce_lossop 的确切工作方式还不为我所知，但基本思想是它使用单层网络（参数nce_weights和nce_biases）将输入向量（从embeddings使用embedop中选择）映射到输出字，然后比较输出到训练标签（训练文本中的相邻单词），也输出到词汇中num_sampled所有其他单词的随机子样本（），然后修改输入向量（存储在其中embeddings）和网络参数以最小化错误。s 参考文献：理解tensorflow中的`tf.nn.nce_loss（) What is the purpose of weights and biases in tensorflow word2vec example 关于word2vec的skip-gram模型使用负例采样nce_loss损失函数的源码剖析 from tensorflow.contrib import learnvp = learn.preprocessing.VocabularyProcessor(100, 0, tokenizer_fn=chinese_tokenizer) 其中VocabularyProcessor（max_document_length,min_frequency=0,vocabulary=None, tokenizer_fn=None)的构造函数中有4个参数max_document_length是文档的最大长度。如果文本的长度大于最大长度，那么它会被剪切，反之则用0填充min_frequency词频的最小值，出现次数&gt;最小词频 的词才会被收录到词表中vocabulary CategoricalVocabulary 对象，不太清楚使用方法tokenizer_fn tokenizer function，讲句子或给定文本格式 token化得函数，可以理解为分词函数 链接： https://www.jianshu.com/p/db400a569730。 维度广播tf.expand_dims() tf.squeezetf.squeeze(input, axis=None, name=None, squeeze_dims=None) 从tensor中去除形状为1的维。（为了去除多余的维） tf.concat()tf.concat(values, axis, name=’concat’) Concatenates tensors along one dimension. 沿着某维串接tensors。和pandas包的concat方法差不多 例如,有tensor1 “t1”形状为[2,3]，tensor2 “t2”形状为[2,3]，则 tf.concat([t1,t2],0)的形状为[4,3]，tf.concat([t1,t2],1)的形状为[2,6] tensorflow 部分预处理函数 tf.trainable_variables(), tf.all_variables(), tf.global_variables()tf.trainable_variables() 顾名思义，这个函数可以也仅可以查看可训练的变量，在我们生成变量时，无论是使用tf.Variable()还是tf.get_variable()生成变量，都会涉及一个参数trainable,其默认为True。 Tensorflow小技巧整理：tf.trainable_variables(), tf.all_variables(), tf.global_variables()的使用 tf.Variable、tf.get_variable、tf.variable_scope以及tf.name_scope关系 tf.layers.Flatten展平向量，把一个Tensor 展平 tensorflow官方文档https://docs.pythontab.com/tensorflow/tutorials/word2vec/]]></content>
+    <content type="text"><![CDATA[tf.sliceslice( input_, begin, size, name=None) 从张量中提取切片. 此操作从由begin指定位置开始的张量input中提取一个尺寸size的切片.切片size被表示为张量形状,其中size[i]是你想要分割的input的第i维的元素的数量.切片的起始位置(begin)表示为每个input维度的偏移量.换句话说,begin[i]是你想从中分割出来的input的“第i个维度”的偏移量.begin是基于零的···t = tf.constant([[[1, 1, 1], [2, 2, 2]], [[3, 3, 3], [4, 4, 4]], [[5, 5, 5], [6, 6, 6]]])tf.slice(t, [1, 0, 0], [1, 1, 3]) # [[[3, 3, 3]]]tf.slice(t, [1, 0, 0], [1, 2, 3]) # [[[3, 3, 3], # [4, 4, 4]]] tf.slice(t, [1, 0, 0], [2, 1, 3]) # [[[3, 3, 3]], # [[5, 5, 5]]] ··· shape可以理解为一个数组的维度。[5,5]就是个2维数组，第一维有5个值，第二维有5个值。[5, 5, 1, 32]就是个4维数组，第一维有5个值，第二维有5个值，第三维有1个值，第四维有32个值。数组维度可以理解为[],最外层有5个[]，每个[]里还有5个[]，以此类推 shape 表示是输出张量的形状 [5,5]应该是大小55的矩阵 [5,5,1,32]这个在卷积网络里应该是卷积核大小55,1个颜色通道，32个不同的卷积核 刚看TensorFlow， tf.layers.dense(inut,units=k)tf.layers.dense( input, units=k )会在内部自动生成一个权矩阵kernel和偏移项bias，各变量具体尺寸如下：对于尺寸为[m, n]的二维张量input, tf.layers.dense()会生成：尺寸为[n, k]的权矩阵kernel，和尺寸为[m, k]的偏移项bias。内部的计算过程为y=input * kernel + bias，输出值y的维度为[m, k]。 可以自己构造权重矩阵W和偏移矩阵b，利用矩阵乘法实现全连接层 matmul两个三维矩阵的乘法怎样计算呢?我通过实验发现，tensorflow把前面的维度当成是batch，对最后两维进行普通的矩阵乘法。也就是说，最后两维之前的维度，都需要相同 tf.shape根据shape如何变换矩阵。其实简单的想就是， reshape（t, shape） =&gt; reshape(t, [-1]) =&gt; reshape(t, shape) 首先将矩阵t变为一维矩阵，然后再对矩阵的形式更改就可以了 1234567891011121314151617181920212223242526272829#tensor &apos;t&apos; is [[[1, 1, 1],# [2, 2, 2]],# [[3, 3, 3],# [4, 4, 4]],# [[5, 5, 5],# [6, 6, 6]]]# tensor &apos;t&apos; has shape [3, 2, 3]# pass &apos;[-1]&apos; to flatten &apos;t&apos;reshape(t, [-1]) ==&gt; [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6]# -1 can also be used to infer the shape# -1 is inferred to be 9:reshape(t, [2, -1]) ==&gt; [[1, 1, 1, 2, 2, 2, 3, 3, 3], [4, 4, 4, 5, 5, 5, 6, 6, 6]]# -1 is inferred to be 2:reshape(t, [-1, 9]) ==&gt; [[1, 1, 1, 2, 2, 2, 3, 3, 3], [4, 4, 4, 5, 5, 5, 6, 6, 6]]# -1 is inferred to be 3:reshape(t, [ 2, -1, 3]) ==&gt; [[[1, 1, 1], [2, 2, 2], [3, 3, 3]], [[4, 4, 4], [5, 5, 5], [6, 6, 6]]]--------------------- 作者：lxg0807 来源：CSDN 原文：https://blog.csdn.net/lxg0807/article/details/53021859 tf.nn.nce_loss1234567loss = tf.reduce_mean( tf.nn.nce_loss(weights=nce_weights, biases=nce_biases, labels=train_labels, inputs=embed, num_sampled=num_sampled, num_classes=vocabulary_size)) 其中， train_inputs = tf.placeholder(tf.int32, shape=[batch_size])train_labels = tf.placeholder(tf.int32, shape=[batch_size, 1])embeddings = tf.Variable( tf.random_uniform([vocabulary_size, embedding_size], -1.0, 1.0))embed = tf.nn.embedding_lookup(embeddings, train_inputs) train_inputs中的就是中心词，train_label中的就是语料库中该中心词在滑动窗口内的上下文词。 所以，train_inputs中会有连续n-1（n为滑动窗口大小）个元素是相同的。即同一中心词。 tf.truncated_normal从截断的正态分布中输出随机值。#生成的值服从具有指定平均值和标准偏差的正态分布，如果生成的值大于平均值2个标准偏差的值则丢弃重新选择。#标准差就是标准偏差，是方差的算术平均根。而上面的代码中对标准方差进行了限制的原因就是为了防止神经网络的参数过大。为什么embeddings中的参数没有进行限制呢？是因为最初初始化的时候，所有的词的词向量之间要保证一定的距离。然后通过学习，才能拉近某些词的关系，使得某些词的词向量更加接近。l #因为是单层神经网络，所以要限制参数过大。如果是深层神经网络，就不需要标准差除一一个embedding_size的平方根了。深层神经网络虽然也要进行参数的正则化限制，防止过拟合和梯度爆炸问题，但是很少看见，有直接对stddev进行限制的 embddings是词嵌入，就是要学习的词向量的存储矩阵。共有词汇表大小的行数，每一行对应一个词的向量。 在word2vec模型中，我们感兴趣的是为单词构建表示。在训练过程中，给定一个滑动窗口，每个单词将有两个嵌入：1）当单词是中心单词时; 2）当单词是上下文单词时。这两个嵌入分别称为输入和输出向量。（输入和输出矩阵的更多解释） 在我看来，输入矩阵是embeddings和输出矩阵nce_weights 该embeddings张量是最终输出矩阵。它将单词映射到向量。在单词预测图中使用它。 输入矩阵是从训练文本生成的一批centre-word : context-word（train_input和train_label分别）对。 虽然nce_lossop 的确切工作方式还不为我所知，但基本思想是它使用单层网络（参数nce_weights和nce_biases）将输入向量（从embeddings使用embedop中选择）映射到输出字，然后比较输出到训练标签（训练文本中的相邻单词），也输出到词汇中num_sampled所有其他单词的随机子样本（），然后修改输入向量（存储在其中embeddings）和网络参数以最小化错误。 参考文献：理解tensorflow中的`tf.nn.nce_loss（) What is the purpose of weights and biases in tensorflow word2vec example 关于word2vec的skip-gram模型使用负例采样nce_loss损失函数的源码剖析 关于采样编号的问题 编号越大，词频越小 word2vec官网说明Understanding tf.nn.nce_loss() in tensorflow 求通俗易懂解释下nce loss？ from tensorflow.contrib import learnvp = learn.preprocessing.VocabularyProcessor(100, 0, tokenizer_fn=chinese_tokenizer) 其中VocabularyProcessor（max_document_length,min_frequency=0,vocabulary=None, tokenizer_fn=None)的构造函数中有4个参数max_document_length是文档的最大长度。如果文本的长度大于最大长度，那么它会被剪切，反之则用0填充min_frequency词频的最小值，出现次数&gt;最小词频 的词才会被收录到词表中vocabulary CategoricalVocabulary 对象，不太清楚使用方法tokenizer_fn tokenizer function，讲句子或给定文本格式 token化得函数，可以理解为分词函数 链接： https://www.jianshu.com/p/db400a569730。 维度广播tf.expand_dims() tf.squeezetf.squeeze(input, axis=None, name=None, squeeze_dims=None) 从tensor中去除形状为1的维。（为了去除多余的维） tf.concat()tf.concat(values, axis, name=’concat’) Concatenates tensors along one dimension. 沿着某维串接tensors。和pandas包的concat方法差不多 例如,有tensor1 “t1”形状为[2,3]，tensor2 “t2”形状为[2,3]，则 tf.concat([t1,t2],0)的形状为[4,3]，tf.concat([t1,t2],1)的形状为[2,6] tensorflow 部分预处理函数 tf.trainable_variables(), tf.all_variables(), tf.global_variables()tf.trainable_variables() 顾名思义，这个函数可以也仅可以查看可训练的变量，在我们生成变量时，无论是使用tf.Variable()还是tf.get_variable()生成变量，都会涉及一个参数trainable,其默认为True。 Tensorflow小技巧整理：tf.trainable_variables(), tf.all_variables(), tf.global_variables()的使用 tf.Variable、tf.get_variable、tf.variable_scope以及tf.name_scope关系 tf.layers.Flatten展平向量，把一个Tensor 展平 tensorflow官方文档https://docs.pythontab.com/tensorflow/tutorials/word2vec/ tensorflow性能调优实践tensorflow里，首字母大写的类，首字母小写的才是op。tf.constant()是直接定义在graph里的，它是graph的一部分，会随着graph一起加载。如果通过tf.constant()定义了一个维度很高的张量，那么graph占用的内存就会变大，加载也会变慢。而tf.placeholder就没有这个问题，所以如果数据维度很高的话，定义成tf.placeholder是更好的选择 https://www.jianshu.com/p/937a0ce99f56 TensorFlow学习笔记1：graph、session和op tensorflow 可视化file_writer = tf.summary.FileWriter(‘/path/to/logs’, sess.graph) TensorBoard的graph有两种依赖，数据依赖和控制依赖。数据依赖展示了tensors在两个ops之间的流动以及流动方向；控制依赖运用了虚线来表示。TensorBoard显示graph有两个区域，主区域和辅助区域，为了便于观察我们可以把一些高层次的依赖项多的节点从主区域移出到辅助区域，只需要在节点右键点击Remove from main graph即可. 1.创建一个TensorFlow graph，用summary operations来保存我们需要了解的节点的信息。2.我们需要整合所有节点的信息，如果一个一个提取太耗费精力和时间，我们可以选择tf.summary.merge_all()函数来把所有的op节点整合成一个单一节点，然后通过运行该节点来提取出所有summary op的信息。3.用tf.summary.FileWriter()函数把提取出的所有的summary op信息存入磁盘中。我们同时可以用该函数把graph的信息存入磁盘，用来可视化神经网络的结构。4.在训练过程中用add_summary命令把训练信息存入磁盘，训练结束后记得把FileWriter对象close。 打开终端，键入以下命令运行TensorBoard： tensorboard –logdir=path/to/logs 得到提示信息“Starting TensorBoard…”则运行成功，我们可以打开浏览器，在地址栏输入localhost:6006进入TensorBoard的操作面板。 参考：TensorBoard可视化 官网 HowTo profile TensorFlow tensorflow 了解这是我看过解释TensorFlow最透彻的文章！ ：池化层（pooling)和全连接层(dense)tensorflow 1.0 学习：池化层（pooling)和全连接层(dense)]]></content>
   </entry>
   <entry>
     <title><![CDATA[概率图模型]]></title>
     <url>%2F2019%2F06%2F24%2F%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%2F</url>
-    <content type="text"><![CDATA[概率图模型（PGM/probabilistic graphical model）是一种用于学习这些带有依赖（dependency）的模型的强大框架。 在探讨如何将概率图模型用于机器学习问题之前，我们需要先理解 PGM 框架。概率图模型（或简称图模型）在形式上是由图结构组成的。图的每个节点（node）都关联了一个随机变量，而图的边（edge）则被用于编码这些随机变量之间的关系。 在这个图中，每个结点表示一个变量，每个箭头表示一个条件概率，起点是条件概率中的条件，终点是该随机变量。比如，从a指向b的箭头表示p(b|a)，并称a是b的父结点参考文献：https://blog.csdn.net/isMarvellous/article/details/78828566 机器学习 —— 概率图模型（推理：采样算法） 动态主题模型动态主题模型Dynamic Topic Models, DTM基于gibbs采样的topic over time基于K-means的动态主题模型话题分类 pyLDA系列︱考量时间因素的动态主题模型（Dynamic Topic Models） LDA 变形senLDA实践—长短文本相似度 Personal PageRank基于图的推荐算法之Personal PageRank代码实战个性化的PageRank和主题感知的PageRank 如何优雅的理解PageRank 概率图大牛唐杰 http://keg.cs.tsinghua.edu.cn/jietang/#research 梁上松：http://sdcs.sysu.edu.cn/content/4569]]></content>
+    <content type="text"><![CDATA[概率图模型（PGM/probabilistic graphical model）是一种用于学习这些带有依赖（dependency）的模型的强大框架。 在探讨如何将概率图模型用于机器学习问题之前，我们需要先理解 PGM 框架。概率图模型（或简称图模型）在形式上是由图结构组成的。图的每个节点（node）都关联了一个随机变量，而图的边（edge）则被用于编码这些随机变量之间的关系。 在这个图中，每个结点表示一个变量，每个箭头表示一个条件概率，起点是条件概率中的条件，终点是该随机变量。比如，从a指向b的箭头表示p(b|a)，并称a是b的父结点参考文献：https://blog.csdn.net/isMarvellous/article/details/78828566 机器学习 —— 概率图模型（推理：采样算法） 采样MCMC等采样算法 动态主题模型动态主题模型Dynamic Topic Models, DTM基于gibbs采样的topic over time基于K-means的动态主题模型话题分类 pyLDA系列︱考量时间因素的动态主题模型（Dynamic Topic Models） LDA 变形senLDA实践—长短文本相似度 代码 Personal PageRank基于图的推荐算法之Personal PageRank代码实战个性化的PageRank和主题感知的PageRank 如何优雅的理解PageRank双向随机游走(个性化PageRank ) twitter 概率图大牛唐杰 http://keg.cs.tsinghua.edu.cn/jietang/#research 梁上松：http://sdcs.sysu.edu.cn/content/4569 受限波尔兹曼机（RBM）受限玻尔兹曼机(RBM)与其在Tensorflow的实现RBM算法模型应用在推荐系统 Python代码实现]]></content>
   </entry>
   <entry>
     <title><![CDATA[tensorflow代码总结]]></title>
@@ -59,7 +84,7 @@
   <entry>
     <title><![CDATA[社交网络论文总结]]></title>
     <url>%2F2019%2F05%2F11%2F%E7%A4%BE%E4%BA%A4%E5%8F%91%E7%8E%B0%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%93%2F</url>
-    <content type="text"><![CDATA[Understanding the Facets of Homophily in Social Psycho-Sociological Network Communities这篇论文研究朋友，亲属，同事之间的同质性： 人工标注了关系类型 建立了四个模型预测年龄，性别，人格，values 最后还进行了链接预测和社区发现的比较，比较这三个不同群体中引入人格特征后社区发现的准确度 Tanmoy Chakraborty 主页：http://faculty.iiitd.ac.in/~tanmoy/index.html#home Metadata vs. Ground-truth: A Myth behind the Evolution of Community Detection Methods基于不同属性建立的社区与基于社区发现的社区进行比较，分析每种社区发现算法在链接预测，信息传播，病毒感染之间的区别 代码库：snap:https://github.com/snap-stanford/snap 图神经网络图网络主要解决的是AI对结构化数据的处理，而在动态数据、大规模数据、非结构化数据等领域，图网络的作为依旧有限 影响力distinguish the effect of peer influence and group conformity. Confluence: Conformity Influence in Large Social Networks从众效应群体，个人，同伴 根据历史行为预测下一行为 Social Influence Analysis in Large-scale Networks在不同主题下的社会影响力Topical Affinity Propagation (TAP) 应用于专家发现相似的节点，哪一个节点对另一个节点有较强的影响 ##Mining Topic-level Influence in Heterogeneous Networks ##Topic-Level Opinion Influence Model (TOIM): An Investigation Using Tencent Microblogging 问题网络表示的作用聚类的作用 GraphSAGEWeisfeiler-Lehman Isomorphism Test（图同构算法）对于不带标签的图，初始的时候，两个图的全部节点赋值1（或以度为标签），然后做多轮wl，出现节点ID和各ID出现次数不一致的情况就认为不是Isomorphism 图注意网络通俗易懂！使用Excel和TF实现Transformerhttps://mp.weixin.qq.com/s/3_dK289DPREI0KNj0NaR-A 社区发现社团发现算法分类及简介 igraph networkXnetworkX 官方文档 read json graph networkx file Method to save networkx graph to json graph? 软件：Network Analysis using iGraph Python Library]]></content>
+    <content type="text"><![CDATA[Understanding the Facets of Homophily in Social Psycho-Sociological Network Communities这篇论文研究朋友，亲属，同事之间的同质性： 人工标注了关系类型 建立了四个模型预测年龄，性别，人格，values 最后还进行了链接预测和社区发现的比较，比较这三个不同群体中引入人格特征后社区发现的准确度 Tanmoy Chakraborty 主页：http://faculty.iiitd.ac.in/~tanmoy/index.html#home Metadata vs. Ground-truth: A Myth behind the Evolution of Community Detection Methods基于不同属性建立的社区与基于社区发现的社区进行比较，分析每种社区发现算法在链接预测，信息传播，病毒感染之间的区别 代码库：snap:https://github.com/snap-stanford/snap 图神经网络图网络主要解决的是AI对结构化数据的处理，而在动态数据、大规模数据、非结构化数据等领域，图网络的作为依旧有限 影响力distinguish the effect of peer influence and group conformity. Confluence: Conformity Influence in Large Social Networks从众效应群体，个人，同伴 根据历史行为预测下一行为 Social Influence Analysis in Large-scale Networks在不同主题下的社会影响力Topical Affinity Propagation (TAP) 应用于专家发现相似的节点，哪一个节点对另一个节点有较强的影响 ##Mining Topic-level Influence in Heterogeneous Networks ##Topic-Level Opinion Influence Model (TOIM): An Investigation Using Tencent Microblogging 问题网络表示的作用聚类的作用 GraphSAGEWeisfeiler-Lehman Isomorphism Test（图同构算法）对于不带标签的图，初始的时候，两个图的全部节点赋值1（或以度为标签），然后做多轮wl，出现节点ID和各ID出现次数不一致的情况就认为不是Isomorphism 图注意力网络通俗易懂！使用Excel和TF实现Transformerhttps://mp.weixin.qq.com/s/3_dK289DPREI0KNj0NaR-A 社区发现社团发现算法分类及简介 igraph networkXnetworkX 官方文档 read json graph networkx file Method to save networkx graph to json graph? 软件：Network Analysis using iGraph Python Library lookalike互联网中寻找相似实体(lookalike)算法优化方案使用比较广泛过的解决方案是结合Minhash和局部敏感哈希算法 LSH (Local-Sensitive-Hash)的特性，分别减少特征比较和两两用户/item（Pair to Pair）的比较 百度百科标签提取：深度丨从零搭建推荐体系：概述及标签体系搭建（上）]]></content>
   </entry>
   <entry>
     <title><![CDATA[网络表示学习论文]]></title>
@@ -74,7 +99,7 @@
   <entry>
     <title><![CDATA[tensorflow1.11 + cuda 9.0+ cudnn 7.0]]></title>
     <url>%2F2019%2F04%2F25%2Ftensorflow%20%E5%AE%89%E8%A3%85%2F</url>
-    <content type="text"><![CDATA[要查看tensorflow 与cuda版本的对应关系 查看cuda版本cat /usr/local/cuda/version.txt cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2 nvcc -V 下载cuda,cudnncudnn需要登陆下载 library 版本 cuda网址，下载runfil(local)版本 安装cudasudo chmod +x cuda_9.0.176_384.81_linux.run # 为 cuda_9.0.176_384.81_linux.run 添加可执行权限 ./cuda_9.0.176_384.81_linux.run # 安装 cuda_9.0.176_384.81_linux.run Install NVIDIA Accelerated Graphics Driver for Linux-x86_64 384.81?(y)es/(n)o/(q)uit: n # 如果已经安装过了，则不需要安装显卡驱动 cudnn1234567sudo tar -xzvf cudnn-8.0-linux-x64-v5.1.tgzsudo cp cuda/include/cudnn.h /usr/local/cuda/includesudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn* sudo vim ~/.bashrcexport PATH=/usr/local/cuda/bin${PATH:+:${PATH}} export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}} export CUDA_HOME=/usr/local/cudasource ~/.bashrc 使之生效 安装tensorflowconda create -n name python=3.6pip install tensorflow-gpu==1.11 -i https://pypi.tuna.tsinghua.edu.cn/simple 参考：https://blog.csdn.net/uhauha2929/article/details/83448909 https://www.cnblogs.com/jins-note/p/9598178.htmltensorflow指定版本的安装及升级到最新版：https://blog.csdn.net/leitouguan8655/article/details/82897525 基于NVIDIA GeForce MX150 的Windows10安装TensorFlow-GPU详解]]></content>
+    <content type="text"><![CDATA[要查看tensorflow 与cuda版本的对应关系 查看cuda版本cat /usr/local/cuda/version.txt cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2 nvcc -V 下载cuda,cudnncudnn需要登陆下载 library 版本 cuda网址，下载runfil(local)版本 安装cudasudo chmod +x cuda_9.0.176_384.81_linux.run # 为 cuda_9.0.176_384.81_linux.run 添加可执行权限 ./cuda_9.0.176_384.81_linux.run # 安装 cuda_9.0.176_384.81_linux.run Install NVIDIA Accelerated Graphics Driver for Linux-x86_64 384.81?(y)es/(n)o/(q)uit: n # 如果已经安装过了，则不需要安装显卡驱动 cudnn1234567sudo tar -xzvf cudnn-8.0-linux-x64-v5.1.tgzsudo cp cuda/include/cudnn.h /usr/local/cuda/includesudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn* sudo vim ~/.bashrcexport PATH=/usr/local/cuda/bin${PATH:+:${PATH}} export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}} export CUDA_HOME=/usr/local/cudasource ~/.bashrc 使之生效 安装tensorflowconda create -n name python=3.6pip install tensorflow-gpu==1.11 -i https://pypi.tuna.tsinghua.edu.cn/simple 参考：https://blog.csdn.net/uhauha2929/article/details/83448909 https://www.cnblogs.com/jins-note/p/9598178.htmltensorflow指定版本的安装及升级到最新版：https://blog.csdn.net/leitouguan8655/article/details/82897525 基于NVIDIA GeForce MX150 的Windows10安装TensorFlow-GPU详解 win10下CUDA和CUDNN的安装（超详细）！亲测有效 tensorflow各个版本的CUDA以及Cudnn版本对应关系]]></content>
   </entry>
   <entry>
     <title><![CDATA[论文写作]]></title>
@@ -524,19 +549,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[jsma 报错集]]></title>
-    <url>%2F2017%2F12%2F04%2F%E9%A1%B9%E7%9B%AE%E6%8A%A5%E9%94%99%2F</url>
-    <content type="text"><![CDATA[UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe9 in position 0: ordinal not in range(128)Python在进行编码方式之间的转换时，会将 unicode 作为“中间编码”，但 unicode 最大只有 128 那么长，所以这里当尝试将 ascii 编码字符串转换成”中间编码” unicode 时由于超出了其范围，就报出了如上错误。我们在/usr/lib/python2.7/site-packages/目录下添加一个sitecustomize.py文件，内容如下： import syssys.setdefaultencoding(‘utf-8’) 忘了操作什么什么之后报的错，记起后补上…… 参考博客 OSError: [Errno 2] No such file or directory１．代码上传服务器后，空文件没有上传，导致自己一直以为存在文件夹，不明白为什么错误，以后应仔细检查一遍２．在路径前加“./” raise IOError, ‘Not a gzipped file’服务器中代码运行报错，不能下载MNIST数据集, 1.首先在当前项目下新建 MNIST_data2.https://gitee.com/Gssol/tensorflow_mnist_Data/attach_files 从该目录将4个附件全部下载 将下载的四个文件(不用解压)直接放到MNIST_data文件夹里面4.就可以调用该数据集了参考博客 ValueError: Parent directory of trained_variables.ckpt doesn’t exist, can’t save.模型存储路径在本地没有加ckpt,可以运行，但在服务器上却必须加，原因不明 ##mport sklearn.model_selection 出错ImportError: No module named model_selectionconda list 查看包安装列表conda update scikit-learn 命令更新sklearn的版本 conda install Matlotlib、Scikit-Learn注意再激活tensorflow情况下查看某个指定环境的已安装包conda list -n python27查找package信息conda search numpy 安装packageconda install -n python27 numpy更新packageconda update -n python27 numpy 删除packageconda remove -n python27 numpy SCP: No such file or directoryscp就是secure copy，一个在linux下用来进行远程拷贝文件的命令。符号软链接，应该写真正指向的地址，不明白这一点，所以浪费了很多时间 If you are logged into the local machine, you would use scp like this: scp /home/username/some.xml root@remote.machine.ip.address:/path/to/directory/ If you are logged into the remote machine (as in the OP), use scp like this: scp username@local.machine.ip.address:/home/username/some.xml /path/to/directory Substitute the IP addresses as directed in the commands./的问题还没弄明白 权限问题，上层目录也就是home目录被别人误改了权限，处理xxuser，其他用户都没了权限 ##anaconda search -t conda tensorflow 服务器上配置tensorflow 环境安装anocanda2 后，安装ＧＰＵ版本GPU安装只能用pip,conda只能安装cpu版本tensorflow版本简单 pip install tensorflow-gpu==1.1.0pip3 install tensorflow==1.1.0 python3.6 cpu版本 CUDA是NVIDIA 推出的使用GPU 资源进行计算的SDK ，CUDA 里面集成了显卡驱动,GPU加速首先就是安装CUDA，然而CUDA只支持NVIDIA显卡,因为CUDA软件就是他家出的注意GPU版本的不支持CUDNNV5，必须要V5.1以上GPU版本需要安装CUDA和ｃｕＤＮＮ,注意版本问题安装CUDA,参考一下网址：博客http://blog.csdn.net/binglel/article/details/70230276http://blog.csdn.net/stronger19890215/article/details/71411981?locationNum=8&amp;fps=1http://blog.csdn.net/jteng/article/details/52975247http://blog.csdn.net/zhaoyu106/article/details/52793183mingw CUDA安装和测试 检查自己的GPU是否是CUDA-capable在终端中输入： lspci | grep -i nvidia 安装qt createrhttps://www.ics.com/blog/getting-started-qt-and-qt-creator-linux sudo apt-get install qtcreator sudo apt-get install build-essential libgl1-mesa-dev cd ~/Downloads$ chmod a+x qt-unified-linux-x64-2.0.3-1-online.run apt-get install qt4-designer下载后找不到在哪儿运行 配置PyCharm1）打开PyCharm，执行快捷键ctrl+alt+s打开设置界面，输入tool，点开external tools，配置qtdesigner。 点击左上角的加号，作如下配置： 在Qt Designer的设置中，Program选择PyQt安装目录中 designer.exe 的路径 Work directory 使用变量 $FileDir$设置“PyUIC” – 这个主要是用来将 Qt界面 转换成 py代码 在PyUIC的设置中，其他的都差不多，Program 写入Python的地址，Parameters写入 -m PyQt5.uic.pyuic $FileName$ -o $FileNameWithoutExtension$.py 把上面的Python路径修改成自己的即可！ Work directory 使用变量 $FileDir$ 转化py代码 creater集成了pyqt desiner,sudo apt-get install qttools5-dev-tools这个因为安装了creater,暂时没试 Python中TypeError: unbound method 问题在运行时报错：TypeError: unbound method onlyCellValue() must be called with dictionary instance as first argument (got str instance instead) 后经在网上查看，发现时由于调用其他类时，未在后面添加括号，添加括号后，运行正常。这是由于未添加括号情况下，未被认为是类的实例，故报此错]]></content>
-      <categories>
-        <category>深度学习</category>
-        <category>编程</category>
-      </categories>
-      <tags>
-        <tag>对抗样本</tag>
-        <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[识别系统前期调研]]></title>
     <url>%2F2017%2F12%2F04%2F%E8%AF%86%E5%88%AB%E7%B3%BB%E7%BB%9F%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94%2F</url>
     <content type="text"><![CDATA[三星S8—虹膜识别 ①首先需要可以捕捉红外光的相机（目前市场已经没有） ② 然后对机主的虹膜进行高分辨捕捉 ③ 偷取他的手机 ④ 再用特殊的打印方式打印出来 iphone X—人脸识别苹果在Face ID的人脸识别中加入了深度信息的技术。 Face ID的实现靠的是iPhone X顶部一小块没被屏幕覆盖的区域。这一小块区域集成了多达八个组件，除了麦克风、扬声器、前置摄像头、环境光传感器、距离感应器等我们熟知的部分，还集成了红外镜头、泛光感应元件（Flood illuminator）、点阵投影器。 深度信息技术在Face ID的认证过程中分为以下两个步骤① 在注册时，点阵投影仪会投射3万多个点在人脸上，从而形成一张3D人脸图，并存储在A11芯片上 ② 使用时，泛光感应元件会打一道看不见的光在人的脸上（这样在黑暗中也可以识别人脸），读取用户的脸部3D几何结构图，并将它与存储在A11芯片隔区内的数据进行对比，如果两者一致，iPhone X就会解锁 越南网络安全公司Bkav绕过了首批由华硕、联想、东芝等笔记本电脑部署的面部识别系统，而使用的不过是一张简单的照片 门禁系统支付宝，ＱＱ安全中心人脸改密打卡机人脸（得力，中控）app以及线下互联网领域存在很多提供人脸识别技术的服务商，比如一登、facevisa 研究人员教导人工智能研究社交网络用户的行为，然后设计并实施自己的网络钓鱼诱饵。在测试中，AI 比人类竞争对手强大得多，制造并分发了比人类更多的网络钓鱼微博人工智能可用于挖掘大量公共领域和社交网络数据，以提取出生日期、性别、位置电话号码、邮箱地址等个人身份信息，可用于黑客入侵个人账户它还可以用于自动监控电子邮件和短信，并为社会工程攻击创建个性化的网络钓鱼邮件网络钓鱼诈骗是非法尝试从不知情的用户获取敏感信息。AI 可以更容易地突变恶意软件、更智能地搜索并挖掘和利用系统中的漏洞 ｆａｃｅ＋＋人脸识别语音：ＡＬＥＸＡ 智能设备语音助手公安部旗下NCIIC的人脸比对优图独创Uface深度人脸模型SeetaFace开源人脸识别引擎车牌识别及普通验证码 目标：Deep-pwning是一个轻量级的机器学习模型的实验框架，其目的是评估其对抗动机的强大对手。 请注意，目前状态下的深层次不在接近到期或完成的地方。 这是为了试验，扩展和扩展你。只有这样我们才能真正成为统计机器学习模型的渗透测试工具包。 Visual Question Answering (VQA）Can you fool AI with adversarial examples on a visual Turing test?]]></content>
@@ -572,6 +584,19 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[jsma 报错集]]></title>
+    <url>%2F2017%2F12%2F04%2F%E9%A1%B9%E7%9B%AE%E6%8A%A5%E9%94%99%2F</url>
+    <content type="text"><![CDATA[UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe9 in position 0: ordinal not in range(128)Python在进行编码方式之间的转换时，会将 unicode 作为“中间编码”，但 unicode 最大只有 128 那么长，所以这里当尝试将 ascii 编码字符串转换成”中间编码” unicode 时由于超出了其范围，就报出了如上错误。我们在/usr/lib/python2.7/site-packages/目录下添加一个sitecustomize.py文件，内容如下： import syssys.setdefaultencoding(‘utf-8’) 忘了操作什么什么之后报的错，记起后补上…… 参考博客 OSError: [Errno 2] No such file or directory１．代码上传服务器后，空文件没有上传，导致自己一直以为存在文件夹，不明白为什么错误，以后应仔细检查一遍２．在路径前加“./” raise IOError, ‘Not a gzipped file’服务器中代码运行报错，不能下载MNIST数据集, 1.首先在当前项目下新建 MNIST_data2.https://gitee.com/Gssol/tensorflow_mnist_Data/attach_files 从该目录将4个附件全部下载 将下载的四个文件(不用解压)直接放到MNIST_data文件夹里面4.就可以调用该数据集了参考博客 ValueError: Parent directory of trained_variables.ckpt doesn’t exist, can’t save.模型存储路径在本地没有加ckpt,可以运行，但在服务器上却必须加，原因不明 ##mport sklearn.model_selection 出错ImportError: No module named model_selectionconda list 查看包安装列表conda update scikit-learn 命令更新sklearn的版本 conda install Matlotlib、Scikit-Learn注意再激活tensorflow情况下查看某个指定环境的已安装包conda list -n python27查找package信息conda search numpy 安装packageconda install -n python27 numpy更新packageconda update -n python27 numpy 删除packageconda remove -n python27 numpy SCP: No such file or directoryscp就是secure copy，一个在linux下用来进行远程拷贝文件的命令。符号软链接，应该写真正指向的地址，不明白这一点，所以浪费了很多时间 If you are logged into the local machine, you would use scp like this: scp /home/username/some.xml root@remote.machine.ip.address:/path/to/directory/ If you are logged into the remote machine (as in the OP), use scp like this: scp username@local.machine.ip.address:/home/username/some.xml /path/to/directory Substitute the IP addresses as directed in the commands./的问题还没弄明白 权限问题，上层目录也就是home目录被别人误改了权限，处理xxuser，其他用户都没了权限 ##anaconda search -t conda tensorflow 服务器上配置tensorflow 环境安装anocanda2 后，安装ＧＰＵ版本GPU安装只能用pip,conda只能安装cpu版本tensorflow版本简单 pip install tensorflow-gpu==1.1.0pip3 install tensorflow==1.1.0 python3.6 cpu版本 CUDA是NVIDIA 推出的使用GPU 资源进行计算的SDK ，CUDA 里面集成了显卡驱动,GPU加速首先就是安装CUDA，然而CUDA只支持NVIDIA显卡,因为CUDA软件就是他家出的注意GPU版本的不支持CUDNNV5，必须要V5.1以上GPU版本需要安装CUDA和ｃｕＤＮＮ,注意版本问题安装CUDA,参考一下网址：博客http://blog.csdn.net/binglel/article/details/70230276http://blog.csdn.net/stronger19890215/article/details/71411981?locationNum=8&amp;fps=1http://blog.csdn.net/jteng/article/details/52975247http://blog.csdn.net/zhaoyu106/article/details/52793183mingw CUDA安装和测试 检查自己的GPU是否是CUDA-capable在终端中输入： lspci | grep -i nvidia 安装qt createrhttps://www.ics.com/blog/getting-started-qt-and-qt-creator-linux sudo apt-get install qtcreator sudo apt-get install build-essential libgl1-mesa-dev cd ~/Downloads$ chmod a+x qt-unified-linux-x64-2.0.3-1-online.run apt-get install qt4-designer下载后找不到在哪儿运行 配置PyCharm1）打开PyCharm，执行快捷键ctrl+alt+s打开设置界面，输入tool，点开external tools，配置qtdesigner。 点击左上角的加号，作如下配置： 在Qt Designer的设置中，Program选择PyQt安装目录中 designer.exe 的路径 Work directory 使用变量 $FileDir$设置“PyUIC” – 这个主要是用来将 Qt界面 转换成 py代码 在PyUIC的设置中，其他的都差不多，Program 写入Python的地址，Parameters写入 -m PyQt5.uic.pyuic $FileName$ -o $FileNameWithoutExtension$.py 把上面的Python路径修改成自己的即可！ Work directory 使用变量 $FileDir$ 转化py代码 creater集成了pyqt desiner,sudo apt-get install qttools5-dev-tools这个因为安装了creater,暂时没试 Python中TypeError: unbound method 问题在运行时报错：TypeError: unbound method onlyCellValue() must be called with dictionary instance as first argument (got str instance instead) 后经在网上查看，发现时由于调用其他类时，未在后面添加括号，添加括号后，运行正常。这是由于未添加括号情况下，未被认为是类的实例，故报此错]]></content>
+      <categories>
+        <category>深度学习</category>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>对抗样本</tag>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[官方文档]]></title>
     <url>%2F2017%2F12%2F04%2F%E5%AE%98%E7%BD%91%E6%96%87%E6%A1%A3%2F</url>
     <content type="text"><![CDATA[linux命令大全tensorflow中文官方文档tensorflow英文文档scipy]]></content>
@@ -581,29 +606,6 @@
       <tags>
         <tag>学习</tag>
         <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[书单]]></title>
-    <url>%2F2017%2F12%2F04%2F%E4%B9%A6%E5%8D%95%2F</url>
-    <content type="text"><![CDATA[书单：理性乐观派]]></content>
-      <categories>
-        <category>读书</category>
-      </categories>
-      <tags>
-        <tag>书籍</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[正则化]]></title>
-    <url>%2F2017%2F12%2F04%2F%E6%AD%A3%E5%88%99%E5%8C%96%2F</url>
-    <content type="text"><![CDATA[正则化是为了解决过拟合问题。在Andrew Ng的机器学习视频中有提到（详见http://www.cnblogs.com/jianxinzhou/p/4083921.html）。 正则化产生了稀疏性（Sparsity），减少了特征向量个数，降低了模型的复杂度。 例如一回归问题，假设回归模型为：y=w1x1+w2x2+…+w1000*x1000+b 通过学习，如果最后学习到的w就只有很少的非零元素，大部分W为0或接近于0，例如只有5个非零的wi，那可以认为y之于这5个（因素）xi有关系，这更有利于人们对问题的认识和分析，抓住影响问题的主要方面（因素）更符合人们的认知习惯。(1)L0范数 L0范数是指向量中非零元素的个数。L0正则化的值是模型中非零参数的个数，L0正则化可以实现模型参数的的稀疏化 （2）L1范数 L1范数是指向量中各个元素绝对值之和，又叫“稀疏规则算子”（Lasso regularization）。 L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩罚』是指对损失函数中的某些参数做一些限制。知乎中陶轻松的答案指出正则项使W向量中项的个数最小化，从而防止过拟合]]></content>
-      <categories>
-        <category>深度学习</category>
-      </categories>
-      <tags>
-        <tag>对抗样本</tag>
-        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -642,6 +644,29 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[书单]]></title>
+    <url>%2F2017%2F12%2F04%2F%E4%B9%A6%E5%8D%95%2F</url>
+    <content type="text"><![CDATA[书单：理性乐观派]]></content>
+      <categories>
+        <category>读书</category>
+      </categories>
+      <tags>
+        <tag>书籍</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[正则化]]></title>
+    <url>%2F2017%2F12%2F04%2F%E6%AD%A3%E5%88%99%E5%8C%96%2F</url>
+    <content type="text"><![CDATA[正则化是为了解决过拟合问题。在Andrew Ng的机器学习视频中有提到（详见http://www.cnblogs.com/jianxinzhou/p/4083921.html）。 正则化产生了稀疏性（Sparsity），减少了特征向量个数，降低了模型的复杂度。 例如一回归问题，假设回归模型为：y=w1x1+w2x2+…+w1000*x1000+b 通过学习，如果最后学习到的w就只有很少的非零元素，大部分W为0或接近于0，例如只有5个非零的wi，那可以认为y之于这5个（因素）xi有关系，这更有利于人们对问题的认识和分析，抓住影响问题的主要方面（因素）更符合人们的认知习惯。(1)L0范数 L0范数是指向量中非零元素的个数。L0正则化的值是模型中非零参数的个数，L0正则化可以实现模型参数的的稀疏化 （2）L1范数 L1范数是指向量中各个元素绝对值之和，又叫“稀疏规则算子”（Lasso regularization）。 L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩罚』是指对损失函数中的某些参数做一些限制。知乎中陶轻松的答案指出正则项使W向量中项的个数最小化，从而防止过拟合]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>对抗样本</tag>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[斯人若彩虹，遇上方知有]]></title>
     <url>%2F2017%2F12%2F04%2F%E4%B8%83%E5%A4%95%2F</url>
     <content type="text"><![CDATA[我们分担寒潮、风雷、霹雳；我们共享雾霭流岚、虹霓，仿佛永远分离，却又终身相依]]></content>
@@ -651,17 +676,6 @@
       <tags>
         <tag>七夕</tag>
         <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Robust Physical-World Attacks on Machine Learning Models]]></title>
-    <url>%2F2017%2F12%2F04%2FRobust%20Physical-World%20Attacks%20on%20Machine%20Learning%20Models%2F</url>
-    <content type="text"><![CDATA[最近的研究中，许多对抗样本构造方法在真实自然世界效果不好。已有的对抗攻击研究在现实世界中，往往不能使分类模型误分类，或者只在非常有限的情况比如复杂原始图像经修改后打印出来才能达到对抗攻击的目的。 本论文要点如下： 提出Robust Physical Perturbations(RP2)算法，能产生鲁棒且自然有效的对抗扰动。 使用RP2算法用两种方式构造对抗攻击：– subtle perturbations：对整个标志进行微小的、很难探测到的改动。把整个受到攻击后的图片打印后覆盖到原标志上面，尺寸和原图一样。– camouflage perturbations：以涂鸦或艺术画的形式对原图进行可见的改变。攻击者直接将扰动攻击打印出来，然后贴到已经存在的标志上面。 因为目前缺乏衡量自然界对抗攻击效果的标准方法，因此论文提出了一种评估方法。 数据集：LISA数据集，包含47种不同的路标图片，在本实验中重设尺寸为32×32 https://www.zybuluo.com/wuxin1994/note/839621]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>对抗样本</tag>
       </tags>
   </entry>
   <entry>
@@ -677,20 +691,31 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Robust Physical-World Attacks on Machine Learning Models]]></title>
+    <url>%2F2017%2F12%2F04%2FRobust%20Physical-World%20Attacks%20on%20Machine%20Learning%20Models%2F</url>
+    <content type="text"><![CDATA[最近的研究中，许多对抗样本构造方法在真实自然世界效果不好。已有的对抗攻击研究在现实世界中，往往不能使分类模型误分类，或者只在非常有限的情况比如复杂原始图像经修改后打印出来才能达到对抗攻击的目的。 本论文要点如下： 提出Robust Physical Perturbations(RP2)算法，能产生鲁棒且自然有效的对抗扰动。 使用RP2算法用两种方式构造对抗攻击：– subtle perturbations：对整个标志进行微小的、很难探测到的改动。把整个受到攻击后的图片打印后覆盖到原标志上面，尺寸和原图一样。– camouflage perturbations：以涂鸦或艺术画的形式对原图进行可见的改变。攻击者直接将扰动攻击打印出来，然后贴到已经存在的标志上面。 因为目前缺乏衡量自然界对抗攻击效果的标准方法，因此论文提出了一种评估方法。 数据集：LISA数据集，包含47种不同的路标图片，在本实验中重设尺寸为32×32 https://www.zybuluo.com/wuxin1994/note/839621]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>对抗样本</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[test]]></title>
     <url>%2F2017%2F12%2F04%2Ftest%2F</url>
     <content type="text"><![CDATA[$$ \frac $$ $$\begin{eqnarray}\nabla\cdot\vec{E} &amp;=&amp; \frac{\rho}{\epsilon_0} \\nabla\cdot\vec{B} &amp;=&amp; 0 \\nabla\times\vec{E} &amp;=&amp; -\frac{\partial B}{\partial t} \\nabla\times\vec{B} &amp;=&amp; \mu_0\left(\vec{J}+\epsilon_0\frac{\partial E}{\partial t} \right)\end{eqnarray}$$]]></content>
   </entry>
   <entry>
-    <title><![CDATA[没想到你是这样的Linux | 终端下有趣的命令合集]]></title>
-    <url>%2F2017%2F12%2F04%2FLinux%20%E6%9C%89%E8%B6%A3%E5%91%BD%E4%BB%A4%2F</url>
-    <content type="text"><![CDATA[转载Freebuf toilet简介 toilet能用字母拼写出更大字母的工具，具体拼出什么字由命令后面的参数决定，不仅如此，它还能打印出各种风格的效果，比如彩色，金属光泽等。安装 apt-get install toilet 参数解释 toilet -f mono12 -F metal FreeBuf sl简介 你可能了解Linux的ls命令，并经常使用它来查看文件夹的内容。但是，有些时候你可能会拼写成sl ,这时我们应该如何获得一些乐趣而不是看见“command not found”呢？某编程牛人也经常犯把ls敲成sl的错误，所以他自己编了一个程序娱乐一下,这个程序的作用很简单，就是当你输入sl的时候终端会出现一个火车呼啸而过～～安装 apt-get install sl cmatrix简介 《黑客帝国》的代码雨视觉特效。安装 apt-get install cmatrix 参数解释 -B: 字体加粗-C: 颜色 后面跟上参数颜色 cowsay简介 Cowsay命令是一个有趣的命令。它会用ASCII字符描绘牛，羊和许多其他动物。但是不是每个Linux发行版都带有这个命令。安装 apt-get install cowsay 参数解释 列出所有支持可用的动物:cowsay -l list sciinema简介 本文其实最初很多特效都用这个终端去录制的，但是由于需要引用外部的js，所以最后这些终端下的特效才换成了gif图。asciineme 可以完美录制完美终端下所敲的命令。官网:https://asciinema.org/]]></content>
+    <title><![CDATA[anaconda+jupyter notebook安装]]></title>
+    <url>%2F2017%2F12%2F04%2Fjupyter%20notebook%20%E5%AE%89%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[安装anaconda2和anaconda3先在清华镜像站下载2和3可以任意先安装一个版本，然后另一个版本安装在/envs/py2路径下，py2是自己起的文件名。再打开CMD下载jupyter notebook 1pip install jupyter notebook notebook同时有两个版本时，可在kernel文件夹中，例如路径为D:\ProgramData\Anaconda3\share\jupyter\kernels，放两个kernel 可把/envs文件下的python拷贝到此路径中。 跟新源http://so.kszixue.com/?id=20 channels: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/ https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/ https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/show_channel_urls: true 例 conda config –add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/]]></content>
       <categories>
-        <category>Linux</category>
+        <category>python</category>
       </categories>
       <tags>
-        <tag>有趣命令</tag>
-        <tag>软件安装</tag>
+        <tag>编程</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -727,27 +752,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[anaconda+jupyter notebook安装]]></title>
-    <url>%2F2017%2F12%2F04%2Fjupyter%20notebook%20%E5%AE%89%E8%A3%85%2F</url>
-    <content type="text"><![CDATA[安装anaconda2和anaconda3先在清华镜像站下载2和3可以任意先安装一个版本，然后另一个版本安装在/envs/py2路径下，py2是自己起的文件名。再打开CMD下载jupyter notebook 1pip install jupyter notebook notebook同时有两个版本时，可在kernel文件夹中，例如路径为D:\ProgramData\Anaconda3\share\jupyter\kernels，放两个kernel 可把/envs文件下的python拷贝到此路径中。 跟新源http://so.kszixue.com/?id=20 channels: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/ https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/ https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/show_channel_urls: true 例 conda config –add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/]]></content>
+    <title><![CDATA[没想到你是这样的Linux | 终端下有趣的命令合集]]></title>
+    <url>%2F2017%2F12%2F04%2FLinux%20%E6%9C%89%E8%B6%A3%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[转载Freebuf toilet简介 toilet能用字母拼写出更大字母的工具，具体拼出什么字由命令后面的参数决定，不仅如此，它还能打印出各种风格的效果，比如彩色，金属光泽等。安装 apt-get install toilet 参数解释 toilet -f mono12 -F metal FreeBuf sl简介 你可能了解Linux的ls命令，并经常使用它来查看文件夹的内容。但是，有些时候你可能会拼写成sl ,这时我们应该如何获得一些乐趣而不是看见“command not found”呢？某编程牛人也经常犯把ls敲成sl的错误，所以他自己编了一个程序娱乐一下,这个程序的作用很简单，就是当你输入sl的时候终端会出现一个火车呼啸而过～～安装 apt-get install sl cmatrix简介 《黑客帝国》的代码雨视觉特效。安装 apt-get install cmatrix 参数解释 -B: 字体加粗-C: 颜色 后面跟上参数颜色 cowsay简介 Cowsay命令是一个有趣的命令。它会用ASCII字符描绘牛，羊和许多其他动物。但是不是每个Linux发行版都带有这个命令。安装 apt-get install cowsay 参数解释 列出所有支持可用的动物:cowsay -l list sciinema简介 本文其实最初很多特效都用这个终端去录制的，但是由于需要引用外部的js，所以最后这些终端下的特效才换成了gif图。asciineme 可以完美录制完美终端下所敲的命令。官网:https://asciinema.org/]]></content>
       <categories>
-        <category>python</category>
+        <category>Linux</category>
       </categories>
       <tags>
-        <tag>编程</tag>
-        <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[ADVERSARIAL MACHINE LEARNING AT SCALE]]></title>
-    <url>%2F2017%2F12%2F04%2FADVERSARIAL%20MACHINE%20LEARNING%20AT%20SCALE%2F</url>
-    <content type="text"><![CDATA[摘要 贡献比较了多种攻击方式构造的对抗样本在更大的数据集（imageNET ）上的实验结果， 单步攻击方法比多步攻击方法更具转移性 解决标签泄露问题 focusing on the question of how well adversarial examples transfer between different types of models, while we focus on defenses and studying howwell different types of adversarial example generation procedures transfer between relatively similar models 标签泄露是指如果分类器正确分类了由使用正确标签构造的对抗样本但是错分了相应的没有使用标签构造的对抗样本，这就说明有了标签泄露。]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>对抗样本</tag>
-        <tag>论文集</tag>
+        <tag>有趣命令</tag>
+        <tag>软件安装</tag>
       </tags>
   </entry>
   <entry>
@@ -762,14 +775,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[深度学习资料]]></title>
-    <url>%2F2017%2F12%2F04%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%2F</url>
-    <content type="text"><![CDATA[深度学习资料2015年5月《自然》上刊登的一篇概述性论文《深度学习》（Deep learning），由我自己、Yoshua Bengio 、Geoff Hinton共同撰写。 系统性的课本方面，由 Goodfellow、Bengio 和 Courville共同撰写的《深度学习》（Deep learning）（这个在网上有HTML版本，本书旨在帮助学生和从业人员入门机器学习，尤其是深度学习领域。HTML版本已经编辑完成，并且永久免费。网址：） 2012 年 IPAM上针对研究生的“深度学习和特征学习夏季课程”（这个夏季课程的授课老师包括 Geoff Hinton 、Yann LeCun、吴恩达、Yoshua Bengio等众多深度学习专家，历时半个多月时间，网上有完整视频录像：） 2015年在加拿大蒙特利尔市举行了“深度学习夏季课程”（该课程的对象为：已经具备的机器学习基本知识的研究生、业界工程师和研究人员，授课量十分丰富。 推荐一些关于特定平台的使用教程，比如Torch、TensorFlow 和 Theano。 百度paddle开发团队介绍的深度学习基本概念：深度学习适用于大数据.其中查了两个概念:word embedding,过拟合 知乎上关于深度学习入门的讨论,列了很多资料，一天搞懂深度学习图解深度学习这个网页动画做的很好。 机器学习中文社区 还有斯坦福大学公开课，讲机器学习,CS231 再看Dawn Song团队的一篇论文时查的VAEGAN（生成对抗网络）的最新应用状况结合代码讲解VAE-GAN比较透彻的一篇文章 应该搜搜深度学习暑期学校或深度学习项目实践 教程Udacity 深度学习知乎231翻译没有博士学位，照样玩转TensorFlow深度学习零基础入门深度学习 对抗样本MNIST的对抗噪声TensorFlow生成对抗样本（微信） https://yq.aliyun.com/articles/149583?utm_content=m_27089]]></content>
+    <title><![CDATA[ADVERSARIAL MACHINE LEARNING AT SCALE]]></title>
+    <url>%2F2017%2F12%2F04%2FADVERSARIAL%20MACHINE%20LEARNING%20AT%20SCALE%2F</url>
+    <content type="text"><![CDATA[摘要 贡献比较了多种攻击方式构造的对抗样本在更大的数据集（imageNET ）上的实验结果， 单步攻击方法比多步攻击方法更具转移性 解决标签泄露问题 focusing on the question of how well adversarial examples transfer between different types of models, while we focus on defenses and studying howwell different types of adversarial example generation procedures transfer between relatively similar models 标签泄露是指如果分类器正确分类了由使用正确标签构造的对抗样本但是错分了相应的没有使用标签构造的对抗样本，这就说明有了标签泄露。]]></content>
       <categories>
-        <category>科研</category>
+        <category>论文</category>
       </categories>
       <tags>
-        <tag>深度学习</tag>
+        <tag>对抗样本</tag>
+        <tag>论文集</tag>
       </tags>
   </entry>
   <entry>
@@ -797,6 +811,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[深度学习资料]]></title>
+    <url>%2F2017%2F12%2F04%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%2F</url>
+    <content type="text"><![CDATA[深度学习资料2015年5月《自然》上刊登的一篇概述性论文《深度学习》（Deep learning），由我自己、Yoshua Bengio 、Geoff Hinton共同撰写。 系统性的课本方面，由 Goodfellow、Bengio 和 Courville共同撰写的《深度学习》（Deep learning）（这个在网上有HTML版本，本书旨在帮助学生和从业人员入门机器学习，尤其是深度学习领域。HTML版本已经编辑完成，并且永久免费。网址：） 2012 年 IPAM上针对研究生的“深度学习和特征学习夏季课程”（这个夏季课程的授课老师包括 Geoff Hinton 、Yann LeCun、吴恩达、Yoshua Bengio等众多深度学习专家，历时半个多月时间，网上有完整视频录像：） 2015年在加拿大蒙特利尔市举行了“深度学习夏季课程”（该课程的对象为：已经具备的机器学习基本知识的研究生、业界工程师和研究人员，授课量十分丰富。 推荐一些关于特定平台的使用教程，比如Torch、TensorFlow 和 Theano。 百度paddle开发团队介绍的深度学习基本概念：深度学习适用于大数据.其中查了两个概念:word embedding,过拟合 知乎上关于深度学习入门的讨论,列了很多资料，一天搞懂深度学习图解深度学习这个网页动画做的很好。 机器学习中文社区 还有斯坦福大学公开课，讲机器学习,CS231 再看Dawn Song团队的一篇论文时查的VAEGAN（生成对抗网络）的最新应用状况结合代码讲解VAE-GAN比较透彻的一篇文章 应该搜搜深度学习暑期学校或深度学习项目实践 教程Udacity 深度学习知乎231翻译没有博士学位，照样玩转TensorFlow深度学习零基础入门深度学习 对抗样本MNIST的对抗噪声TensorFlow生成对抗样本（微信） https://yq.aliyun.com/articles/149583?utm_content=m_27089]]></content>
+      <categories>
+        <category>科研</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[利用Wireshark任意获取QQ好友IP实施精准定位]]></title>
     <url>%2F2017%2F12%2F04%2F%E5%88%A9%E7%94%A8wireshark%E8%BF%9B%E8%A1%8Cqq%E5%A5%BD%E5%8F%8B%E5%AE%9A%E4%BD%8D%2F</url>
     <content type="text"><![CDATA[利用Wireshark任意获取QQ好友IP实施精准定位在freebuf上看到了利用Wireshark任意获取QQ好友IP实施精准定位这篇文章，就想试试。wireshark抓取数据包，然后查找。 1,选择搜索 “字符串”; 2,选择搜索 “分组详情”;3,填写搜索数据 “020048”; 当发现查找能自动定位到连接数据的时候就可以关闭电话邀请一个IP在线定位的网站openGPS.cn 进入页面后，选择高精度IP定位.wireshark功能使用的详细介绍 wireshark抓包常见提示含义解析 我是如何轻松拿到Google$1337现金奖励这篇文章主要是讲漏洞挖掘可适当关注Fofa、Shodan、Zoomeye等网络空间数据平台。]]></content>
@@ -817,18 +842,6 @@
       <tags>
         <tag>寄语</tag>
         <tag>心情</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Hexo + github 博客搭建过程]]></title>
-    <url>%2F2017%2F12%2F04%2FHexo%20%2B%20github%20%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B%2F</url>
-    <content type="text"><![CDATA[最近想建个博客记录一下平时的一些技术细节，以后可以随时翻翻，发现以前做过的事总是很容易忘记，真是好记性不如烂笔头,顺便整理一下思路。 整理知识，学习笔记 发布日记，杂文，所见所想 撰写发布技术文稿（代码支持） 撰写发布学术论文（LaTeX 公式支持） 搭建环境 Windows10 64位 node@4.4 后变成6.1.0 hexo@3.3.7 前期 百度知道了搭建博客用wordpress等需要有服务器，买不起，虽然后面知道了GitHub大礼包，有digitalOcean 提供的优惠劵，但已经不想折腾wordpress了，以后再说。所以用了github page这个功能，再加上hexo ,类似的还有jekyll,但jekyll 好像命令有些复杂，而且需要依赖的东西有点多，所以选了hexo,hexo 用户量级好像不如jekyll。 Hexo 是什么 Hexo 可以快速，简洁，高效的搭建博客框架，方便的生成静态网页 托管在github上。它是台湾的@tommy351编写的，基于Node.js。 搭建博客安装git参考了博客http://blog.csdn.net/SmallCheric/article/details/51049683的教程，下载并安装了[Git](https://git-for-windows.github.io/) 用以下命令查看git版本1git --version 安装Node.jswindows环境下的Node.js的安装很简单,只需要下载客户端一路next就行了,第一次选择前面提到博客中的v4.4.0LTS版本64位的，后来因为css样式显示不出来，又下载了新版本V6.110，升级node又是一番折腾，后面再提。用以下命令查看版本号：1node -v 安装HexoNode.js 安装完成后，在电脑任意位置，右键选择GitBash ,执行npm命令 npm install -g hexo 安装完成后，建立一个文件夹（E:\Hexo）,在建立的文件夹内右键,选择gitbush,执行以下命令，就在目标文件夹下创建建立博客所需的文件。 hexo init 然后 hexo install 初始化完成目录图： 这是参考了http://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html的教程12＄hexo g #生成$hexo s #启动服务，本地浏览 执行以上命令，hexo会把public文件夹里的东西提交到github上，同时在public 文件夹中生成相关html文件。 hexo s 开启本地服务端口，打开浏览器http://localhost:4000 即可看到内容，啊哈^-^ ,没想到写到这个竟然解决的本地没有css的问题，原来自己一直是点击Index.html打开网页，不是用以上网址打开，所以css样式显示不出来，但是为什么呢，不求甚解，难道是不用那个网址没法渲染，找不到css样式，但自己看了看源代码，觉得应该能找到啊，不解。css 代码：1&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/./main.b3331d.css&quot;&gt; 顺便记录一下路径的问题： ./ 当前路径/ 网站根路径../ 上一层目录，如../../表示上上层目录 当前路径是指和本文件同在一个文件夹下，这是可以用相对路径。 修改端口号：执行命令hexo s -p 5000 修改主题官方主题下载了2个主题：hexo-them-jekyll和hexo-theme-yilia 下载主题：1$ git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia 下载后的主题在themes文件夹中，修改—config.yml中的theme: landscape为theme: yilia,然后执行hexo g生成，注意hexo g 每次执行都会把public 文件夹的东西更新一次，还有theme 冒号后面注意有空格。 如果有问题，执行hexo clean,清理public 的内容，然后重新生成和发布。 上传 hexo上传代码会把以前的代码都删掉，注意备份。 首先，配置ssh_key,用ssh key 解决本地与服务器连接的问题。可参考百度经验。1$ cd ~/.ssh #检查本机已存在的ssh密钥 1$ ssh-keygen -t -C "github注册邮件地址" 会生成一个文件.ssh\id_rsa.pub，复制里面的内容到github，个人设置-》SSH and GPG key中-》New SSh key 测试是否成功：1$ ssh -T git@github.com 然后配置：12$ git config --global user.name &quot;**&quot;// 你的github用户名，非昵称$ git config --global user.email &quot;xxx@qq.com&quot;// 填写你的github注册邮箱 配置：config_yml中deploy,1234deploy: type: git repository: git@github.com:lian/lian.github.io.git branch: master 后又改成这个，http似乎不能写成https1234deploy: type: git repository: http://github.com/lian/lian.github.io.git branch: master 如果报deployer not found,是因为没有安装插件。打开 git bash，输入hexo d提交改动代码到github。 保留CNAME等文件把这些文件放到source文件夹中，这里的所有文件会原样复制到public文件夹中。http://blog.liuxianan.com/build-blog-website-by-hexo-github.html 中可下载作者的md文件。 介绍markdawn 语法Hexo文件夹结构 设置next主题,参考博客。 搭建过程中问题1、生成时hexo 报错 Cannot read property ‘replace’ of null 解决： _config.yml 配置文件中的url 设置错误 123456# URL## If your site is put in a subdirectory, set url as &apos;http://yoursite.com/child&apos; and root as &apos;/child/&apos;url: https://lian.github.ioroot: \permalink: :year/:month/:day/:title/permalink_defaults: root 后是根路径，与css文件路径有关 2、 ERROR Plugin load failed: hexo-generator-json-content 升级node.js到最新稳定版升级node，参照博客,先安装gnvm，点击exe发现在cmd下找不到，弃之，后直接下载node安装。 执行命令 npm i hexo-generator-json-content –save 3、提交时出现错误ERROR Plugin load failed: hexo-deployer-git 解决 执行 npm install hexo-deployer-git –save 4、config 中文乱码 在sublime里打开，保存为GBK-8格式 常见hexo命令1234567hexo new &quot;postName&quot; #新建文章hexo new page &quot;pageName&quot; #新建页面hexo generate #生成静态页面至public目录hexo server #开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）hexo deploy #部署到GitHubhexo help # 查看帮助hexo version #查看Hexo的版本 缩写：1234hexo n == hexo newhexo g == hexo generatehexo s == hexo serverhexo d == hexo deploy 组合命令：12hexo s -g #生成并本地预览hexo d -g #生成并上传 markdown12345678910在英文输入法下:&apos;&apos;&apos;&apos;&apos;&apos; 表示 代码块 #到###### 表示标题 ** dd** 加粗 * dd* 斜体 [ ]（） 链接&lt;！-- more --&gt;！[init]（连接） 图片* 标号 title: postName #文章页面上的显示名称，一般是中文date: 2013-12-02 15:30:16 #文章生成时间，一般不改，当然也可以任意修改categories: 默认分类 #分类tags: [tag1,tag2,tag3]#文章标签，可空，多标签请用格式，注意:后面有个空格 域名解析用namecheap解析域名步骤参考文章 关于A解析和CNAME解析的区别： A解析：只能填IP地址，IP地址如果换了的话就需要换解析记录CNAME解析：解析到另一个域名，即使被指向的域名的ip发生变化，也不需要更改解析记录。CNAME优先级高于A解析（至少在DNSPOD是这样的） 给网站添加favicon这个和主题有关，默认可能没有，浏览器打开后根据开发者工具里可以看到当前主题下’favicon’的具体路径和要求文件格式，对应做一个就可以了。有时候是’png’但也有时候强制要求’.ico’，可以去比特虫等网站在线制作。 博客优化（12月2日更新）根据官网配置了本地搜索 社交链接 打赏功能 友情链接 百度统计 文章阅读量统计配置LeanCloud 文章【字数统计】、【阅读时长】统计功能 安装wordcount插件 npm i –save hexo-wordcountnpm install hexo-generator-searchdb –save 显示文字 用 Sublime Text 工具打开 post.swig 文件，路径如下：xxx_blog/themes/next/layout/_macro/post.swig 增加网站的浏览次数与访客数量统计功能网站的浏览次数，即pv；网站的访客数为uv。pv的计算方式是，单个用户连续点击n篇文章，记录n次访问量；uv的计算方式是，单个用户连续点击n篇文章，只记录1次访客数。你可以根据需要添加相应的统计功能。安装busuanzi.js脚本 如果你使用的是NexT主题（其他主题类似），打开/theme/next/layout/_partial/footer.swig文件，拷贝下面的代码至文件的开头。 显示统计标签 同样编辑/theme/next/layout/_partial/footer.swig文件。 如果你想要显示pv统计量，复制以下代码至你想要放置的位置， 本站总访问量次 如果你想要显示uv统计量，复制以下代码至你想要放置的位置， 本站访客数人次 hexo数学公式显示这个折腾了两天，放弃之后结果莫名其妙可以显示了。 主要使用的命令 npm install hexo-math –savehexo math installnpm uninstall hexo-renderer-marked –savenpm install hexo-renderer-kramed –savenpm install hexo-renderer-mathjax –save kramed是在marked上作了修改。hexo-renderer-kramed渲染后公式消失了，最终卸载了。 最终的方案： 用编辑器打开marked.js（在./node_modules/marked/lib/中）Step 1: escape: /^\([\`*{}[]()# +-.!_&gt;])/, 替换成 escape: /^\([`*[]()# +-.!_&gt;])/, 这一步是在原基础上取消了对\,{,}的转义(escape)Step 2: em: /^\b((?:[^]|_)+?)\b|^*((?:**|[\s\S])+?)*(?!*)/, 替换成 em:/^*((?:**|[\s\S])+?)*(?!*)/, 进入到主题目录，找到_config.yml配置问题，把mathjax默认的false修改为true，具体如下： MathJax Supportmathjax: enable: true per_page: true 参考文献：http://blog.csdn.net/emptyset110/article/details/50123231 http://masikkk.com/article/hexo-13-MathJax/]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>GitHub</tag>
       </tags>
   </entry>
   <entry>
@@ -853,6 +866,18 @@
         <tag>DigitalOceam</tag>
         <tag>科学上网</tag>
         <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo + github 博客搭建过程]]></title>
+    <url>%2F2017%2F12%2F04%2FHexo%20%2B%20github%20%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B%2F</url>
+    <content type="text"><![CDATA[最近想建个博客记录一下平时的一些技术细节，以后可以随时翻翻，发现以前做过的事总是很容易忘记，真是好记性不如烂笔头,顺便整理一下思路。 整理知识，学习笔记 发布日记，杂文，所见所想 撰写发布技术文稿（代码支持） 撰写发布学术论文（LaTeX 公式支持） 搭建环境 Windows10 64位 node@4.4 后变成6.1.0 hexo@3.3.7 前期 百度知道了搭建博客用wordpress等需要有服务器，买不起，虽然后面知道了GitHub大礼包，有digitalOcean 提供的优惠劵，但已经不想折腾wordpress了，以后再说。所以用了github page这个功能，再加上hexo ,类似的还有jekyll,但jekyll 好像命令有些复杂，而且需要依赖的东西有点多，所以选了hexo,hexo 用户量级好像不如jekyll。 Hexo 是什么 Hexo 可以快速，简洁，高效的搭建博客框架，方便的生成静态网页 托管在github上。它是台湾的@tommy351编写的，基于Node.js。 搭建博客安装git参考了博客http://blog.csdn.net/SmallCheric/article/details/51049683的教程，下载并安装了[Git](https://git-for-windows.github.io/) 用以下命令查看git版本1git --version 安装Node.jswindows环境下的Node.js的安装很简单,只需要下载客户端一路next就行了,第一次选择前面提到博客中的v4.4.0LTS版本64位的，后来因为css样式显示不出来，又下载了新版本V6.110，升级node又是一番折腾，后面再提。用以下命令查看版本号：1node -v 安装HexoNode.js 安装完成后，在电脑任意位置，右键选择GitBash ,执行npm命令 npm install -g hexo 安装完成后，建立一个文件夹（E:\Hexo）,在建立的文件夹内右键,选择gitbush,执行以下命令，就在目标文件夹下创建建立博客所需的文件。 hexo init 然后 hexo install 初始化完成目录图： 这是参考了http://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html的教程12＄hexo g #生成$hexo s #启动服务，本地浏览 执行以上命令，hexo会把public文件夹里的东西提交到github上，同时在public 文件夹中生成相关html文件。 hexo s 开启本地服务端口，打开浏览器http://localhost:4000 即可看到内容，啊哈^-^ ,没想到写到这个竟然解决的本地没有css的问题，原来自己一直是点击Index.html打开网页，不是用以上网址打开，所以css样式显示不出来，但是为什么呢，不求甚解，难道是不用那个网址没法渲染，找不到css样式，但自己看了看源代码，觉得应该能找到啊，不解。css 代码：1&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/./main.b3331d.css&quot;&gt; 顺便记录一下路径的问题： ./ 当前路径/ 网站根路径../ 上一层目录，如../../表示上上层目录 当前路径是指和本文件同在一个文件夹下，这是可以用相对路径。 修改端口号：执行命令hexo s -p 5000 修改主题官方主题下载了2个主题：hexo-them-jekyll和hexo-theme-yilia 下载主题：1$ git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia 下载后的主题在themes文件夹中，修改—config.yml中的theme: landscape为theme: yilia,然后执行hexo g生成，注意hexo g 每次执行都会把public 文件夹的东西更新一次，还有theme 冒号后面注意有空格。 如果有问题，执行hexo clean,清理public 的内容，然后重新生成和发布。 上传 hexo上传代码会把以前的代码都删掉，注意备份。 首先，配置ssh_key,用ssh key 解决本地与服务器连接的问题。可参考百度经验。1$ cd ~/.ssh #检查本机已存在的ssh密钥 1$ ssh-keygen -t -C "github注册邮件地址" 会生成一个文件.ssh\id_rsa.pub，复制里面的内容到github，个人设置-》SSH and GPG key中-》New SSh key 测试是否成功：1$ ssh -T git@github.com 然后配置：12$ git config --global user.name &quot;**&quot;// 你的github用户名，非昵称$ git config --global user.email &quot;xxx@qq.com&quot;// 填写你的github注册邮箱 配置：config_yml中deploy,1234deploy: type: git repository: git@github.com:lian/lian.github.io.git branch: master 后又改成这个，http似乎不能写成https1234deploy: type: git repository: http://github.com/lian/lian.github.io.git branch: master 如果报deployer not found,是因为没有安装插件。打开 git bash，输入hexo d提交改动代码到github。 保留CNAME等文件把这些文件放到source文件夹中，这里的所有文件会原样复制到public文件夹中。http://blog.liuxianan.com/build-blog-website-by-hexo-github.html 中可下载作者的md文件。 介绍markdawn 语法Hexo文件夹结构 设置next主题,参考博客。 搭建过程中问题1、生成时hexo 报错 Cannot read property ‘replace’ of null 解决： _config.yml 配置文件中的url 设置错误 123456# URL## If your site is put in a subdirectory, set url as &apos;http://yoursite.com/child&apos; and root as &apos;/child/&apos;url: https://lian.github.ioroot: \permalink: :year/:month/:day/:title/permalink_defaults: root 后是根路径，与css文件路径有关 2、 ERROR Plugin load failed: hexo-generator-json-content 升级node.js到最新稳定版升级node，参照博客,先安装gnvm，点击exe发现在cmd下找不到，弃之，后直接下载node安装。 执行命令 npm i hexo-generator-json-content –save 3、提交时出现错误ERROR Plugin load failed: hexo-deployer-git 解决 执行 npm install hexo-deployer-git –save 4、config 中文乱码 在sublime里打开，保存为GBK-8格式 常见hexo命令1234567hexo new &quot;postName&quot; #新建文章hexo new page &quot;pageName&quot; #新建页面hexo generate #生成静态页面至public目录hexo server #开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）hexo deploy #部署到GitHubhexo help # 查看帮助hexo version #查看Hexo的版本 缩写：1234hexo n == hexo newhexo g == hexo generatehexo s == hexo serverhexo d == hexo deploy 组合命令：12hexo s -g #生成并本地预览hexo d -g #生成并上传 markdown12345678910在英文输入法下:&apos;&apos;&apos;&apos;&apos;&apos; 表示 代码块 #到###### 表示标题 ** dd** 加粗 * dd* 斜体 [ ]（） 链接&lt;！-- more --&gt;！[init]（连接） 图片* 标号 title: postName #文章页面上的显示名称，一般是中文date: 2013-12-02 15:30:16 #文章生成时间，一般不改，当然也可以任意修改categories: 默认分类 #分类tags: [tag1,tag2,tag3]#文章标签，可空，多标签请用格式，注意:后面有个空格 域名解析用namecheap解析域名步骤参考文章 关于A解析和CNAME解析的区别： A解析：只能填IP地址，IP地址如果换了的话就需要换解析记录CNAME解析：解析到另一个域名，即使被指向的域名的ip发生变化，也不需要更改解析记录。CNAME优先级高于A解析（至少在DNSPOD是这样的） 给网站添加favicon这个和主题有关，默认可能没有，浏览器打开后根据开发者工具里可以看到当前主题下’favicon’的具体路径和要求文件格式，对应做一个就可以了。有时候是’png’但也有时候强制要求’.ico’，可以去比特虫等网站在线制作。 博客优化（12月2日更新）根据官网配置了本地搜索 社交链接 打赏功能 友情链接 百度统计 文章阅读量统计配置LeanCloud 文章【字数统计】、【阅读时长】统计功能 安装wordcount插件 npm i –save hexo-wordcountnpm install hexo-generator-searchdb –save 显示文字 用 Sublime Text 工具打开 post.swig 文件，路径如下：xxx_blog/themes/next/layout/_macro/post.swig 增加网站的浏览次数与访客数量统计功能网站的浏览次数，即pv；网站的访客数为uv。pv的计算方式是，单个用户连续点击n篇文章，记录n次访问量；uv的计算方式是，单个用户连续点击n篇文章，只记录1次访客数。你可以根据需要添加相应的统计功能。安装busuanzi.js脚本 如果你使用的是NexT主题（其他主题类似），打开/theme/next/layout/_partial/footer.swig文件，拷贝下面的代码至文件的开头。 显示统计标签 同样编辑/theme/next/layout/_partial/footer.swig文件。 如果你想要显示pv统计量，复制以下代码至你想要放置的位置， 本站总访问量次 如果你想要显示uv统计量，复制以下代码至你想要放置的位置， 本站访客数人次 hexo数学公式显示这个折腾了两天，放弃之后结果莫名其妙可以显示了。 主要使用的命令 npm install hexo-math –savehexo math installnpm uninstall hexo-renderer-marked –savenpm install hexo-renderer-kramed –savenpm install hexo-renderer-mathjax –save kramed是在marked上作了修改。hexo-renderer-kramed渲染后公式消失了，最终卸载了。 最终的方案： 用编辑器打开marked.js（在./node_modules/marked/lib/中）Step 1: escape: /^\([\`*{}[]()# +-.!_&gt;])/, 替换成 escape: /^\([`*[]()# +-.!_&gt;])/, 这一步是在原基础上取消了对\,{,}的转义(escape)Step 2: em: /^\b((?:[^]|_)+?)\b|^*((?:**|[\s\S])+?)*(?!*)/, 替换成 em:/^*((?:**|[\s\S])+?)*(?!*)/, 进入到主题目录，找到_config.yml配置问题，把mathjax默认的false修改为true，具体如下： MathJax Supportmathjax: enable: true per_page: true 参考文献：http://blog.csdn.net/emptyset110/article/details/50123231 http://masikkk.com/article/hexo-13-MathJax/]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>GitHub</tag>
       </tags>
   </entry>
 </search>
