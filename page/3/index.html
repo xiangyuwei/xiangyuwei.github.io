@@ -413,6 +413,382 @@ $(function() {
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/04/25/tensorflow 安装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/25/tensorflow 安装/" itemprop="url">tensorflow1.11 + cuda 9.0+ cudnn 7.0</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-25T17:44:30+08:00">
+                2019-04-25
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-08-09T23:59:27+08:00">
+                2019-08-09
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/04/25/tensorflow 安装/" class="leancloud_visitors" data-flag-title="tensorflow1.11 + cuda 9.0+ cudnn 7.0">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  310 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>要查看tensorflow 与cuda版本的对应关系</p>
+<h2 id="查看cuda版本"><a href="#查看cuda版本" class="headerlink" title="查看cuda版本"></a>查看cuda版本</h2><p>cat /usr/local/cuda/version.txt</p>
+<p>cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2</p>
+<p>nvcc -V</p>
+<h2 id="下载cuda-cudnn"><a href="#下载cuda-cudnn" class="headerlink" title="下载cuda,cudnn"></a>下载cuda,cudnn</h2><p><a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="external">cudnn</a><br>需要登陆下载 library 版本</p>
+<p><a href="https://developer.nvidia.com/cuda-90-download-archive?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=Ubuntu&amp;target_version=1604&amp;target_type=runfilelocal" target="_blank" rel="external">cuda网址</a>，下载runfil(local)版本</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="cuda"><a href="#cuda" class="headerlink" title="cuda"></a>cuda</h3><p>sudo chmod +x cuda_9.0.176_384.81_linux.run # 为 cuda_9.0.176_384.81_linux.run 添加可执行权限</p>
+<p>./cuda_9.0.176_384.81_linux.run # 安装 cuda_9.0.176_384.81_linux.run</p>
+<p>Install NVIDIA Accelerated Graphics Driver for Linux-x86_64 384.81?<br>(y)es/(n)o/(q)uit: n # 如果已经安装过了，则不需要安装显卡驱动</p>
+<h2 id="cudnn"><a href="#cudnn" class="headerlink" title="cudnn"></a>cudnn</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">sudo tar -xzvf cudnn-8.0-linux-x64-v5.1.tgz</div><div class="line"></div><div class="line">sudo cp cuda/include/cudnn.h /usr/local/cuda/include</div><div class="line"></div><div class="line">sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64</div><div class="line"></div><div class="line">sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*</div></pre></td></tr></table></figure>
+<p>sudo vim ~/.bashrc<br>export PATH=/usr/local/cuda/bin${PATH:+:${PATH}} export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}} export CUDA_HOME=/usr/local/cuda<br>source ~/.bashrc 使之生效</p>
+<h2 id="安装tensorflow"><a href="#安装tensorflow" class="headerlink" title="安装tensorflow"></a>安装tensorflow</h2><p>conda create -n name python=3.6<br>pip install tensorflow-gpu==1.11 -i <a href="https://pypi.tuna.tsinghua.edu.cn/simple" target="_blank" rel="external">https://pypi.tuna.tsinghua.edu.cn/simple</a> </p>
+<p>参考：<a href="https://blog.csdn.net/uhauha2929/article/details/83448909" target="_blank" rel="external">https://blog.csdn.net/uhauha2929/article/details/83448909</a></p>
+<p><a href="https://www.cnblogs.com/jins-note/p/9598178.html" target="_blank" rel="external">https://www.cnblogs.com/jins-note/p/9598178.html</a><br>tensorflow指定版本的安装及升级到最新版：<a href="https://blog.csdn.net/leitouguan8655/article/details/82897525" target="_blank" rel="external">https://blog.csdn.net/leitouguan8655/article/details/82897525</a></p>
+<p><a href="https://blog.csdn.net/qq_36026791/article/details/88793488" target="_blank" rel="external">基于NVIDIA GeForce MX150 的Windows10安装TensorFlow-GPU详解</a></p>
+<p><a href="https://blog.csdn.net/u011473714/article/details/95042856" target="_blank" rel="external">win10下CUDA和CUDNN的安装（超详细）！亲测有效</a></p>
+<p><a href="https://blog.csdn.net/qq_27825451/article/details/89082978" target="_blank" rel="external">tensorflow各个版本的CUDA以及Cudnn版本对应关系</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/03/22/论文写作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/22/论文写作/" itemprop="url">论文写作</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-22T11:08:26+08:00">
+                2019-03-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-08-20T14:45:27+08:00">
+                2019-08-20
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/03/22/论文写作/" class="leancloud_visitors" data-flag-title="论文写作">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  578 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="时态，单复数一致性，定冠词"><a href="#时态，单复数一致性，定冠词" class="headerlink" title="时态，单复数一致性，定冠词"></a>时态，单复数一致性，定冠词</h2><p>摘要，实验用一般现在时</p>
+<p>相关工作用过去式</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Some conventional community detection methods may have limited performance because<br>they merely focus on the networks’ topological structure</p>
+<p>In order to compensate for the possible deficiencies of </p>
+<p>apply<br>perform operates by<br>utilizing<br>For instance,<br>Moreover<br>Additionally<br>indicates<br>such assumption is not sufficient<br>Especially<br>More importantly,<br>Furthermore<br>In fact,<br>in particular<br>illustrate<br>demonstrate<br>wherereas<br>Since<br>In the meanwhile<br>hence<br>thus<br>respectively</p>
+<p>Extensive expeperience conducted on a large dataset</p>
+<h2 id="motive"><a href="#motive" class="headerlink" title="motive"></a>motive</h2><p>The concept of emotional intelligence (EI) has drawn a great amount of scholarly interest in recent years; however, attempts to measure individual differences in this ability remain controversial. </p>
+<p>There is less research on the EI ability of Jordanian nurses, and the present study was undertaken to address this gap</p>
+<h3 id="介绍结构"><a href="#介绍结构" class="headerlink" title="介绍结构"></a>介绍结构</h3><p>The paper is structured as follows. In Sect.2we discuss the basic conceptsof information-theoretic bounded rationality, sampled-based interpretations ofbounded rationality in the context of Markov Chain Monte Carlo (MCMC),and the basic concepts of Variational Autoencoders. In Sect.3. we present theproposed decision-making model by combining sample-based decision-makingwith concurrent learning of priors parameterized by Variational Autoencoders.In Sect.4we evaluate the model with toy examples. In Sect.5we discuss ourresults.</p>
+<h3 id="贡献"><a href="#贡献" class="headerlink" title="贡献"></a>贡献</h3><p>Understanding the structure and analyzing properties of graphs are hence paramount to developing insights into the physical systems.</p>
+<p>##方法</p>
+<h3 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h3><p>, the expectation<br>the solution of s is given by the following set of equations<br>where  A j = A ji = 1  when there is an edge between node i and j , and otherwise =0<br>where Xir<br>is defined as the propensity that node i belongs to community r.<br>utilizes<br>represents<br>Therefore, we can formulate another objective function as<br>X corresponds to the topological structure<br>We denote a density on X by p(X), </p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>Based on the models derived above, in this section, we introduce a simplified unified model that integrates topology as well<br>as content to conduct a pre-experiment about the mismatch effect</p>
+<p>we designed the<br>following pre-experiment to illustrate the different influences of<br>semantic information with different trade-offs between topology<br>and content.</p>
+<p>In the pre-experiment, we applied the unified model (5) to two real network datasets<br>take the following two steps in turns.</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>We observe that HOPE, LLE and SDNE achieve high MAP values. Furthermore, HOPE can predict top 5 links with perfect accuracy.</p>
+<p>A paper showcasing the results</p>
+<p>to demonstrate our approach we evaluate two scenarios. </p>
+<p>Our results indicate that using </p>
+<p>to illustrate the differences in efficiency between the single prior agent andthe multi-prior agents, we plotted in Fig.4</p>
+<p> Furthermore our results indicate that the multi-prior system generally outperforms the single-prior system in terms of utility.</p>
+<p>We executed above initialization</p>
+<p>with regard to the result of Facebook in<br>Fig. 1(b)</p>
+<p>reflects the fact that<br>we can still observe<br>As shown in Fig. 2, for both ASCD-ARC and ASCD-NMI methods,the values of the objective function converge fast straight from the beginning and ASCD-ARC converges faster than ASCD-NMI</p>
+<p>which are shown in Fig. 2</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>In this  study  we  ‘implemented bounded rational  decision  makers  with  adap-tive priors. We achieved this with Variational Autoencoder priors. </p>
+<h2 id="因为"><a href="#因为" class="headerlink" title="因为"></a>因为</h2><p>Since</p>
+<h2 id="并且"><a href="#并且" class="headerlink" title="并且"></a>并且</h2><p>Accordingly<br>Moreover</p>
+<h2 id="然而"><a href="#然而" class="headerlink" title="然而"></a>然而</h2><p>while<br>Nevertheless<br> hence<br>respectively</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/02/04/编程软件安装/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1966,401 +2342,6 @@ $(function() {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/12/31/python错误/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/31/python错误/" itemprop="url">python错误</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T22:08:54+08:00">
-                2018-12-31
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-31T22:09:22+08:00">
-                2018-12-31
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程/" itemprop="url" rel="index">
-                    <span itemprop="name">编程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/12/31/python错误/" class="leancloud_visitors" data-flag-title="python错误">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  258 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="AttributeError-‘module’-object-has-no-attribute-‘handlers’"><a href="#AttributeError-‘module’-object-has-no-attribute-‘handlers’" class="headerlink" title="AttributeError: ‘module’ object has no attribute ‘handlers’"></a>AttributeError: ‘module’ object has no attribute ‘handlers’</h2><p>原来导入logging模块后并没有自动导入其子模块handlers</p>
-<pre><code>import logging
-import logging.handlers
-……
-</code></pre>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/31/python错误/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2018/12/31/mysql错误/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/31/mysql错误/" itemprop="url">mysql错误</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T22:05:54+08:00">
-                2018-12-31
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-01T00:35:07+08:00">
-                2019-01-01
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程/" itemprop="url" rel="index">
-                    <span itemprop="name">编程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/12/31/mysql错误/" class="leancloud_visitors" data-flag-title="mysql错误">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  388 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  2 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1114-–-The-table-‘xxxx’is-full解决方法"><a href="#1114-–-The-table-‘xxxx’is-full解决方法" class="headerlink" title="1114 – The table ‘xxxx’is full解决方法"></a>1114 – The table ‘xxxx’is full解决方法</h2><p>ubuntu中mysql 的配置文件 my.cnf 的路径是/etc/mysql/my.cnf。<br>2、其它非debian系列的linux中mysql的配置文件my.cnf的路径一般是/etc/my.cnf。</p>
-<h2 id="ERROR-Export-data-to-file-‘Lost-connection-to-MySQL-server-during-query’-2013"><a href="#ERROR-Export-data-to-file-‘Lost-connection-to-MySQL-server-during-query’-2013" class="headerlink" title="ERROR: Export data to file: (‘Lost connection to MySQL server during query’, 2013"></a>ERROR: Export data to file: (‘Lost connection to MySQL server during query’, 2013</h2><p>MySQL workbench Q&amp;A找到原因，链接如下  <a href="https://dev.mysql.com/doc/workbench/en/workbench-faq.html#faq-workbench-error-lost-connection" target="_blank" rel="external">https://dev.mysql.com/doc/workbench/en/workbench-faq.html#faq-workbench-error-lost-connection</a></p>
-<p>Yes, go to ‘ edit ,Preferences, SQL Editor’, and adjust the DBMS connection read time out option that defaults to 600 seconds. This sets the maximum amount of time (in seconds) that a query can take before MySQL Workbench disconnects from the MySQL server.</p>
-<p>通过修改红色字体的值，并重启启动workbench 生效（一定要重启哦！）。</p>
-<h2 id="The-MySQL-server-is-running-with-the-–secure-file-priv-option"><a href="#The-MySQL-server-is-running-with-the-–secure-file-priv-option" class="headerlink" title="The MySQL server is running with the –secure-file-priv option"></a>The MySQL server is running with the –secure-file-priv option</h2><p>```<br>mysql -u -p<br>show variables like ‘%secure%’;查看 secure-file-priv 当前的值是什么<br>导出的数据必须是这个值的指定路径才可以导出，默认有可能是NULL就代表禁止导出，所以需要设置一下</p>
-<p>知道mysql安装路径下的my.ini文件，设置一下路径：<br>然后重启数据库即可</p>
-<h2 id="Error-executing-task-‘ascii’-codec-can’t-decode-byte-0xc4-in-position-32-ordinal-not-in-range-128"><a href="#Error-executing-task-‘ascii’-codec-can’t-decode-byte-0xc4-in-position-32-ordinal-not-in-range-128" class="headerlink" title="Error executing task: ‘ascii’ codec can’t decode byte 0xc4 in position 32: ordinal not in range(128)"></a>Error executing task: ‘ascii’ codec can’t decode byte 0xc4 in position 32: ordinal not in range(128)</h2><p>存储路径名不要有中文<br><a href="https://bbs.csdn.net/topics/390347030" target="_blank" rel="external">https://bbs.csdn.net/topics/390347030</a><br><a href="https://blog.csdn.net/ACMAIN_CHM/article/details/4174186" target="_blank" rel="external">https://blog.csdn.net/ACMAIN_CHM/article/details/4174186</a></p>
-<h2 id="mysql-导出csv"><a href="#mysql-导出csv" class="headerlink" title="mysql 导出csv"></a>mysql 导出csv</h2><p>命令行：<br>SELECT * FROM server_warning_repaired</p>
-<p>into outfile ‘/tmp/test.csv’<br><a href="https://my.oschina.net/u/2335552/blog/733185" target="_blank" rel="external">https://my.oschina.net/u/2335552/blog/733185</a></p>
-<p>mysql workbench:<br>表的右键有导出数据选项，但好像只能一张表一张表<br>整个数据库的导出是导出sql</p>
-<h2 id="查看端口"><a href="#查看端口" class="headerlink" title="查看端口"></a>查看端口</h2><p>终端mysql -uroot -ppasswd 进入<br>show global variables like ‘port’;查看端口号</p>
-<p><a href="https://blog.csdn.net/LANGZI7758521/article/details/51391932" target="_blank" rel="external">https://blog.csdn.net/LANGZI7758521/article/details/51391932</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2410,7 +2391,7 @@ import logging.handlers
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-count">95</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

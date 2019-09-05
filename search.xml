@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[傅里叶变换与人生]]></title>
+    <url>%2F2019%2F09%2F05%2F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E4%B8%8E%E4%BA%BA%E7%94%9F%2F</url>
+    <content type="text"><![CDATA[https://en.wikipedia.org/wiki/File:Fourier_series_square_wave_circles_animation.gif https://en.wikipedia.org/wiki/File:Fourier_series_sawtooth_wave_circles_animation.gif https://zhuanlan.zhihu.com/p/19759362?utm_source=wechat_session&amp;utm_medium=social&amp;from=singlemessage]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[LSTM]]></title>
+    <url>%2F2019%2F09%2F02%2FLstm%2F</url>
+    <content type="text"><![CDATA[将门创投斗鱼直播 动手学深度学习 gluon.aiaww baord GRU数据可视化平台：fooplot(grafana) GRU：重置门：中短期依赖关系 把过去的信息set为0，更新门：如何更新，上一时刻和当前时刻的候选状态，中长期依赖关系，Zt 为1，就可以一直拷贝以前状态 sigmoid:大部分接近0或者1按位相乘：乘0 都为0，乘1保留原值 判断是否保留过去信息 LSTM 1997年 6个公式输入门遗忘门输出门: 是否把状态传递到隐含状态(比GRU多的步骤) 候选记忆细胞 tanh(-1到1之间) 中心化数据记忆细胞 RNN移位（错位）准备X，Y 最后全概率最大 随机批量抽样 相邻批量采样 上一个批量的最后一个字符与下一个批量的最后一个字符相关，上一个H3 初始化 下一个批量的H0]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[文本表示模型]]></title>
     <url>%2F2019%2F08%2F09%2F%E6%96%87%E6%9C%AC%E8%A1%A8%E7%A4%BA%E6%A8%A1%E5%9E%8B%2F</url>
     <content type="text"><![CDATA[textcnn[NLP] TextCNN模型原理和实现 文本分类实战（二）—— textCNN 模型代码 另一个代码(参考过) 吾爱NLP(4)—基于Text-CNN模型的中文文本分类实战 doc2vecDoc2Vec模型介绍及使用基于gensim的doc2vec实践 当每个文档不仅可以由文本信息表示，还有别的其他标签信息时，比如，在商品推荐中，将每个商品看成是一个文档，我们想学习商品向量表示时，可以只使用商品的描述信息来学习商品的向量表示，但有时：商品类别等信息我们也想将其考虑进去， 最简单的方法是：当用文本信息学习到商品向量后，添加一维商品的类别信息，但只用一维来表示商品类别信息的有效性差。gensim 工具包的doc2vec提供了更加合理的方法，将商品标签（如类别）加入到商品向量的训练中，即gensim 中的LabeledSentence方法 fasttext玩转Fasttext]]></content>
@@ -549,6 +559,19 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[jsma 报错集]]></title>
+    <url>%2F2017%2F12%2F04%2F%E9%A1%B9%E7%9B%AE%E6%8A%A5%E9%94%99%2F</url>
+    <content type="text"><![CDATA[UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe9 in position 0: ordinal not in range(128)Python在进行编码方式之间的转换时，会将 unicode 作为“中间编码”，但 unicode 最大只有 128 那么长，所以这里当尝试将 ascii 编码字符串转换成”中间编码” unicode 时由于超出了其范围，就报出了如上错误。我们在/usr/lib/python2.7/site-packages/目录下添加一个sitecustomize.py文件，内容如下： import syssys.setdefaultencoding(‘utf-8’) 忘了操作什么什么之后报的错，记起后补上…… 参考博客 OSError: [Errno 2] No such file or directory１．代码上传服务器后，空文件没有上传，导致自己一直以为存在文件夹，不明白为什么错误，以后应仔细检查一遍２．在路径前加“./” raise IOError, ‘Not a gzipped file’服务器中代码运行报错，不能下载MNIST数据集, 1.首先在当前项目下新建 MNIST_data2.https://gitee.com/Gssol/tensorflow_mnist_Data/attach_files 从该目录将4个附件全部下载 将下载的四个文件(不用解压)直接放到MNIST_data文件夹里面4.就可以调用该数据集了参考博客 ValueError: Parent directory of trained_variables.ckpt doesn’t exist, can’t save.模型存储路径在本地没有加ckpt,可以运行，但在服务器上却必须加，原因不明 ##mport sklearn.model_selection 出错ImportError: No module named model_selectionconda list 查看包安装列表conda update scikit-learn 命令更新sklearn的版本 conda install Matlotlib、Scikit-Learn注意再激活tensorflow情况下查看某个指定环境的已安装包conda list -n python27查找package信息conda search numpy 安装packageconda install -n python27 numpy更新packageconda update -n python27 numpy 删除packageconda remove -n python27 numpy SCP: No such file or directoryscp就是secure copy，一个在linux下用来进行远程拷贝文件的命令。符号软链接，应该写真正指向的地址，不明白这一点，所以浪费了很多时间 If you are logged into the local machine, you would use scp like this: scp /home/username/some.xml root@remote.machine.ip.address:/path/to/directory/ If you are logged into the remote machine (as in the OP), use scp like this: scp username@local.machine.ip.address:/home/username/some.xml /path/to/directory Substitute the IP addresses as directed in the commands./的问题还没弄明白 权限问题，上层目录也就是home目录被别人误改了权限，处理xxuser，其他用户都没了权限 ##anaconda search -t conda tensorflow 服务器上配置tensorflow 环境安装anocanda2 后，安装ＧＰＵ版本GPU安装只能用pip,conda只能安装cpu版本tensorflow版本简单 pip install tensorflow-gpu==1.1.0pip3 install tensorflow==1.1.0 python3.6 cpu版本 CUDA是NVIDIA 推出的使用GPU 资源进行计算的SDK ，CUDA 里面集成了显卡驱动,GPU加速首先就是安装CUDA，然而CUDA只支持NVIDIA显卡,因为CUDA软件就是他家出的注意GPU版本的不支持CUDNNV5，必须要V5.1以上GPU版本需要安装CUDA和ｃｕＤＮＮ,注意版本问题安装CUDA,参考一下网址：博客http://blog.csdn.net/binglel/article/details/70230276http://blog.csdn.net/stronger19890215/article/details/71411981?locationNum=8&amp;fps=1http://blog.csdn.net/jteng/article/details/52975247http://blog.csdn.net/zhaoyu106/article/details/52793183mingw CUDA安装和测试 检查自己的GPU是否是CUDA-capable在终端中输入： lspci | grep -i nvidia 安装qt createrhttps://www.ics.com/blog/getting-started-qt-and-qt-creator-linux sudo apt-get install qtcreator sudo apt-get install build-essential libgl1-mesa-dev cd ~/Downloads$ chmod a+x qt-unified-linux-x64-2.0.3-1-online.run apt-get install qt4-designer下载后找不到在哪儿运行 配置PyCharm1）打开PyCharm，执行快捷键ctrl+alt+s打开设置界面，输入tool，点开external tools，配置qtdesigner。 点击左上角的加号，作如下配置： 在Qt Designer的设置中，Program选择PyQt安装目录中 designer.exe 的路径 Work directory 使用变量 $FileDir$设置“PyUIC” – 这个主要是用来将 Qt界面 转换成 py代码 在PyUIC的设置中，其他的都差不多，Program 写入Python的地址，Parameters写入 -m PyQt5.uic.pyuic $FileName$ -o $FileNameWithoutExtension$.py 把上面的Python路径修改成自己的即可！ Work directory 使用变量 $FileDir$ 转化py代码 creater集成了pyqt desiner,sudo apt-get install qttools5-dev-tools这个因为安装了creater,暂时没试 Python中TypeError: unbound method 问题在运行时报错：TypeError: unbound method onlyCellValue() must be called with dictionary instance as first argument (got str instance instead) 后经在网上查看，发现时由于调用其他类时，未在后面添加括号，添加括号后，运行正常。这是由于未添加括号情况下，未被认为是类的实例，故报此错]]></content>
+      <categories>
+        <category>深度学习</category>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>对抗样本</tag>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[识别系统前期调研]]></title>
     <url>%2F2017%2F12%2F04%2F%E8%AF%86%E5%88%AB%E7%B3%BB%E7%BB%9F%E5%89%8D%E6%9C%9F%E8%B0%83%E7%A0%94%2F</url>
     <content type="text"><![CDATA[三星S8—虹膜识别 ①首先需要可以捕捉红外光的相机（目前市场已经没有） ② 然后对机主的虹膜进行高分辨捕捉 ③ 偷取他的手机 ④ 再用特殊的打印方式打印出来 iphone X—人脸识别苹果在Face ID的人脸识别中加入了深度信息的技术。 Face ID的实现靠的是iPhone X顶部一小块没被屏幕覆盖的区域。这一小块区域集成了多达八个组件，除了麦克风、扬声器、前置摄像头、环境光传感器、距离感应器等我们熟知的部分，还集成了红外镜头、泛光感应元件（Flood illuminator）、点阵投影器。 深度信息技术在Face ID的认证过程中分为以下两个步骤① 在注册时，点阵投影仪会投射3万多个点在人脸上，从而形成一张3D人脸图，并存储在A11芯片上 ② 使用时，泛光感应元件会打一道看不见的光在人的脸上（这样在黑暗中也可以识别人脸），读取用户的脸部3D几何结构图，并将它与存储在A11芯片隔区内的数据进行对比，如果两者一致，iPhone X就会解锁 越南网络安全公司Bkav绕过了首批由华硕、联想、东芝等笔记本电脑部署的面部识别系统，而使用的不过是一张简单的照片 门禁系统支付宝，ＱＱ安全中心人脸改密打卡机人脸（得力，中控）app以及线下互联网领域存在很多提供人脸识别技术的服务商，比如一登、facevisa 研究人员教导人工智能研究社交网络用户的行为，然后设计并实施自己的网络钓鱼诱饵。在测试中，AI 比人类竞争对手强大得多，制造并分发了比人类更多的网络钓鱼微博人工智能可用于挖掘大量公共领域和社交网络数据，以提取出生日期、性别、位置电话号码、邮箱地址等个人身份信息，可用于黑客入侵个人账户它还可以用于自动监控电子邮件和短信，并为社会工程攻击创建个性化的网络钓鱼邮件网络钓鱼诈骗是非法尝试从不知情的用户获取敏感信息。AI 可以更容易地突变恶意软件、更智能地搜索并挖掘和利用系统中的漏洞 ｆａｃｅ＋＋人脸识别语音：ＡＬＥＸＡ 智能设备语音助手公安部旗下NCIIC的人脸比对优图独创Uface深度人脸模型SeetaFace开源人脸识别引擎车牌识别及普通验证码 目标：Deep-pwning是一个轻量级的机器学习模型的实验框架，其目的是评估其对抗动机的强大对手。 请注意，目前状态下的深层次不在接近到期或完成的地方。 这是为了试验，扩展和扩展你。只有这样我们才能真正成为统计机器学习模型的渗透测试工具包。 Visual Question Answering (VQA）Can you fool AI with adversarial examples on a visual Turing test?]]></content>
@@ -584,16 +607,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[jsma 报错集]]></title>
-    <url>%2F2017%2F12%2F04%2F%E9%A1%B9%E7%9B%AE%E6%8A%A5%E9%94%99%2F</url>
-    <content type="text"><![CDATA[UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe9 in position 0: ordinal not in range(128)Python在进行编码方式之间的转换时，会将 unicode 作为“中间编码”，但 unicode 最大只有 128 那么长，所以这里当尝试将 ascii 编码字符串转换成”中间编码” unicode 时由于超出了其范围，就报出了如上错误。我们在/usr/lib/python2.7/site-packages/目录下添加一个sitecustomize.py文件，内容如下： import syssys.setdefaultencoding(‘utf-8’) 忘了操作什么什么之后报的错，记起后补上…… 参考博客 OSError: [Errno 2] No such file or directory１．代码上传服务器后，空文件没有上传，导致自己一直以为存在文件夹，不明白为什么错误，以后应仔细检查一遍２．在路径前加“./” raise IOError, ‘Not a gzipped file’服务器中代码运行报错，不能下载MNIST数据集, 1.首先在当前项目下新建 MNIST_data2.https://gitee.com/Gssol/tensorflow_mnist_Data/attach_files 从该目录将4个附件全部下载 将下载的四个文件(不用解压)直接放到MNIST_data文件夹里面4.就可以调用该数据集了参考博客 ValueError: Parent directory of trained_variables.ckpt doesn’t exist, can’t save.模型存储路径在本地没有加ckpt,可以运行，但在服务器上却必须加，原因不明 ##mport sklearn.model_selection 出错ImportError: No module named model_selectionconda list 查看包安装列表conda update scikit-learn 命令更新sklearn的版本 conda install Matlotlib、Scikit-Learn注意再激活tensorflow情况下查看某个指定环境的已安装包conda list -n python27查找package信息conda search numpy 安装packageconda install -n python27 numpy更新packageconda update -n python27 numpy 删除packageconda remove -n python27 numpy SCP: No such file or directoryscp就是secure copy，一个在linux下用来进行远程拷贝文件的命令。符号软链接，应该写真正指向的地址，不明白这一点，所以浪费了很多时间 If you are logged into the local machine, you would use scp like this: scp /home/username/some.xml root@remote.machine.ip.address:/path/to/directory/ If you are logged into the remote machine (as in the OP), use scp like this: scp username@local.machine.ip.address:/home/username/some.xml /path/to/directory Substitute the IP addresses as directed in the commands./的问题还没弄明白 权限问题，上层目录也就是home目录被别人误改了权限，处理xxuser，其他用户都没了权限 ##anaconda search -t conda tensorflow 服务器上配置tensorflow 环境安装anocanda2 后，安装ＧＰＵ版本GPU安装只能用pip,conda只能安装cpu版本tensorflow版本简单 pip install tensorflow-gpu==1.1.0pip3 install tensorflow==1.1.0 python3.6 cpu版本 CUDA是NVIDIA 推出的使用GPU 资源进行计算的SDK ，CUDA 里面集成了显卡驱动,GPU加速首先就是安装CUDA，然而CUDA只支持NVIDIA显卡,因为CUDA软件就是他家出的注意GPU版本的不支持CUDNNV5，必须要V5.1以上GPU版本需要安装CUDA和ｃｕＤＮＮ,注意版本问题安装CUDA,参考一下网址：博客http://blog.csdn.net/binglel/article/details/70230276http://blog.csdn.net/stronger19890215/article/details/71411981?locationNum=8&amp;fps=1http://blog.csdn.net/jteng/article/details/52975247http://blog.csdn.net/zhaoyu106/article/details/52793183mingw CUDA安装和测试 检查自己的GPU是否是CUDA-capable在终端中输入： lspci | grep -i nvidia 安装qt createrhttps://www.ics.com/blog/getting-started-qt-and-qt-creator-linux sudo apt-get install qtcreator sudo apt-get install build-essential libgl1-mesa-dev cd ~/Downloads$ chmod a+x qt-unified-linux-x64-2.0.3-1-online.run apt-get install qt4-designer下载后找不到在哪儿运行 配置PyCharm1）打开PyCharm，执行快捷键ctrl+alt+s打开设置界面，输入tool，点开external tools，配置qtdesigner。 点击左上角的加号，作如下配置： 在Qt Designer的设置中，Program选择PyQt安装目录中 designer.exe 的路径 Work directory 使用变量 $FileDir$设置“PyUIC” – 这个主要是用来将 Qt界面 转换成 py代码 在PyUIC的设置中，其他的都差不多，Program 写入Python的地址，Parameters写入 -m PyQt5.uic.pyuic $FileName$ -o $FileNameWithoutExtension$.py 把上面的Python路径修改成自己的即可！ Work directory 使用变量 $FileDir$ 转化py代码 creater集成了pyqt desiner,sudo apt-get install qttools5-dev-tools这个因为安装了creater,暂时没试 Python中TypeError: unbound method 问题在运行时报错：TypeError: unbound method onlyCellValue() must be called with dictionary instance as first argument (got str instance instead) 后经在网上查看，发现时由于调用其他类时，未在后面添加括号，添加括号后，运行正常。这是由于未添加括号情况下，未被认为是类的实例，故报此错]]></content>
+    <title><![CDATA[书单]]></title>
+    <url>%2F2017%2F12%2F04%2F%E4%B9%A6%E5%8D%95%2F</url>
+    <content type="text"><![CDATA[书单：理性乐观派]]></content>
       <categories>
-        <category>深度学习</category>
-        <category>编程</category>
+        <category>读书</category>
       </categories>
       <tags>
-        <tag>对抗样本</tag>
-        <tag>深度学习</tag>
+        <tag>书籍</tag>
       </tags>
   </entry>
   <entry>
@@ -606,17 +627,6 @@
       <tags>
         <tag>学习</tag>
         <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[当难过时]]></title>
-    <url>%2F2017%2F12%2F04%2F%E5%BD%93%E9%9A%BE%E8%BF%87%E6%97%B6%2F</url>
-    <content type="text"><![CDATA[一屋两人三餐四季]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>心情</tag>
       </tags>
   </entry>
   <entry>
@@ -644,14 +654,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[书单]]></title>
-    <url>%2F2017%2F12%2F04%2F%E4%B9%A6%E5%8D%95%2F</url>
-    <content type="text"><![CDATA[书单：理性乐观派]]></content>
+    <title><![CDATA[斯人若彩虹，遇上方知有]]></title>
+    <url>%2F2017%2F12%2F04%2F%E4%B8%83%E5%A4%95%2F</url>
+    <content type="text"><![CDATA[我们分担寒潮、风雷、霹雳；我们共享雾霭流岚、虹霓，仿佛永远分离，却又终身相依]]></content>
       <categories>
-        <category>读书</category>
+        <category>随笔</category>
       </categories>
       <tags>
-        <tag>书籍</tag>
+        <tag>七夕</tag>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -667,15 +678,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[斯人若彩虹，遇上方知有]]></title>
-    <url>%2F2017%2F12%2F04%2F%E4%B8%83%E5%A4%95%2F</url>
-    <content type="text"><![CDATA[我们分担寒潮、风雷、霹雳；我们共享雾霭流岚、虹霓，仿佛永远分离，却又终身相依]]></content>
+    <title><![CDATA[当难过时]]></title>
+    <url>%2F2017%2F12%2F04%2F%E5%BD%93%E9%9A%BE%E8%BF%87%E6%97%B6%2F</url>
+    <content type="text"><![CDATA[一屋两人三餐四季]]></content>
       <categories>
         <category>随笔</category>
       </categories>
       <tags>
-        <tag>七夕</tag>
-        <tag>随笔</tag>
+        <tag>心情</tag>
       </tags>
   </entry>
   <entry>
@@ -691,6 +701,11 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[test]]></title>
+    <url>%2F2017%2F12%2F04%2Ftest%2F</url>
+    <content type="text"><![CDATA[$$ \frac $$ $$\begin{eqnarray}\nabla\cdot\vec{E} &amp;=&amp; \frac{\rho}{\epsilon_0} \\nabla\cdot\vec{B} &amp;=&amp; 0 \\nabla\times\vec{E} &amp;=&amp; -\frac{\partial B}{\partial t} \\nabla\times\vec{B} &amp;=&amp; \mu_0\left(\vec{J}+\epsilon_0\frac{\partial E}{\partial t} \right)\end{eqnarray}$$]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[Robust Physical-World Attacks on Machine Learning Models]]></title>
     <url>%2F2017%2F12%2F04%2FRobust%20Physical-World%20Attacks%20on%20Machine%20Learning%20Models%2F</url>
     <content type="text"><![CDATA[最近的研究中，许多对抗样本构造方法在真实自然世界效果不好。已有的对抗攻击研究在现实世界中，往往不能使分类模型误分类，或者只在非常有限的情况比如复杂原始图像经修改后打印出来才能达到对抗攻击的目的。 本论文要点如下： 提出Robust Physical Perturbations(RP2)算法，能产生鲁棒且自然有效的对抗扰动。 使用RP2算法用两种方式构造对抗攻击：– subtle perturbations：对整个标志进行微小的、很难探测到的改动。把整个受到攻击后的图片打印后覆盖到原标志上面，尺寸和原图一样。– camouflage perturbations：以涂鸦或艺术画的形式对原图进行可见的改变。攻击者直接将扰动攻击打印出来，然后贴到已经存在的标志上面。 因为目前缺乏衡量自然界对抗攻击效果的标准方法，因此论文提出了一种评估方法。 数据集：LISA数据集，包含47种不同的路标图片，在本实验中重设尺寸为32×32 https://www.zybuluo.com/wuxin1994/note/839621]]></content>
@@ -700,11 +715,6 @@
       <tags>
         <tag>对抗样本</tag>
       </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[test]]></title>
-    <url>%2F2017%2F12%2F04%2Ftest%2F</url>
-    <content type="text"><![CDATA[$$ \frac $$ $$\begin{eqnarray}\nabla\cdot\vec{E} &amp;=&amp; \frac{\rho}{\epsilon_0} \\nabla\cdot\vec{B} &amp;=&amp; 0 \\nabla\times\vec{E} &amp;=&amp; -\frac{\partial B}{\partial t} \\nabla\times\vec{B} &amp;=&amp; \mu_0\left(\vec{J}+\epsilon_0\frac{\partial E}{\partial t} \right)\end{eqnarray}$$]]></content>
   </entry>
   <entry>
     <title><![CDATA[anaconda+jupyter notebook安装]]></title>
@@ -787,9 +797,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[人生百态 千翻滋味]]></title>
-    <url>%2F2017%2F12%2F04%2F%E8%AE%A9%E6%88%91%E6%8E%A5%E5%8F%97%E5%B9%B3%E5%BA%B8%E7%9A%84%E7%94%9F%E6%B4%BB%2F</url>
-    <content type="text"><![CDATA[红黄蓝白黑，酸甜苦辣咸。每个人都带着一生的历史，半个月的哀乐，在街上走。 ——汪曾祺 让我接受平庸的生活 作家苏芩在她的新书《你要世俗地活着，才有不俗的未来》里也讲过这样一段话： 了解俗世的规则，也懂得世俗外的享受，才深切地明白，如果没有足够的力量去赢得生活，那一切优雅的享用，都会转瞬即逝。美是一种力量，任何软绵绵的优雅都不值得被欣赏，你要知道：你能驾驭的，才是你真正拥有的。 因此，我们都需要修炼，在尘世的烟火中，修炼出一颗通透的心。成为这样一种人：可以很俗世，却又似在世俗之外。 希望你也可以，如愿活成自己梦想的样子。 不知，还在俗世中忙碌着的你，是否已然活成了自己梦想的样子了呢？ 我们终归要回到俗世的繁华中去磨砺成长，增长出足够的力量来支撑和应对庸忙的生活。所谓的诗意生活，并不是疏离尘世，而是让自己在尘世中修炼得更加清澈，通透。]]></content>
+    <title><![CDATA[今夜 仰望星空]]></title>
+    <url>%2F2017%2F12%2F04%2F%E4%BB%8A%E5%A4%9C%20%E4%BB%B0%E6%9C%9B%E6%98%9F%E7%A9%BA%2F</url>
+    <content type="text"><![CDATA[一片朦胧的夕光衬着暗绿的楼影你从雾雨中显现带着浴后的红晕多少语言和往事都在微笑中消溶我们走进了夜海去打捞遗失的繁星]]></content>
       <categories>
         <category>随笔</category>
       </categories>
@@ -799,9 +809,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[今夜 仰望星空]]></title>
-    <url>%2F2017%2F12%2F04%2F%E4%BB%8A%E5%A4%9C%20%E4%BB%B0%E6%9C%9B%E6%98%9F%E7%A9%BA%2F</url>
-    <content type="text"><![CDATA[一片朦胧的夕光衬着暗绿的楼影你从雾雨中显现带着浴后的红晕多少语言和往事都在微笑中消溶我们走进了夜海去打捞遗失的繁星]]></content>
+    <title><![CDATA[有趣的尝试]]></title>
+    <url>%2F2017%2F12%2F04%2F%E5%AF%84%E8%AF%AD%2F</url>
+    <content type="text"><![CDATA[寄语 “大部分人都是不好不坏，平庸乏味，跟一次性塑料饭盒一样。对这种长方形塑料，你连闻一闻的兴趣都不会有。大多数音乐、大部分书，都是。他们的刻度永远都打在一个最正确的正中间，永远不犯错、永远不会失败，最终出来一个光溜溜的东西。但美是不正确，美是错乱。”在《所有失败的鱼》里，绿妖这样说道。 明天就是新的一周，希望你也能开始一些全新而有趣的尝试。 晚安，好眠。：）]]></content>
       <categories>
         <category>随笔</category>
       </categories>
@@ -833,9 +843,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[有趣的尝试]]></title>
-    <url>%2F2017%2F12%2F04%2F%E5%AF%84%E8%AF%AD%2F</url>
-    <content type="text"><![CDATA[寄语 “大部分人都是不好不坏，平庸乏味，跟一次性塑料饭盒一样。对这种长方形塑料，你连闻一闻的兴趣都不会有。大多数音乐、大部分书，都是。他们的刻度永远都打在一个最正确的正中间，永远不犯错、永远不会失败，最终出来一个光溜溜的东西。但美是不正确，美是错乱。”在《所有失败的鱼》里，绿妖这样说道。 明天就是新的一周，希望你也能开始一些全新而有趣的尝试。 晚安，好眠。：）]]></content>
+    <title><![CDATA[人生百态 千翻滋味]]></title>
+    <url>%2F2017%2F12%2F04%2F%E8%AE%A9%E6%88%91%E6%8E%A5%E5%8F%97%E5%B9%B3%E5%BA%B8%E7%9A%84%E7%94%9F%E6%B4%BB%2F</url>
+    <content type="text"><![CDATA[红黄蓝白黑，酸甜苦辣咸。每个人都带着一生的历史，半个月的哀乐，在街上走。 ——汪曾祺 让我接受平庸的生活 作家苏芩在她的新书《你要世俗地活着，才有不俗的未来》里也讲过这样一段话： 了解俗世的规则，也懂得世俗外的享受，才深切地明白，如果没有足够的力量去赢得生活，那一切优雅的享用，都会转瞬即逝。美是一种力量，任何软绵绵的优雅都不值得被欣赏，你要知道：你能驾驭的，才是你真正拥有的。 因此，我们都需要修炼，在尘世的烟火中，修炼出一颗通透的心。成为这样一种人：可以很俗世，却又似在世俗之外。 希望你也可以，如愿活成自己梦想的样子。 不知，还在俗世中忙碌着的你，是否已然活成了自己梦想的样子了呢？ 我们终归要回到俗世的繁华中去磨砺成长，增长出足够的力量来支撑和应对庸忙的生活。所谓的诗意生活，并不是疏离尘世，而是让自己在尘世中修炼得更加清澈，通透。]]></content>
       <categories>
         <category>随笔</category>
       </categories>
