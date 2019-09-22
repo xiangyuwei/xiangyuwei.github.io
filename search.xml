@@ -2,11 +2,6 @@
 <search>
   <entry>
     <title></title>
-    <url>%2F2019%2F09%2F22%2F%E8%AE%BA%E6%96%87%E6%A8%A1%E6%9D%BF%2F</url>
-    <content type="text"><![CDATA[|论文详解| 笔记| |:-:|:-:| | 标题 | | 作者 | | 学校 | | 发表地点 | | 主要贡献| | 内容 | | 难点 |]]></content>
-  </entry>
-  <entry>
-    <title></title>
     <url>%2F2019%2F09%2F08%2Fnature%20%E6%9D%82%E5%BF%97%2F</url>
     <content type="text"><![CDATA[title：Nature Nature杂志为例，目前它每期刊登的文章中，属于学术文本的仅3个栏目：论文（article）、归类于“原创研究”的通信（letter）以及综述评论（review）。通信比较简要，是对某项科研成果的初步介绍，论文篇幅稍长，是对某项研究工作更全面的介绍。但是一定要注意，Nature杂志还有另外的15个栏目呢！它们是： 消息和评论（News and Comment）、读者来信（Correspondence）、讣告（Obituaries）、观点（Opinion）、书籍和艺术（Books &amp; Arts）、未来（Futures——那个发表科幻小说的栏目）、书评（Book Reviews）、消息和观点（News &amp; Views）、洞见（Insights），评论和视野（Reviews and Perspectives）、分析（Analysis）、假想（Hypothesis）、招聘（Careers）、技术特征（Technology Features）、瞭望（Outlooks） 评论：https://www.nature.com/articles/d41586-019-02616-2https://www.nature.com/articles/d41586-019-02562-z#ref-CR1]]></content>
   </entry>
@@ -569,18 +564,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[自动备份Hexo博客源文件]]></title>
-    <url>%2F2017%2F12%2F04%2F%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BDhexo%2F</url>
-    <content type="text"><![CDATA[原文出自：http://zhujiegao.com/2015/12/06/automatic-backup/ 先安装git和node 原理通过通过监听Hexo的其它事件来完成自动执行Git命令完成自动备份。通过查阅Hexo文档，找到了Hexo的主要事件，见下表： 事件名 事件发生时间 deployBefore 在部署完成前发布 deployAfter 在部署成功后发布 exit 在 Hexo 结束前发布 generateBefore 在静态文件生成前发布 generateAfter 在静态文件生成后发布 new 在文章文件建立后发布 实现 在Github下创建新的仓库，取名hexo 进入本地hexo文件夹，执行以下命令 123456git initgit remote add origin git@github.com:XXX/XXX.gitgit pull -u origin mastergit add .git commit -m &quot;添加hexo源码文件备份&quot;git pull -u origin master 3.安装shelljs模块要实现这个自动备份功能，需要依赖Node.js的一个shelljs模块,该模块重新包装了child_process,调用系统命令更加的方便。该模块需要安装后使用 1npm install --save shelljs 4 自动备份脚本 待到模块安装完成，在Hexo根目录的scripts文件夹下新建一个js文件，文件名随意取。 ps: 如果没有scripts目录，请新建一个。 然后在脚本中，写入以下内容： 123456789101112131415161718192021222324252627282930require(&apos;shelljs/global&apos;);try &#123; hexo.on(&apos;deployAfter&apos;, function() &#123;//当deploy完成后执行备份 run(); &#125;);&#125; catch (e) &#123; console.log(&quot;产生了一个错误&lt;(￣3￣)&gt; !，错误详情为：&quot; + e.toString());&#125;function run() &#123; if (!which(&apos;git&apos;)) &#123; echo(&apos;Sorry, this script requires git&apos;); exit(1); &#125; else &#123; echo(&quot;======================Auto Backup Begin===========================&quot;); cd(&apos;D:/hexo&apos;); //此处修改为Hexo根目录路径 if (exec(&apos;git add --all&apos;).code !== 0) &#123; echo(&apos;Error: Git add failed&apos;); exit(1); &#125; if (exec(&apos;git commit -am &quot;Form auto backup script\&apos;s commit&quot;&apos;).code !== 0) &#123; echo(&apos;Error: Git commit failed&apos;); exit(1); &#125; if (exec(&apos;git push origin master&apos;).code !== 0) &#123; echo(&apos;Error: Git push failed&apos;); exit(1); &#125; echo(&quot;==================Auto Backup Complete============================&quot;) &#125;&#125;]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>GitHub</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[对抗样本]]></title>
     <url>%2F2017%2F12%2F04%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87%E9%9B%86%2F</url>
     <content type="text"><![CDATA[“Explaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”如何让神经网络把熊猫识别为秃鹫正向传播与反向传播的区别、这个博客表达了对此论文的一些看法。 通过利用比你想象更简单（更线性！）的网络事实来做到这一点。我们会使用一个线性函数来逼近这个网络！ 生成对抗网络的发明人Ian Goodfellow在《Explaining and Harnessing Adversarial Examples》中提出了一种更快速方便的方法来产生对抗样本： 技术分享 这种方法的思想非常简单，就是让输入图像朝着让类别置信度降低的方向上移动一个在各个维度上都是技术分享这么大小的一步。因为输入通常是高维的（比如224x224），再加上现在的主流神经网络结构都是ReLU系的激活函数，线性程度其实很高，所以即使是很小的技术分享，每个维度的效果加一块，通常也足以对结果产生很大的影响，比如下面这样： 正则化激活函数优化问题的解决损失函数梯度 下面是L1正则化和L2正则化的作用，这些表述可以在很多文章中找到。 L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩罚』是指对损失函数中的某些参数做一些限制。对于线性回归模型，使用L1正则化的模型建叫做Lasso回归，使用L2正则化的模型叫做Ridge回归（岭回归）。L1正则化是指权值向量w中各个元素的绝对值之和，通常表示为||w||1 L2正则化是指权值向量w中各个元素的平方和然后再求平方根（可以看到Ridge回归的L2正则化项有平方符号），通常表示为||w||2 L1正则化可以产生稀疏权值矩阵，即产生一个稀疏模型，可以用于特征选择 L2正则化可以防止模型过拟合（overfitting）；一定程度上，L1也可以防止过拟合 Adversarial Examples and their implications - Deep Learning bits #3这篇博客主要引用别人论文介绍了概念。应用和几种对抗样本防御方法。对我比较新颖的一点是介绍了图像误分类的区别：一种是图像本身有歧义或者裁剪失败，再一种图像中包含很多类别。这些都可以造成分类器分类失败，但对抗样本是指它不是正常产生的，而是人为构造的。 ##我们可以利用对抗样本做什么 绕过安全过滤机制加载图片通过穿戴特别眼镜假冒他人编过人脸识别装置改变交通标志误导自动驾驶伪装武器躲避视频检测绕过声音或指纹识别 ##怎样防范该博客提出防止模型隐私泄露这种方法是不值得采用的。并列举几种论文中的方法，等详细看了之后在写。]]></content>
@@ -604,6 +587,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[自动备份Hexo博客源文件]]></title>
+    <url>%2F2017%2F12%2F04%2F%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BDhexo%2F</url>
+    <content type="text"><![CDATA[原文出自：http://zhujiegao.com/2015/12/06/automatic-backup/ 先安装git和node 原理通过通过监听Hexo的其它事件来完成自动执行Git命令完成自动备份。通过查阅Hexo文档，找到了Hexo的主要事件，见下表： 事件名 事件发生时间 deployBefore 在部署完成前发布 deployAfter 在部署成功后发布 exit 在 Hexo 结束前发布 generateBefore 在静态文件生成前发布 generateAfter 在静态文件生成后发布 new 在文章文件建立后发布 实现 在Github下创建新的仓库，取名hexo 进入本地hexo文件夹，执行以下命令 123456git initgit remote add origin git@github.com:XXX/XXX.gitgit pull -u origin mastergit add .git commit -m &quot;添加hexo源码文件备份&quot;git pull -u origin master 3.安装shelljs模块要实现这个自动备份功能，需要依赖Node.js的一个shelljs模块,该模块重新包装了child_process,调用系统命令更加的方便。该模块需要安装后使用 1npm install --save shelljs 4 自动备份脚本 待到模块安装完成，在Hexo根目录的scripts文件夹下新建一个js文件，文件名随意取。 ps: 如果没有scripts目录，请新建一个。 然后在脚本中，写入以下内容： 123456789101112131415161718192021222324252627282930require(&apos;shelljs/global&apos;);try &#123; hexo.on(&apos;deployAfter&apos;, function() &#123;//当deploy完成后执行备份 run(); &#125;);&#125; catch (e) &#123; console.log(&quot;产生了一个错误&lt;(￣3￣)&gt; !，错误详情为：&quot; + e.toString());&#125;function run() &#123; if (!which(&apos;git&apos;)) &#123; echo(&apos;Sorry, this script requires git&apos;); exit(1); &#125; else &#123; echo(&quot;======================Auto Backup Begin===========================&quot;); cd(&apos;D:/hexo&apos;); //此处修改为Hexo根目录路径 if (exec(&apos;git add --all&apos;).code !== 0) &#123; echo(&apos;Error: Git add failed&apos;); exit(1); &#125; if (exec(&apos;git commit -am &quot;Form auto backup script\&apos;s commit&quot;&apos;).code !== 0) &#123; echo(&apos;Error: Git commit failed&apos;); exit(1); &#125; if (exec(&apos;git push origin master&apos;).code !== 0) &#123; echo(&apos;Error: Git push failed&apos;); exit(1); &#125; echo(&quot;==================Auto Backup Complete============================&quot;) &#125;&#125;]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>GitHub</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[jsma 报错集]]></title>
     <url>%2F2017%2F12%2F04%2F%E9%A1%B9%E7%9B%AE%E6%8A%A5%E9%94%99%2F</url>
     <content type="text"><![CDATA[UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe9 in position 0: ordinal not in range(128)Python在进行编码方式之间的转换时，会将 unicode 作为“中间编码”，但 unicode 最大只有 128 那么长，所以这里当尝试将 ascii 编码字符串转换成”中间编码” unicode 时由于超出了其范围，就报出了如上错误。我们在/usr/lib/python2.7/site-packages/目录下添加一个sitecustomize.py文件，内容如下： import syssys.setdefaultencoding(‘utf-8’) 忘了操作什么什么之后报的错，记起后补上…… 参考博客 OSError: [Errno 2] No such file or directory１．代码上传服务器后，空文件没有上传，导致自己一直以为存在文件夹，不明白为什么错误，以后应仔细检查一遍２．在路径前加“./” raise IOError, ‘Not a gzipped file’服务器中代码运行报错，不能下载MNIST数据集, 1.首先在当前项目下新建 MNIST_data2.https://gitee.com/Gssol/tensorflow_mnist_Data/attach_files 从该目录将4个附件全部下载 将下载的四个文件(不用解压)直接放到MNIST_data文件夹里面4.就可以调用该数据集了参考博客 ValueError: Parent directory of trained_variables.ckpt doesn’t exist, can’t save.模型存储路径在本地没有加ckpt,可以运行，但在服务器上却必须加，原因不明 ##mport sklearn.model_selection 出错ImportError: No module named model_selectionconda list 查看包安装列表conda update scikit-learn 命令更新sklearn的版本 conda install Matlotlib、Scikit-Learn注意再激活tensorflow情况下查看某个指定环境的已安装包conda list -n python27查找package信息conda search numpy 安装packageconda install -n python27 numpy更新packageconda update -n python27 numpy 删除packageconda remove -n python27 numpy SCP: No such file or directoryscp就是secure copy，一个在linux下用来进行远程拷贝文件的命令。符号软链接，应该写真正指向的地址，不明白这一点，所以浪费了很多时间 If you are logged into the local machine, you would use scp like this: scp /home/username/some.xml root@remote.machine.ip.address:/path/to/directory/ If you are logged into the remote machine (as in the OP), use scp like this: scp username@local.machine.ip.address:/home/username/some.xml /path/to/directory Substitute the IP addresses as directed in the commands./的问题还没弄明白 权限问题，上层目录也就是home目录被别人误改了权限，处理xxuser，其他用户都没了权限 ##anaconda search -t conda tensorflow 服务器上配置tensorflow 环境安装anocanda2 后，安装ＧＰＵ版本GPU安装只能用pip,conda只能安装cpu版本tensorflow版本简单 pip install tensorflow-gpu==1.1.0pip3 install tensorflow==1.1.0 python3.6 cpu版本 CUDA是NVIDIA 推出的使用GPU 资源进行计算的SDK ，CUDA 里面集成了显卡驱动,GPU加速首先就是安装CUDA，然而CUDA只支持NVIDIA显卡,因为CUDA软件就是他家出的注意GPU版本的不支持CUDNNV5，必须要V5.1以上GPU版本需要安装CUDA和ｃｕＤＮＮ,注意版本问题安装CUDA,参考一下网址：博客http://blog.csdn.net/binglel/article/details/70230276http://blog.csdn.net/stronger19890215/article/details/71411981?locationNum=8&amp;fps=1http://blog.csdn.net/jteng/article/details/52975247http://blog.csdn.net/zhaoyu106/article/details/52793183mingw CUDA安装和测试 检查自己的GPU是否是CUDA-capable在终端中输入： lspci | grep -i nvidia 安装qt createrhttps://www.ics.com/blog/getting-started-qt-and-qt-creator-linux sudo apt-get install qtcreator sudo apt-get install build-essential libgl1-mesa-dev cd ~/Downloads$ chmod a+x qt-unified-linux-x64-2.0.3-1-online.run apt-get install qt4-designer下载后找不到在哪儿运行 配置PyCharm1）打开PyCharm，执行快捷键ctrl+alt+s打开设置界面，输入tool，点开external tools，配置qtdesigner。 点击左上角的加号，作如下配置： 在Qt Designer的设置中，Program选择PyQt安装目录中 designer.exe 的路径 Work directory 使用变量 $FileDir$设置“PyUIC” – 这个主要是用来将 Qt界面 转换成 py代码 在PyUIC的设置中，其他的都差不多，Program 写入Python的地址，Parameters写入 -m PyQt5.uic.pyuic $FileName$ -o $FileNameWithoutExtension$.py 把上面的Python路径修改成自己的即可！ Work directory 使用变量 $FileDir$ 转化py代码 creater集成了pyqt desiner,sudo apt-get install qttools5-dev-tools这个因为安装了creater,暂时没试 Python中TypeError: unbound method 问题在运行时报错：TypeError: unbound method onlyCellValue() must be called with dictionary instance as first argument (got str instance instead) 后经在网上查看，发现时由于调用其他类时，未在后面添加括号，添加括号后，运行正常。这是由于未添加括号情况下，未被认为是类的实例，故报此错]]></content>
@@ -614,30 +609,6 @@
       <tags>
         <tag>对抗样本</tag>
         <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[深度学习对抗攻击]]></title>
-    <url>%2F2017%2F12%2F04%2F%E5%AF%B9%E6%8A%97%E6%A0%B7%E6%9C%AC%E8%AE%BA%E6%96%87%E9%9B%86%2F</url>
-    <content type="text"><![CDATA[深度学习１、2014-ｅxlaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”[ArXiv][code][code] 提出对抗样本不是因为非线性，而是因为模型在高维空间中的线性性。FSM 方法是计算关于x的导数，然后ｓｉｇｎ函数取值进行扰动,在$$ L{无穷} $$距离度量下。$$ X^{adv}＝Ｘ＋ \varepsilon \cdot sign (\bigtriangledown \ J(X,y{true})) $$梯度可以通过反向传播算法（backpropagation）计算获得。 ２、2015-DeepFool: a simple and accurate method to fool deep neural networks [ArXiv][code]基于$L_2$距离度量的非目标攻击$min ||D(x)-X||2subject\ to\ argmaxf(D(X) \neq\ y{true})$ ３、2015-The Limitations of Deep Learning in Adversarial Settings[ArXiv][code]通过计算对抗显著图，寻找对输出影响最大的两个输入，每次迭代修改两个像素点，直到达到目标图像。L0 distance metric ４、2015-Distributional Smoothing with Virtual Adversarial Training [ArXiv][code]KL散度 ５、2016-Exploring the space of adversarial images[ArXiv][code]-lua６、2016-Adversarial Machine Learning at Scale[ArXiv][code]９、2016-Adversarial examples in the physical world [ArXiv][code][code]通过对对抗样本拍照片，改变了某些像素来测试对抗样本的有效性拓展FGSM,多次应用，每次一小步,中间结果被$\varepsilon$截断$X0^{adv}=X \X{N+1}^{adv}=Clip{X,\varepsilon}{X{N}^{adv}+\alpha\cdot sign (\bigtriangledown J(X,y_{true}))}$ 10、2016-Simple Black-Box Adversarial Perturbations for Deep Networks[ArXiv]数据集：CIFAR10, MNIST, SVHN, STL10, and ImageNet1000 datasets 11、2017-Towards Evaluating the Robustness of Neural Networks[ArXiv][code][code]It is noteworthy that the original defensive distillation is broken by Carlini and Wagner’s attack$min ||1/2(tanh(W)+1)-x)||^2_2+c\cdot l(1/2(tanh(W)+1))$ 12、2017-Fast Feature Fool: A data independent approach to universal adversarial perturbations[ArXiv][code]13、2017-Towards Deep Learning Models Resistant to Adversarial Attacks[ArXiv][code]14、2017-Ensemble Adversarial Training: Attacks and Defenses[ArXiv][code]15、S. Zagoruyko. Are deep learning algorithms easily hackable?[code]16、2015-Deep neural networks are easily fooled: High confidence predictions for unrecognizable images[ArXiv]16、2016-Transferability in Machine Learning: from Phenomena to Black-Box Attacks using Adversarial Samples[ArXiv]17、2013-Intriguing properties of neural networkss[ArXiv]通过在$Ｌ_２$距离度量下Ｌ—BFGS解决优化问题来生成对抗样本。 $min\ c|r|+loss_f(x+r,l)\ s.t\ x+r \subset[0,1]^m$ L-BFGS attack and DeepFool attacks have been implemented in the Foolbox[code] 2017-Robust Physical-World Attacks on Deep Learning Models Evasion attacks against machine learning at test time adversary goal（攻击目标）: 分为两种目标，一是能够分类为好的即可（在垃圾邮件检测中，指分类为好的邮件）。如果有一个函数g定义在样本空间中X，g(x)&lt;0表示分类为好，那么敌人的目标就是设计一个样本x，让g(x)&lt;0。这种攻击很容易破解，只要调整分类界限即可（这里指g(x)=0这条边界）。所以，其实攻击者还有一个更好的目标是让g(x)尽可能小 Universal adversarial perturbations[ArXiv][code]黑盒攻击2017-10-WHITENING BLACK-BOX NEURAL NETWORKS[ArXiv]窃取隐私数据然后进行白盒攻击 ７、2016-Delving into Transferable Adversarial Examples and Black-box Attacks [ArXiv][code]作者还使用了同样的实验方法测试了定向性对抗性攻击在目标模型的效果。结果表明定向类标记的传递性差了很多，只有小于等于4%的对抗性图像在源、目标机器学习模型中都识别出相同的定向标记。基于此，作者提出了ensemble方法。它是以多个深度神经网络模型为基础构造对抗图片，即将图4中单个已知机器学习模型替换成多个不同的已知机器学习模型，并共同产生一个对抗性图像。在实验设计中，作者对5个不同的深度神经网络模型一一实施了黑盒子攻击。在对每一个模型攻击的时候，作者假设已知其余的4个模型，并用集合的方式作白盒子对抗图形的构造。同样的，作者分别使用基于优化的攻击手段，和基于Fast Gradient的手段构造对抗性图片。构造图片依然使用的是Adam优化器。在算法经过100次的迭代对权重向量的更新，loss function得以汇聚。作者发现有许多攻击者预先设定的标记也得到了传递。详细结果参见表2。格子(i,j)代表用除了模型i之外的4个其他算法生成的对抗图片，用模型j来验证得到的定向标记的准确值。可以看出，当目标模型包含在已知模型集合中，定向类标记的传递性都在60%以上。即使目标模型不在已知模型集合中，定向标记的准确值也在30%以上。 ８、2016-Practical Black-Box Attacks against Machine Learning[ArXiv][code]敌手不需要知道目标模型的结构和参数，只能够根据输入得到输出。由于对抗样本的迁移性，可以先构建替代模型训练对抗样本再在目标模型上测试生成的对抗样本。替代模型的结构和目标模型结构要能够处理相同的任务。 Machine Learning as an Adversarial Service:Learning Black-Box Adversarial Examples一种直接攻击目标黑盒神经网络的方法MNIST数据集，CIFAR-10图片数据集应用在物理世界中的目的模型——Amazon Machine Learning Prediction Universal adversarial perturbationsGenerating Adversarial Malware Examples for Black-Box Attacks Based on GAN利用生成对抗网络原理生成对抗样本的方法文中称之为MalGAN。其中，GAN 网络中的判别器是一个人为构建的替代探测器网络。生成器则是目的网络，能生成恶意软件对抗样本。 隐私问题1、Hacking Smart Machines with Smarter Ones : How to Extract Meaningful Data from Machine Learning Classifiers[ArXiv]２、Membership Inference Attacks Against Machine Learning Models[ArXiv]3、Stealing machine learning models via prediction apis4、An end-to-end case study of personal- ized warfarin dosingOn the Protection of Private Information in Machine Learning Systems:Two Recent Approaches其他机器学习技术1、Vulnerability of Deep Reinforcement Learning to Policy Induction Attacks[ArXiv]2、Tactics of Adversarial Attack on Deep Reinforcement Learning Agents[ArXiv]3、Adversarial examples for generative models[ArXiv]4、Adversarial Attacks on Neural Network Policies防御技术1、2016-Distillation as a Defense to Adversarial Perturbations Against Deep Neural Networks[ArXiv]机器学习1、2006-Can machine learning be secure?[paper]2、2011-Adversarial machine learning3、Take two software updates and see me in the morning: The Case for Software Security Evaluations of Medical Devices [paper]4、Adversarial AI5、2017-机器学习安全性问题及其防御技术研究综述6、Concrete Problems in AI Safety[ArXiv]7、Towards the Science of Security and Privacy in Machine Learning[ArXiv]8、Stealing Machine Learning Models via Prediction APIs[paper][code]GAN和对抗样本1、2017-APE-GAN : Adversarial Perturbation Elimination with GAN[ArXiv][code]数据集：including MNIST, CIFAR10 and ImageNet 生成网络将对抗样本还原为真实图片 2、2017-Generative Adversarial Trainer : Defense to Adversarial Perturbations with GAN[ArXiv]增强判别器的识别能力 ３、2017-Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN[ArXiv]GAN也可以产生针对恶意 软件分类器的对抗样本在提取的恶意软件特征上增加噪声使分类器误分类。 ４、2017-Adversarial examples for generative models[ArXiv]5、Generative Poisoning Attack Method Against Neural Networks[ArXiv]提出了 一种更有效的产生对抗样本的方法，它采用生成对 抗网络（GAN）中生成模型（Generative Model）和 判别模型（Discriminative model）的思想，即先用生成模型产生候选的对抗样本，再用判别模型进行 筛选最优对抗样本。 博士论文ON THE INTEGRITY OF DEEP LEARNING SYSTEMS IN ADVERSARIAL SETTINGSSegmentation &amp; Object DetectionAdversarial Examples for Semantic Segmentation and Object Detection Visual Question Answering (VQA）Can you fool AI with adversarial examples on a visual Turing test? 应用场景１．Accessorize to a crime: Real and stealthy attacks on state-of-the-art face recognition２．Robust Physical-World Attacks on Machine Learning Models 软件及应用1.AdversariaLib (includes implementation of evasion attacks from .2.AdLib. A python library with a scikit-style interface which includes implementations of a number of published evasion attacks and defenses.3.AlfaSVMLib. Adversarial Label Flip Attacks against Support Vector Machines.4.Poisoning Attacks against Support Vector Machines, and Attacks against Clustering Algorithms5.deep-pwning Metasploit for deep learning which currently has attacks on deep neural networks using Tensorflow6.Cleverhans is a great TensorFlow-based library for adversarial attacks and defences: https://github.com/tensorflow/cleverhans7.FoolBox – another collection of attacks that you can use with a framework of your preferencehttps://foolbox.readthedocs.io/en/latest/8.EvadeML - Machine Learning in the Presence of Adversaries9.Adversarial Machine Learning - PRA Lab]]></content>
-      <categories>
-        <category>深度学习</category>
-      </categories>
-      <tags>
-        <tag>对抗样本</tag>
-        <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[官方文档]]></title>
-    <url>%2F2017%2F12%2F04%2F%E5%AE%98%E7%BD%91%E6%96%87%E6%A1%A3%2F</url>
-    <content type="text"><![CDATA[linux命令大全tensorflow中文官方文档tensorflow英文文档scipy]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>学习</tag>
-        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -665,9 +636,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[深度学习中激活函数]]></title>
-    <url>%2F2017%2F12%2F04%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[在神经网络中，激活函数的作用是能够给神经网络加入一些非线性因素，使得神经网络可以更好地解决较为复杂的问题。激活函数众所周知有tanh,sigmoid,ReLU等。 tanh 双切正切函数，取值范围[-1,1]sigmoid 采用S形函数，取值范围[0,1] ReLU 取的max(0,x) 简单而粗暴，大于0的留下，否则一律为0。 可微函数是指那些在定义域中所有点都存在导数的函数。 知乎忆臻的回答中激活函数是多个线性直线的组合，图像比较直观经网络中的激活函数（activation function）-Sigmoid, ReLu, TanHyperbolic(tanh) 梯度消失问题,由于激活函数的饱和性。几种常见的激活函数从神经网络的构建讲解激活函数。]]></content>
+    <title><![CDATA[深度学习对抗攻击]]></title>
+    <url>%2F2017%2F12%2F04%2F%E5%AF%B9%E6%8A%97%E6%A0%B7%E6%9C%AC%E8%AE%BA%E6%96%87%E9%9B%86%2F</url>
+    <content type="text"><![CDATA[深度学习１、2014-ｅxlaining and Harnessing Adversarial Examples（对抗样本的解释和利用）”[ArXiv][code][code] 提出对抗样本不是因为非线性，而是因为模型在高维空间中的线性性。FSM 方法是计算关于x的导数，然后ｓｉｇｎ函数取值进行扰动,在$$ L{无穷} $$距离度量下。$$ X^{adv}＝Ｘ＋ \varepsilon \cdot sign (\bigtriangledown \ J(X,y{true})) $$梯度可以通过反向传播算法（backpropagation）计算获得。 ２、2015-DeepFool: a simple and accurate method to fool deep neural networks [ArXiv][code]基于$L_2$距离度量的非目标攻击$min ||D(x)-X||2subject\ to\ argmaxf(D(X) \neq\ y{true})$ ３、2015-The Limitations of Deep Learning in Adversarial Settings[ArXiv][code]通过计算对抗显著图，寻找对输出影响最大的两个输入，每次迭代修改两个像素点，直到达到目标图像。L0 distance metric ４、2015-Distributional Smoothing with Virtual Adversarial Training [ArXiv][code]KL散度 ５、2016-Exploring the space of adversarial images[ArXiv][code]-lua６、2016-Adversarial Machine Learning at Scale[ArXiv][code]９、2016-Adversarial examples in the physical world [ArXiv][code][code]通过对对抗样本拍照片，改变了某些像素来测试对抗样本的有效性拓展FGSM,多次应用，每次一小步,中间结果被$\varepsilon$截断$X0^{adv}=X \X{N+1}^{adv}=Clip{X,\varepsilon}{X{N}^{adv}+\alpha\cdot sign (\bigtriangledown J(X,y_{true}))}$ 10、2016-Simple Black-Box Adversarial Perturbations for Deep Networks[ArXiv]数据集：CIFAR10, MNIST, SVHN, STL10, and ImageNet1000 datasets 11、2017-Towards Evaluating the Robustness of Neural Networks[ArXiv][code][code]It is noteworthy that the original defensive distillation is broken by Carlini and Wagner’s attack$min ||1/2(tanh(W)+1)-x)||^2_2+c\cdot l(1/2(tanh(W)+1))$ 12、2017-Fast Feature Fool: A data independent approach to universal adversarial perturbations[ArXiv][code]13、2017-Towards Deep Learning Models Resistant to Adversarial Attacks[ArXiv][code]14、2017-Ensemble Adversarial Training: Attacks and Defenses[ArXiv][code]15、S. Zagoruyko. Are deep learning algorithms easily hackable?[code]16、2015-Deep neural networks are easily fooled: High confidence predictions for unrecognizable images[ArXiv]16、2016-Transferability in Machine Learning: from Phenomena to Black-Box Attacks using Adversarial Samples[ArXiv]17、2013-Intriguing properties of neural networkss[ArXiv]通过在$Ｌ_２$距离度量下Ｌ—BFGS解决优化问题来生成对抗样本。 $min\ c|r|+loss_f(x+r,l)\ s.t\ x+r \subset[0,1]^m$ L-BFGS attack and DeepFool attacks have been implemented in the Foolbox[code] 2017-Robust Physical-World Attacks on Deep Learning Models Evasion attacks against machine learning at test time adversary goal（攻击目标）: 分为两种目标，一是能够分类为好的即可（在垃圾邮件检测中，指分类为好的邮件）。如果有一个函数g定义在样本空间中X，g(x)&lt;0表示分类为好，那么敌人的目标就是设计一个样本x，让g(x)&lt;0。这种攻击很容易破解，只要调整分类界限即可（这里指g(x)=0这条边界）。所以，其实攻击者还有一个更好的目标是让g(x)尽可能小 Universal adversarial perturbations[ArXiv][code]黑盒攻击2017-10-WHITENING BLACK-BOX NEURAL NETWORKS[ArXiv]窃取隐私数据然后进行白盒攻击 ７、2016-Delving into Transferable Adversarial Examples and Black-box Attacks [ArXiv][code]作者还使用了同样的实验方法测试了定向性对抗性攻击在目标模型的效果。结果表明定向类标记的传递性差了很多，只有小于等于4%的对抗性图像在源、目标机器学习模型中都识别出相同的定向标记。基于此，作者提出了ensemble方法。它是以多个深度神经网络模型为基础构造对抗图片，即将图4中单个已知机器学习模型替换成多个不同的已知机器学习模型，并共同产生一个对抗性图像。在实验设计中，作者对5个不同的深度神经网络模型一一实施了黑盒子攻击。在对每一个模型攻击的时候，作者假设已知其余的4个模型，并用集合的方式作白盒子对抗图形的构造。同样的，作者分别使用基于优化的攻击手段，和基于Fast Gradient的手段构造对抗性图片。构造图片依然使用的是Adam优化器。在算法经过100次的迭代对权重向量的更新，loss function得以汇聚。作者发现有许多攻击者预先设定的标记也得到了传递。详细结果参见表2。格子(i,j)代表用除了模型i之外的4个其他算法生成的对抗图片，用模型j来验证得到的定向标记的准确值。可以看出，当目标模型包含在已知模型集合中，定向类标记的传递性都在60%以上。即使目标模型不在已知模型集合中，定向标记的准确值也在30%以上。 ８、2016-Practical Black-Box Attacks against Machine Learning[ArXiv][code]敌手不需要知道目标模型的结构和参数，只能够根据输入得到输出。由于对抗样本的迁移性，可以先构建替代模型训练对抗样本再在目标模型上测试生成的对抗样本。替代模型的结构和目标模型结构要能够处理相同的任务。 Machine Learning as an Adversarial Service:Learning Black-Box Adversarial Examples一种直接攻击目标黑盒神经网络的方法MNIST数据集，CIFAR-10图片数据集应用在物理世界中的目的模型——Amazon Machine Learning Prediction Universal adversarial perturbationsGenerating Adversarial Malware Examples for Black-Box Attacks Based on GAN利用生成对抗网络原理生成对抗样本的方法文中称之为MalGAN。其中，GAN 网络中的判别器是一个人为构建的替代探测器网络。生成器则是目的网络，能生成恶意软件对抗样本。 隐私问题1、Hacking Smart Machines with Smarter Ones : How to Extract Meaningful Data from Machine Learning Classifiers[ArXiv]２、Membership Inference Attacks Against Machine Learning Models[ArXiv]3、Stealing machine learning models via prediction apis4、An end-to-end case study of personal- ized warfarin dosingOn the Protection of Private Information in Machine Learning Systems:Two Recent Approaches其他机器学习技术1、Vulnerability of Deep Reinforcement Learning to Policy Induction Attacks[ArXiv]2、Tactics of Adversarial Attack on Deep Reinforcement Learning Agents[ArXiv]3、Adversarial examples for generative models[ArXiv]4、Adversarial Attacks on Neural Network Policies防御技术1、2016-Distillation as a Defense to Adversarial Perturbations Against Deep Neural Networks[ArXiv]机器学习1、2006-Can machine learning be secure?[paper]2、2011-Adversarial machine learning3、Take two software updates and see me in the morning: The Case for Software Security Evaluations of Medical Devices [paper]4、Adversarial AI5、2017-机器学习安全性问题及其防御技术研究综述6、Concrete Problems in AI Safety[ArXiv]7、Towards the Science of Security and Privacy in Machine Learning[ArXiv]8、Stealing Machine Learning Models via Prediction APIs[paper][code]GAN和对抗样本1、2017-APE-GAN : Adversarial Perturbation Elimination with GAN[ArXiv][code]数据集：including MNIST, CIFAR10 and ImageNet 生成网络将对抗样本还原为真实图片 2、2017-Generative Adversarial Trainer : Defense to Adversarial Perturbations with GAN[ArXiv]增强判别器的识别能力 ３、2017-Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN[ArXiv]GAN也可以产生针对恶意 软件分类器的对抗样本在提取的恶意软件特征上增加噪声使分类器误分类。 ４、2017-Adversarial examples for generative models[ArXiv]5、Generative Poisoning Attack Method Against Neural Networks[ArXiv]提出了 一种更有效的产生对抗样本的方法，它采用生成对 抗网络（GAN）中生成模型（Generative Model）和 判别模型（Discriminative model）的思想，即先用生成模型产生候选的对抗样本，再用判别模型进行 筛选最优对抗样本。 博士论文ON THE INTEGRITY OF DEEP LEARNING SYSTEMS IN ADVERSARIAL SETTINGSSegmentation &amp; Object DetectionAdversarial Examples for Semantic Segmentation and Object Detection Visual Question Answering (VQA）Can you fool AI with adversarial examples on a visual Turing test? 应用场景１．Accessorize to a crime: Real and stealthy attacks on state-of-the-art face recognition２．Robust Physical-World Attacks on Machine Learning Models 软件及应用1.AdversariaLib (includes implementation of evasion attacks from .2.AdLib. A python library with a scikit-style interface which includes implementations of a number of published evasion attacks and defenses.3.AlfaSVMLib. Adversarial Label Flip Attacks against Support Vector Machines.4.Poisoning Attacks against Support Vector Machines, and Attacks against Clustering Algorithms5.deep-pwning Metasploit for deep learning which currently has attacks on deep neural networks using Tensorflow6.Cleverhans is a great TensorFlow-based library for adversarial attacks and defences: https://github.com/tensorflow/cleverhans7.FoolBox – another collection of attacks that you can use with a framework of your preferencehttps://foolbox.readthedocs.io/en/latest/8.EvadeML - Machine Learning in the Presence of Adversaries9.Adversarial Machine Learning - PRA Lab]]></content>
       <categories>
         <category>深度学习</category>
       </categories>
@@ -688,6 +659,30 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[官方文档]]></title>
+    <url>%2F2017%2F12%2F04%2F%E5%AE%98%E7%BD%91%E6%96%87%E6%A1%A3%2F</url>
+    <content type="text"><![CDATA[linux命令大全tensorflow中文官方文档tensorflow英文文档scipy]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[深度学习中激活函数]]></title>
+    <url>%2F2017%2F12%2F04%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[在神经网络中，激活函数的作用是能够给神经网络加入一些非线性因素，使得神经网络可以更好地解决较为复杂的问题。激活函数众所周知有tanh,sigmoid,ReLU等。 tanh 双切正切函数，取值范围[-1,1]sigmoid 采用S形函数，取值范围[0,1] ReLU 取的max(0,x) 简单而粗暴，大于0的留下，否则一律为0。 可微函数是指那些在定义域中所有点都存在导数的函数。 知乎忆臻的回答中激活函数是多个线性直线的组合，图像比较直观经网络中的激活函数（activation function）-Sigmoid, ReLu, TanHyperbolic(tanh) 梯度消失问题,由于激活函数的饱和性。几种常见的激活函数从神经网络的构建讲解激活函数。]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>对抗样本</tag>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[书单]]></title>
     <url>%2F2017%2F12%2F04%2F%E4%B9%A6%E5%8D%95%2F</url>
     <content type="text"><![CDATA[书单：理性乐观派]]></content>
@@ -696,6 +691,18 @@
       </categories>
       <tags>
         <tag>书籍</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[udacity知识点]]></title>
+    <url>%2F2017%2F12%2F04%2Fudacity%20%E7%9F%A5%E8%AF%86%E7%82%B9%2F</url>
+    <content type="text"><![CDATA[splitext()作用类似与split(),不过它会根据扩展名分隔符而不是目录分隔符来分解路径 python 在内部使用两个字节来存储一个unicode，使用unicode对象而不是str的好处，就是unicode方便于跨平台。你可以用如下两种方式定义一个unicode:Pythons1 = u”人生苦短”s2 = unicode(“人生苦短”, “utf-8”)12 s1 = u”人生苦短”s2 = unicode(“人生苦短”, “utf-8”) 在windows上面开始使用路径时，一定带上r，不然路径里面类似\t \n这种会被转义不信，自己找路径试试 Python pickle模块作用是持久化的储存数据。 numpy.random.shuffle打乱顺序函数：在做将caffe模型和预训练的参数转化为tensorflow的模型和预训练的参数，以便微调]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -715,27 +722,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[udacity知识点]]></title>
-    <url>%2F2017%2F12%2F04%2Fudacity%20%E7%9F%A5%E8%AF%86%E7%82%B9%2F</url>
-    <content type="text"><![CDATA[splitext()作用类似与split(),不过它会根据扩展名分隔符而不是目录分隔符来分解路径 python 在内部使用两个字节来存储一个unicode，使用unicode对象而不是str的好处，就是unicode方便于跨平台。你可以用如下两种方式定义一个unicode:Pythons1 = u”人生苦短”s2 = unicode(“人生苦短”, “utf-8”)12 s1 = u”人生苦短”s2 = unicode(“人生苦短”, “utf-8”) 在windows上面开始使用路径时，一定带上r，不然路径里面类似\t \n这种会被转义不信，自己找路径试试 Python pickle模块作用是持久化的储存数据。 numpy.random.shuffle打乱顺序函数：在做将caffe模型和预训练的参数转化为tensorflow的模型和预训练的参数，以便微调]]></content>
+    <title><![CDATA[One pixel attack for fooling deep neural networks Jiawei]]></title>
+    <url>%2F2017%2F12%2F04%2FOne%20pixel%20attack%20for%20fooling%20deep%20neural%20networks%20Jiawei%2F</url>
+    <content type="text"><![CDATA[摘要在图像识别领域，基于 DNN 的方法突破了传统的图像处理技术，达到了可与人类媲美的结果 [9]。但是，多个研究证明自然图像中的人工扰动可以轻易使 DNN 对图像进行错误分类，研究者提出了生成此类「对抗图像」的高效算法 [1, 2, 3, 4]。生成对抗图像（adversarial images）的主要方式是向准确分类的自然图像中添加精心设计的额外扰动，该扰动不影响人类对图像的识别。这样的修改导致分类器将修改后的图像标注为完全不同的其他物体。但是，大多数之前的攻击并未考虑非常有限的对抗实例，即扰动的量有时候也会影响到人眼的识别能力（示例见图 2）。此外，研究在有限场景中创建的对抗图像更加有趣，因为它们可能更接近原始类别和目标类别（target class）之间的边界，研究此类关键点可以使人类更多地了解 DNN 输入空间的几何特征 方法贡献 非目标攻击，修改1,3,5个像素黑盒攻击可攻击不同模型对特征目标有相同的扰动方向 方法它不抽象的问题将扰动搜索到任意显式的目标函数进行求解，而直接关注提高目标类别的概率标注值全局对抗扰动可以泄露标签 固定修改像素的个数，增改像素改变的强度 Differential evolution (DE) which belongs to the generalclass of genetic algorithm (GA 实验结论]]></content>
       <categories>
-        <category>学习</category>
+        <category>论文</category>
       </categories>
       <tags>
-        <tag>深度学习</tag>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[没想到你是这样的Linux | 终端下有趣的命令合集]]></title>
-    <url>%2F2017%2F12%2F04%2FLinux%20%E6%9C%89%E8%B6%A3%E5%91%BD%E4%BB%A4%2F</url>
-    <content type="text"><![CDATA[转载Freebuf toilet简介 toilet能用字母拼写出更大字母的工具，具体拼出什么字由命令后面的参数决定，不仅如此，它还能打印出各种风格的效果，比如彩色，金属光泽等。安装 apt-get install toilet 参数解释 toilet -f mono12 -F metal FreeBuf sl简介 你可能了解Linux的ls命令，并经常使用它来查看文件夹的内容。但是，有些时候你可能会拼写成sl ,这时我们应该如何获得一些乐趣而不是看见“command not found”呢？某编程牛人也经常犯把ls敲成sl的错误，所以他自己编了一个程序娱乐一下,这个程序的作用很简单，就是当你输入sl的时候终端会出现一个火车呼啸而过～～安装 apt-get install sl cmatrix简介 《黑客帝国》的代码雨视觉特效。安装 apt-get install cmatrix 参数解释 -B: 字体加粗-C: 颜色 后面跟上参数颜色 cowsay简介 Cowsay命令是一个有趣的命令。它会用ASCII字符描绘牛，羊和许多其他动物。但是不是每个Linux发行版都带有这个命令。安装 apt-get install cowsay 参数解释 列出所有支持可用的动物:cowsay -l list sciinema简介 本文其实最初很多特效都用这个终端去录制的，但是由于需要引用外部的js，所以最后这些终端下的特效才换成了gif图。asciineme 可以完美录制完美终端下所敲的命令。官网:https://asciinema.org/]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>有趣命令</tag>
-        <tag>软件安装</tag>
+        <tag>对抗样本</tag>
       </tags>
   </entry>
   <entry>
@@ -761,14 +755,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[One pixel attack for fooling deep neural networks Jiawei]]></title>
-    <url>%2F2017%2F12%2F04%2FOne%20pixel%20attack%20for%20fooling%20deep%20neural%20networks%20Jiawei%2F</url>
-    <content type="text"><![CDATA[摘要在图像识别领域，基于 DNN 的方法突破了传统的图像处理技术，达到了可与人类媲美的结果 [9]。但是，多个研究证明自然图像中的人工扰动可以轻易使 DNN 对图像进行错误分类，研究者提出了生成此类「对抗图像」的高效算法 [1, 2, 3, 4]。生成对抗图像（adversarial images）的主要方式是向准确分类的自然图像中添加精心设计的额外扰动，该扰动不影响人类对图像的识别。这样的修改导致分类器将修改后的图像标注为完全不同的其他物体。但是，大多数之前的攻击并未考虑非常有限的对抗实例，即扰动的量有时候也会影响到人眼的识别能力（示例见图 2）。此外，研究在有限场景中创建的对抗图像更加有趣，因为它们可能更接近原始类别和目标类别（target class）之间的边界，研究此类关键点可以使人类更多地了解 DNN 输入空间的几何特征 方法贡献 非目标攻击，修改1,3,5个像素黑盒攻击可攻击不同模型对特征目标有相同的扰动方向 方法它不抽象的问题将扰动搜索到任意显式的目标函数进行求解，而直接关注提高目标类别的概率标注值全局对抗扰动可以泄露标签 固定修改像素的个数，增改像素改变的强度 Differential evolution (DE) which belongs to the generalclass of genetic algorithm (GA 实验结论]]></content>
+    <title><![CDATA[没想到你是这样的Linux | 终端下有趣的命令合集]]></title>
+    <url>%2F2017%2F12%2F04%2FLinux%20%E6%9C%89%E8%B6%A3%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[转载Freebuf toilet简介 toilet能用字母拼写出更大字母的工具，具体拼出什么字由命令后面的参数决定，不仅如此，它还能打印出各种风格的效果，比如彩色，金属光泽等。安装 apt-get install toilet 参数解释 toilet -f mono12 -F metal FreeBuf sl简介 你可能了解Linux的ls命令，并经常使用它来查看文件夹的内容。但是，有些时候你可能会拼写成sl ,这时我们应该如何获得一些乐趣而不是看见“command not found”呢？某编程牛人也经常犯把ls敲成sl的错误，所以他自己编了一个程序娱乐一下,这个程序的作用很简单，就是当你输入sl的时候终端会出现一个火车呼啸而过～～安装 apt-get install sl cmatrix简介 《黑客帝国》的代码雨视觉特效。安装 apt-get install cmatrix 参数解释 -B: 字体加粗-C: 颜色 后面跟上参数颜色 cowsay简介 Cowsay命令是一个有趣的命令。它会用ASCII字符描绘牛，羊和许多其他动物。但是不是每个Linux发行版都带有这个命令。安装 apt-get install cowsay 参数解释 列出所有支持可用的动物:cowsay -l list sciinema简介 本文其实最初很多特效都用这个终端去录制的，但是由于需要引用外部的js，所以最后这些终端下的特效才换成了gif图。asciineme 可以完美录制完美终端下所敲的命令。官网:https://asciinema.org/]]></content>
       <categories>
-        <category>论文</category>
+        <category>Linux</category>
       </categories>
       <tags>
-        <tag>对抗样本</tag>
+        <tag>有趣命令</tag>
+        <tag>软件安装</tag>
       </tags>
   </entry>
   <entry>
@@ -807,18 +802,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[今夜 仰望星空]]></title>
-    <url>%2F2017%2F12%2F04%2F%E4%BB%8A%E5%A4%9C%20%E4%BB%B0%E6%9C%9B%E6%98%9F%E7%A9%BA%2F</url>
-    <content type="text"><![CDATA[一片朦胧的夕光衬着暗绿的楼影你从雾雨中显现带着浴后的红晕多少语言和往事都在微笑中消溶我们走进了夜海去打捞遗失的繁星]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>寄语</tag>
-        <tag>心情</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[利用Wireshark任意获取QQ好友IP实施精准定位]]></title>
     <url>%2F2017%2F12%2F04%2F%E5%88%A9%E7%94%A8wireshark%E8%BF%9B%E8%A1%8Cqq%E5%A5%BD%E5%8F%8B%E5%AE%9A%E4%BD%8D%2F</url>
     <content type="text"><![CDATA[利用Wireshark任意获取QQ好友IP实施精准定位在freebuf上看到了利用Wireshark任意获取QQ好友IP实施精准定位这篇文章，就想试试。wireshark抓取数据包，然后查找。 1,选择搜索 “字符串”; 2,选择搜索 “分组详情”;3,填写搜索数据 “020048”; 当发现查找能自动定位到连接数据的时候就可以关闭电话邀请一个IP在线定位的网站openGPS.cn 进入页面后，选择高精度IP定位.wireshark功能使用的详细介绍 wireshark抓包常见提示含义解析 我是如何轻松拿到Google$1337现金奖励这篇文章主要是讲漏洞挖掘可适当关注Fofa、Shodan、Zoomeye等网络空间数据平台。]]></content>
@@ -827,18 +810,6 @@
       </categories>
       <tags>
         <tag>wireshark</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[有趣的尝试]]></title>
-    <url>%2F2017%2F12%2F04%2F%E5%AF%84%E8%AF%AD%2F</url>
-    <content type="text"><![CDATA[寄语 “大部分人都是不好不坏，平庸乏味，跟一次性塑料饭盒一样。对这种长方形塑料，你连闻一闻的兴趣都不会有。大多数音乐、大部分书，都是。他们的刻度永远都打在一个最正确的正中间，永远不犯错、永远不会失败，最终出来一个光溜溜的东西。但美是不正确，美是错乱。”在《所有失败的鱼》里，绿妖这样说道。 明天就是新的一周，希望你也能开始一些全新而有趣的尝试。 晚安，好眠。：）]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>寄语</tag>
-        <tag>心情</tag>
       </tags>
   </entry>
   <entry>
@@ -862,6 +833,30 @@
       </categories>
       <tags>
         <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[有趣的尝试]]></title>
+    <url>%2F2017%2F12%2F04%2F%E5%AF%84%E8%AF%AD%2F</url>
+    <content type="text"><![CDATA[寄语 “大部分人都是不好不坏，平庸乏味，跟一次性塑料饭盒一样。对这种长方形塑料，你连闻一闻的兴趣都不会有。大多数音乐、大部分书，都是。他们的刻度永远都打在一个最正确的正中间，永远不犯错、永远不会失败，最终出来一个光溜溜的东西。但美是不正确，美是错乱。”在《所有失败的鱼》里，绿妖这样说道。 明天就是新的一周，希望你也能开始一些全新而有趣的尝试。 晚安，好眠。：）]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>寄语</tag>
+        <tag>心情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[今夜 仰望星空]]></title>
+    <url>%2F2017%2F12%2F04%2F%E4%BB%8A%E5%A4%9C%20%E4%BB%B0%E6%9C%9B%E6%98%9F%E7%A9%BA%2F</url>
+    <content type="text"><![CDATA[一片朦胧的夕光衬着暗绿的楼影你从雾雨中显现带着浴后的红晕多少语言和往事都在微笑中消溶我们走进了夜海去打捞遗失的繁星]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>寄语</tag>
+        <tag>心情</tag>
       </tags>
   </entry>
   <entry>
