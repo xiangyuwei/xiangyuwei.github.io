@@ -93,17 +93,19 @@
 
 
 
-<meta name="description" content="##软注意力是只注意的每项都可以是概率值，不一定是有或者无 Graph Attention Network 图注意力网络 (一) 训练运行与代码概览 Transformer中的Multi-Head Attention 关联性图注意力网络：Relational Graph Attention Networks（ICLR2019） Graph Attention Networks网络结构+代码 总结他">
+<meta name="description" content="##软注意力是只注意的每项都可以是概率值，不一定是有或者无 Graph Attention Network 图注意力网络 (一) 训练运行与代码概览 Transformer中的Multi-Head Attention 关联性图注意力网络：Relational Graph Attention Networks（ICLR2019） Graph Attention Networks网络结构+代码 翻译中">
 <meta name="keywords" content="神经网络">
 <meta property="og:type" content="article">
 <meta property="og:title" content="注意力机制">
 <meta property="og:url" content="http://xiangyuwei.github.io/2019/08/01/注意力机制/index.html">
 <meta property="og:site_name" content="就和今天说早安">
-<meta property="og:description" content="##软注意力是只注意的每项都可以是概率值，不一定是有或者无 Graph Attention Network 图注意力网络 (一) 训练运行与代码概览 Transformer中的Multi-Head Attention 关联性图注意力网络：Relational Graph Attention Networks（ICLR2019） Graph Attention Networks网络结构+代码 总结他">
-<meta property="og:updated_time" content="2019-08-09T11:07:13.615Z">
+<meta property="og:description" content="##软注意力是只注意的每项都可以是概率值，不一定是有或者无 Graph Attention Network 图注意力网络 (一) 训练运行与代码概览 Transformer中的Multi-Head Attention 关联性图注意力网络：Relational Graph Attention Networks（ICLR2019） Graph Attention Networks网络结构+代码 翻译中">
+<meta property="og:image" content="http://xiangyuwei.github.io/2019/08/01/注意力机制/img/注意力公式.png">
+<meta property="og:updated_time" content="2019-11-06T01:49:22.423Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="注意力机制">
-<meta name="twitter:description" content="##软注意力是只注意的每项都可以是概率值，不一定是有或者无 Graph Attention Network 图注意力网络 (一) 训练运行与代码概览 Transformer中的Multi-Head Attention 关联性图注意力网络：Relational Graph Attention Networks（ICLR2019） Graph Attention Networks网络结构+代码 总结他">
+<meta name="twitter:description" content="##软注意力是只注意的每项都可以是概率值，不一定是有或者无 Graph Attention Network 图注意力网络 (一) 训练运行与代码概览 Transformer中的Multi-Head Attention 关联性图注意力网络：Relational Graph Attention Networks（ICLR2019） Graph Attention Networks网络结构+代码 翻译中">
+<meta name="twitter:image" content="http://xiangyuwei.github.io/2019/08/01/注意力机制/img/注意力公式.png">
 
 
 
@@ -458,8 +460,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-08-09T19:07:13+08:00">
-                2019-08-09
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-06T09:49:22+08:00">
+                2019-11-06
               </time>
             
           </span>
@@ -497,7 +499,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  228 字
+                  473 字
                 </span>
               
 
@@ -513,7 +515,7 @@ $(function() {
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -536,6 +538,7 @@ $(function() {
 <p><a href="http://www.isclab.org.cn/wp-content/uploads/2018/12/Transformer%E4%B8%AD%E7%9A%84Multi-Head-Attention-%E7%8E%8B%E7%9D%BF%E6%80%A1-2018.12.9-19_00_00.pdf" target="_blank" rel="external">Transformer中的Multi-Head Attention</a></p>
 <p><a href="https://blog.csdn.net/luoxuexiong/article/details/88853655" target="_blank" rel="external">关联性图注意力网络：Relational Graph Attention Networks（ICLR2019）</a></p>
 <p><a href="https://blog.csdn.net/weixin_39373480/article/details/88728518" target="_blank" rel="external">Graph Attention Networks网络结构+代码</a></p>
+<h2 id="翻译中的注意力机制"><a href="#翻译中的注意力机制" class="headerlink" title="翻译中的注意力机制"></a>翻译中的注意力机制</h2><p>注意力机制的BahdanauAttention模型就很令人费解了，困惑的关键在于其中的算法。算法的计算部分只有两行代码，代码本身都知道是在做什么，但完全不明白组合在一起是什么功能以及为什么这样做。其实阅读由数学公式推导、转换而来的程序代码都有这种感觉。所以现在很多的知识保护，根本不在于源代码，而在于公式本身。没有公式，很多源代码非常难以读懂。<br><a href="https://www.cnblogs.com/andrewwang/p/10794420.html" target="_blank" rel="external">TensorFlow从1到2（十）带注意力机制的神经网络机器翻译</a></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><a href="https://juejin.im/post/5bbf41c3f265da0af16160d2" target="_blank" rel="external">他们只说注意力机制（Attention Mechanism）不练，还是我来给大家撸代码讲解</a></p>
 <p><a href="http://www.zhuanzhi.ai/document/b806ec47935f896da24368db3987787a" target="_blank" rel="external">注意力能提高模型可解释性？实验表明：并没有 </a></p>
 <h2 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h2><p><a href="https://stackoverflow.com/questions/40601552/visualizing-attention-activation-in-tensorflow" target="_blank" rel="external">Visualizing attention activation in Tensorflow</a></p>
@@ -545,6 +548,11 @@ $(function() {
 <p><a href="https://github.com/uhauha2929/examples/blob/master/self-attention.ipynb" target="_blank" rel="external">https://github.com/uhauha2929/examples/blob/master/self-attention.ipynb</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/45295182" target="_blank" rel="external">可视化循环神经网络的注意力机制</a></p>
 <p><a href="https://www.zhihu.com/question/274926848" target="_blank" rel="external">请问注意力机制中生成的类似热力图或者柱状图是如何生成的</a> 其实没啥用</p>
+<h2 id="各种各样的注意力"><a href="#各种各样的注意力" class="headerlink" title="各种各样的注意力"></a>各种各样的注意力</h2><p><a href="https://blog.eson.org/pub/c47c5082/" target="_blank" rel="external">深度学习中的注意力机制 原理 及 代码</a></p>
+<p><a href="https://www.jianshu.com/p/9f6eefa4ac96" target="_blank" rel="external">神经网络中的注意力机制总结及PyTorch实战</a></p>
+<p><img src="./img/注意力公式.png" alt="注意力公式"></p>
+<p><a href="https://www.cnblogs.com/databingo/p/9769928.html" target="_blank" rel="external">神经网络中注意力机制概述</a> 摘自《Notes on Deep Learning for NLP》</p>
+<p>层级注意力：<a href="https://richliao.github.io/supervised/classification/2016/12/26/textclassifier-HATN/" target="_blank" rel="external">Text Classification, Part 3 - Hierarchical attention network</a></p>
 
       
     </div>
@@ -692,7 +700,7 @@ $(function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">97</span>
+                <span class="site-state-item-count">100</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -840,7 +848,7 @@ $(function() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可视化"><span class="nav-number">2.</span> <span class="nav-text">可视化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#翻译中的注意力机制"><span class="nav-number">1.</span> <span class="nav-text">翻译中的注意力机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可视化"><span class="nav-number">3.</span> <span class="nav-text">可视化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#各种各样的注意力"><span class="nav-number">4.</span> <span class="nav-text">各种各样的注意力</span></a></li></ol></div>
             
 
           </div>

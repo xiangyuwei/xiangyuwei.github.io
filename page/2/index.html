@@ -413,6 +413,522 @@ $(function() {
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/08/06/tensorflow报错/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/06/tensorflow报错/" itemprop="url">tensorflow 报错</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-06T15:46:01+08:00">
+                2019-08-06
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-08-07T11:04:18+08:00">
+                2019-08-07
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/08/06/tensorflow报错/" class="leancloud_visitors" data-flag-title="tensorflow 报错">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  432 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="安装tensorflow-警告信息"><a href="#安装tensorflow-警告信息" class="headerlink" title="安装tensorflow 警告信息"></a>安装tensorflow 警告信息</h2><p>numpy 版本改为1.15.4</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">import tensorflow as tf</div><div class="line">~/.local/lib/python3.7/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:541: FutureWarning: Passing (type, 1) or &apos;1type&apos; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &apos;(1,)type&apos;.</div><div class="line">  _np_qint8 = np.dtype([(&quot;qint8&quot;, np.int8, 1)])</div><div class="line">~/.local/lib/python3.7/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:542: FutureWarning: Passing (type, 1) or &apos;1type&apos; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &apos;(1,)type&apos;.</div><div class="line">  _np_quint8 = np.dtype([(&quot;quint8&quot;, np.uint8, 1)])</div><div class="line">~/.local/lib/python3.7/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:543: FutureWarning: Passing (type, 1) or &apos;1type&apos; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &apos;(1,)type&apos;.</div><div class="line">  _np_qint16 = np.dtype([(&quot;qint16&quot;, np.int16, 1)])</div><div class="line">~/.local/lib/python3.7/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:544: FutureWarning: Passing (type, 1) or &apos;1type&apos; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &apos;(1,)type&apos;.</div><div class="line">  _np_quint16 = np.dtype([(&quot;quint16&quot;, np.uint16, 1)])</div><div class="line">~/.local/lib/python3.7/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:545: FutureWarning: Passing (type, 1) or &apos;1type&apos; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &apos;(1,)type&apos;.</div><div class="line">  _np_qint32 = np.dtype([(&quot;qint32&quot;, np.int32, 1)])</div><div class="line">~/.local/lib/python3.7/site-packages/tensorboard/compat/tensorflow_stub/dtypes.py:550: FutureWarning: Passing (type, 1) or &apos;1type&apos; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &apos;(1,)type&apos;.</div><div class="line">  np_resource = np.dtype([(&quot;resource&quot;, np.ubyte, 1)])</div></pre></td></tr></table></figure>
+<p>网址：<a href="https://github.com/tensorflow/tensorflow/issues/31249" target="_blank" rel="external">https://github.com/tensorflow/tensorflow/issues/31249</a></p>
+<h2 id="核心已转储：（Segmentation-fault-core-dumped-）"><a href="#核心已转储：（Segmentation-fault-core-dumped-）" class="headerlink" title="核心已转储：（Segmentation fault(core dumped)）"></a>核心已转储：（Segmentation fault(core dumped)）</h2><p>core 线圈，代表内存</p>
+<p>下标越界，访问了不可访问或不存在的内容</p>
+<p>linux下应用  ulimit -a 命令查看当前栈空间大小</p>
+<p>ulimit -s  102400  将栈的大小改为100M</p>
+<p>或者 ~/.bashrc<br>~/.bashrc　的最后加入： ulimit -c unlimited （一劳永逸）<br>ulimit -s  unlimited</p>
+<p><a href="https://www.xuebuyuan.com/3235632.html" target="_blank" rel="external">https://www.xuebuyuan.com/3235632.html</a><br><a href="https://blog.csdn.net/qq_39759656/article/details/82858101" target="_blank" rel="external">https://blog.csdn.net/qq_39759656/article/details/82858101</a></p>
+<p>python 安装 <a href="https://askubuntu.com/questions/175412/how-can-i-get-python-stack-trace-information-using-gdb" target="_blank" rel="external">https://askubuntu.com/questions/175412/how-can-i-get-python-stack-trace-information-using-gdb</a><br>python gdb <a href="https://wiki.python.org/moin/DebuggingWithGdb" target="_blank" rel="external">https://wiki.python.org/moin/DebuggingWithGdb</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/08/04/图社交网络数据集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/04/图社交网络数据集/" itemprop="url">图社交网络数据集</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-04T15:17:33+08:00">
+                2019-08-04
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-08-09T19:41:38+08:00">
+                2019-08-09
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/08/04/图社交网络数据集/" class="leancloud_visitors" data-flag-title="图社交网络数据集">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  50 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="异构数据集"><a href="#异构数据集" class="headerlink" title="异构数据集"></a>异构数据集</h2><p>HGAE： DBLP，IMDB，ACM</p>
+<p><a href="https://dblp.uni-trier.de" target="_blank" rel="external">DBLP</a></p>
+<p><a href="https://linqs.soe.ucsc.edu/data" target="_blank" rel="external">cora,citeseer,pubmeb</a></p>
+<p><a href="https://snap.stanford.edu/data/higgs-twitter.html" target="_blank" rel="external">twitter</a></p>
+<p><a href="http://socialcomputing.asu.edu/datasets/YouTube" target="_blank" rel="external">youtubu</a></p>
+<p><a href="http://jmcauley.ucsd.edu/data/amazon/" target="_blank" rel="external">Amazon</a></p>
+<p>唐杰引文数据：<a href="https://www.aminer.cn/citation" target="_blank" rel="external">https://www.aminer.cn/citation</a></p>
+<p>zhihu</p>
+<h2 id="同构"><a href="#同构" class="headerlink" title="同构"></a>同构</h2><p>##twitter 数据集处理</p>
+<p><a href="https://gwu-libraries.github.io/sfm-ui/posts/2016-11-10-twitter-interaction" target="_blank" rel="external">On retweets, replies, quotes &amp; favorites: A guide for researchers</a><br><a href="https://www.cnblogs.com/relucent/articles/7170142.html" target="_blank" rel="external">Twitter开放API文档</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/08/03/评审意见/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/03/评审意见/" itemprop="url">评审意见</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-03T22:01:20+08:00">
+                2019-08-03
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-08-03T22:01:55+08:00">
+                2019-08-03
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/08/03/评审意见/" class="leancloud_visitors" data-flag-title="评审意见">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  30 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://mp.weixin.qq.com/s/y752ZSzGuyIraiEIGl-w2Q" target="_blank" rel="external">千辛万苦写好的论文，却得到这样的评审意见…… </a><br><a href="https://mp.weixin.qq.com/s/MDB_36orTdcXvOzYAQRo3Q" target="_blank" rel="external">如何组织评审意见回复 RESPONSES ？</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/08/03/比赛/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -969,8 +1485,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-08-09T20:02:51+08:00">
-                2019-08-09
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-05T21:59:06+08:00">
+                2019-11-05
               </time>
             
           </span>
@@ -1008,7 +1524,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  446 字
+                  506 字
                 </span>
               
 
@@ -1047,6 +1563,8 @@ $(function() {
             <h2 id="论文资料"><a href="#论文资料" class="headerlink" title="论文资料"></a>论文资料</h2><p>How powerful is the graph neural network</p>
 <p><a href="https://www.sohu.com/a/211628336_99940985" target="_blank" rel="external">2017CIKM－Network Embedding专题论文分享</a></p>
 <p><a href="https://daiwk.github.io/posts/dl-graph-representations.html" target="_blank" rel="external">AAAI2019《图表示学习》Tutorial, 180 页 PPT 带你从入门到精通（下载）</a><br><a href="http://blog.sciencenet.cn/home.php?mod=space&amp;uid=588923&amp;do=blog&amp;id=1078213" target="_blank" rel="external">Representation Learning on Network 网络表示学习笔记</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/1422796" target="_blank" rel="external">Github项目推荐 | 图神经网络(GNN)相关资源大列表</a></p>
+<h3 id="github"><a href="#github" class="headerlink" title="github"></a>github</h3><p>  <a href="https://github.com/nnzhan/Awesome-Graph-Neural-Networks" target="_blank" rel="external">https://github.com/nnzhan/Awesome-Graph-Neural-Networks</a><br>   图卷积网络,图的注意力模型，图的自动编码器，图生成网络，图时空网络，各种应用</p>
 <p>##Inductive Representation Learning On Large Graphs</p>
 <p><a href="https://blog.csdn.net/imark11/article/details/78698844" target="_blank" rel="external">Inductive Representation Learning On Large Graphs【阅读笔记】</a></p>
 <p><a href="https://www.cnblogs.com/shiyublog/p/9819086.html" target="_blank" rel="external">GraphSAGE 代码解析(一) - unsupervised_train.py</a></p>
@@ -1152,8 +1670,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-08-09T19:07:13+08:00">
-                2019-08-09
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-06T09:49:22+08:00">
+                2019-11-06
               </time>
             
           </span>
@@ -1191,7 +1709,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  228 字
+                  473 字
                 </span>
               
 
@@ -1207,7 +1725,7 @@ $(function() {
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -1232,6 +1750,7 @@ $(function() {
 <p><a href="http://www.isclab.org.cn/wp-content/uploads/2018/12/Transformer%E4%B8%AD%E7%9A%84Multi-Head-Attention-%E7%8E%8B%E7%9D%BF%E6%80%A1-2018.12.9-19_00_00.pdf" target="_blank" rel="external">Transformer中的Multi-Head Attention</a></p>
 <p><a href="https://blog.csdn.net/luoxuexiong/article/details/88853655" target="_blank" rel="external">关联性图注意力网络：Relational Graph Attention Networks（ICLR2019）</a></p>
 <p><a href="https://blog.csdn.net/weixin_39373480/article/details/88728518" target="_blank" rel="external">Graph Attention Networks网络结构+代码</a></p>
+<h2 id="翻译中的注意力机制"><a href="#翻译中的注意力机制" class="headerlink" title="翻译中的注意力机制"></a>翻译中的注意力机制</h2><p>注意力机制的BahdanauAttention模型就很令人费解了，困惑的关键在于其中的算法。算法的计算部分只有两行代码，代码本身都知道是在做什么，但完全不明白组合在一起是什么功能以及为什么这样做。其实阅读由数学公式推导、转换而来的程序代码都有这种感觉。所以现在很多的知识保护，根本不在于源代码，而在于公式本身。没有公式，很多源代码非常难以读懂。<br><a href="https://www.cnblogs.com/andrewwang/p/10794420.html" target="_blank" rel="external">TensorFlow从1到2（十）带注意力机制的神经网络机器翻译</a></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><a href="https://juejin.im/post/5bbf41c3f265da0af16160d2" target="_blank" rel="external">他们只说注意力机制（Attention Mechanism）不练，还是我来给大家撸代码讲解</a></p>
 <p><a href="http://www.zhuanzhi.ai/document/b806ec47935f896da24368db3987787a" target="_blank" rel="external">注意力能提高模型可解释性？实验表明：并没有 </a></p>
 <h2 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h2><p><a href="https://stackoverflow.com/questions/40601552/visualizing-attention-activation-in-tensorflow" target="_blank" rel="external">Visualizing attention activation in Tensorflow</a></p>
@@ -1241,6 +1760,11 @@ $(function() {
 <p><a href="https://github.com/uhauha2929/examples/blob/master/self-attention.ipynb" target="_blank" rel="external">https://github.com/uhauha2929/examples/blob/master/self-attention.ipynb</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/45295182" target="_blank" rel="external">可视化循环神经网络的注意力机制</a></p>
 <p><a href="https://www.zhihu.com/question/274926848" target="_blank" rel="external">请问注意力机制中生成的类似热力图或者柱状图是如何生成的</a> 其实没啥用</p>
+<h2 id="各种各样的注意力"><a href="#各种各样的注意力" class="headerlink" title="各种各样的注意力"></a>各种各样的注意力</h2><p><a href="https://blog.eson.org/pub/c47c5082/" target="_blank" rel="external">深度学习中的注意力机制 原理 及 代码</a></p>
+<p><a href="https://www.jianshu.com/p/9f6eefa4ac96" target="_blank" rel="external">神经网络中的注意力机制总结及PyTorch实战</a></p>
+<p><img src="./img/注意力公式.png" alt="注意力公式"></p>
+<p><a href="https://www.cnblogs.com/databingo/p/9769928.html" target="_blank" rel="external">神经网络中注意力机制概述</a> 摘自《Notes on Deep Learning for NLP》</p>
+<p>层级注意力：<a href="https://richliao.github.io/supervised/classification/2016/12/26/textclassifier-HATN/" target="_blank" rel="external">Text Classification, Part 3 - Hierarchical attention network</a></p>
 
           
         
@@ -1685,556 +2209,6 @@ $(function() {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/06/20/tensorflow 代码总结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/20/tensorflow 代码总结/" itemprop="url">tensorflow代码总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-20T10:16:15+08:00">
-                2019-06-20
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-08-03T21:18:19+08:00">
-                2019-08-03
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/代码/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/06/20/tensorflow 代码总结/" class="leancloud_visitors" data-flag-title="tensorflow代码总结">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  488 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  3 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="数据不平衡"><a href="#数据不平衡" class="headerlink" title="数据不平衡"></a>数据不平衡</h2><p>pip install tf-nightly-gpu-2.0-preview</p>
-<p>首先我们需要统计每种类别包含的样本数量，并基于此计算类别权重：</p>
-<h1 id="计算每种类别数据的数量"><a href="#计算每种类别数据的数量" class="headerlink" title="计算每种类别数据的数量"></a>计算每种类别数据的数量</h1><p>counts = np.bincount(train_targets[:, 0])</p>
-<h1 id="基于数量计算类别权重"><a href="#基于数量计算类别权重" class="headerlink" title="基于数量计算类别权重"></a>基于数量计算类别权重</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">weight_for_0 = 1. / counts[0]</div><div class="line">weight_for_1 = 1. / counts[1]</div><div class="line">class_weight = &#123;0: weight_for_0, 1: weight_for_1&#125;</div><div class="line"></div><div class="line">在训练时，加上一行代码设置类别权重即可：</div><div class="line">model.fit(train_features, train_targets,</div><div class="line">          batch_size=2048,</div><div class="line">          epochs=50,</div><div class="line">          verbose=2,</div><div class="line">          callbacks=callbacks,</div><div class="line">          validation_data=(val_features, val_targets),</div><div class="line">          # 设置类别权重</div><div class="line">          class_weight=class_weight)</div></pre></td></tr></table></figure>
-<p>完整代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div></pre></td><td class="code"><pre><div class="line"># -*- coding: utf-8 -*-</div><div class="line">&quot;&quot;&quot;## First, vectorize the CSV data&quot;&quot;&quot;</div><div class="line">import csv</div><div class="line">import numpy as np</div><div class="line"></div><div class="line"># Get the real data from https://www.kaggle.com/mlg-ulb/creditcardfraud/downloads/creditcardfraud.zip/</div><div class="line">fname = &apos;/Users/fchollet/Downloads/creditcard.csv&apos;</div><div class="line">all_features = []</div><div class="line">all_targets = []</div><div class="line">with open(fname) as f:</div><div class="line">    for i, line in enumerate(f):</div><div class="line">        if i == 0:</div><div class="line">            print(&apos;HEADER:&apos;, line.strip())</div><div class="line">            continue  # Skip header</div><div class="line">        fields = line.strip().split(&apos;,&apos;)</div><div class="line">        all_features.append([float(v.replace(&apos;&quot;&apos;, &apos;&apos;)) for v in fields[:-1]])</div><div class="line">        all_targets.append([int(fields[-1].replace(&apos;&quot;&apos;, &apos;&apos;))])</div><div class="line">        if i == 1:</div><div class="line">            print(&apos;EXAMPLE FEATURES:&apos;, all_features[-1])</div><div class="line"></div><div class="line">features = np.array(all_features, dtype=&apos;float32&apos;)</div><div class="line">targets = np.array(all_targets, dtype=&apos;uint8&apos;)</div><div class="line">print(&apos;features.shape:&apos;, features.shape)</div><div class="line">print(&apos;targets.shape:&apos;, targets.shape)</div><div class="line"></div><div class="line">&quot;&quot;&quot;## Prepare a validation set&quot;&quot;&quot;</div><div class="line">num_val_samples = int(len(features) * 0.2)</div><div class="line">train_features = features[:-num_val_samples]</div><div class="line">train_targets = targets[:-num_val_samples]</div><div class="line">val_features = features[-num_val_samples:]</div><div class="line">val_targets = targets[-num_val_samples:]</div><div class="line"></div><div class="line">print(&apos;Number of training samples:&apos;, len(train_features))</div><div class="line">print(&apos;Number of validation samples:&apos;, len(val_features))</div><div class="line"></div><div class="line">&quot;&quot;&quot;## Analyze class imbalance in the targets&quot;&quot;&quot;</div><div class="line">counts = np.bincount(train_targets[:, 0])</div><div class="line">print(&apos;Number of positive samples in training data: &#123;&#125; (&#123;:.2f&#125;% of total)&apos;.format(counts[1],</div><div class="line">                                                                                  100 * float(counts[1]) / len(</div><div class="line">                                                                                      train_targets)))</div><div class="line"></div><div class="line">weight_for_0 = 1. / counts[0]</div><div class="line">weight_for_1 = 1. / counts[1]</div><div class="line"></div><div class="line">&quot;&quot;&quot;## Normalize the data using training set statistics&quot;&quot;&quot;</div><div class="line">mean = np.mean(train_features, axis=0)</div><div class="line">train_features -= mean</div><div class="line">val_features -= mean</div><div class="line">std = np.std(train_features, axis=0)</div><div class="line">train_features /= std</div><div class="line">val_features /= std</div><div class="line"></div><div class="line">from tensorflow import keras</div><div class="line"></div><div class="line">model = keras.Sequential([</div><div class="line">    keras.layers.Dense(256, activation=&apos;relu&apos;,</div><div class="line">                       input_shape=(train_features.shape[-1],)),</div><div class="line">    keras.layers.Dense(256, activation=&apos;relu&apos;),</div><div class="line">    keras.layers.Dropout(0.3),</div><div class="line">    keras.layers.Dense(256, activation=&apos;relu&apos;),</div><div class="line">    keras.layers.Dropout(0.3),</div><div class="line">    keras.layers.Dense(1, activation=&apos;sigmoid&apos;),</div><div class="line">])</div><div class="line">model.summary()</div><div class="line"></div><div class="line">metrics = [keras.metrics.FalseNegatives(name=&apos;fn&apos;),</div><div class="line">           keras.metrics.FalsePositives(name=&apos;fp&apos;),</div><div class="line">           keras.metrics.TrueNegatives(name=&apos;tn&apos;),</div><div class="line">           keras.metrics.TruePositives(name=&apos;tp&apos;),</div><div class="line">           keras.metrics.Precision(name=&apos;precision&apos;),</div><div class="line">           keras.metrics.Recall(name=&apos;recall&apos;)]</div><div class="line"></div><div class="line">model.compile(optimizer=keras.optimizers.Adam(1e-2),</div><div class="line">              loss=&apos;binary_crossentropy&apos;,</div><div class="line">              metrics=metrics)</div><div class="line"></div><div class="line">callbacks = [keras.callbacks.ModelCheckpoint(&apos;fraud_model_at_epoch_&#123;epoch&#125;.h5&apos;)]</div><div class="line">class_weight = &#123;0: weight_for_0, 1: weight_for_1&#125;</div><div class="line"></div><div class="line">model.fit(train_features, train_targets,</div><div class="line">          batch_size=2048,</div><div class="line">          epochs=50,</div><div class="line">          verbose=2,</div><div class="line">          callbacks=callbacks,</div><div class="line">          validation_data=(val_features, val_targets),</div><div class="line">          class_weight=class_weight)</div></pre></td></tr></table></figure></p>
-<p>参考：<a href="https://mp.weixin.qq.com/s/K9U3GCW1tAIYRoKKq_nG9w" target="_blank" rel="external">https://mp.weixin.qq.com/s/K9U3GCW1tAIYRoKKq_nG9w</a><br>代码地址：<br><a href="https://colab.research.google.com/drive/1xL2jSdY-MGlN60gGuSH_L30P7kxxwUfM" target="_blank" rel="external">https://colab.research.google.com/drive/1xL2jSdY-MGlN60gGuSH_L30P7kxxwUfM</a></p>
-<p><a href="https://www.cnblogs.com/zhaokui/p/5101301.html" target="_blank" rel="external">如何解决机器学习中数据不平衡问题</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/05/13/卷积网络随笔/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/13/卷积网络随笔/" itemprop="url">卷积网络</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-13T10:07:16+08:00">
-                2019-05-13
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-08-01T16:56:16+08:00">
-                2019-08-01
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/05/13/卷积网络随笔/" class="leancloud_visitors" data-flag-title="卷积网络">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  8 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>卷积就是加权求和</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/05/11/社交发现论文总结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/11/社交发现论文总结/" itemprop="url">社交网络论文总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T15:05:34+08:00">
-                2019-05-11
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-08-09T11:33:05+08:00">
-                2019-08-09
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/05/11/社交发现论文总结/" class="leancloud_visitors" data-flag-title="社交网络论文总结">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  599 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  2 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Understanding-the-Facets-of-Homophily-in-Social-Psycho-Sociological-Network-Communities"><a href="#Understanding-the-Facets-of-Homophily-in-Social-Psycho-Sociological-Network-Communities" class="headerlink" title="Understanding the Facets of Homophily in Social Psycho-Sociological Network Communities"></a>Understanding the Facets of Homophily in Social Psycho-Sociological Network Communities</h2><p>这篇论文研究朋友，亲属，同事之间的同质性：</p>
-<p>人工标注了关系类型</p>
-<p>建立了四个模型预测年龄，性别，人格，values</p>
-<p>最后还进行了链接预测和社区发现的比较，比较这三个不同群体中引入人格特征后社区发现的准确度</p>
-<p>Tanmoy Chakraborty 主页：<a href="http://faculty.iiitd.ac.in/~tanmoy/index.html#home" target="_blank" rel="external">http://faculty.iiitd.ac.in/~tanmoy/index.html#home</a></p>
-<h2 id="Metadata-vs-Ground-truth-A-Myth-behind-the-Evolution-of-Community-Detection-Methods"><a href="#Metadata-vs-Ground-truth-A-Myth-behind-the-Evolution-of-Community-Detection-Methods" class="headerlink" title="Metadata vs. Ground-truth: A Myth behind the Evolution of Community Detection Methods"></a>Metadata vs. Ground-truth: A Myth behind the Evolution of Community Detection Methods</h2><p>基于不同属性建立的社区与基于社区发现的社区进行比较，分析每种社区发现算法在链接预测，信息传播，病毒感染之间的区别</p>
-<h2 id="代码库："><a href="#代码库：" class="headerlink" title="代码库："></a>代码库：</h2><p>snap:<a href="https://github.com/snap-stanford/snap" target="_blank" rel="external">https://github.com/snap-stanford/snap</a></p>
-<h2 id="图神经网络"><a href="#图神经网络" class="headerlink" title="图神经网络"></a>图神经网络</h2><p>图网络主要解决的是AI对结构化数据的处理，而在动态数据、大规模数据、非结构化数据等领域，图网络的作为依旧有限</p>
-<h2 id="影响力"><a href="#影响力" class="headerlink" title="影响力"></a>影响力</h2><p>distinguish the effect of peer influence and group conformity.</p>
-<h2 id="Confluence-Conformity-Influence-in-Large-Social-Networks"><a href="#Confluence-Conformity-Influence-in-Large-Social-Networks" class="headerlink" title="Confluence: Conformity Influence in Large Social Networks"></a>Confluence: Conformity Influence in Large Social Networks</h2><p>从众效应<br>群体，个人，同伴</p>
-<p>根据历史行为预测下一行为</p>
-<h2 id="Social-Influence-Analysis-in-Large-scale-Networks"><a href="#Social-Influence-Analysis-in-Large-scale-Networks" class="headerlink" title="Social Influence Analysis in Large-scale Networks"></a>Social Influence Analysis in Large-scale Networks</h2><p>在不同主题下的社会影响力<br>Topical Affinity Propagation (TAP) </p>
-<p>应用于专家发现<br>相似的节点，哪一个节点对另一个节点有较强的影响</p>
-<p>##Mining Topic-level Influence in Heterogeneous Networks</p>
-<p>##Topic-Level Opinion Influence Model (TOIM): An Investigation Using Tencent Microblogging</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>网络表示的作用<br>聚类的作用</p>
-<h2 id="GraphSAGE"><a href="#GraphSAGE" class="headerlink" title="GraphSAGE"></a>GraphSAGE</h2><p>Weisfeiler-Lehman Isomorphism Test（图同构算法）<br>对于不带标签的图，初始的时候，两个图的全部节点赋值1（或以度为标签），然后做多轮wl，出现节点ID和各ID出现次数不一致的情况就认为不是Isomorphism</p>
-<h2 id="图注意力网络"><a href="#图注意力网络" class="headerlink" title="图注意力网络"></a>图注意力网络</h2><p>通俗易懂！使用Excel和TF实现Transformer<br><a href="https://mp.weixin.qq.com/s/3_dK289DPREI0KNj0NaR-A" target="_blank" rel="external">https://mp.weixin.qq.com/s/3_dK289DPREI0KNj0NaR-A</a></p>
-<h2 id="社区发现"><a href="#社区发现" class="headerlink" title="社区发现"></a>社区发现</h2><p><a href="https://blog.csdn.net/u012369559/article/details/78713572" target="_blank" rel="external">社团发现算法分类及简介</a></p>
-<h2 id="igraph-networkX"><a href="#igraph-networkX" class="headerlink" title="igraph networkX"></a>igraph networkX</h2><p><a href="https://networkx.github.io/documentation/stable/reference/readwrite/json_graph.html#json-data" target="_blank" rel="external">networkX 官方文档</a></p>
-<p><a href="https://stackoverflow.com/questions/34665042/read-json-graph-networkx-file" target="_blank" rel="external">read json graph networkx file</a></p>
-<p><a href="https://stackoverflow.com/questions/3162909/method-to-save-networkx-graph-to-json-graph" target="_blank" rel="external">Method to save networkx graph to json graph?</a></p>
-<p>软件：<a href="https://in.pycon.org/cfp/2016/proposals/network-analysis-using-igraph-python-library~bmyAb/" target="_blank" rel="external">Network Analysis using iGraph Python Library</a> </p>
-<h2 id="lookalike"><a href="#lookalike" class="headerlink" title="lookalike"></a>lookalike</h2><p><a href="https://blog.csdn.net/weixin_39195527/article/details/78003162" target="_blank" rel="external">互联网中寻找相似实体(lookalike)算法优化方案</a>使用比较广泛过的解决方案是结合Minhash和局部敏感哈希算法 LSH (Local-Sensitive-Hash)的特性，分别减少特征比较和两两用户/item（Pair to Pair）的比较</p>
-<p><a href="http://www.woshipm.com/pd/416875.html" target="_blank" rel="external">百度百科标签提取：深度丨从零搭建推荐体系：概述及标签体系搭建（上）</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2284,7 +2258,7 @@ $(function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">97</span>
+                <span class="site-state-item-count">100</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
