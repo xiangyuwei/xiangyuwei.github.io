@@ -3,12 +3,12 @@
   <entry>
     <title><![CDATA[异质信息网络的表示学习及应用]]></title>
     <url>%2F2019%2F11%2F09%2F%E5%BC%82%E8%B4%A8%E4%BF%A1%E6%81%AF%E7%BD%91%E7%BB%9C%2F</url>
-    <content type="text"><![CDATA[定义包含不同类型节点和边的异质信息网络可以更加完整自然地对现实世界的网络数据建模 元路径表示连接两个对象之间的关系的组合，它刻画了网络中包含的丰富的语义信息 异质信息网络被定义为一个有向图，它包含多种类型的对象或者关系，每个对象属于一个特定的对象类型，每条关系属于一个特定的关系类型。网络模式（Network schema）是定义在对象类型和关系类型上的一个有向图，是信息网络的元描述。 元路径 定义在网络模式上的链接两类对象的一条路径，形式化定义为表示对象类型之间的一种复合关系 R=R1R2……Rl，其中 代表关系之间的复合算子，Ai 表示对象类型，Ri 表示关系类型。 链接两类对象的不同元路径表示了不同的语义关系和不同的链接网络，这也造成了不同的分析结果和不同的特征表示。 挑战 节点和边的异质性带来的挑战。不同类型的节点和边代表不同的对象，因此，在异质网络的表征学习中需要考虑将不同类型的对象映射到不同的空间中。另外，如何有效地保存每个节点的异质邻居以及有效地处理异质的节点序列也是值得考虑的问题。 异质网络中丰富的信息带来的表示融合挑战。异质网络中的各类信息蕴含着丰富的语义，它从多个维度来刻画节点的意义，因此，如何有效地抽取和利用异质网络的多维度信息，并有效地融合这些信息以便全面地学习节点的表示是一个巨大的挑战。 根据不同的元路径可以从多个维度对节点的丰富信息建模。如何有效地自动筛选和融合不同元路径下的网络节点表示是一个值得关注的研究方向。目前节点的表征学习研究比较多，关系和元路径的表征学习还比较少。不同类型的节点有不同的特征表示空间，对这些表示空间之间的关系还缺乏深入探究 异质网络天然包含丰富的多模信息，如属性、文本和图像等。只有将更多模态的信息考虑进来，学习到的网络节点表示才能更加准确地对节点进行描述。而现有的主要工作都致力于对异质信息网络中的结构信息建模，没有充分挖掘网络中的其他模态信息。如何更好地融合这些多模态信息的表征学习将是一个研究难点 现实世界中的网络往往规模较大并且动态变化。我们需要考虑节点和边的异质性，快速高效地获取新增节点的表示，研究面向增量计算和在线计算的表征学习方法。 在社区发现、异常检测等特定任务上，通用表征学习的效果往往不尽如人意。如何与具体应用结合学习网络表示是重要发展方向 更加复杂的网络构建 当前研究大多假定异质信息网络是明确定义的，网络中的对象和关系是清晰的。然而，在实际应用中，从真实数据构造异质信息网络会遇到很多挑战。对于关系数据库之类的结构化数据，构造异质信息网络比较容易，然而即使是在这种网络中，对象和关系也可能具有噪声，比如会出现对象重名或关系不完整等问题；对于像文本、图像等非结构化数据，如何准确抽取出相应的对象和关系，进而建立更加完善和准确的异质信息网络也将面临更多挑战，在实践中会用到诸如信息抽取、自然语言处理、图像处理等各种技术。 在异质信息网络中，对象可通过不同的方式组织在一起。星型模式是广泛使用的异质信息网络类型，例如前面介绍的科技文献网络。之后，又出现了带环的星型模式和多中心网络等网络模式。 用户可能存在于多个异质网络，这时需要对齐不同网络中的用户，有效融合不同网络的信息。还有很多网络数据，例如知识图谱，包含有很多种类型的对象和关系，很难用简单的网络模式来描述。这种丰富模式（schema-rich）的异质网络中也出现了很多新的研究问题，例如多种类型对象关系的管理以及元路径的自动产生等。 异质信息网络中的对象和关系包含着丰富的语义信息，而元路径可以捕捉这种语义信息。异质信息网络上的很多数据挖掘任务是基于元路径进行研究的，但是元路径在某些应用场景中并不能捕捉到精细的语义信息。例如，“作者-论文-作者”路径表示了作者之间的合作关系，但却不能描述特定条件下（例如KDD领域）的合作关系。为了克服这个不足，很多研究者提出了受限元路径、带权元路径、元结构等概念扩展元路径的语义抽取能力。针对更加复杂的网络结构（如知识图谱），如何设计更加灵活精细的语义探索工具仍然需要进一步的研究。 表征学习方法基于元路径的随机游走 Metapath2vec： 做基于元路径的随机游走来抽取节点结构信息，进一步深化节点类型带来的差异提出了Metapath2Vec++ HIN2Vec： 考虑了不同类型节点及节点间复杂多样的关系 HINE ：元路径随机游走来计算节点间的相似性 ###基于分解 可以将异质网络分解为比较简单的网络，分别对这些网络进行表征学习，然后再将这些信息融合起来 HEREC ：利用元路径抽取异质网络中的多个同质网络，并对这些同质网络进行表征学习，然后通过融合函数对不同的表示进行融合，并结合矩阵分解模型进行评分预 PTE ：从文本中构建的异质网络分解成3 个子网：word-word 网络、word-document 网络和word-label网络。对上述网络进行表征学习可以得到不同类型对象（如word、document 和label）的向量表示 EOE 复杂的学术异质网分解为单词共现网络和作者合作网络，对各个子网内节点对和子网间节点对同时进行表征学习 深度学习 BL-MNE 采用自动编码机分别对异质网络在不同元路径下的信息进行编码，联合编码，不同网络之间通过转移矩阵进行融合 SHINE 利用自动编码机分别对社交网络、情感网络和画像网络中的异质信息进行压缩编码得到特征表示，然后通过聚合函数对这些表示进行融合得到最终的节点表示。 HNE 针对文本和图像并存的异质网络，通过CNN 和MLP 分别对文本和图像数据进行特征抽取，然后通过转移矩阵将不同类型的数据投影到同一个空间。上述方法均采用深度模型来学习节点的向量表示。 研究点 提取元路径，挖掘隐含的丰富语义关系 应用（网络结构，语义探索）相似性度量 PathSim 利用对称元路径抽取两个节点之间的连通路径来度量二者的相似性，这样不仅利用到了相关的异质信息，而且体现了节点和边的丰富语义 节点分类链路预测推荐系统 JRL ：推荐模型设计了一个深度表征学习框架，利用异质信息源（评分、评论和图片）学习用户和物品的特征表示，然后通过一个额外层学习到用户和物品的联合表示，最后通过Pair-wise 学习，来推荐top-N的物品。Ting Chen、Yizhou Sun 等人 提出一种混合表征学习推荐框架，并对采样策略进行优化，提出了三种可以大大提升训练效率的采样策略 异常检测韩家炜 from Unstructured Text to TextCube: Automated Construction andMultidimensional Exploration将数据结构化。两种结构化数据的形式，一种是异质网络（Heterogeneous Network），另一种是多维文本立方体（Multi-dimensionalText Cube）。 无结构文本变成有结构文本 从结构文本中挖掘知识 Structuring：将无结构的文本转化成有结构的、有类型的、关联的实体或关系Networking：利用大量有结构的关系构建网络Mining：在关系和网络上进行挖掘 网络如果有一个 Network 将 Big Data 结构化后，其预测能力（或者别的能力）将是非常强的。 text cube通过 NY Times 在 2016 年的新闻很容易就挖掘出了当时美国两党辩论过程中的主要议程（例如、等）Top 10 的关键信息。 Phrase Mining从 Text 中挖掘出词组（Phrase），那么对挖掘文本结构将有很重要的意义。韩家炜团队的人员先后提出了三种方法，分别为无监督的 TopMine、弱监督的 SegPhrase和远程监督的AutoPhrase Philip S. Yu 广度学习首先是在同一个实体上有不同类型信息的学习。这种类型的广度学习包括前面谈到的 Multi-view Learning、Multi-source Learning、Multi-model Learning 等。 其次是在不同的但类型相似的实体上信息的学习。这包括 Transfer Learning。 另外是在有复杂网络类型关系的不同类型实体信息的学习。这包括基于融合的异质信息网络（HIN） 要做好「广度学习」，需要以下三步： 首先，定义并获取相关的有用数据源，也即找到对你的问题有用的数据； 其次，设计一种模型来将异质数据源信息融合起来； 最后，基于模型整体的需求从各种数据源中深度地去挖掘信息。 参考2018，异质网络表征学习的研究进展 异构信息网络挖掘： 原理和方法法》，作者( 美）孙艺洲（Yizhou Sun），（美）韩家炜（Jiawei Han） 数据挖掘领头人韩家炜教授：如何从无结构文本到有用的知识？ 广度学习]]></content>
+    <content type="text"><![CDATA[定义包含不同类型节点和边的异质信息网络可以更加完整自然地对现实世界的网络数据建模 元路径表示连接两个对象之间的关系的组合，它刻画了网络中包含的丰富的语义信息 异质信息网络被定义为一个有向图，它包含多种类型的对象或者关系，每个对象属于一个特定的对象类型，每条关系属于一个特定的关系类型。网络模式（Network schema）是定义在对象类型和关系类型上的一个有向图，是信息网络的元描述。 元路径 定义在网络模式上的链接两类对象的一条路径，形式化定义为表示对象类型之间的一种复合关系 R=R1R2……Rl，其中 代表关系之间的复合算子，Ai 表示对象类型，Ri 表示关系类型。 链接两类对象的不同元路径表示了不同的语义关系和不同的链接网络，这也造成了不同的分析结果和不同的特征表示。 挑战 节点和边的异质性带来的挑战。不同类型的节点和边代表不同的对象，因此，在异质网络的表征学习中需要考虑将不同类型的对象映射到不同的空间中。另外，如何有效地保存每个节点的异质邻居以及有效地处理异质的节点序列也是值得考虑的问题。 异质网络中丰富的信息带来的表示融合挑战。异质网络中的各类信息蕴含着丰富的语义，它从多个维度来刻画节点的意义，因此，如何有效地抽取和利用异质网络的多维度信息，并有效地融合这些信息以便全面地学习节点的表示是一个巨大的挑战。 根据不同的元路径可以从多个维度对节点的丰富信息建模。如何有效地自动筛选和融合不同元路径下的网络节点表示是一个值得关注的研究方向。目前节点的表征学习研究比较多，关系和元路径的表征学习还比较少。不同类型的节点有不同的特征表示空间，对这些表示空间之间的关系还缺乏深入探究 异质网络天然包含丰富的多模信息，如属性、文本和图像等。只有将更多模态的信息考虑进来，学习到的网络节点表示才能更加准确地对节点进行描述。而现有的主要工作都致力于对异质信息网络中的结构信息建模，没有充分挖掘网络中的其他模态信息。如何更好地融合这些多模态信息的表征学习将是一个研究难点 现实世界中的网络往往规模较大并且动态变化。我们需要考虑节点和边的异质性，快速高效地获取新增节点的表示，研究面向增量计算和在线计算的表征学习方法。 在社区发现、异常检测等特定任务上，通用表征学习的效果往往不尽如人意。如何与具体应用结合学习网络表示是重要发展方向 更加复杂的网络构建 当前研究大多假定异质信息网络是明确定义的，网络中的对象和关系是清晰的。然而，在实际应用中，从真实数据构造异质信息网络会遇到很多挑战。对于关系数据库之类的结构化数据，构造异质信息网络比较容易，然而即使是在这种网络中，对象和关系也可能具有噪声，比如会出现对象重名或关系不完整等问题；对于像文本、图像等非结构化数据，如何准确抽取出相应的对象和关系，进而建立更加完善和准确的异质信息网络也将面临更多挑战，在实践中会用到诸如信息抽取、自然语言处理、图像处理等各种技术。 在异质信息网络中，对象可通过不同的方式组织在一起。星型模式是广泛使用的异质信息网络类型，例如前面介绍的科技文献网络。之后，又出现了带环的星型模式和多中心网络等网络模式。 用户可能存在于多个异质网络，这时需要对齐不同网络中的用户，有效融合不同网络的信息。还有很多网络数据，例如知识图谱，包含有很多种类型的对象和关系，很难用简单的网络模式来描述。这种丰富模式（schema-rich）的异质网络中也出现了很多新的研究问题，例如多种类型对象关系的管理以及元路径的自动产生等。 异质信息网络中的对象和关系包含着丰富的语义信息，而元路径可以捕捉这种语义信息。异质信息网络上的很多数据挖掘任务是基于元路径进行研究的，但是元路径在某些应用场景中并不能捕捉到精细的语义信息。例如，“作者-论文-作者”路径表示了作者之间的合作关系，但却不能描述特定条件下（例如KDD领域）的合作关系。为了克服这个不足，很多研究者提出了受限元路径、带权元路径、元结构等概念扩展元路径的语义抽取能力。针对更加复杂的网络结构（如知识图谱），如何设计更加灵活精细的语义探索工具仍然需要进一步的研究。 表征学习方法基于元路径的随机游走 Metapath2vec： 做基于元路径的随机游走来抽取节点结构信息，进一步深化节点类型带来的差异提出了Metapath2Vec++ HIN2Vec： 考虑了不同类型节点及节点间复杂多样的关系 HINE ：元路径随机游走来计算节点间的相似性 基于分解可以将异质网络分解为比较简单的网络，分别对这些网络进行表征学习，然后再将这些信息融合起来 HEREC ：利用元路径抽取异质网络中的多个同质网络，并对这些同质网络进行表征学习，然后通过融合函数对不同的表示进行融合，并结合矩阵分解模型进行评分预 PTE ：从文本中构建的异质网络分解成3 个子网：word-word 网络、word-document 网络和word-label网络。对上述网络进行表征学习可以得到不同类型对象（如word、document 和label）的向量表示 EOE 复杂的学术异质网分解为单词共现网络和作者合作网络，对各个子网内节点对和子网间节点对同时进行表征学习 深度学习 BL-MNE 采用自动编码机分别对异质网络在不同元路径下的信息进行编码，联合编码，不同网络之间通过转移矩阵进行融合 SHINE 利用自动编码机分别对社交网络、情感网络和画像网络中的异质信息进行压缩编码得到特征表示，然后通过聚合函数对这些表示进行融合得到最终的节点表示。 HNE 针对文本和图像并存的异质网络，通过CNN 和MLP 分别对文本和图像数据进行特征抽取，然后通过转移矩阵将不同类型的数据投影到同一个空间。上述方法均采用深度模型来学习节点的向量表示。 研究点 提取元路径，挖掘隐含的丰富语义关系 应用（网络结构，语义探索）相似性度量matapath基于元路径最基本的两个工作是：（1）衡量HIN中基于对称元路径的相同类型节点间的相似度方法PathSim【1】（代码python2.7：http://download.csdn.net/download/u013527419/9475257）。 PathSim 利用对称元路径抽取两个节点之间的连通路径来度量二者的相似性，这样不仅利用到了相关的异质信息，而且体现了节点和边的丰富语义 （2）衡量HIN中基于任意元路径的相同/不同类型节点间的相似度方法HeteSim【2】（代码：https://download.csdn.net/download/u013527419/10353251） （3）其他基于meta path 的相似度度量方式： common node，PCRW，BPCRW KnowSim（based on given meta path and the reverse meta path） AvgSim（similarity of documents in HIN） RelSim（measure the similarity of relations in HIN） meta structure鉴于meta path的表征能力有限。例如，在DBLP中, 如果我们想要度量发表的论文既在同一个会议上又含有相同的主题词(i.e.,the APVPA and APTPA paths)的两个作者的关系时，meta path 就不太好使，像是a1 和a2 基于meta path的三种相似度都是相同的。【1】提出了meta structure,表示一些更复杂的关系，meta path 是 meta structure 的特例。 Yangqiu Song Reynold C.K. Cheng ( 鄭振剛 ) [1]Huang, Z., Zheng, Y., Cheng, R., Sun, Y., Mamoulis, N., Li, X.: Meta structure: computingrelevance in large heterogeneous information networks. In: SIGKDD, pp. 1595–1604 (2016)[2]Meta-Graph Based Recommendation Fusion over Heterogeneous Information Networks. 节点分类链路预测推荐系统 JRL ：推荐模型设计了一个深度表征学习框架，利用异质信息源（评分、评论和图片）学习用户和物品的特征表示，然后通过一个额外层学习到用户和物品的联合表示，最后通过Pair-wise 学习，来推荐top-N的物品。Ting Chen、Yizhou Sun 等人 提出一种混合表征学习推荐框架，并对采样策略进行优化，提出了三种可以大大提升训练效率的采样策略 异常检测韩家炜 from Unstructured Text to TextCube: Automated Construction andMultidimensional Exploration将数据结构化。两种结构化数据的形式，一种是异质网络（Heterogeneous Network），另一种是多维文本立方体（Multi-dimensionalText Cube）。 无结构文本变成有结构文本 从结构文本中挖掘知识 Structuring：将无结构的文本转化成有结构的、有类型的、关联的实体或关系Networking：利用大量有结构的关系构建网络Mining：在关系和网络上进行挖掘 网络如果有一个 Network 将 Big Data 结构化后，其预测能力（或者别的能力）将是非常强的。 text cube通过 NY Times 在 2016 年的新闻很容易就挖掘出了当时美国两党辩论过程中的主要议程（例如、等）Top 10 的关键信息。 Phrase Mining从 Text 中挖掘出词组（Phrase），那么对挖掘文本结构将有很重要的意义。韩家炜团队的人员先后提出了三种方法，分别为无监督的 TopMine、弱监督的 SegPhrase和远程监督的AutoPhrase Philip S. Yu 广度学习首先是在同一个实体上有不同类型信息的学习。这种类型的广度学习包括前面谈到的 Multi-view Learning、Multi-source Learning、Multi-model Learning 等。 其次是在不同的但类型相似的实体上信息的学习。这包括 Transfer Learning。 另外是在有复杂网络类型关系的不同类型实体信息的学习。这包括基于融合的异质信息网络（HIN） 要做好「广度学习」，需要以下三步： 首先，定义并获取相关的有用数据源，也即找到对你的问题有用的数据； 其次，设计一种模型来将异质数据源信息融合起来； 最后，基于模型整体的需求从各种数据源中深度地去挖掘信息。 参考2018，异质网络表征学习的研究进展 异构信息网络挖掘： 原理和方法法》，作者( 美）孙艺洲（Yizhou Sun），（美）韩家炜（Jiawei Han） 数据挖掘领头人韩家炜教授：如何从无结构文本到有用的知识？ 广度学习 石川论文 孙怡州]]></content>
   </entry>
   <entry>
     <title><![CDATA[论文集合]]></title>
     <url>%2F2019%2F11%2F05%2F%E8%AE%BA%E6%96%87%E9%9B%86%E5%90%88%2F</url>
-    <content type="text"><![CDATA[Table of Contents Recomendation Graph Bayesian Deep Learning Datasets 日期 文章题目 作者 会议 引用 代码 备注 参考网址 is a singer embedding Enough ?learning node representation that capture multiple social contexts WWW19 https://github.com/google-research/google-research/tree/master/graph_embedding/persona https://mp.weixin.qq.com/s/U8S5Ew2JolAtMMI_Gn85nQs Fine-grained Event Categorization with Heterogeneous Graph Convolutional Networks Hao Peng, Jianxin Li, Qiran Gong, Yangqiu Song, Yuanxing Ning, Kunfeng Lai, Philip S. Yu IJCAI 2019 https://github.com/RingBDStack/PPGCN A survey of heterogeneous information network analysis Shi, C., Li, Y., Zhang, J., Sun, Y., &amp; Philip, S. Y. (2016). 251 IEEE Transactions on Knowledge and Data Engineering 综述]]></content>
+    <content type="text"><![CDATA[Table of Contents Recomendation Graph Bayesian Deep Learning Datasets 日期 文章题目 作者 会议 引用 代码 备注 参考网址 is a singer embedding Enough ?learning node representation that capture multiple social contexts WWW19 https://github.com/google-research/google-research/tree/master/graph_embedding/persona https://mp.weixin.qq.com/s/U8S5Ew2JolAtMMI_Gn85nQs Fine-grained Event Categorization with Heterogeneous Graph Convolutional Networks Hao Peng, Jianxin Li, Qiran Gong, Yangqiu Song, Yuanxing Ning, Kunfeng Lai, Philip S. Yu IJCAI 2019 https://github.com/RingBDStack/PPGCN A survey of heterogeneous information network analysis Shi, C., Li, Y., Zhang, J., Sun, Y., &amp; Philip, S. Y. (2016). 251 IEEE Transactions on Knowledge and Data Engineering 综述 11.19 Easing Embedding Learning by Comprehensive Transcription of Heterogeneous Information Networks KDD 18 这篇KDD’18的文章，没有按照常规的方法将所有的node嵌入到同一的空间，因为文章提出node因为连接的edge类型（type）不同，存在不兼容（incompatibility）的特性，所以最好能够根据不同的edge type来定义不同度量空间（metric space），保持同一个度量空间下，node的兼容性.局限性：比如没有考虑更复杂的网络结构信息，而是仅仅通过相邻节点的关系来确定embedding，更复杂的关系可以通过meta-path来找到，这也可能成为该论文未来的研究方向不同类型关系的嵌入与节点边的嵌入计算相似度，定义相似度函数，获得基于不同边类型的相似度函数 https://mp.weixin.qq.com/s?__biz=MzU1Mjc5NTg5OQ==&amp;mid=2247483890&amp;idx=1&amp;sn=1eacd1791a7f560e7b279fc13998e4ab&amp;chksm=fbfdea66cc8a6370e301df5024414761a0ae46fe893f8f4da68e660d14feeb44cd92c2f7a8f8&amp;scene=21&amp;token=1524641645&amp;lang=zh_CN#wechat_redirect HIN2Vec: Explore Meta-paths in Heterogeneous Information Networks for Representation Learning HIN2Vec 的核心是一个神经网络模型，不仅能够学习网络中节点的表示，同时还学到了关系（元路径）的表示。HIN2Vec 模型保留了更多的上下文信息，不仅假设存在关系的两个节点是相关的，而且还区分节点之间的不同关系，并通过共同学习关系向量区别对待把节点和节点间的关系作为一种二分类问题考虑，给定两个节点 x,y，通过预测节点之间是否存在确定的关系 r，同时学习到了节点和关系的向量表示 https://blog.csdn.net/c9Yv2cf9I06K2A9E/article/details/78623785]]></content>
   </entry>
   <entry>
     <title><![CDATA[matlab 安装]]></title>
@@ -322,6 +322,17 @@
       </categories>
       <tags>
         <tag>自然语言处理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[当难过时]]></title>
+    <url>%2F2018%2F12%2F11%2F%E5%BD%93%E9%9A%BE%E8%BF%87%E6%97%B6%2F</url>
+    <content type="text"><![CDATA[一屋两人三餐四季]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>心情</tag>
       </tags>
   </entry>
   <entry>
@@ -646,17 +657,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[当难过时]]></title>
-    <url>%2F2017%2F12%2F04%2F%E5%BD%93%E9%9A%BE%E8%BF%87%E6%97%B6%2F</url>
-    <content type="text"><![CDATA[一屋两人三餐四季]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>心情</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[深度学习中激活函数]]></title>
     <url>%2F2017%2F12%2F04%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%2F</url>
     <content type="text"><![CDATA[在神经网络中，激活函数的作用是能够给神经网络加入一些非线性因素，使得神经网络可以更好地解决较为复杂的问题。激活函数众所周知有tanh,sigmoid,ReLU等。 tanh 双切正切函数，取值范围[-1,1]sigmoid 采用S形函数，取值范围[0,1] ReLU 取的max(0,x) 简单而粗暴，大于0的留下，否则一律为0。 可微函数是指那些在定义域中所有点都存在导数的函数。 知乎忆臻的回答中激活函数是多个线性直线的组合，图像比较直观经网络中的激活函数（activation function）-Sigmoid, ReLu, TanHyperbolic(tanh) 梯度消失问题,由于激活函数的饱和性。几种常见的激活函数从神经网络的构建讲解激活函数。]]></content>
@@ -681,29 +681,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[书单]]></title>
-    <url>%2F2017%2F12%2F04%2F%E4%B9%A6%E5%8D%95%2F</url>
-    <content type="text"><![CDATA[书单：理性乐观派]]></content>
-      <categories>
-        <category>读书</category>
-      </categories>
-      <tags>
-        <tag>书籍</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[正则化]]></title>
-    <url>%2F2017%2F12%2F04%2F%E6%AD%A3%E5%88%99%E5%8C%96%2F</url>
-    <content type="text"><![CDATA[正则化是为了解决过拟合问题。在Andrew Ng的机器学习视频中有提到（详见http://www.cnblogs.com/jianxinzhou/p/4083921.html）。 正则化产生了稀疏性（Sparsity），减少了特征向量个数，降低了模型的复杂度。 例如一回归问题，假设回归模型为：y=w1x1+w2x2+…+w1000*x1000+b 通过学习，如果最后学习到的w就只有很少的非零元素，大部分W为0或接近于0，例如只有5个非零的wi，那可以认为y之于这5个（因素）xi有关系，这更有利于人们对问题的认识和分析，抓住影响问题的主要方面（因素）更符合人们的认知习惯。(1)L0范数 L0范数是指向量中非零元素的个数。L0正则化的值是模型中非零参数的个数，L0正则化可以实现模型参数的的稀疏化 （2）L1范数 L1范数是指向量中各个元素绝对值之和，又叫“稀疏规则算子”（Lasso regularization）。 L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩罚』是指对损失函数中的某些参数做一些限制。知乎中陶轻松的答案指出正则项使W向量中项的个数最小化，从而防止过拟合]]></content>
-      <categories>
-        <category>深度学习</category>
-      </categories>
-      <tags>
-        <tag>对抗样本</tag>
-        <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[斯人若彩虹，遇上方知有]]></title>
     <url>%2F2017%2F12%2F04%2F%E4%B8%83%E5%A4%95%2F</url>
     <content type="text"><![CDATA[我们分担寒潮、风雷、霹雳；我们共享雾霭流岚、虹霓，仿佛永远分离，却又终身相依]]></content>
@@ -716,6 +693,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[书单]]></title>
+    <url>%2F2017%2F12%2F04%2F%E4%B9%A6%E5%8D%95%2F</url>
+    <content type="text"><![CDATA[书单：理性乐观派]]></content>
+      <categories>
+        <category>读书</category>
+      </categories>
+      <tags>
+        <tag>书籍</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[官方文档]]></title>
     <url>%2F2017%2F12%2F04%2F%E5%AE%98%E7%BD%91%E6%96%87%E6%A1%A3%2F</url>
     <content type="text"><![CDATA[linux命令大全tensorflow中文官方文档tensorflow英文文档scipy]]></content>
@@ -725,6 +713,18 @@
       <tags>
         <tag>学习</tag>
         <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[正则化]]></title>
+    <url>%2F2017%2F12%2F04%2F%E6%AD%A3%E5%88%99%E5%8C%96%2F</url>
+    <content type="text"><![CDATA[正则化是为了解决过拟合问题。在Andrew Ng的机器学习视频中有提到（详见http://www.cnblogs.com/jianxinzhou/p/4083921.html）。 正则化产生了稀疏性（Sparsity），减少了特征向量个数，降低了模型的复杂度。 例如一回归问题，假设回归模型为：y=w1x1+w2x2+…+w1000*x1000+b 通过学习，如果最后学习到的w就只有很少的非零元素，大部分W为0或接近于0，例如只有5个非零的wi，那可以认为y之于这5个（因素）xi有关系，这更有利于人们对问题的认识和分析，抓住影响问题的主要方面（因素）更符合人们的认知习惯。(1)L0范数 L0范数是指向量中非零元素的个数。L0正则化的值是模型中非零参数的个数，L0正则化可以实现模型参数的的稀疏化 （2）L1范数 L1范数是指向量中各个元素绝对值之和，又叫“稀疏规则算子”（Lasso regularization）。 L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩罚』是指对损失函数中的某些参数做一些限制。知乎中陶轻松的答案指出正则项使W向量中项的个数最小化，从而防止过拟合]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>对抗样本</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>

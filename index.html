@@ -460,8 +460,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-13T22:52:27+08:00">
-                2019-11-13
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-19T18:48:14+08:00">
+                2019-11-19
               </time>
             
           </span>
@@ -499,7 +499,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,844 字
+                  3,149 字
                 </span>
               
 
@@ -515,7 +515,7 @@ $(function() {
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  10 分钟
+                  11 分钟
                 </span>
               
             </div>
@@ -579,8 +579,7 @@ $(function() {
 <li><p>HINE ：元路径随机游走来计算<br>节点间的相似性</p>
 </li>
 </ul>
-<p>###基于分解</p>
-<p>可以将异质网络分解为比较简单的网络，分别对这些网络进行表征学习，然后再将这些信息融合起来</p>
+<h3 id="基于分解"><a href="#基于分解" class="headerlink" title="基于分解"></a>基于分解</h3><p>可以将异质网络分解为比较简单的网络，分别对这些网络进行表征学习，然后再将这些信息融合起来</p>
 <ul>
 <li><p>HEREC ：利用元路<br>径抽取异质网络中的多个同质网络，并对这些同质<br>网络进行表征学习，然后通过融合函数对不同的表<br>示进行融合，并结合矩阵分解模型进行评分预</p>
 </li>
@@ -599,9 +598,23 @@ $(function() {
 <h2 id="研究点"><a href="#研究点" class="headerlink" title="研究点"></a>研究点</h2><ul>
 <li>提取元路径，挖掘隐含的丰富语义关系</li>
 </ul>
-<h2 id="应用（网络结构，语义探索）"><a href="#应用（网络结构，语义探索）" class="headerlink" title="应用（网络结构，语义探索）"></a>应用（网络结构，语义探索）</h2><h3 id="相似性度量"><a href="#相似性度量" class="headerlink" title="相似性度量"></a>相似性度量</h3><ul>
+<h2 id="应用（网络结构，语义探索）"><a href="#应用（网络结构，语义探索）" class="headerlink" title="应用（网络结构，语义探索）"></a>应用（网络结构，语义探索）</h2><h3 id="相似性度量"><a href="#相似性度量" class="headerlink" title="相似性度量"></a>相似性度量</h3><h3 id="matapath"><a href="#matapath" class="headerlink" title="matapath"></a>matapath</h3><p>基于元路径最基本的两个工作是：<br>（1）衡量HIN中基于对称元路径的相同类型节点间的相似度方法PathSim【1】（代码python2.7：<a href="http://download.csdn.net/download/u013527419/9475257）。" target="_blank" rel="external">http://download.csdn.net/download/u013527419/9475257）。</a></p>
+<ul>
 <li>PathSim 利用对称元路径抽取两个节点之间的连通路径来度量二者的相似性，这样不仅利用到了相关的异质信息，而且体现了节点和边的丰富语义</li>
 </ul>
+<p>（2）衡量HIN中基于任意元路径的相同/不同类型节点间的相似度方法HeteSim【2】（代码：<a href="https://download.csdn.net/download/u013527419/10353251）" target="_blank" rel="external">https://download.csdn.net/download/u013527419/10353251）</a></p>
+<p>（3）其他基于meta path 的相似度度量方式：</p>
+<ul>
+<li>common node，PCRW，BPCRW</li>
+<li>KnowSim（based on given meta path and the reverse meta path）</li>
+<li>AvgSim（similarity of documents in HIN）</li>
+<li>RelSim（measure the similarity of relations in HIN）</li>
+</ul>
+<h3 id="meta-structure"><a href="#meta-structure" class="headerlink" title="meta structure"></a>meta structure</h3><p>鉴于meta path的表征能力有限。例如，在DBLP中, 如果我们想要度量发表的论文既在同一个会议上又含有相同的主题词(i.e.,the APVPA and APTPA paths)的两个作者的关系时，meta path 就不太好使，像是a1 和a2 基于meta path的三种相似度都是相同的。【1】提出了meta structure,表示一些更复杂的关系，meta path 是 meta structure 的特例。</p>
+<p><img src="../img/meta struct.png" alt="meta struct"></p>
+<p><a href="https://www.cse.ust.hk/~yqsong/" target="_blank" rel="external">Yangqiu Song</a></p>
+<p><a href="https://i.cs.hku.hk/~ckcheng/" target="_blank" rel="external">Reynold C.K. Cheng  ( 鄭振剛 )</a></p>
+<p>[1]Huang, Z., Zheng, Y., Cheng, R., Sun, Y., Mamoulis, N., Li, X.: Meta structure: computing<br>relevance in large heterogeneous information networks. In: SIGKDD, pp. 1595–1604 (2016)<br>[2]Meta-Graph Based Recommendation Fusion over Heterogeneous Information Networks.</p>
 <h3 id="节点分类"><a href="#节点分类" class="headerlink" title="节点分类"></a>节点分类</h3><h3 id="链路预测"><a href="#链路预测" class="headerlink" title="链路预测"></a>链路预测</h3><h3 id="推荐系统"><a href="#推荐系统" class="headerlink" title="推荐系统"></a>推荐系统</h3><ul>
 <li>JRL ：推荐模型设计了一个深度表征学习框架，利用异质<br>信息源（评分、评论和图片）学习用户和物品的特<br>征表示，然后通过一个额外层学习到用户和物品的<br>联合表示，最后通过Pair-wise 学习，来推荐top-N<br>的物品。<br>Ting Chen、Yizhou Sun 等人 提出一种<br>混合表征学习推荐框架，并对采样策略进行优化，<br>提出了三种可以大大提升训练效率的采样策略</li>
 </ul>
@@ -629,6 +642,8 @@ $(function() {
 <p>异构信息网络挖掘： 原理和方法法》，作者( 美）孙艺洲（Yizhou Sun），（美）韩家炜（Jiawei Han）</p>
 <p><a href="https://mp.weixin.qq.com/s/aKGh9wOdWsleSted_iEmBQ" target="_blank" rel="external">数据挖掘领头人韩家炜教授：如何从无结构文本到有用的知识？</a></p>
 <p><a href="https://mp.weixin.qq.com/s/sCfYwSZ2J2e6aT5mn5dHuw" target="_blank" rel="external">广度学习</a></p>
+<p><a href="http://dblp.uni-trier.de/pers/hd/s/Shi:Chuan" target="_blank" rel="external">石川论文</a></p>
+<p><a href="http://www.ccs.neu.edu/home/yzsun/Publications.htm" target="_blank" rel="external">孙怡州</a></p>
 
           
         
@@ -719,8 +734,8 @@ $(function() {
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-09T15:52:43+08:00">
-                2019-11-09
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-19T17:26:27+08:00">
+                2019-11-19
               </time>
             
           </span>
@@ -758,7 +773,7 @@ $(function() {
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  115 字
+                  533 字
                 </span>
               
 
@@ -774,7 +789,7 @@ $(function() {
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -832,6 +847,8 @@ $(function() {
 <td>IJCAI 2019</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"><a href="https://github.com/RingBDStack/PPGCN" target="_blank" rel="external">https://github.com/RingBDStack/PPGCN</a></td>
+<td style="text-align:center"></td>
+<td></td>
 </tr>
 <tr>
 <td style="text-align:center"></td>
@@ -840,6 +857,28 @@ $(function() {
 <td>251</td>
 <td style="text-align:center">IEEE Transactions on Knowledge and Data Engineering</td>
 <td style="text-align:center">综述</td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">11.19</td>
+<td style="text-align:left">Easing Embedding Learning by Comprehensive Transcription of Heterogeneous Information Networks</td>
+<td></td>
+<td>KDD 18</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">这篇KDD’18的文章，没有按照常规的方法将所有的node嵌入到同一的空间，因为文章提出node因为连接的edge类型（type）不同，存在不兼容（incompatibility）的特性，所以最好能够根据不同的edge type来定义不同度量空间（metric space），保持同一个度量空间下，node的兼容性.<br>局限性：比如没有考虑更复杂的网络结构信息，而是仅仅通过相邻节点的关系来确定embedding，更复杂的关系可以通过meta-path来找到，这也可能成为该论文未来的研究方向<br>不同类型关系的嵌入与节点边的嵌入计算相似度，定义相似度函数，获得基于不同边类型的相似度函数</td>
+<td><a href="https://mp.weixin.qq.com/s?__biz=MzU1Mjc5NTg5OQ==&amp;mid=2247483890&amp;idx=1&amp;sn=1eacd1791a7f560e7b279fc13998e4ab&amp;chksm=fbfdea66cc8a6370e301df5024414761a0ae46fe893f8f4da68e660d14feeb44cd92c2f7a8f8&amp;scene=21&amp;token=1524641645&amp;lang=zh_CN#wechat_redirect" target="_blank" rel="external">https://mp.weixin.qq.com/s?__biz=MzU1Mjc5NTg5OQ==&amp;mid=2247483890&amp;idx=1&amp;sn=1eacd1791a7f560e7b279fc13998e4ab&amp;chksm=fbfdea66cc8a6370e301df5024414761a0ae46fe893f8f4da68e660d14feeb44cd92c2f7a8f8&amp;scene=21&amp;token=1524641645&amp;lang=zh_CN#wechat_redirect</a></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:left">HIN2Vec: Explore Meta-paths in Heterogeneous Information Networks for Representation Learning</td>
+<td></td>
+<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"><strong>HIN2Vec 的核心是一个神经网络模型，不仅能够学习网络中节点的表示，同时还学到了关系（元路径）的表示</strong>。HIN2Vec 模型<strong>保留了更多的上下文信息</strong>，不仅假设<strong>存在关系的两个节点是相关的</strong>，而且还<strong>区分节点之间的不同关系</strong>，并通过共同<strong>学习关系向量</strong>区别对待<br>把节点和节点间的关系作为一种二分类问题考虑，给定两个节点 x,y，通过预测节点之间是否存在确定的关系 r，同时学习到了节点和关系的向量表示</td>
+<td><a href="https://blog.csdn.net/c9Yv2cf9I06K2A9E/article/details/78623785" target="_blank" rel="external">https://blog.csdn.net/c9Yv2cf9I06K2A9E/article/details/78623785</a></td>
 </tr>
 </tbody>
 </table>
