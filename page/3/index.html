@@ -413,6 +413,603 @@ $(function() {
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/08/01/注意力机制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/01/注意力机制/" itemprop="url">注意力机制</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-01T16:49:03+08:00">
+                2019-08-01
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-06T09:49:22+08:00">
+                2019-11-06
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/08/01/注意力机制/" class="leancloud_visitors" data-flag-title="注意力机制">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  473 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##<br>软注意力是只注意的每项都可以是概率值，不一定是有或者无</p>
+<p><a href="https://blog.csdn.net/weixin_36474809/article/details/89350573" target="_blank" rel="external">Graph Attention Network 图注意力网络 (一) 训练运行与代码概览</a></p>
+<p><a href="http://www.isclab.org.cn/wp-content/uploads/2018/12/Transformer%E4%B8%AD%E7%9A%84Multi-Head-Attention-%E7%8E%8B%E7%9D%BF%E6%80%A1-2018.12.9-19_00_00.pdf" target="_blank" rel="external">Transformer中的Multi-Head Attention</a></p>
+<p><a href="https://blog.csdn.net/luoxuexiong/article/details/88853655" target="_blank" rel="external">关联性图注意力网络：Relational Graph Attention Networks（ICLR2019）</a></p>
+<p><a href="https://blog.csdn.net/weixin_39373480/article/details/88728518" target="_blank" rel="external">Graph Attention Networks网络结构+代码</a></p>
+<h2 id="翻译中的注意力机制"><a href="#翻译中的注意力机制" class="headerlink" title="翻译中的注意力机制"></a>翻译中的注意力机制</h2><p>注意力机制的BahdanauAttention模型就很令人费解了，困惑的关键在于其中的算法。算法的计算部分只有两行代码，代码本身都知道是在做什么，但完全不明白组合在一起是什么功能以及为什么这样做。其实阅读由数学公式推导、转换而来的程序代码都有这种感觉。所以现在很多的知识保护，根本不在于源代码，而在于公式本身。没有公式，很多源代码非常难以读懂。<br><a href="https://www.cnblogs.com/andrewwang/p/10794420.html" target="_blank" rel="external">TensorFlow从1到2（十）带注意力机制的神经网络机器翻译</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><a href="https://juejin.im/post/5bbf41c3f265da0af16160d2" target="_blank" rel="external">他们只说注意力机制（Attention Mechanism）不练，还是我来给大家撸代码讲解</a></p>
+<p><a href="http://www.zhuanzhi.ai/document/b806ec47935f896da24368db3987787a" target="_blank" rel="external">注意力能提高模型可解释性？实验表明：并没有 </a></p>
+<h2 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h2><p><a href="https://stackoverflow.com/questions/40601552/visualizing-attention-activation-in-tensorflow" target="_blank" rel="external">Visualizing attention activation in Tensorflow</a></p>
+<p><a href="https://blog.csdn.net/uhauha2929/article/details/81951760" target="_blank" rel="external">文本单词，网页上可视化</a></p>
+<p><a href="https://blog.csdn.net/m0_38133212/article/details/86664569" target="_blank" rel="external">matplotlib 文本attention矩阵可视化</a></p>
+<p><a href="https://blog.csdn.net/weixin_34613450/article/details/97250092s" target="_blank" rel="external">论文中注意力机制可视化图的制作</a>seaborn提供的热力图来制作</p>
+<p><a href="https://github.com/uhauha2929/examples/blob/master/self-attention.ipynb" target="_blank" rel="external">https://github.com/uhauha2929/examples/blob/master/self-attention.ipynb</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/45295182" target="_blank" rel="external">可视化循环神经网络的注意力机制</a></p>
+<p><a href="https://www.zhihu.com/question/274926848" target="_blank" rel="external">请问注意力机制中生成的类似热力图或者柱状图是如何生成的</a> 其实没啥用</p>
+<h2 id="各种各样的注意力"><a href="#各种各样的注意力" class="headerlink" title="各种各样的注意力"></a>各种各样的注意力</h2><p><a href="https://blog.eson.org/pub/c47c5082/" target="_blank" rel="external">深度学习中的注意力机制 原理 及 代码</a></p>
+<p><a href="https://www.jianshu.com/p/9f6eefa4ac96" target="_blank" rel="external">神经网络中的注意力机制总结及PyTorch实战</a></p>
+<p><img src="./img/注意力公式.png" alt="注意力公式"></p>
+<p><a href="https://www.cnblogs.com/databingo/p/9769928.html" target="_blank" rel="external">神经网络中注意力机制概述</a> 摘自《Notes on Deep Learning for NLP》</p>
+<p>层级注意力：<a href="https://richliao.github.io/supervised/classification/2016/12/26/textclassifier-HATN/" target="_blank" rel="external">Text Classification, Part 3 - Hierarchical attention network</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/07/22/tensorflow 函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/22/tensorflow 函数/" itemprop="url">tensorflow 函数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-22T16:36:16+08:00">
+                2019-07-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-04-17T15:33:52+08:00">
+                2020-04-17
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/07/22/tensorflow 函数/" class="leancloud_visitors" data-flag-title="tensorflow 函数">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2,615 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  11 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="tf-slice"><a href="#tf-slice" class="headerlink" title="tf.slice"></a>tf.slice</h2><p>slice(<br>    input_,<br>    begin,<br>    size,<br>    name=None<br>)</p>
+<p>从张量中提取切片.</p>
+<p>此操作从由begin指定位置开始的张量input中提取一个尺寸size的切片.切片size被表示为张量形状,其中size[i]是你想要分割的input的第i维的元素的数量.切片的起始位置(begin)表示为每个input维度的偏移量.换句话说,begin[i]是你想从中分割出来的input的“第i个维度”的偏移量.<br>begin是基于零的<br>···<br>t = tf.constant([[[1, 1, 1], [2, 2, 2]],<br>                 [[3, 3, 3], [4, 4, 4]],<br>                 [[5, 5, 5], [6, 6, 6]]])<br>tf.slice(t, [1, 0, 0], [1, 1, 3])  # [[[3, 3, 3]]]<br>tf.slice(t, [1, 0, 0], [1, 2, 3])  # [[[3, 3, 3],</p>
+<pre><code>#   [4, 4, 4]]]
+</code></pre><p>tf.slice(t, [1, 0, 0], [2, 1, 3])  # [[[3, 3, 3]],</p>
+<pre><code>#  [[5, 5, 5]]]
+</code></pre><p>···</p>
+<p> shape可以理解为一个数组的维度。[5,5]就是个2维数组，第一维有5个值，第二维有5个值。[5, 5, 1, 32]就是个4维数组，第一维有5个值，第二维有5个值，第三维有1个值，第四维有32个值。数组维度可以理解为[],最外层有5个[]，每个[]里还有5个[]，以此类推</p>
+<p>shape 表示是输出张量的形状 [5,5]应该是大小5<em>5的矩阵 [5,5,1,32]这个在卷积网络里应该是卷积核大小5</em>5,1个颜色通道，32个不同的卷积核 刚看TensorFlow，</p>
+<h2 id="tf-layers-dense-inut-units-k"><a href="#tf-layers-dense-inut-units-k" class="headerlink" title="tf.layers.dense(inut,units=k)"></a>tf.layers.dense(inut,units=k)</h2><p>tf.layers.dense( input, units=k )会在内部自动生成一个权矩阵kernel和偏移项bias，各变量具体尺寸如下：对于尺寸为[m, n]的二维张量input, tf.layers.dense()会生成：尺寸为[n, k]的权矩阵kernel，和尺寸为[m, k]的偏移项bias。内部的计算过程为y=input * kernel + bias，输出值y的维度为[m, k]。</p>
+<p>可以自己构造权重矩阵W和偏移矩阵b，利用矩阵乘法实现全连接层</p>
+<h2 id="matmul"><a href="#matmul" class="headerlink" title="matmul"></a>matmul</h2><p>两个三维矩阵的乘法怎样计算呢?我通过实验发现，tensorflow把前面的维度当成是batch，对最后两维进行普通的矩阵乘法。也就是说，最后两维之前的维度，都需要相同</p>
+<h2 id="tf-shape"><a href="#tf-shape" class="headerlink" title="tf.shape"></a>tf.shape</h2><p>根据shape如何变换矩阵。其实简单的想就是，</p>
+<p>reshape（t, shape） =&gt; reshape(t, [-1]) =&gt; reshape(t, shape)</p>
+<p>首先将矩阵t变为一维矩阵，然后再对矩阵的形式更改就可以了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">#tensor &apos;t&apos; is [[[1, 1, 1],</div><div class="line">#                [2, 2, 2]],</div><div class="line">#                [[3, 3, 3],</div><div class="line">#                 [4, 4, 4]],</div><div class="line">#                [[5, 5, 5],</div><div class="line">#                 [6, 6, 6]]]</div><div class="line"># tensor &apos;t&apos; has shape [3, 2, 3]</div><div class="line"># pass &apos;[-1]&apos; to flatten &apos;t&apos;</div><div class="line">reshape(t, [-1]) ==&gt; [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6]</div><div class="line"></div><div class="line"># -1 can also be used to infer the shape</div><div class="line"></div><div class="line"># -1 is inferred to be 9:</div><div class="line">reshape(t, [2, -1]) ==&gt; [[1, 1, 1, 2, 2, 2, 3, 3, 3],</div><div class="line">                         [4, 4, 4, 5, 5, 5, 6, 6, 6]]</div><div class="line"># -1 is inferred to be 2:</div><div class="line">reshape(t, [-1, 9]) ==&gt; [[1, 1, 1, 2, 2, 2, 3, 3, 3],</div><div class="line">                         [4, 4, 4, 5, 5, 5, 6, 6, 6]]</div><div class="line"># -1 is inferred to be 3:</div><div class="line">reshape(t, [ 2, -1, 3]) ==&gt; [[[1, 1, 1],</div><div class="line">                              [2, 2, 2],</div><div class="line">                              [3, 3, 3]],</div><div class="line">                             [[4, 4, 4],</div><div class="line">                              [5, 5, 5],</div><div class="line">                              [6, 6, 6]]]</div><div class="line">--------------------- </div><div class="line">作者：lxg0807 </div><div class="line">来源：CSDN </div><div class="line">原文：https://blog.csdn.net/lxg0807/article/details/53021859</div></pre></td></tr></table></figure>
+<h2 id="tf-nn-nce-loss"><a href="#tf-nn-nce-loss" class="headerlink" title="tf.nn.nce_loss"></a>tf.nn.nce_loss</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">loss = tf.reduce_mean(</div><div class="line">      tf.nn.nce_loss(weights=nce_weights,</div><div class="line">                     biases=nce_biases,</div><div class="line">                     labels=train_labels,</div><div class="line">                     inputs=embed,</div><div class="line">                     num_sampled=num_sampled,</div><div class="line">                     num_classes=vocabulary_size))</div></pre></td></tr></table></figure>
+<p>其中，</p>
+<p>train_inputs = tf.placeholder(tf.int32, shape=[batch_size])<br>train_labels = tf.placeholder(tf.int32, shape=[batch_size, 1])<br>embeddings = tf.Variable(<br>        tf.random_uniform([vocabulary_size, embedding_size], -1.0, 1.0))<br>embed = tf.nn.embedding_lookup(embeddings, train_inputs)　</p>
+<p>train_inputs中的就是中心词，train_label中的就是语料库中该中心词在滑动窗口内的上下文词。</p>
+<p>所以，train_inputs中会有连续n-1（n为滑动窗口大小）个元素是相同的。即同一中心词。</p>
+<p>tf.truncated_normal从截断的正态分布中输出随机值。#生成的值服从具有指定平均值和标准偏差的正态分布，如果生成的值大于平均值2个标准偏差的值则丢弃重新选择。#标准差就是标准偏差，是方差的算术平均根。而上面的代码中对标准方差进行了限制的原因就是为了防止神经网络的参数过大。为什么embeddings中的参数没有进行限制呢？是因为最初初始化的时候，所有的词的词向量之间要保证一定的距离。然后通过学习，才能拉近某些词的关系，使得某些词的词向量更加接近。<br>l  #因为是单层神经网络，所以要限制参数过大。如果是深层神经网络，就不需要标准差除一一个embedding_size的平方根了。深层神经网络虽然也要进行参数的正则化限制，防止过拟合和梯度爆炸问题，但是很少看见，有直接对stddev进行限制的</p>
+<p>embddings是词嵌入，就是要学习的词向量的存储矩阵。共有词汇表大小的行数，每一行对应一个词的向量。</p>
+<p>在word2vec模型中，我们感兴趣的是为单词构建表示。在训练过程中，给定一个滑动窗口，每个单词将有两个嵌入：1）当单词是中心单词时; 2）当单词是上下文单词时。这两个嵌入分别称为输入和输出向量。（输入和输出矩阵的更多解释）</p>
+<p>在我看来，输入矩阵是embeddings和输出矩阵nce_weights</p>
+<p>该embeddings张量是最终输出矩阵。它将单词映射到向量。在单词预测图中使用它。</p>
+<p>输入矩阵是从训练文本生成的一批centre-word : context-word（train_input和train_label分别）对。</p>
+<p>虽然nce_lossop 的确切工作方式还不为我所知，但基本思想是它使用单层网络（参数nce_weights和nce_biases）将输入向量（从embeddings使用embedop中选择）映射到输出字，然后比较输出到训练标签（训练文本中的相邻单词），也输出到词汇中num_sampled所有其他单词的随机子样本（），然后修改输入向量（存储在其中embeddings）和网络参数以最小化错误。</p>
+<p>参考文献：<a href="https://cloud.tencent.com/developer/ask/218807" target="_blank" rel="external">理解tensorflow中的`tf.nn.nce_loss（)</a></p>
+<p><a href="https://stackoverflow.com/questions/37982478/what-is-the-purpose-of-weights-and-biases-in-tensorflow-word2vec-example" target="_blank" rel="external">What is the purpose of weights and biases in tensorflow word2vec example</a></p>
+<p><a href="https://www.cnblogs.com/xiaojieshisilang/p/9284634.html" target="_blank" rel="external">关于word2vec的skip-gram模型使用负例采样nce_loss损失函数的源码剖析</a></p>
+<p><a href="https://blog.csdn.net/qq_36092251/article/details/79684721" target="_blank" rel="external">关于采样编号的问题</a> 编号越大，词频越小</p>
+<p><a href="https://docs.pythontab.com/tensorflow/tutorials/word2vec/" target="_blank" rel="external">word2vec官网说明</a><br><a href="https://stackoverflow.com/questions/41475180/understanding-tf-nn-nce-loss-in-tensorflow" target="_blank" rel="external">Understanding <code>tf.nn.nce_loss()</code> in tensorflow</a></p>
+<p><a href="https://www.zhihu.com/question/50043438" target="_blank" rel="external">求通俗易懂解释下nce loss？</a></p>
+<h2 id="from-tensorflow-contrib-import-learn"><a href="#from-tensorflow-contrib-import-learn" class="headerlink" title="from tensorflow.contrib import learn"></a>from tensorflow.contrib import learn</h2><p>vp = learn.preprocessing.VocabularyProcessor(100, 0, tokenizer_fn=chinese_tokenizer)</p>
+<p>其中VocabularyProcessor（max_document_length,min_frequency=0,vocabulary=None, tokenizer_fn=None)的构造函数中有4个参数<br>max_document_length是文档的最大长度。如果文本的长度大于最大长度，那么它会被剪切，反之则用0填充<br>min_frequency词频的最小值，出现次数&gt;最小词频 的词才会被收录到词表中<br>vocabulary CategoricalVocabulary 对象，不太清楚使用方法<br>tokenizer_fn tokenizer function，讲句子或给定文本格式 token化得函数，可以理解为分词函数</p>
+<p>链接： <a href="https://www.jianshu.com/p/db400a569730" target="_blank" rel="external">https://www.jianshu.com/p/db400a569730</a><br>。</p>
+<h2 id="维度广播"><a href="#维度广播" class="headerlink" title="维度广播"></a>维度广播</h2><p>tf.expand_dims()</p>
+<h2 id="tf-squeeze"><a href="#tf-squeeze" class="headerlink" title="tf.squeeze"></a>tf.squeeze</h2><p>tf.squeeze(input, axis=None, name=None, squeeze_dims=None)</p>
+<p>从tensor中去除形状为1的维。（为了去除多余的维）</p>
+<h2 id="tf-concat"><a href="#tf-concat" class="headerlink" title="tf.concat()"></a>tf.concat()</h2><p>tf.concat(values, axis, name=’concat’)</p>
+<p>Concatenates tensors along one dimension.</p>
+<p>沿着某维串接tensors。和pandas包的concat方法差不多</p>
+<p>例如,有tensor1 “t1”形状为[2,3]，tensor2 “t2”形状为[2,3]，则</p>
+<p>tf.concat([t1,t2],0)的形状为[4,3]，tf.concat([t1,t2],1)的形状为[2,6]</p>
+<p><a href="https://blog.csdn.net/xxzhix/article/details/80569713" target="_blank" rel="external">tensorflow 部分预处理函数</a></p>
+<h2 id="tf-trainable-variables-tf-all-variables-tf-global-variables"><a href="#tf-trainable-variables-tf-all-variables-tf-global-variables" class="headerlink" title="tf.trainable_variables(), tf.all_variables(), tf.global_variables()"></a>tf.trainable_variables(), tf.all_variables(), tf.global_variables()</h2><p>tf.trainable_variables()</p>
+<p>顾名思义，这个函数可以也仅可以查看可训练的变量，在我们生成变量时，无论是使用tf.Variable()还是tf.get_variable()生成变量，都会涉及一个参数trainable,其默认为True。</p>
+<p><a href="https://blog.csdn.net/cerisier/article/details/86523446" target="_blank" rel="external">Tensorflow小技巧整理：tf.trainable_variables(), tf.all_variables(), tf.global_variables()的使用</a></p>
+<p><a href="https://www.cnblogs.com/MY0213/p/9270864.html" target="_blank" rel="external">tf.Variable、tf.get_variable、tf.variable_scope以及tf.name_scope关系</a></p>
+<h2 id="tf-layers-Flatten"><a href="#tf-layers-Flatten" class="headerlink" title="tf.layers.Flatten"></a>tf.layers.Flatten</h2><p>展平向量，把一个Tensor 展平</p>
+<h2 id="tensorflow官方文档"><a href="#tensorflow官方文档" class="headerlink" title="tensorflow官方文档"></a>tensorflow官方文档</h2><p><a href="https://docs.pythontab.com/tensorflow/tutorials/word2vec/" target="_blank" rel="external">https://docs.pythontab.com/tensorflow/tutorials/word2vec/</a></p>
+<h2 id="tensorflow性能调优实践"><a href="#tensorflow性能调优实践" class="headerlink" title="tensorflow性能调优实践"></a>tensorflow性能调优实践</h2><p>tensorflow里，首字母大写的类，首字母小写的才是op。<br>tf.constant()是直接定义在graph里的，它是graph的一部分，会随着graph一起加载。如果通过tf.constant()定义了一个维度很高的张量，那么graph占用的内存就会变大，加载也会变慢。而tf.placeholder就没有这个问题，所以如果数据维度很高的话，定义成tf.placeholder是更好的选择</p>
+<p><a href="https://www.jianshu.com/p/937a0ce99f56" target="_blank" rel="external">https://www.jianshu.com/p/937a0ce99f56</a></p>
+<p><a href="https://www.cnblogs.com/jiaxblog/p/9054051.html" target="_blank" rel="external">TensorFlow学习笔记1：graph、session和op</a></p>
+<h3 id="tensorflow-可视化"><a href="#tensorflow-可视化" class="headerlink" title="tensorflow 可视化"></a>tensorflow 可视化</h3><p>file_writer = tf.summary.FileWriter(‘/path/to/logs’, sess.graph)</p>
+<p>TensorBoard的graph有两种依赖，数据依赖和控制依赖。数据依赖展示了tensors在两个ops之间的流动以及流动方向；控制依赖运用了虚线来表示。TensorBoard显示graph有两个区域，主区域和辅助区域，为了便于观察我们可以把一些高层次的依赖项多的节点从主区域移出到辅助区域，只需要在节点右键点击Remove from main graph即可.</p>
+<p>1.创建一个TensorFlow graph，用summary operations来保存我们需要了解的节点的信息。<br>2.我们需要整合所有节点的信息，如果一个一个提取太耗费精力和时间，我们可以选择tf.summary.merge_all()函数来把所有的op节点整合成一个单一节点，然后通过运行该节点来提取出所有summary op的信息。<br>3.用tf.summary.FileWriter()函数把提取出的所有的summary op信息存入磁盘中。我们同时可以用该函数把graph的信息存入磁盘，用来可视化神经网络的结构。<br>4.在训练过程中用add_summary命令把训练信息存入磁盘，训练结束后记得把FileWriter对象close。</p>
+<p>打开终端，键入以下命令运行TensorBoard：</p>
+<p>tensorboard –logdir=path/to/logs</p>
+<p>得到提示信息“Starting TensorBoard…”则运行成功，我们可以打开浏览器，在地址栏输入localhost:6006进入TensorBoard的操作面板。</p>
+<p>参考：<a href="http://zangbo.me/2017/06/27/TensorFlow_4/" target="_blank" rel="external">TensorBoard可视化</a></p>
+<p><a href="https://www.tensorflow.org/tensorboard/r1/graphs" target="_blank" rel="external">官网</a></p>
+<p><a href="https://towardsdatascience.com/howto-profile-tensorflow-1a49fb18073d" target="_blank" rel="external">HowTo profile TensorFlow</a></p>
+<h2 id="tensorflow-了解"><a href="#tensorflow-了解" class="headerlink" title="tensorflow 了解"></a>tensorflow 了解</h2><p><a href="https://juejin.im/post/5b345a49f265da599c561b25" target="_blank" rel="external">这是我看过解释TensorFlow最透彻的文章！</a></p>
+<h2 id="：池化层（pooling-和全连接层-dense"><a href="#：池化层（pooling-和全连接层-dense" class="headerlink" title="：池化层（pooling)和全连接层(dense)"></a>：池化层（pooling)和全连接层(dense)</h2><p><a href="https://www.cnblogs.com/denny402/p/6933172.html" target="_blank" rel="external">tensorflow 1.0 学习：池化层（pooling)和全连接层(dense)</a></p>
+<h2 id="深度学习库-TensorFlow-TF-中的候选采样"><a href="#深度学习库-TensorFlow-TF-中的候选采样" class="headerlink" title="深度学习库 TensorFlow (TF) 中的候选采样"></a>深度学习库 TensorFlow (TF) 中的候选采样</h2><p> 如果类别服从均匀分布，我们就用uniform_candidate_sampler;如果词作类别，我们知道词服从 Zipfian, 我们就用  log_uniform_candidate_sampler; 如果我们能够通过统计或者其他渠道知道类别满足某些分布，我们就用  nn.fixed_unigram_candidate_sampler; 如果我们实在不知道类别分布，我们还可以用  tf.nn.learned_unigram_candidate_sampler。 </p>
+<p> <a href="https://www.usa-idc.com/news/idc/201700504.shtml" target="_blank" rel="external">深度学习库 TensorFlow (TF) 中的候选采样</a> </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/06/24/概率图模型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/24/概率图模型/" itemprop="url">概率图模型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-24T20:44:03+08:00">
+                2019-06-24
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-08-13T14:19:37+08:00">
+                2019-08-13
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/06/24/概率图模型/" class="leancloud_visitors" data-flag-title="概率图模型">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  411 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>概率图模型（PGM/probabilistic graphical model）是一种用于学习这些带有依赖（dependency）的模型的强大框架。</p>
+<p>在探讨如何将概率图模型用于机器学习问题之前，我们需要先理解 PGM 框架。概率图模型（或简称图模型）在形式上是由图结构组成的。图的每个节点（node）都关联了一个随机变量，而图的边（edge）则被用于编码这些随机变量之间的关系。</p>
+<p>在这个图中，每个结点表示一个变量，每个箭头表示一个条件概率，起点是条件概率中的条件，终点是该随机变量。比如，从a指向b的箭头表示p(b|a)，并称a是b的父结点<br>参考文献：<a href="https://blog.csdn.net/isMarvellous/article/details/78828566" target="_blank" rel="external">https://blog.csdn.net/isMarvellous/article/details/78828566</a></p>
+<p><a href="https://www.cnblogs.com/ironstark/p/5229085.html" target="_blank" rel="external">机器学习 —— 概率图模型（推理：采样算法）</a></p>
+<h2 id="采样"><a href="#采样" class="headerlink" title="采样"></a>采样</h2><p><a href="https://www.cnblogs.com/CSLaker/p/9962912.html" target="_blank" rel="external">MCMC等采样算法</a></p>
+<h2 id="动态主题模型"><a href="#动态主题模型" class="headerlink" title="动态主题模型"></a>动态主题模型</h2><p><a href="https://blog.csdn.net/gdkyxy2013/article/details/85156547" target="_blank" rel="external">动态主题模型Dynamic Topic Models, DTM</a><br>基于gibbs采样的topic over time<br>基于K-means的动态主题模型话题分类</p>
+<p><a href="https://blog.csdn.net/sinat_26917383/article/details/79377761" target="_blank" rel="external">pyLDA系列︱考量时间因素的动态主题模型（Dynamic Topic Models）</a></p>
+<h2 id="LDA-变形"><a href="#LDA-变形" class="headerlink" title="LDA 变形"></a>LDA 变形</h2><p><a href="https://www.jianshu.com/p/ac08edaef631" target="_blank" rel="external">senLDA实践—长短文本相似度</a> <a href="https://github.com/balikasg/topicModelling/blob/master/senLDA/perplexity.py" target="_blank" rel="external">代码</a></p>
+<h2 id="Personal-PageRank"><a href="#Personal-PageRank" class="headerlink" title="Personal PageRank"></a>Personal PageRank</h2><p><a href="https://www.jianshu.com/p/fe2c05933193" target="_blank" rel="external">基于图的推荐算法之Personal PageRank代码实战</a><br><a href="https://blog.csdn.net/aspirinvagrant/article/details/40855391" target="_blank" rel="external">个性化的PageRank和主题感知的PageRank</a></p>
+<p><a href="https://www.jianshu.com/p/caba9efdb2f8" target="_blank" rel="external">如何优雅的理解PageRank</a><br><a href="https://www.helplib.com/GitHub/article_133250" target="_blank" rel="external">双向随机游走(个性化PageRank )</a></p>
+<p><a href="https://github.com/xsongx/TwitterRank" target="_blank" rel="external">twitter</a></p>
+<h2 id="概率图大牛"><a href="#概率图大牛" class="headerlink" title="概率图大牛"></a>概率图大牛</h2><p>唐杰 <a href="http://keg.cs.tsinghua.edu.cn/jietang/#research" target="_blank" rel="external">http://keg.cs.tsinghua.edu.cn/jietang/#research</a></p>
+<p>梁上松：<a href="http://sdcs.sysu.edu.cn/content/4569" target="_blank" rel="external">http://sdcs.sysu.edu.cn/content/4569</a></p>
+<h2 id="受限波尔兹曼机（RBM）"><a href="#受限波尔兹曼机（RBM）" class="headerlink" title="受限波尔兹曼机（RBM）"></a>受限波尔兹曼机（RBM）</h2><p><a href="https://blog.csdn.net/qq_23869697/article/details/80683163" target="_blank" rel="external">受限玻尔兹曼机(RBM)与其在Tensorflow的实现</a><br><a href="https://blog.csdn.net/doleria/article/details/78618022" target="_blank" rel="external">RBM算法模型应用在推荐系统 Python代码实现</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/06/20/tensorflow 代码总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1673,568 +2270,11 @@ $(function() {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/02/04/编程软件安装/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/04/编程软件安装/" itemprop="url">编程软件安装</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-04T22:53:56+08:00">
-                2019-02-04
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-05T00:07:06+08:00">
-                2019-02-05
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/02/04/编程软件安装/" class="leancloud_visitors" data-flag-title="编程软件安装">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  547 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  2 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="neo4j"><a href="#neo4j" class="headerlink" title="neo4j"></a>neo4j</h2><p>3.4 以后版本比较好<br>neo4j 3.1.0 Releases<br>官方下载链接<br>windows64 zip<br><a href="https://neo4j.com/artifact.php?name=neo4j-community-3.1.0-windows.zip" target="_blank" rel="external">https://neo4j.com/artifact.php?name=neo4j-community-3.1.0-windows.zip</a><br>windows64 exe<br><a href="https://neo4j.com/artifact.php?name=neo4j-community_windows-x64_3_1_0.exe" target="_blank" rel="external">https://neo4j.com/artifact.php?name=neo4j-community_windows-x64_3_1_0.exe</a><br>linux<br><a href="https://neo4j.com/artifact.php?name=neo4j-community-3.1.0-unix.tar.gz" target="_blank" rel="external">https://neo4j.com/artifact.php?name=neo4j-community-3.1.0-unix.tar.gz</a><br>mac<br><a href="https://neo4j.com/artifact.php?name=neo4j-community_macos_3_1_0.dmg" target="_blank" rel="external">https://neo4j.com/artifact.php?name=neo4j-community_macos_3_1_0.dmg</a></p>
-<p>windows下安装<br>想下载哪个版本 修改这个超链接 修改版本号<br><a href="https://neo4j.com/artifact.php?name=neo4j-community_windows-x64_3_1_0.exe" target="_blank" rel="external">https://neo4j.com/artifact.php?name=neo4j-community_windows-x64_3_1_0.exe</a><br><a href="https://neo4j.com/artifact.php?name=neo4j-community_windows-x64_3_3_1.exe" target="_blank" rel="external">https://neo4j.com/artifact.php?name=neo4j-community_windows-x64_3_3_1.exe</a></p>
-<p><a href="https://blog.csdn.net/qq_21383435/article/" target="_blank" rel="external">windows下载与安装neo4j</a><br><a href="http://we-yun.com/index.php/blog/releases-56.html" target="_blank" rel="external">Neo4j 产品下载</a></p>
-<h2 id="igragh"><a href="#igragh" class="headerlink" title="igragh"></a>igragh</h2><p>我们需要安装python-igraph包。这是<a href="https://igraph.org/python/" target="_blank" rel="external">官方网址</a>。直接使用pip安装会出现问题（Windows系统本身的问题），因此本人选用的非官方网址的安装包，见下面。这个网址在官网也提供了，一定要选对对应的版本。Python3.6以上的版本好像并没有对应的igraph包，因此安装的时候会出现平台不支持的提示。然后在dos系统环境下pip install 安装包，即可实现igraph的安装。<br>接下来，我们还需要安装支持igraph绘制图形的Cairo库。这个库同样在上面提供的非官方网址上可以找到，下载对应系统的版本，并进行pip安装即可。</p>
-<p>Christoph提供了非官方的whl安装包。<a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#python-igraph，这里还有很多其他的Windows二进制python扩展包。" target="_blank" rel="external">http://www.lfd.uci.edu/~gohlke/pythonlibs/#python-igraph，这里还有很多其他的Windows二进制python扩展包。</a><br>下载对应版本：python_igraph-0.7.1.post6-cp27-none-win_amd64.whl。<br>进入本地保存的目录执行：</p>
-<p>pip install python_igraph-0.7.1.post6-cp27-none-win_amd64.whl</p>
-<p>cairo是一个用于向量图形绘图的开源库，可以在多个背景下进行2D绘图，Ｃ语言实现，它的python版本就是pycairo。请不要参考网上关于pycairo-1.8.10.win32-py2.7.msi安装的文章，因为目前的发行版里没有针对Windows64位系统的，pycairo非官方的whl安装包。<a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#pycairo：" target="_blank" rel="external">http://www.lfd.uci.edu/~gohlke/pythonlibs/#pycairo：</a><br>这里下载对应系统的python_igraph-0.7.1.post6-cp27-none-win_amd64.whl。到下载目录执行命令：</p>
-<p>pip install python_igraph-0.7.1.post6-cp27-none-win_amd64.whl</p>
-<p>参考：<br><a href="https://www.cnblogs.com/mar-q/p/7759952.html" target="_blank" rel="external">Windows7 64位环境下Python-igraph环境配置</a><br><a href="https://igraph.org/python/doc/tutorial/tutorial.html" target="_blank" rel="external">官方手册</a><br><a href="https://blog.csdn.net/liuhuan323/article/details/78936781" target="_blank" rel="external">https://blog.csdn.net/liuhuan323/article/details/78936781</a> </p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/01/23/ssh调试/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/23/ssh调试/" itemprop="url">远程服务器链接失败调试</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T20:18:50+08:00">
-                2019-01-23
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-04-25T09:57:03+08:00">
-                2019-04-25
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/01/23/ssh调试/" class="leancloud_visitors" data-flag-title="远程服务器链接失败调试">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  196 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>检测是否已启动</p>
-<p>ps -e | grep ssh</p>
-<p>看到有ssh字样，说明已启动，如果没有就手动启动</p>
-<p>/etc/init.d/ssh start<br>vi /etc/ssh/sshd_config 没找到错误原因<br>启动失败，systemctl status ssh.service 查找具体信息，发现<br>Failed to start OpenBSD Secure Shell server</p>
-<p>用sshd -T 查找错误原因，出现报错信息：<br>fatal: Missing privilege separation directory: /var/empty/sshd<br>检查/var/empty/sshd目录，发现确实不存在。手工创建此目录后，重新启动，发现sshd可以发起新的连接了。</p>
-<p><a href="https://serverfault.com/questions/798283/failed-to-start-openbsd-secure-shell-server" target="_blank" rel="external">Failed to start OpenBSD Secure Shell server [closed]</a></p>
-<p><a href="http://www.linuxyw.com/linux/yunweiguzhang/20130520/415.html" target="_blank" rel="external">ssh连接不上linux服务器（fatal: Missing privilege sepa</a></p>
-<h2 id="终端闪退"><a href="#终端闪退" class="headerlink" title="终端闪退"></a>终端闪退</h2><p>可能Host key verification failed.REMOTE HOST IDENTIFICATION HAS CHANGED! 服务器被重新安装过<br>windows:在本地机器上，不是服务器，删除 .ssh/known_hosts<br>linux:ssh-keygen -R ip</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/01/16/python进程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WeiXiangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="就和今天说早安">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/16/python进程/" itemprop="url">python 多线程，多进程，多协程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-16T15:33:22+08:00">
-                2019-01-16
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-30T15:09:24+08:00">
-                2019-01-30
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/01/16/python进程/" class="leancloud_visitors" data-flag-title="python 多线程，多进程，多协程">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1,715 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  6 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="进程，线程，协程"><a href="#进程，线程，协程" class="headerlink" title="进程，线程，协程"></a>进程，线程，协程</h2><p>如果你的代码是IO密集型的，线程和多进程可以帮到你。多进程比线程更易用，但是消耗更多的内存。如果你的代码是CPU密集型的，多进程就明显是更好的选择——特别是所使用的机器是多核或多CPU的。对于网络应用，在你需要扩展到多台机器上执行任务，RQ是更好的选择。<br>使用多进程，我们得建立一个多进程池。通过它提供的map方法，我们把URL列表传给池，然后8个新进程就会生成，它们将并行地去下载图片。这就是真正的并行，不过这是有代价的。整个脚本的内存将会被拷贝到各个子进程中。在我们的例子中这不算什么，但是在大型程序中它很容易导致严重的问题。<br><a href="https://www.jb51.net/article/63558.htm" target="_blank" rel="external">浅析Python中的多进程与多线程的使用</a></p>
-<p><a href="https://blog.csdn.net/universe_ant/article/details/51243137" target="_blank" rel="external">为什么在Python里推荐使用多进程而不是多线程</a></p>
-<p><a href="https://www.cnblogs.com/lingwang3/p/6753388.html" target="_blank" rel="external">python多线程、多进程、协程的使用</a></p>
-<p><a href="https://www.cnblogs.com/cjyfff/p/3662355.html" target="_blank" rel="external">关于python多线程编程中join()和setDaemon()的一点儿探究</a></p>
-<h2 id="进程池"><a href="#进程池" class="headerlink" title="进程池"></a>进程池</h2><p>创建进程需要消耗时间，销毁进程也需要时间。其次，即使开启了成千上万的进程，操作系统也不能让它们同时执行，这样反而会影响程序的效率。因此我们不能无限制的根据任务开启或者结束进程。</p>
-<p>进程池：定义了一个池子，在里面放上固定数量的进程，有需求来了，就拿这个池中的一个进程来处理任务，等到处理完毕，进程并不关闭，而是将进程再放回进程池中继续等待认为。如果有许多任务需要执行，池中的进程数量不够，任务就要等待之前的进程执行任务完毕归来，拿到空闲进程才能继续执行。</p>
-<p>对于python而言，由于其使用了全局解释锁(GIL)，所以python的多线程并不能实现并发。因此，python的并发是通过多进程来实现的！！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">import os</div><div class="line">import time</div><div class="line">import random</div><div class="line">from multiprocessing import Pool</div><div class="line">from multiprocessing import Process</div><div class="line">def func(i):</div><div class="line">    i += 1</div><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">    p = Pool(5)          # 创建了5个进程</div><div class="line">    start = time.time()</div><div class="line">    p.map(func,range(1000))  </div><div class="line">    p.close()   # 是不允许再向进程池中添加任务</div><div class="line">    p.join()</div><div class="line">    print(time.time() - start)  # 0.35544490814208984</div><div class="line">    start = time.time()</div><div class="line">    l = []</div><div class="line">    for i in range(1000):</div><div class="line">        p = Process(target=func,args=(i,))  # 创建了一百个进程</div><div class="line">        p.start()</div><div class="line">        l.append(p)</div><div class="line">    [i.join() for i in l]</div><div class="line">    print(time.time() - start)  #  101.00088691711426</div></pre></td></tr></table></figure>
-<p>在写代码时，pool（3）之后程序好像死锁，搞了两天，终于知道是因为from gevent import monkey; monkey.patch_all();引入了这个，但并不知道原因</p>
-<p>apply_async(func[,args[,kwds[,callback = None]]])    #非阻塞且支持结果返回进行回调</p>
-<p>apply_async(函数,不定参数)     #四个进程在Pool进程池内并行(分给4核cpu),剩下的交替进行.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">from multiprocessing import Pool,Process</div><div class="line">import time,os</div><div class="line">def Foo(a):#创建函数</div><div class="line">    time.sleep(2)</div><div class="line">    print(&apos;in the process:&apos;,os.getpid(),os.getppid())</div><div class="line">    return a+100</div><div class="line"></div><div class="line">def bar(arga):#创建函数</div><div class="line">    print(&apos;----&gt;&apos;,arga)</div><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">    print(&apos;父进程ID:&apos;,os.getpid())</div><div class="line">    pool = Pool(2)#创建进程池最大容量为2，最多允许2个进程同时运行，参照线程信号量模式</div><div class="line">    for i in range(10):#创建10个进程</div><div class="line">        pool.apply_async(func=Foo,args=(i,),callback=bar)#创建线程，参数1调用函数，参数2设置i为函数FOO参数，参数3为返回函数</div><div class="line">        #参数三为回调函数，将FOO函数的返回值作为参数调用bar函数。</div><div class="line">        #pool.apply(func=Foo,args=(i,),callback=bar)#串行</div><div class="line">         #pool.apply_async(func=Foo,args=(i,),callback=bar)#并行</div><div class="line"></div><div class="line">    pool.close()#关闭</div><div class="line">    #pool.join()#如果没有.join语句，程序不执行就会关闭。这里是个大坑。</div></pre></td></tr></table></figure>
-<ol>
-<li>对写入操作 进行加锁<br>就是说:对当前进行写入操作的进程锁定，直到该进程写完十个字，也就是一个完成的操作，后解除该进程的锁定，放它离开。切换到另外一个进程来操作。<br>因为一次只能一个进程执行写入操作，而且必须执行完成完整的操作，才允许切换。所以不会造成文件内容的混乱。<br>但是加锁一般会完造成程序的执行效率下降。而且，如果写入操作分散在整个代码的多处，<br>总不能把整个代码都锁起来吧，这样岂不是又成单进程了么？<br>所以:把写入操作抽象出来为单独的一个函数，这样对单独的一个函数加群，这样问题就不大了。<br>更优雅的方法:使用multiprocessing的回调函数。<br>1。把写入操作抽象为单独的一个函数<br>2。把进程需要写入的内容，作为返回值返回<br>3。使用回调函数写入进程返回内容。</li>
-</ol>
-<p><a href="https://www.jianshu.com/p/dc3cb5315ded" target="_blank" rel="external">python多进程文件加锁与回调</a><br>[进程与线程，加锁]（<a href="https://blog.csdn.net/u014265088/article/details/53128108）" target="_blank" rel="external">https://blog.csdn.net/u014265088/article/details/53128108）</a></p>
-<p><a href="https://www.cnblogs.com/kaituorensheng/p/4465768.html" target="_blank" rel="external">python进程池：multiprocessing.pool</a></p>
-<h2 id="进程能否实例化"><a href="#进程能否实例化" class="headerlink" title="进程能否实例化"></a>进程能否实例化</h2><p>能否定义在类中的进程，这个目前还没有实验</p>
-<p><a href="https://stackoverflow.com/questions/1816958/cant-pickle-type-instancemethod-when-using-multiprocessing-pool-map" target="_blank" rel="external">Can’t pickle <type 'instancemethod'=""> when using multiprocessing Pool.map()</type></a><br>另外找到的可能出错的原因：<br>Windows下面的multiprocessing跟Linux下面略有不同，Linux下面基于fork，fork之后所有的本地变量都复制一份，因此可以使用任意的全局变量；在Windows下面，多进程是通过启动新进程完成的，所有的全局变量都是重新初始化的，在运行过程中动态生成、修改过的全局变量是不能使用的。multiprocessing内部使用pickling传递map的参数到不同的进程，当传递一个函数或类时，pickling将函数或者类用所在模块+函数/类名的方式表示，如果对端的Python进程无法在对应的模块中找到相应的函数或者类，就会出错。当你在Interactive Console当中创建函数的时候，这个函数是动态添加到<strong>main</strong>模块中的，在重新启动的新进程当中不存在，所以会出错。当不在Console中，而是在独立Python文件中运行时，你会遇到另一个问题：由于你下面调用multiprocessing的代码没有保护，在新进程加载这个模块的时候会重新执行这段代码，创建出新的multiprocessing池，无限调用下去。解决这个问题的方法是永远把实际执行功能的代码加入到带保护的区域中：if <strong>name</strong> == ‘<strong>mian</strong>‘:</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>pool 可以创建进程池<br>from functools import  partial 引入多个参数<br>pool.map<br>pool.apply<br>pool.apply_aysnc<br>这些的区别在这片博客中：<a href="https://www.cnblogs.com/alan-babyblog/p/5351031.html" target="_blank" rel="external">https://www.cnblogs.com/alan-babyblog/p/5351031.html</a></p>
-<p><a href="https://blog.csdn.net/weixin_42233629/article/details/82974456）
-[进程和线程的简单解释](https://www.cnblogs.com/smallmars/p/7093603.html" target="_blank" rel="external">进程池</a></p>
-<p>进程池报错可能中断运行，但不显示错误</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2279,7 +2319,7 @@ $(function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">100</span>
+                <span class="site-state-item-count">103</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2437,7 +2477,7 @@ $(function() {
 <div class="copyright" >
   
   &copy;  2017 - 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

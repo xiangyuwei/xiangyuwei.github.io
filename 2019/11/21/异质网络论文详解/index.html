@@ -1,0 +1,1522 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, world" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="tiitle: 异质论文详解 PME: PRojected Metric Embedding on HEterogeneous NEtworks for Link Prediction问题内积只能建模一阶关系，使用 metric learning（具体可参见论文 Collaborative Metric Learning\ ，它具有 triangle inequality 特性）来同时捕捉一阶关系">
+<meta property="og:type" content="article">
+<meta property="og:title" content="就和今天说早安">
+<meta property="og:url" content="http://xiangyuwei.github.io/2019/11/21/异质网络论文详解/index.html">
+<meta property="og:site_name" content="就和今天说早安">
+<meta property="og:description" content="tiitle: 异质论文详解 PME: PRojected Metric Embedding on HEterogeneous NEtworks for Link Prediction问题内积只能建模一阶关系，使用 metric learning（具体可参见论文 Collaborative Metric Learning\ ，它具有 triangle inequality 特性）来同时捕捉一阶关系">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/VBcD02jFhgnUM8xgzgSldGmPxeRxo72nHJgQs4w22RuoaurRv0AicSIKicD3XcxTK4Cn8RJ2kPTlP7wiaynSbj6iaw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="http://xiangyuwei.github.io/2019/11/21/img/平衡度指标.png">
+<meta property="og:image" content="http://xiangyuwei.github.io/2019/11/21/img/HIN%20类型.png">
+<meta property="og:updated_time" content="2019-12-26T03:47:03.768Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="就和今天说早安">
+<meta name="twitter:description" content="tiitle: 异质论文详解 PME: PRojected Metric Embedding on HEterogeneous NEtworks for Link Prediction问题内积只能建模一阶关系，使用 metric learning（具体可参见论文 Collaborative Metric Learning\ ，它具有 triangle inequality 特性）来同时捕捉一阶关系">
+<meta name="twitter:image" content="https://mmbiz.qpic.cn/mmbiz_png/VBcD02jFhgnUM8xgzgSldGmPxeRxo72nHJgQs4w22RuoaurRv0AicSIKicD3XcxTK4Cn8RJ2kPTlP7wiaynSbj6iaw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xiangyuwei.github.io/2019/11/21/异质网络论文详解/"/>
+
+
+
+
+
+  <title> | 就和今天说早安</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4bacbbd8913214b562621e17552a2067";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+
+
+
+
+</head>
+
+     <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("83okXLCNivJlkVOwUJeUnyLO-gzGzoHsz", "2HD2Pm5DF4IGQImRKGIlClwK");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = $(document.getElementById(url)).text() + ': 0';
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = $(document.getElementById(url)).text() + ': ' + object.get('time');
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+	});
+}
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = $(document.getElementById(url)).text() + ': ' + counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = $(document.getElementById(url)).text() + ': ' + newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+});
+</script>
+  
+
+  
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">就和今天说早安</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xiangyuwei.github.io/2019/11/21/异质网络论文详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WeiXiangYu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="就和今天说早安">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-21T19:56:48+08:00">
+                2019-11-21
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-26T11:47:03+08:00">
+                2019-12-26
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/11/21/异质网络论文详解/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2,438 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  9 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>tiitle: 异质论文详解</p>
+<h2 id="PME-PRojected-Metric-Embedding-on-HEterogeneous-NEtworks-for-Link-Prediction"><a href="#PME-PRojected-Metric-Embedding-on-HEterogeneous-NEtworks-for-Link-Prediction" class="headerlink" title="PME: PRojected Metric Embedding on HEterogeneous NEtworks for Link Prediction"></a>PME: PRojected Metric Embedding on HEterogeneous NEtworks for Link Prediction</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>内积只能建模一阶关系，使用 <strong>metric learning</strong>（具体可参见论文 <strong><em>Collaborative Metric Learning\</em></strong> ，它具有 triangle inequality 特性）来同时捕捉一阶关系和二阶关系（second-order proximity ）</p>
+<p>具体来说，A 和B相似，B和C相似，那么A和C也相似</p>
+<p> relationship 的种类分布非常<strong>不均匀</strong>。  提出 loss-aware 自适应采样方法来进行模型优化 </p>
+<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p> 采用双向负采样（Bidirectional Negative Sampling Strategy） </p>
+<p> 每个 epoch，我们会把每个种类的网络的 loss 记录下来，如下<img src="https://mmbiz.qpic.cn/mmbiz_png/VBcD02jFhgnUM8xgzgSldGmPxeRxo72nHJgQs4w22RuoaurRv0AicSIKicD3XcxTK4Cn8RJ2kPTlP7wiaynSbj6iaw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img">，然后根据目标种类 r 的 loss 所占的比例，来确定对该种类 r 的 edge 采样出多少的比例。这样为根据 loss 来自适应的调整采样策略 （<strong>Loss-aware Adaptive Positive Sampling Strategy</strong>） </p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>使用 metric learning 来解决 HIN 中的二阶关系，并借用 TransR 中的映射矩阵来解决 metric learning 存在的 ill-posed algebraic 问题，对于多种 relation 建立多个 relation space。</p>
+<p>提出 loss-aware adaptive 采样方法，解决了 HIN 中存在的 relation skewed 的问题。 </p>
+<p><strong>但是可能存在的问题是</strong>，该篇文章仅仅考虑基础的 relation，另外在 HIN 中还有常见的 composite relations 是使用 meta-paths 来表示的。</p>
+<p>比如在 DBLP 这样的参考文献数据集上，存在 (A, author，P，paper，C，conference) 这些节点。而像 APA  (co-author relation)，以及 APC (authors write pa- pers published in  conferences) 这样包含着丰富的信息的 composite relations，在这篇文章中没有考虑到</p>
+<h2 id="Relation-Structure-Aware-Heterogeneous-Information-Network-Embedding"><a href="#Relation-Structure-Aware-Heterogeneous-Information-Network-Embedding" class="headerlink" title="Relation Structure-Aware Heterogeneous Information Network Embedding"></a>Relation Structure-Aware Heterogeneous Information Network Embedding</h2><h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p> 异构网络中存在着很多的 relations，不同的 relations 有着不同的<strong>结构特性</strong>，如 AP 表现的是 peer-to-peer，而 PC 代表的是 one-centered-by-another 关系。如何区分不同的 relations </p>
+<p> 根据结构特性定义了两种 relations，Affiliation Relations (ARs) 代表 one-centered-by-another 的结构，而  Interaction Relations (IRs) 代表 peer-to-peer的关系。 </p>
+<p>对于 AR，这些点应当有共同的特性，所以直接用节点的<strong>欧几里得距离作为 proximity。对于 IR，将这种关系定义为节点之间的</strong>转移（translation）**。前者借鉴了 collaborative metric learning，后者借鉴了模型 TransE。</p>
+<p> 该指标由 u 和 v 种类的节点的平均<strong>度（degrees）</strong>来决定。如果 D(r) 越大，代表由 r 连接的两类节点的不平衡性越大，越倾向于 AR 类型，否则倾向 IR 类型。同时定义了另外一个稀疏度指标如下 </p>
+<p><img src="../img/平衡度指标.png" alt=""></p>
+<p> 该指标由 u 和 v 种类的节点的平均<strong>度（degrees）</strong>来决定。如果 D(r) 越大，代表由 r 连接的两类节点的不平衡性越大，越倾向于 AR 类型，否则倾向 IR 类型。 </p>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><h2 id="HIN2Vec-Explore-Meta-paths-in-Heterogeneous-Information-Networks-for-Representation-Learning"><a href="#HIN2Vec-Explore-Meta-paths-in-Heterogeneous-Information-Networks-for-Representation-Learning" class="headerlink" title="HIN2Vec: Explore Meta-paths in Heterogeneous Information Networks for Representation Learning"></a>HIN2Vec: Explore Meta-paths in Heterogeneous Information Networks for Representation Learning</h2><h3 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h3><p> 把节点和节点间的关系作为一种<strong>二分类问题</strong>考虑，给定两个节点 x,y，通过预测节点之间是否存在确定的关系 r，同时学习到了节点和关系的向量表示。 </p>
+<p> 论文考虑到了节点和关系的语义是不同的，因此它们的表示空间也应该不通，所以论文对<strong>关系向量运用了一个正则函数。</strong> </p>
+<h2 id="HEER"><a href="#HEER" class="headerlink" title="HEER"></a>HEER</h2><p>该论文提出的模型，想要解决Type不兼容的问题。在研究异质网络中，常用的思路仍然是将所有的节点在同一个空间下表示，但是这时候就会出现一些节点因为存在多种关系，而关系与关系之间又并不兼容的特性。</p>
+<p>如图，<em>stan</em>，<em>musical</em>，<em>Ang Lee</em>是不同类型的节点，因为musical和Ang Lee的embedding距离很远，会导致stan无法同时和两个embedding同时很近，因此需要学习两个不同的度量空间，从而<em>stan</em>分别在两个度量空间中与对应的node距离很近。</p>
+<p>该度量向量μ是对不同类型的关系来进行embedding，g_{uv}是表示u,v之间的边的embedding。通过定义该相似度函数，能够获得基于不同边类型r的相似度。</p>
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p> <strong>分析具体场景所要考虑的关系→融合所有关系构建HIN→基于元路径或元结构计算相似度→先特征融合再进行分类器学习或者先学习分类器再进行集成。</strong> </p>
+<h2 id="Automatic-Opioid-User-Detection-From-Twitter-Transductive-Ensemble-Built-On-Different-Meta-graph-Based-Similarities-Over-Heterogeneous-Information-Network"><a href="#Automatic-Opioid-User-Detection-From-Twitter-Transductive-Ensemble-Built-On-Different-Meta-graph-Based-Similarities-Over-Heterogeneous-Information-Network" class="headerlink" title="Automatic Opioid User Detection From Twitter: Transductive Ensemble  Built On Different Meta-graph Based Similarities Over Heterogeneous  Information Network"></a>Automatic Opioid User Detection From Twitter: Transductive Ensemble  Built On Different Meta-graph Based Similarities Over Heterogeneous  Information Network</h2><h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><ul>
+<li><p><strong>Data collector and preprocessor</strong> 第一阶段为数据收集和处理阶段，系统收集用户的profile和发表的tweet，并使用CoreNLP对文本进行相关的处理，如果文本涉及到一些毒品相关词如海洛因、吗啡或其衍生词等都会以topic的形式标记下来。</p>
+</li>
+<li><p><strong>Feature extractor and HIN constructor</strong> 每个tweet都会以词袋模型的形式进行表示，另外用户、tweet、topic的相关关系都会被考虑进HIN的构建中。</p>
+</li>
+</ul>
+<p><strong>Meta-graph based similarity builder</strong> 在这一阶段，通过基于meta-graph的相似度计算方法，来计算用户之间的相似度。</p>
+<ul>
+<li><strong> Transductive ensemble</strong> 基于不同语义关系下的相似度，作者为了减少对于标记数据的依赖，使用 transductive learning来学习分类器，最后采用ensemble的思想得到最终的识别</li>
+<li>6种关系</li>
+</ul>
+<p><img src="..\img\HIN 类型.png" alt=""></p>
+<p> 基于meta-graph的相似度计算，我们就能够量化在给定语意关系下的用户间的相关性。在另一方面，作者也通过推文的词袋表示来计算任意两个用户产生的内容之间的余弦相似度 。 到了指定语意路径下的用户相似度矩阵，将这个矩阵还原成图，就得到了一个节点类型全为 user，边权重为两用户相似度的同态图 </p>
+<h3 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h3><p>在得到的相似度矩阵上进行分类</p>
+<h2 id="HinDroid-An-Intelligent-Android-Malware-Detection-System-Based-on-Structured-Heterogeneous-Information-Network"><a href="#HinDroid-An-Intelligent-Android-Malware-Detection-System-Based-on-Structured-Heterogeneous-Information-Network" class="headerlink" title="HinDroid: An Intelligent Android Malware Detection System Based on Structured Heterogeneous Information Network"></a>HinDroid: An Intelligent Android Malware Detection System Based on Structured Heterogeneous Information Network</h2><h3 id="架构-1"><a href="#架构-1" class="headerlink" title="架构"></a>架构</h3><p><strong>Unzipper and Decompiler</strong>：对APK文件进行解包以及反编译成smali code；</p>
+<p><strong>Feature Extractor</strong>：解析每个APK文件的smali code，提取APK、API间的各种关系；</p>
+<p><strong>HIN Constructor</strong>：结合上一步的各种关系，构建 HIN；</p>
+<p><strong>Multi-kernel Learner</strong>：通过各种 meta-path 计算apk之间的相似度矩阵，然后基于此训练multi-kernel SVM；</p>
+<p><strong>Malware Detector</strong>：给定一个新的APK，通过前面其API的相关特征送入SVM进行分类；</p>
+<h2 id="基于异构神经网络的恶意账号识别"><a href="#基于异构神经网络的恶意账号识别" class="headerlink" title="基于异构神经网络的恶意账号识别"></a>基于异构神经网络的恶意账号识别</h2><p>蚂蚁金服在CIKM2018 上的文章</p>
+<h3 id="恶意账号特点"><a href="#恶意账号特点" class="headerlink" title="恶意账号特点"></a>恶意账号特点</h3><p> 恶意账户具有强烈获取利益倾向和团伙性质，往往是通过批量、低成本注册的账户。</p>
+<p>基于我们前面对设备聚集性和时间聚集性的分析，我们将上面的用于刻画联通子图的图神经网络方法进行扩展：</p>
+<p>第一、我们构建异构图，包括账户类节点，以及多种类型的设备信息，如：电话、MAC、IMSI 以及其他 ID。</p>
+<p>第二、我们为每个账户加入时间上的行为特征 X ∈ RN,P。其中每行 Xi 表示节点（账户或设备）在时间上的行为特征。我们希望构建的神经网络模型可以学习到通过设备聚集在一起的账户在行为特征上的模式，从而更准确的做出判别。</p>
+<h2 id="推荐系统"><a href="#推荐系统" class="headerlink" title="推荐系统"></a>推荐系统</h2><h2 id="Meta-Graph-Based-Recommendation-Fusion-over-Heterogeneous-Information-Networks"><a href="#Meta-Graph-Based-Recommendation-Fusion-over-Heterogeneous-Information-Networks" class="headerlink" title="Meta-Graph Based Recommendation Fusion over Heterogeneous Information Networks"></a><strong>Meta-Graph Based Recommendation Fusion over Heterogeneous Information Networks</strong></h2><h3 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h3><p> 有了HIN，能给我们更多的用户-商品关联矩阵，这是因为每一条meta-path或meta-graph，都可以刻画出在该种语意关系下的用户-商品相似度矩阵。<strong>那么问题就转化为：已知用户-商品之间在多种关系下的相似度矩阵，如何融合这些矩阵所提供的信息呢？如果我们有了融合的方法，就可以在目前推荐的一般框架下进行建模。</strong> </p>
+<p> 向量相加，FM分解</p>
+<h2 id="Leveraging-Meta-path-based-Context-for-Top-N-Recommendation-with-A-Neural-Co-Attention-Model"><a href="#Leveraging-Meta-path-based-Context-for-Top-N-Recommendation-with-A-Neural-Co-Attention-Model" class="headerlink" title="Leveraging Meta-path based Context for Top-N Recommendation with A Neural Co-Attention Model"></a><strong>Leveraging Meta-path based Context for Top-N Recommendation with A Neural Co-Attention Model</strong></h2><h3 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h3><p>对用户、商品、元路径分别做了embedding。如果仅有用户与商品的embedding建模，那就是一个很基础的基于隐变量的矩阵分解模型，在HIN中，有了meta-path之后，我们要去思考两件事？</p>
+<p>1、meta-path 如何量化表达？</p>
+<p>2、meta-path、user、item 三者的特征表达如何进行整合？</p>
+<ul>
+<li><p>借用CNN+Pooling的组合，得到统一标准的meta-path embedding </p>
+<p>K个路径实例是怎么选取的呢？一种方法是基于元路径的随机游走策略，即沿着元路径在节点之间均匀游走，作者认为这样并不高效。我们可以借用矩阵分解的思路得到每一个节点的表达，然后在游走的时候计算当前节点与其所有邻居节点的相似度，按照相似度的大小进行概率跳转，这样抽样出来的路径实例更具有代表性 </p>
+</li>
+<li><p>利用attention机制进行整合</p>
+</li>
+</ul>
+<h2 id="Fine-grained-Event-Categorization-with-Heterogeneous-Graph-Convolutional-Networks"><a href="#Fine-grained-Event-Categorization-with-Heterogeneous-Graph-Convolutional-Networks" class="headerlink" title="Fine-grained Event Categorization with Heterogeneous Graph Convolutional Networks"></a>Fine-grained Event Categorization with Heterogeneous Graph Convolutional Networks</h2><h3 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h3><p>细粒度的事件分类：不同实体描述</p>
+<h2 id="Abnormal-Event-Detection-via-Heterogeneous-Information-Network-Embedding"><a href="#Abnormal-Event-Detection-via-Heterogeneous-Information-Network-Embedding" class="headerlink" title="Abnormal Event Detection via Heterogeneous Information Network Embedding"></a>Abnormal Event Detection via Heterogeneous Information Network Embedding</h2><p>不同领域的人突然合作了一篇文章</p>
+<h2 id="动态异质网络"><a href="#动态异质网络" class="headerlink" title="动态异质网络"></a>动态异质网络</h2><ul>
+<li><p>Snapshot</p>
+<p> 表示方法在时序上对动态网络等间隔取快照(Snapshot)，从而得到网络演化的离散序列 </p>
+</li>
+<li><p>continuous time networks</p>
+<p> 将每个连边都打上多个时间戳，表示连边在该时刻发生变化。<br> <a href="https://mp.weixin.qq.com/s/GPrQ_8U9v-_-ZD78fTS0Hg" target="_blank" rel="external">前沿论文综述：如何把一系列随时而变的网络放到一个特征空间下比较</a></p>
+</li>
+</ul>
+<p>​       <a href="https://cloud.tencent.com/developer/article/1552350" target="_blank" rel="external">图智能分析利器-Graph Embedding与动态图异常检测</a></p>
+<h3 id="动态网络"><a href="#动态网络" class="headerlink" title="动态网络"></a>动态网络</h3><h3 id="动态异构网络"><a href="#动态异构网络" class="headerlink" title="动态异构网络"></a>动态异构网络</h3>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/path/wechat-reward-image.jpg" alt="WeiXiangYu WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/path/alipay-reward-image.jpg" alt="WeiXiangYu Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/09/异质信息网络/" rel="next" title="异质信息网络的表示学习及应用">
+                <i class="fa fa-chevron-left"></i> 异质信息网络的表示学习及应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/17/深度学习调参/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/avatar.jpg"
+               alt="WeiXiangYu" />
+          <p class="site-author-name" itemprop="name">WeiXiangYu</p>
+           
+              <p class="site-description motion-element" itemprop="description">胸怀猛虎 细嗅蔷薇</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">103</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/xiangyuwei" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/aiyuziyou520" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://youtube.com/" target="_blank" title="Youtube">
+                  
+                    <i class="fa fa-fw fa-youtube"></i>
+                  
+                  Youtube
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/68759000" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-douban"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/wei-shao-54" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-zhihu"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://blog.csdn.net/u011038411" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-csdn"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://macshuo.com/" title="MacTalk" target="_blank">MacTalk</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://weibo.com/1402400261/" title="爱可可爱生活" target="_blank">爱可可爱生活</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://itindex.net/" title="IT瘾" target="_blank">IT瘾</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://spaces.ac.cn/" title="苏剑林" target="_blank">苏剑林</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#PME-PRojected-Metric-Embedding-on-HEterogeneous-NEtworks-for-Link-Prediction"><span class="nav-number">1.</span> <span class="nav-text">PME: PRojected Metric Embedding on HEterogeneous NEtworks for Link Prediction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">1.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型"><span class="nav-number">1.2.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Relation-Structure-Aware-Heterogeneous-Information-Network-Embedding"><span class="nav-number">2.</span> <span class="nav-text">Relation Structure-Aware Heterogeneous Information Network Embedding</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决问题"><span class="nav-number">2.1.</span> <span class="nav-text">解决问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结-1"><span class="nav-number">2.2.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HIN2Vec-Explore-Meta-paths-in-Heterogeneous-Information-Networks-for-Representation-Learning"><span class="nav-number">3.</span> <span class="nav-text">HIN2Vec: Explore Meta-paths in Heterogeneous Information Networks for Representation Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总结-2"><span class="nav-number">3.1.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HEER"><span class="nav-number">4.</span> <span class="nav-text">HEER</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应用"><span class="nav-number"></span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Automatic-Opioid-User-Detection-From-Twitter-Transductive-Ensemble-Built-On-Different-Meta-graph-Based-Similarities-Over-Heterogeneous-Information-Network"><span class="nav-number">1.</span> <span class="nav-text">Automatic Opioid User Detection From Twitter: Transductive Ensemble  Built On Different Meta-graph Based Similarities Over Heterogeneous  Information Network</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#架构"><span class="nav-number">1.1.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结-3"><span class="nav-number">1.2.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HinDroid-An-Intelligent-Android-Malware-Detection-System-Based-on-Structured-Heterogeneous-Information-Network"><span class="nav-number">2.</span> <span class="nav-text">HinDroid: An Intelligent Android Malware Detection System Based on Structured Heterogeneous Information Network</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#架构-1"><span class="nav-number">2.1.</span> <span class="nav-text">架构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于异构神经网络的恶意账号识别"><span class="nav-number">3.</span> <span class="nav-text">基于异构神经网络的恶意账号识别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#恶意账号特点"><span class="nav-number">3.1.</span> <span class="nav-text">恶意账号特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐系统"><span class="nav-number">4.</span> <span class="nav-text">推荐系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Meta-Graph-Based-Recommendation-Fusion-over-Heterogeneous-Information-Networks"><span class="nav-number">5.</span> <span class="nav-text">Meta-Graph Based Recommendation Fusion over Heterogeneous Information Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题-1"><span class="nav-number">5.1.</span> <span class="nav-text">问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Leveraging-Meta-path-based-Context-for-Top-N-Recommendation-with-A-Neural-Co-Attention-Model"><span class="nav-number">6.</span> <span class="nav-text">Leveraging Meta-path based Context for Top-N Recommendation with A Neural Co-Attention Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题-2"><span class="nav-number">6.1.</span> <span class="nav-text">问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fine-grained-Event-Categorization-with-Heterogeneous-Graph-Convolutional-Networks"><span class="nav-number">7.</span> <span class="nav-text">Fine-grained Event Categorization with Heterogeneous Graph Convolutional Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#动机"><span class="nav-number">7.1.</span> <span class="nav-text">动机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Abnormal-Event-Detection-via-Heterogeneous-Information-Network-Embedding"><span class="nav-number">8.</span> <span class="nav-text">Abnormal Event Detection via Heterogeneous Information Network Embedding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态异质网络"><span class="nav-number">9.</span> <span class="nav-text">动态异质网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态网络"><span class="nav-number">9.1.</span> <span class="nav-text">动态网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态异构网络"><span class="nav-number">9.2.</span> <span class="nav-text">动态异构网络</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">WeiXiangYu</span>
+  <br/>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("83okXLCNivJlkVOwUJeUnyLO-gzGzoHsz", "2HD2Pm5DF4IGQImRKGIlClwK");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
